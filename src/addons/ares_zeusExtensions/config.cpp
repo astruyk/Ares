@@ -202,7 +202,6 @@ class CfgGroups
 					class Object90 {side=8;vehicle="Land_BarrelSand_grey_F";rank="";position[]={21.5156,-29.5898,-0.00137782};dir=88.4237;};
 					class Object91 {side=8;vehicle="Land_HBarrier_Big_F";rank="";position[]={17.0625,-33.5234,-0.00143886};dir=184.934;};
 					class Object92 {side=8;vehicle="Land_BarrelSand_grey_F";rank="";position[]={21.1445,-32.4707,-0.00137353};dir=88.4804;};
-					class Object93 {side=8;vehicle="Land_dp_transformer_F";rank="";position[]={37.9102,-14.7207,-95.7523};dir=0;};
 				};
 			};
 		
@@ -237,7 +236,6 @@ class CfgGroups
 					class Object22 {side=8;vehicle="Land_HBarrier_5_F";rank="";position[]={8.00391,1.55469,-0.00143886};dir=269.358;};
 					class Object23 {side=8;vehicle="Land_HBarrier_5_F";rank="";position[]={-7.40625,7.26953,-0.00143886};dir=0;};
 					class Object24 {side=8;vehicle="Land_HBarrier_5_F";rank="";position[]={3.56836,7.30859,-0.00143886};dir=0;};
-					class Object27 {side=8;vehicle="Land_dp_transformer_F";rank="";position[]={28.7109,-14.0684,-95.7523};dir=0;};
 				};
 			}
 		};
