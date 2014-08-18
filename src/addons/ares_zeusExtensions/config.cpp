@@ -211,7 +211,7 @@ class CfgGroups
 			
 				class AresAmmoCache
 				{
-					name = "Ammo Dump";
+					name = "Sm. Ammo Dump";
 					class Object1 {side=8;vehicle="Land_BagFence_Short_F";rank="";position[]={-0.976563,1.0957,-0.00143886};dir=0;};
 					class Object2 {side=8;vehicle="Land_BagFence_Short_F";rank="";position[]={1.99219,1.17773,-0.00243902};dir=0;};
 					class Object3 {side=8;vehicle="Land_Pallet_MilBoxes_F";rank="";position[]={-1.26758,2.33789,-0.00143886};dir=88.4461;};
@@ -240,7 +240,7 @@ class CfgGroups
 				
 				class AresRoadblockCivilianWrecks
 				{
-					name = "Wreck Roadblock (Civilian)";
+					name = "Sm. Wreck Roadblock 1";
 					class Object1 {side=8;vehicle="Land_Sacks_heap_F";rank="";position[]={0.873047,1.98242,-0.00143886};dir=0;};
 					class Object2 {side=8;vehicle="Land_Wreck_Car_F";rank="";position[]={-0.101563,1.93945,-0.00143886};dir=90.2452;};
 					class Object3 {side=8;vehicle="Land_Sacks_heap_F";rank="";position[]={0.923828,2.14453,1.44768};dir=0;};
@@ -257,7 +257,7 @@ class CfgGroups
 				
 				class AresRoadblockArmyWrecks
 				{
-					name = "Wreck Roadblock (ARMY)";
+					name = "Sm. Wreck Roadblock 2";
 					class Object1 {side=8;vehicle="Land_BagFence_Long_F";rank="";position[]={-1.69141,1.44922,-0.00243902};dir=200.036;};
 					class Object2 {side=8;vehicle="Land_BagFence_Long_F";rank="";position[]={2.95117,0.0664063,-0.00243902};dir=189.779;};
 					class Object3 {side=8;vehicle="Land_Wreck_Hunter_F";rank="";position[]={-0.744141,2.89453,-0.00143886};dir=117.829;};
