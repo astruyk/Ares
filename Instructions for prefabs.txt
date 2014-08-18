@@ -1,0 +1,117 @@
+http://www.reddit.com/r/arma/comments/2b2cef/creating_custom_zeus_compositions_in_arma_3_x39/
+
+
+Creating custom ZEUS compositions in ArmA 3, X39 explains how (self.arma)
+submitted 29 days ago * by KX39
+Zeus is a pretty DAMN exciting mission mode but suddenly its lacking some important features … One of those features is the ability to add custom compositions so that you dont need to set up really EVERY mission from scratch …
+Want a simpleToUse solution to add your own compositions? Well ^ ^ then read carefully:
+
+Requirements:
+binPBO/addonBuilder (ArmA 3 Tools) or any other pbo packaging tool
+ArmA 3 (Trust me … you need it :F)
+got everything you need? well then lets start!
+
+STEP 1
+Create your compposition using the editor/zeus or whatever you want to use inside of the mission editor
+
+STEP 2
+Place !YOUR PLAYER CHAR! (not the zeus controller for example) in the middle of your composition (will be used as 0 point so that you later will place the base around this place)
+
+STEP 3
+C&P this little script into your debug console (press ESC to open the debug console when youre admin/inside of the mission editor)
+
+_nameOfCompositionFirstGroup = "by X39";
+_nameOfCompositionSecondGroup = "FOBs";
+_nameOfComposition = "ION FOB ALPHA";
+_range = 500;
+_filterAmmoboxes = true;
+_classNameOfCompositionFirstGroup = [];
+_classNameOfCompositionSecondGroup = [];
+_classNameOfComposition = [];
+{
+    if(_x == 32) then
+    {
+        _classNameOfCompositionFirstGroup set[count _classNameOfCompositionFirstGroup, 95];
+    }
+    else
+    {
+        _classNameOfCompositionFirstGroup set[count _classNameOfCompositionFirstGroup, _x];
+    };
+    false
+}count toArray _nameOfCompositionFirstGroup;
+
+_classNameOfCompositionFirstGroup = toString _classNameOfCompositionFirstGroup;
+{
+    if(_x == 32) then
+    {
+        _classNameOfCompositionSecondGroup set[count _classNameOfCompositionSecondGroup, 95];
+    }
+    else
+    {
+        _classNameOfCompositionSecondGroup set[count _classNameOfCompositionSecondGroup, _x];
+    };
+    false
+}count toArray _nameOfCompositionSecondGroup;
+
+_classNameOfCompositionSecondGroup = toString _classNameOfCompositionSecondGroup;
+{
+    if(_x == 32) then
+    {
+        _classNameOfComposition set[count _classNameOfComposition, 95];
+    }
+    else
+    {
+        _classNameOfComposition set[count _classNameOfComposition, _x];
+    };
+    false
+}count toArray _nameOfComposition;
+
+_classNameOfComposition = toString _classNameOfComposition;
+_strArr = toArray format["class CfgGroups%7{%7%8class Empty%7%8{%7%8%8side = 8;%7%8%8name = ""Compositions"";%7%8%8class %4%7%8%8{%7%8%8%8name = ""%1"";%7%8%8%8class %5%7%8%8%8{%7%8%8%8%8name = ""%2"";%7%8%8%8%8class %6%7%8%8%8%8{%7%8%8%8%8%8name = ""%3"";%7", _nameOfCompositionFirstGroup, _nameOfCompositionSecondGroup, _nameOfComposition, _classNameOfCompositionFirstGroup, _classNameOfCompositionSecondGroup, _classNameOfComposition, toString [13,10], toString [9]];
+{
+    _flag = false;
+    _typeX = typeOf _x;
+    if(_typeX == "Rabbit_F") then {_flag = true;};ares_zeusExtensions
+    if(_typeX == "Snake_random_F") then {_flag = true;};
+    if(_typeX == "GroundWeaponHolder") then {_flag = true;};
+    if(_x == player) then {_flag = true;};
+    if(_filterAmmoboxes && {_x isKindOf "ReammoBox_F"}) then {_flag = true};
+    if(!_flag) then
+    {
+        _nulledPosition = [(position _x select 0) - (position player select 0), (position _x select 1) - (position player select 1), (position _x select 2) - (position player select 2)];
+        _strArr = _strArr + toArray(format["%8%8%8%8%8class Object%1 {side=8;vehicle=""%2"";rank="""";position[]={%3,%4,%5};dir=%6;};%7", _forEachIndex, _typeX, _nulledPosition select 0, _nulledPosition select 1, _nulledPosition select 2, direction _x, toString [13,10], toString [9]]);
+    };
+}forEach  nearestObjects [position player, ["all"], _range];
+
+_strArr = _strArr + toArray format["%2%2%2%2};%1%2%2%2};%1%2%2};%1%2};%1};", toString [13,10], toString [9]];
+copyToClipBoard toString _strArr;
+
+
+and execute it local
+STEP 4
+in your ArmA 3 installation, create a new folder callen “@WhatEverYouWantToCallIt” (the @ is important at the beginning!)
+STEP 5
+create another new folder inside of the newly created folder callen “Addons”
+STEP 6
+AND another folder inside the Addons folder (name it whatever you want to name it ^ but a basic convention is usually: MODDERTAG_MODNAME_PURPOSE)
+STEP 7
+create a file callen “config.cpp” inside of the folder you created in step 6 and fill it (using CTRL+V for example) with the magical content you got from step 3 inside of your clipboard (if you copied something else during the phase of step 4 and here then … yeah … execute step 3 again and come back to here! :F) You also need to add a CfgPatch class at the top (use this as template :F)
+class CfgPatches
+{
+    class YOUR_ADDONFOLDER_NAME
+    {
+        units[] = {};
+        weapons[] = {};
+        requiredVersion = 0.1;
+        requiredAddons[] = {"A3_Modules_F", "A3_Modules_F_Curator"};
+    };
+};
+
+STEP 8
+open your binPBO / Addonmaker (from the ArmA 3 tools) and set the addon source directory to the folder you created in step 6 the destination folder needs to be the Addons folder you created in Step 5 then finally click on Pack (or what ever seems to be the button to create some new file out of that folder)
+STEP 9
+Enable your addon in ArmA 3
+STEP 10
+Start a ZEUS mission and use your newly created composition (it could be required that the server also has this little addon you just created)
+Ohh and by the way call yourself modder from now as you modified the game successfully
+kindly regards X39 :F
