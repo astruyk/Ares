@@ -31,7 +31,7 @@ class CfgGroups
 				// Light OP with sandbags, small bunker, razor wire
 				class AresLightOpAlpha
 				{
-					name = "Light OP Alpha";
+					name = "Sm. OP Alpha";
 					class Object1 {side=8;vehicle="Land_BagBunker_Small_F";rank="";position[]={0.189453,1.06055,-0.00143886};dir=179.087;};
 					class Object2 {side=8;vehicle="Land_BagFence_Long_F";rank="";position[]={-1.26758,-3.54688,-0.00243902};dir=0;};
 					class Object3 {side=8;vehicle="Land_BagFence_Long_F";rank="";position[]={1.73242,-3.54102,-0.00243902};dir=0;};
@@ -49,7 +49,7 @@ class CfgGroups
 				// Medium OP with H-barriers, observation tower, Cargo house & ammo crates
 				class AresMedOpAlpha
 				{
-					name = "Med OP Alpha";
+					name = "Med. OP Alpha";
 					class Object1 {side=8;vehicle="Land_HBarrier_5_F";rank="";position[]={3.49805,-0.929688,-0.00143886};dir=269.333;};
 					class Object3 {side=8;vehicle="Land_Pallet_MilBoxes_F";rank="";position[]={-3.71484,-3.33789,-0.00143886};dir=0;};
 					class Object4 {side=8;vehicle="Land_Cargo_Patrol_V1_F";rank="";position[]={-2.90039,6.10742,-0.00143886};dir=177;};
@@ -77,7 +77,7 @@ class CfgGroups
 				// Medium OP with H-barriers, speaker tower, Cargo house & ammo crates
 				class AresMedOpBravo
 				{
-					name = "Med OP Bravo";
+					name = "Med. OP Bravo";
 					class Object1 {side=8;vehicle="Land_HBarrier_5_F";rank="";position[]={5.32813,-2.0918,-0.00143886};dir=218.506;};
 					class Object2 {side=8;vehicle="Land_HBarrier_5_F";rank="";position[]={3.4707,4.98633,-0.00143886};dir=127.37;};
 					class Object3 {side=8;vehicle="Land_Pallet_MilBoxes_F";rank="";position[]={-3.60938,1.22266,-0.00143886};dir=37.6699;};
@@ -108,7 +108,7 @@ class CfgGroups
 			
 			class AresCheckpoints
 			{
-				name = "Checkpoints";
+				name = "Road Checkpoints";
 				
 				class CheckpointAlpha
 				{
@@ -205,6 +205,111 @@ class CfgGroups
 				};
 			};
 		
+			class AresRoadblocks
+			{
+				name = "Urban Roadblocks";
+				
+				class AresRoadblockJunkVerySmall
+				{
+					name = "Sm. Junk Pile";
+					class Object1 {side=8;vehicle="Land_IronPipes_F";rank="";position[]={0.361084,1.26563,-0.00143862};dir=0;};
+					class Object2 {side=8;vehicle="Land_Cages_F";rank="";position[]={-3.0564,1.57959,0.0143638};dir=267.511;};
+					class Object3 {side=8;vehicle="Land_Tyres_F";rank="";position[]={-3.33789,1.59619,0.0051589};dir=0;};
+					class Object4 {side=8;vehicle="Land_Sacks_heap_F";rank="";position[]={3.82861,1.61719,-0.00143862};dir=0;};
+					class Object5 {side=8;vehicle="Land_Pallets_stack_F";rank="";position[]={3.81396,1.73438,-0.00143862};dir=92.0786;};
+					class Object6 {side=8;vehicle="Land_CratesPlastic_F";rank="";position[]={5.03931,1.44678,-0.00143862};dir=0;};
+					class Object7 {side=8;vehicle="Land_Bricks_V4_F";rank="";position[]={5.15869,1.55225,-0.00143862};dir=0.00103247;};
+				};
+				
+				class RoadblockMilSmall
+				{
+					name = "Sm. Re-enforced Fence";
+					class Object1 {side=8;vehicle="Land_BagFence_Long_F";rank="";position[]={0.243652,1.05127,-0.00243855};dir=179.528;};
+					class Object2 {side=8;vehicle="Land_Mil_WiredFence_F";rank="";position[]={0.253906,1.63867,-0.00144815};dir=179.97;};
+					class Object3 {side=8;vehicle="Land_BagFence_Long_F";rank="";position[]={-2.24487,0.74707,-0.00243855};dir=0;};
+					class Object4 {side=8;vehicle="Land_CncBarrier_F";rank="";position[]={-2.31445,0.737305,0.780849};dir=0;};
+					class Object5 {side=8;vehicle="Land_CncBarrier_F";rank="";position[]={2.65015,0.799805,0.782759};dir=0;};
+					class Object6 {side=8;vehicle="Land_BagFence_Long_F";rank="";position[]={2.76172,0.794434,-0.00243855};dir=0;};
+				};
+				
+				class AresRoadblockCivilianWrecks
+				{
+					name = "Sm. Civ Vehicles";
+					class Object1 {side=8;vehicle="Land_Sacks_heap_F";rank="";position[]={0.873047,1.98242,-0.00143886};dir=0;};
+					class Object2 {side=8;vehicle="Land_Wreck_Car_F";rank="";position[]={-0.101563,1.93945,-0.00143886};dir=90.2452;};
+					class Object3 {side=8;vehicle="Land_Sacks_heap_F";rank="";position[]={0.923828,2.14453,1.44768};dir=0;};
+					class Object4 {side=8;vehicle="Land_BagFence_Long_F";rank="";position[]={3.40039,0.875,-0.00243902};dir=182.848;};
+					class Object5 {side=8;vehicle="Land_BagFence_Short_F";rank="";position[]={-2.53711,2.99414,-0.00243902};dir=195.925;};
+					class Object6 {side=8;vehicle="Land_Razorwire_F";rank="";position[]={1.31445,3.44922,1.00124};dir=195.217;};
+					class Object7 {side=8;vehicle="Land_Wreck_Truck_dropside_F";rank="";position[]={-1.7207,3.96484,-0.00143886};dir=286.44;};
+					class Object8 {side=8;vehicle="Land_BagFence_Short_F";rank="";position[]={-4.16992,3.45898,-0.00243902};dir=195.925;};
+					class Object9 {side=8;vehicle="Land_Wreck_Ural_F";rank="";position[]={5.48633,1.66406,7.12872e-005};dir=273.27;};
+					class Object10 {side=8;vehicle="Land_Razorwire_F";rank="";position[]={6.49609,2.85938,-0.00144124};dir=195.217;};
+					class Object11 {side=8;vehicle="Land_BagFence_Short_F";rank="";position[]={-5.3457,2.77539,-0.00243902};dir=138.052;};
+					class Object12 {side=8;vehicle="Land_BagFence_Long_F";rank="";position[]={6.18359,0.472656,-0.00243902};dir=182.848;};
+				};
+				
+				class AresRoadblockCivilianWrecks2
+				{
+					name = "Sm. Civ Vehicles 2";
+					class Object1 {side=8;vehicle="Land_Wreck_Truck_dropside_F";rank="";position[]={-0.291016,3.2417,-0.00143862};dir=201.1;};
+					class Object2 {side=8;vehicle="Land_Wreck_Car2_F";rank="";position[]={2.88428,0.916016,0.601496};dir=107.267;};
+					class Object3 {side=8;vehicle="Land_JunkPile_F";rank="";position[]={-3.45459,2.1582,-0.24174};dir=0;};
+					class Object4 {side=8;vehicle="Land_Tyres_F";rank="";position[]={-3.74097,2.26416,0.0051589};dir=0;};
+					class Object5 {side=8;vehicle="Land_BagFence_Short_F";rank="";position[]={-3.69189,2.42041,0.0281777};dir=0;};
+					class Object6 {side=8;vehicle="Land_Wreck_HMMWV_F";rank="";position[]={-3.8313,2.53662,-0.761311};dir=270.966;};
+					class Object7 {side=8;vehicle="Land_Timbers_F";rank="";position[]={5.72705,0.469727,0.0217681};dir=89.2823;};
+					class Object8 {side=8;vehicle="Land_Razorwire_F";rank="";position[]={-6.46411,3.479,-0.681004};dir=352.751;};
+					class Object9 {side=8;vehicle="Land_Mound01_8m_F";rank="";position[]={5.48584,2.70898,-0.00144339};dir=0;};
+					class Object10 {side=8;vehicle="Land_Razorwire_F";rank="";position[]={3.72852,3.24658,0.146024};dir=0;};
+					class Object11 {side=8;vehicle="Land_Wreck_Truck_F";rank="";position[]={6.74683,0.542969,-0.0655932};dir=87.9434;};
+					class Object12 {side=8;vehicle="Land_Wreck_Skodovka_F";rank="";position[]={-7.62842,2.40186,0.00144911};dir=270.057;};
+					class Object13 {side=8;vehicle="Land_Bricks_V2_F";rank="";position[]={10.3438,1.6499,-0.00143862};dir=358.114;};
+				};
+				
+				class AresRoadblockArmyWrecks
+				{
+					name = "Sm. Army Vehicles";
+					class Object1 {side=8;vehicle="Land_BagFence_Long_F";rank="";position[]={-1.69141,1.44922,-0.00243902};dir=200.036;};
+					class Object2 {side=8;vehicle="Land_BagFence_Long_F";rank="";position[]={2.95117,0.0664063,-0.00243902};dir=189.779;};
+					class Object3 {side=8;vehicle="Land_Wreck_Hunter_F";rank="";position[]={-0.744141,2.89453,-0.00143886};dir=117.829;};
+					class Object4 {side=8;vehicle="Land_Wreck_Slammer_turret_F";rank="";position[]={5.14844,1.96875,-0.00143886};dir=142.09;};
+					class Object5 {side=8;vehicle="Land_Slums02_4m";rank="";position[]={4.74609,1.36914,0.794677};dir=197.453;};
+					class Object6 {side=8;vehicle="Land_CncBarrier_F";rank="";position[]={2.26953,3.87695,-0.00143886};dir=19.03;};
+					class Object7 {side=8;vehicle="Land_CncBarrier_F";rank="";position[]={-0.191406,5.01367,-0.00143886};dir=27.5651;};
+					class Object8 {side=8;vehicle="Land_Razorwire_F";rank="";position[]={4.19336,4.23242,-0.00144124};dir=17.9729;};
+					class Object9 {side=8;vehicle="Land_Razorwire_F";rank="";position[]={-5.67578,6.37109,-0.00144124};dir=8.03473;};
+					class Object10 {side=8;vehicle="Land_Wreck_Slammer_hull_F";rank="";position[]={-7.42383,3.26367,-0.00143886};dir=257.511;};
+					class Object11 {side=8;vehicle="Land_Wreck_Truck_F";rank="";position[]={7.64453,0.353516,-0.00143886};dir=105.085;};
+				};
+				
+				class AresRoadblockLargeWrecks
+				{
+					name = "Lg. Mixed Vehicles";
+					class Object1 {side=8;vehicle="Dirthump_2_F";rank="";position[]={-0.207031,4.63379,-0.00143862};dir=0;};
+					class Object2 {side=8;vehicle="Land_Wreck_Offroad_F";rank="";position[]={-6.64722,4.77832,-0.756494};dir=80.4907;};
+					class Object3 {side=8;vehicle="Land_Sacks_heap_F";rank="";position[]={-7.78662,4.3374,0.00906038};dir=0;};
+					class Object4 {side=8;vehicle="Land_Wreck_UAZ_F";rank="";position[]={7.3877,4.87988,0.517596};dir=261.738;};
+					class Object5 {side=8;vehicle="Land_Sacks_heap_F";rank="";position[]={8.04639,5.12354,-0.35144};dir=0;};
+					class Object6 {side=8;vehicle="Land_Razorwire_F";rank="";position[]={-8.5354,7.00977,-0.490126};dir=340.864;};
+					class Object7 {side=8;vehicle="Land_BagFence_Short_F";rank="";position[]={10.4751,4.28857,0.365863};dir=0;};
+					class Object8 {side=8;vehicle="Land_Razorwire_F";rank="";position[]={6.74731,8.05225,0.286464};dir=14.2485;};
+					class Object9 {side=8;vehicle="Land_Wreck_Car2_F";rank="";position[]={-10.7385,3.98877,-0.71892};dir=266.449;};
+					class Object10 {side=8;vehicle="Land_Wreck_CarDismantled_F";rank="";position[]={10.4683,4.96875,0.103909};dir=283.022;};
+					class Object11 {side=8;vehicle="Land_Wreck_Car3_F";rank="";position[]={-14.3706,3.57861,1.69269};dir=36.686;};
+					class Object12 {side=8;vehicle="Land_BagFence_Long_F";rank="";position[]={14.4746,4.38867,-0.00243855};dir=0;};
+					class Object13 {side=8;vehicle="Land_Wreck_Truck_dropside_F";rank="";position[]={13.9521,5.77148,-0.00143862};dir=104.871;};
+					class Object14 {side=8;vehicle="Land_BagFence_End_F";rank="";position[]={16.8474,4.36377,-0.00243855};dir=0;};
+					class Object15 {side=8;vehicle="Land_Mound01_8m_F";rank="";position[]={-17.5127,3.99658,-0.00144339};dir=0;};
+					class Object16 {side=8;vehicle="Land_Razorwire_F";rank="";position[]={-19.0044,5.79395,-0.001441};dir=354.017;};
+					class Object17 {side=8;vehicle="Land_Razorwire_F";rank="";position[]={15.905,6.85986,-0.001441};dir=0;};
+					class Object18 {side=8;vehicle="Land_Wreck_Ural_F";rank="";position[]={-19.0212,4.69775,1.13863};dir=80.8483;};
+					class Object19 {side=8;vehicle="Land_Wreck_Car_F";rank="";position[]={19.562,5.39258,-0.00143862};dir=265.952;};
+					class Object20 {side=8;vehicle="Land_BagFence_Round_F";rank="";position[]={22.4204,4.29053,-0.00273943};dir=203.478;};
+					class Object21 {side=8;vehicle="Land_ScrapHeap_2_F";rank="";position[]={24.4016,4.91699,-0.00143862};dir=283.542;};
+				};
+			}
+		
 			class AresMisc
 			{
 				name = "Miscellaneous";
@@ -236,39 +341,6 @@ class CfgGroups
 					class Object22 {side=8;vehicle="Land_HBarrier_5_F";rank="";position[]={8.00391,1.55469,-0.00143886};dir=269.358;};
 					class Object23 {side=8;vehicle="Land_HBarrier_5_F";rank="";position[]={-7.40625,7.26953,-0.00143886};dir=0;};
 					class Object24 {side=8;vehicle="Land_HBarrier_5_F";rank="";position[]={3.56836,7.30859,-0.00143886};dir=0;};
-				};
-				
-				class AresRoadblockCivilianWrecks
-				{
-					name = "Sm. Wreck Roadblock 1";
-					class Object1 {side=8;vehicle="Land_Sacks_heap_F";rank="";position[]={0.873047,1.98242,-0.00143886};dir=0;};
-					class Object2 {side=8;vehicle="Land_Wreck_Car_F";rank="";position[]={-0.101563,1.93945,-0.00143886};dir=90.2452;};
-					class Object3 {side=8;vehicle="Land_Sacks_heap_F";rank="";position[]={0.923828,2.14453,1.44768};dir=0;};
-					class Object4 {side=8;vehicle="Land_BagFence_Long_F";rank="";position[]={3.40039,0.875,-0.00243902};dir=182.848;};
-					class Object5 {side=8;vehicle="Land_BagFence_Short_F";rank="";position[]={-2.53711,2.99414,-0.00243902};dir=195.925;};
-					class Object6 {side=8;vehicle="Land_Razorwire_F";rank="";position[]={1.31445,3.44922,1.00124};dir=195.217;};
-					class Object7 {side=8;vehicle="Land_Wreck_Truck_dropside_F";rank="";position[]={-1.7207,3.96484,-0.00143886};dir=286.44;};
-					class Object8 {side=8;vehicle="Land_BagFence_Short_F";rank="";position[]={-4.16992,3.45898,-0.00243902};dir=195.925;};
-					class Object9 {side=8;vehicle="Land_Wreck_Ural_F";rank="";position[]={5.48633,1.66406,7.12872e-005};dir=273.27;};
-					class Object10 {side=8;vehicle="Land_Razorwire_F";rank="";position[]={6.49609,2.85938,-0.00144124};dir=195.217;};
-					class Object11 {side=8;vehicle="Land_BagFence_Short_F";rank="";position[]={-5.3457,2.77539,-0.00243902};dir=138.052;};
-					class Object12 {side=8;vehicle="Land_BagFence_Long_F";rank="";position[]={6.18359,0.472656,-0.00243902};dir=182.848;};
-				};
-				
-				class AresRoadblockArmyWrecks
-				{
-					name = "Sm. Wreck Roadblock 2";
-					class Object1 {side=8;vehicle="Land_BagFence_Long_F";rank="";position[]={-1.69141,1.44922,-0.00243902};dir=200.036;};
-					class Object2 {side=8;vehicle="Land_BagFence_Long_F";rank="";position[]={2.95117,0.0664063,-0.00243902};dir=189.779;};
-					class Object3 {side=8;vehicle="Land_Wreck_Hunter_F";rank="";position[]={-0.744141,2.89453,-0.00143886};dir=117.829;};
-					class Object4 {side=8;vehicle="Land_Wreck_Slammer_turret_F";rank="";position[]={5.14844,1.96875,-0.00143886};dir=142.09;};
-					class Object5 {side=8;vehicle="Land_Slums02_4m";rank="";position[]={4.74609,1.36914,0.794677};dir=197.453;};
-					class Object6 {side=8;vehicle="Land_CncBarrier_F";rank="";position[]={2.26953,3.87695,-0.00143886};dir=19.03;};
-					class Object7 {side=8;vehicle="Land_CncBarrier_F";rank="";position[]={-0.191406,5.01367,-0.00143886};dir=27.5651;};
-					class Object8 {side=8;vehicle="Land_Razorwire_F";rank="";position[]={4.19336,4.23242,-0.00144124};dir=17.9729;};
-					class Object9 {side=8;vehicle="Land_Razorwire_F";rank="";position[]={-5.67578,6.37109,-0.00144124};dir=8.03473;};
-					class Object10 {side=8;vehicle="Land_Wreck_Slammer_hull_F";rank="";position[]={-7.42383,3.26367,-0.00143886};dir=257.511;};
-					class Object11 {side=8;vehicle="Land_Wreck_Truck_F";rank="";position[]={7.64453,0.353516,-0.00143886};dir=105.085;};
 				};
 			}
 		};
