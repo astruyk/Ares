@@ -386,7 +386,7 @@ class CfgGroups
 					class Object24 {side=8;vehicle="Land_HBarrier_5_F";rank="";position[]={3.56836,7.30859,-0.00143886};dir=0;};
 				};
 				
-				class AresAmmoCache
+				class AresAmmoCache2
 				{
 					name = "Sm. Camo Ammo Dump";
 					class Object1 {side=8;vehicle="CamoNet_OPFOR_Curator_F";rank="";position[]={-0.665039,-1.42432,-0.00144148};dir=179.956;};
