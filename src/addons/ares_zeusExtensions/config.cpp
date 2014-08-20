@@ -5,12 +5,17 @@ class CfgPatches
         units[] = {};
         weapons[] = {};
         requiredVersion = 0.1;
-        requiredAddons[] = {"A3_Modules_F", "A3_Modules_F_Curator"};
 		author[] = { "Anton Struyk" };
 		authorUrl = "https://github.com/astruyk/";
 		version = 0.0.1;
 		versionStr = "0.0.1";
 		versionAr[] = {0,0,1};
+		
+		requiredAddons[] =
+		{
+			"A3_Modules_F",
+			"A3_Modules_F_Curator"
+		};
     };
 };
 
