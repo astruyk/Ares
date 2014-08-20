@@ -1,5 +1,5 @@
-_logic = _this select 0;
-/*if (!isServer) exitWith {};
+/*
+if (!isServer) exitWith {};
 
 _transportHelo = _this select 0;
 _rallyPoints = _this select 1;
@@ -19,4 +19,5 @@ _spawnedGroup = [[0, 0, 0], EAST, _chosenSquad] call BIS_fnc_spawnGroup;
 {_x moveInCargo _transportHelo} forEach units _spawnedGroup;
 
 // Move them to the rally point after landing
-_wp = _spawnedGroup addWaypoint [getMarkerPos _chosenRallyPoint, 0];*/
+_wp = _spawnedGroup addWaypoint [getMarkerPos _chosenRallyPoint, 0];
+*/

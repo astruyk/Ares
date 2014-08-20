@@ -12,6 +12,7 @@ class CfgPatches
 		
 		units[] =
 		{
+			"Ares_Module_Base",
 			"Ares_Module_Test"
 		};
 		
@@ -27,7 +28,7 @@ class CfgFactionClasses
 {
 	class Ares // The section the module will show up under in the editor?? Or is this just whatever you want?
 	{
-		displayname = "Ares Library";	// Name of the module section?
+		displayname = "Ares";	// Name of the module section.
 		priority = 8;
 		side = 7;
 
@@ -65,7 +66,7 @@ class CfgVehicles
 		mapSize = 0;
 		author = "Anton Struyk";
 		vehicleClass = "Modules";
-		category = "Curator";
+		category = "Ares";
 		subCategory = "Common";
 		side = 7;
 
@@ -99,10 +100,8 @@ class CfgVehicles
 	{
 		scope = 2;
 		scopeCurator = 2;
-		//category = "Curator";
-		//subCategory = "Ares";
 		displayName = "Ares Test";
-		function = "Ares_fnc_test";
+		function = "";
 	};
 };
 
