@@ -1,3 +1,5 @@
+["Test Function Called!"] call Ares_fnc_DisplayMessage;
+
 /*
 if (!isServer) exitWith {};
 
