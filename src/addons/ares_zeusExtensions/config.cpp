@@ -101,7 +101,7 @@ class CfgVehicles
 		scope = 2;
 		scopeCurator = 2;
 		displayName = "Ares Test";
-		function = "";
+		function = "Ares_fnc_test";
 	};
 };
 
@@ -124,9 +124,9 @@ class CfgFunctions
 		}
 		
 		// Helper functions
-		class utils
+		class util
 		{
-			file = "\ares_zeusExtensions\functions\utils";
+			file = "\ares_zeusExtensions\functions\util";
 			
 			class DisplayMessage {};
 		};
