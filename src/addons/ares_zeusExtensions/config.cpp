@@ -109,9 +109,32 @@ class CfgFunctions
 {
 	class Ares // This bit will be prefixed when actually calling the function (e.g. "Ares_fnc_...." )
 	{
-		class scripts
+		// Functions to call during initialization. See https://community.bistudio.com/wiki/Functions_Library_(Arma_3)
+		class init
 		{
-			file = "\ares_zeusExtensions\scripts"; // All of the scripts defined in this class are in the '\ares_zeusExtensions\scripts' folder.
+			file = "\ares_zeusExtensions\functions\init";
+			
+			class InitAres { preInit = 1; }
+		};
+
+		// Functions called in response to events
+		class events
+		{
+			file = "\ares_zeusExtensions\functions\events";
+		}
+		
+		// Helper functions
+		class utils
+		{
+			file = "\ares_zeusExtensions\functions\utils";
+			
+			class DisplayMessage {};
+		};
+		
+		// Functions to perform module actions
+		class modules
+		{
+			file = "\ares_zeusExtensions\functions\modules"; // All of the scripts defined in this class are in the '\ares_zeusExtensions\scripts' folder.
 			class test {};	// This will be found in "\ares_zeusExtensions\scripts\fn_<thisname>.sqf" and compiled into 'Ares_fnc_<thisname>'
 		};
 	};
