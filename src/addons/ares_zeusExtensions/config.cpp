@@ -124,6 +124,7 @@ class CfgFunctions
 			file = "\ares_zeusExtensions\functions\util";
 			
 			class DisplayMessage {};
+			class GlobalExecute {};
 		};
 		
 		// Functions to perform module actions
