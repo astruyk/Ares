@@ -125,6 +125,7 @@ class CfgFunctions
 			
 			class DisplayMessage {};
 			class GlobalExecute {};
+			class GetUnitUnderCursor {};
 		};
 		
 		// Functions to perform module actions
@@ -132,6 +133,7 @@ class CfgFunctions
 		{
 			file = "\ares_zeusExtensions\functions\modules"; // All of the scripts defined in this class are in the '\ares_zeusExtensions\scripts' folder.
 			class test {};	// This will be found in "\ares_zeusExtensions\scripts\fn_<thisname>.sqf" and compiled into 'Ares_fnc_<thisname>'
+			class removeNvgSingleUnit {};
 		};
 	};
 };
