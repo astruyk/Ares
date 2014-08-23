@@ -63,7 +63,7 @@ class CfgVehicles
 	
 	class Ares_Module_Base : Module_F
 	{
-		mapSize = 0;
+		mapSize = 1;
 		author = "Anton Struyk";
 		vehicleClass = "Modules";
 		category = "Ares";
@@ -82,23 +82,18 @@ class CfgVehicles
 		functionPriority = 1;	// Execution priority, modules with lower number are executed first. 0 is used when the attribute is undefined
 		isGlobal = 2;			// 0 for server only execution, 1 for remote execution on all clients upon mission start, 2 for persistent execution
 		isTriggerActivated = 0;	// 1 for module waiting until all synced triggers are activated
-		isDisposable = 1;		// 1 if modules is to be disabled once it's activated (i.e., repeated trigger activation won't work)
+		isDisposable = 0;		// 1 if modules is to be disabled once it's activated (i.e., repeated trigger activation won't work)
 		// curatorInfoType = "RscDisplayAttributeModuleNuke";	// Menu displayed when the module is placed or double-clicked on by Zeus
 		
-		class Arguments : ArgumentsBaseUnits
-		{
-			class Units: Units {};
-		};
+		class Arguments {};
 		class ModuleDescription: ModuleDescription
 		{
 			description = "Ares Module Base";
-			sync[] = {};
 		};
 	};
 	
 	class Ares_Module_Test : Ares_Module_Base
 	{
-		scope = 2;
 		scopeCurator = 2;
 		displayName = "Ares Test";
 		function = "Ares_fnc_test";
