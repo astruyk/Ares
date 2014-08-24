@@ -10,13 +10,8 @@ class CfgPatches
 		versionStr = "0.0.1";
 		versionAr[] = {0,0,1};
 		
-		units[] =
-		{
-			"Ares_Module_Test",
-			"Ares_Module_RemoveNvgSingle",
-			"Ares_Module_RemoveNvgGroup"
-		};
-		
+		#include "units.hpp"
+
 		requiredAddons[] =
 		{
 			"A3_UI_F",
@@ -62,7 +57,7 @@ class CfgVehicles
 			class EmptyDetector;
 		};
 	};
-	
+
 	class Ares_Module_Base : Module_F
 	{
 		mapSize = 1;
@@ -93,7 +88,7 @@ class CfgVehicles
 			description = "Ares Module Base";
 		};
 	};
-	
+
 	// Placeholder class that doesn't do anything. Used for generating categories in UI.
 	class Ares_Module_Empty : Ares_Module_Base
 	{
@@ -105,75 +100,13 @@ class CfgVehicles
 		icon = "";
 		function = "Ares_fnc_Empty";
 	}
-	
-	class Ares_Module_Test : Ares_Module_Base
-	{
-		scopeCurator = 2;
-		displayName = "Ares Test";
-		function = "Ares_fnc_test";
-	};
-	
-	class Ares_Module_RemoveNvgSingle : Ares_Module_Base
-	{
-		scopeCurator = 2;
-		displayName = "Remove Nvg (Single Unit)";
-		function = "Ares_fnc_removeNvgSingleUnit";
-	};
-	
-	class Ares_Module_RemoveNvgGroup : Ares_Module_Base
-	{
-		scopeCurator = 2;
-		displayName = "Remove Nvg (Group)";
-		function = "Ares_fnc_removeNvgGroup";
-	};
+
+	#include "cfgVehicles.hpp"
 };
 
 class CfgFunctions
 {
-	class Ares // This bit will be prefixed when actually calling the function (e.g. "Ares_fnc_...." )
-	{
-		// Functions to call during initialization. See https://community.bistudio.com/wiki/Functions_Library_(Arma_3)
-		class init
-		{
-			file = "\ares_zeusExtensions\functions\init";
-			
-			class InitAres { preInit = 1; }
-			class InitAresEvents { preInit = 1; }
-			class InitAresUi { preInit = 1; }
-		};
-
-		// Functions called in response to events
-		class events
-		{
-			file = "\ares_zeusExtensions\functions\events";
-			
-			class OnModuleTreeLoad {};
-		}
-		
-		// Helper functions
-		class util
-		{
-			file = "\ares_zeusExtensions\functions\util";
-			
-			class DisplayMessage {};
-			class GetGroupUnderCursor {};
-			class GetUnitUnderCursor {};
-			class GlobalExecute {};
-			class IsZeus {};
-			class MonitorCuratorDisplay {};
-			class WaitForZeus {};
-		};
-		
-		// Functions to perform module actions
-		class modules
-		{
-			file = "\ares_zeusExtensions\functions\modules"; // All of the scripts defined in this class are in the '\ares_zeusExtensions\scripts' folder.
-			class Empty {};
-			class test {};	// This will be found in "\ares_zeusExtensions\scripts\fn_<thisname>.sqf" and compiled into 'Ares_fnc_<thisname>'
-			class removeNvgSingleUnit {};
-			class removeNvgGroup {};
-		};
-	};
+	#include "cfgFunctions.hpp"
 };
 
 class CfgGroups
