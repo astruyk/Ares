@@ -20,6 +20,10 @@ class CfgPatches
 		
 		requiredAddons[] =
 		{
+			"A3_UI_F",
+			"A3_UI_F_Curator",
+			"A3_Functions_F",
+			"A3_Functions_F_Curator",
 			"A3_Modules_F",
 			"A3_Modules_F_Curator"
 		};
@@ -126,12 +130,16 @@ class CfgFunctions
 			file = "\ares_zeusExtensions\functions\init";
 			
 			class InitAres { preInit = 1; }
+			class InitAresEvents { preInit = 1; }
+			class InitAresUi { preInit = 1; }
 		};
 
 		// Functions called in response to events
 		class events
 		{
 			file = "\ares_zeusExtensions\functions\events";
+			
+			class OnModuleTreeLoad {};
 		}
 		
 		// Helper functions
@@ -140,9 +148,12 @@ class CfgFunctions
 			file = "\ares_zeusExtensions\functions\util";
 			
 			class DisplayMessage {};
-			class GlobalExecute {};
-			class GetUnitUnderCursor {};
 			class GetGroupUnderCursor {};
+			class GetUnitUnderCursor {};
+			class GlobalExecute {};
+			class IsZeus {};
+			class MonitorCuratorDisplay {};
+			class WaitForZeus {};
 		};
 		
 		// Functions to perform module actions
