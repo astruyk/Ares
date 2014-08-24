@@ -12,7 +12,6 @@ class CfgPatches
 		
 		units[] =
 		{
-			"Ares_Module_Base",
 			"Ares_Module_Test",
 			"Ares_Module_RemoveNvgSingle",
 			"Ares_Module_RemoveNvgGroup"
@@ -45,7 +44,7 @@ class CfgFactionClasses
 			class Common
 			{
 				displayname = "Common";
-				moduleClass = "Ares_ModuleEmpty";
+				moduleClass = "Ares_Module_Empty";
 			};
 		};
 	};
@@ -80,9 +79,9 @@ class CfgVehicles
 		scopeCurator = 1;		// Curator visibility; 2 will show it in the menu, 1 will hide it.
 
 		displayName = "Ares Module Base";	// Name displayed in the menu
-		// icon = "\chessmastersCommonLibrary\data\icon_ca.paa";		// Map icon. Delete this entry to use the default icon
-		// picture = "\chessmastersCommonLibrary\data\icon_ca.paa";
-		// portrait = "\chessmastersCommonLibrary\data\icon_ca.paa";
+		icon = "\ares_zeusExtensions\data\icon_ca.paa";		// Map icon. Delete this entry to use the default icon
+		picture = "\ares_zeusExtensions\data\icon_ca.paa";
+		portrait = "\ares_zeusExtensions\data\icon_ca.paa";
 
 		function = "";			// Name of function triggered once conditions are met
 		functionPriority = 1;	// Execution priority, modules with lower number are executed first. 0 is used when the attribute is undefined
@@ -97,6 +96,14 @@ class CfgVehicles
 			description = "Ares Module Base";
 		};
 	};
+	
+	// Placeholder class that doesn't do anything. Used for generating categories in UI.
+	class Ares_Module_Empty : Ares_Module_Base
+	{
+		scopeCurator = 2;
+		displayName = "Empty Module";
+		function = "Ares_fnc_Empty";
+	}
 	
 	class Ares_Module_Test : Ares_Module_Base
 	{
@@ -160,6 +167,7 @@ class CfgFunctions
 		class modules
 		{
 			file = "\ares_zeusExtensions\functions\modules"; // All of the scripts defined in this class are in the '\ares_zeusExtensions\scripts' folder.
+			class Empty {};
 			class test {};	// This will be found in "\ares_zeusExtensions\scripts\fn_<thisname>.sqf" and compiled into 'Ares_fnc_<thisname>'
 			class removeNvgSingleUnit {};
 			class removeNvgGroup {};
