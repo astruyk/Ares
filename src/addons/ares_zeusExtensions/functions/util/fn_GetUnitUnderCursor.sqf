@@ -11,7 +11,8 @@ _logic = _this select 0;
 
 _unitUnderCursor = objNull;
 _mouseOverVariableValue = missionnamespace getvariable ["bis_fnc_curatorObjectPlaced_mouseOver",[""]];
-if ((_mouseOverVariableValue select 0) == typename objNull) then {
+if ((_mouseOverVariableValue select 0) == typename objNull) then
+{
 	_unitUnderCursor = _mouseOverVariableValue select 1;
 };
 if(isnull _unitUnderCursor) then {
