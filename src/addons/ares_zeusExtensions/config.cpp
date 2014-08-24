@@ -50,19 +50,16 @@ class CfgFactionClasses
 	};
 };
 
-
 class CfgVehicles
 {
 	class Logic;
 	class Module_F: Logic
 	{
-		class ArgumentsBaseUnits
-		{
-			class Units;
-		};
 		class ModuleDescription
 		{
+			class AnyPlayer;
 			class AnyBrain;
+			class EmptyDetector;
 		};
 	};
 	
@@ -100,8 +97,12 @@ class CfgVehicles
 	// Placeholder class that doesn't do anything. Used for generating categories in UI.
 	class Ares_Module_Empty : Ares_Module_Base
 	{
-		scopeCurator = 2;
-		displayName = "Empty Module";
+		category = "Curator";
+		subCategory = "";
+		
+		mapSize = 0;
+		displayName = "";
+		icon = "";
 		function = "Ares_fnc_Empty";
 	}
 	
