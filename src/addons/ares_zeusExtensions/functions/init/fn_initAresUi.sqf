@@ -2,7 +2,7 @@
 if(isServer && isDedicated) exitWith {};
 
 [] spawn {
-	[] call Ares_fnc_waitForZeusLoad;
+	[] call Ares_fnc_waitForZeus;
 
 	//Don't do anything for non-zeus players.
 	if(!([player] call Ares_fnc_isZeus)) exitWith {};
@@ -10,7 +10,7 @@ if(isServer && isDedicated) exitWith {};
 	["Initializing UI ..."] call Ares_fnc_DisplayMessage;
 	
 	["Ares"] spawn Ares_fnc_MonitorCuratorDisplay;
-	[] spawn cpm_fnc_SetupDisplayHandlers;
+	//[] spawn Ares_fnc_SetupDisplayHandlers;
 
 	["... Done initializing UI."] call Ares_fnc_DisplayMessage;
 };

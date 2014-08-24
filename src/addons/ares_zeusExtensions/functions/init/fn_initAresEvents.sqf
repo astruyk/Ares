@@ -2,7 +2,7 @@
 if(isServer && isDedicated) exitWith {};
 
 [] spawn {
-	[] call Ares_fnc_waitForZeusLoad;
+	[] call Ares_fnc_waitForZeus;
 
 	//Skip event loading for non-curator players
 	if(!([player] call Ares_fnc_isZeus)) exitWith {};
