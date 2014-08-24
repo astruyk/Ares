@@ -104,7 +104,7 @@ class CfgVehicles
 	{
 		scopeCurator = 2;
 		displayName = "Remove Nvg (Single Unit)";
-		function = "Ares_fnc_GetUnitUnderCursor";
+		function = "Ares_fnc_removeNvgSingleUnit";
 	};
 };
 
