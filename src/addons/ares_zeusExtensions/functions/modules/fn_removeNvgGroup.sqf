@@ -9,7 +9,7 @@ if (_activated && local _logic) then
 	{
 		_x unassignItem "NVGoggles";
 		_x removeItem "NVGoggles";
-	} forEach units _groupUnderCursor; 
+	} forEach units _groupUnderCursor;
 	
 	[objnull, "Removed NVGoogles from Group."] call bis_fnc_showCuratorFeedbackMessage;
 };

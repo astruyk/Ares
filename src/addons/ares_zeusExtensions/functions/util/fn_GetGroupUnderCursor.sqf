@@ -1,11 +1,11 @@
 /*
-	Gets the unit under the mouse cursor.
+	Gets the group of the unit under the mouse cursor.
 	
 	Params:
 		0 - [Object] The module's logic unit that is trying to get the unit under the cursor. Will automatically be deleted if no unit is under the cursor.
 		
 	Returns:
-		The unit under the cursor (if any). Otherwise the logic unit parameter is deleted.
+		The group of the unit under the cursor (if any). Otherwise the logic unit parameter is deleted.
 */
 _logic = _this select 0;
 
