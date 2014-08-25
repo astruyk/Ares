@@ -96,8 +96,8 @@ class CfgVehicles
 		subCategory = "";
 		
 		mapSize = 0;
-		displayName = "";
-		icon = "";
+		displayName = "Ares Module Empty";
+		//icon = "";
 		function = "Ares_fnc_Empty";
 	}
 
