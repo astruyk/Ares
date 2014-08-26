@@ -1,9 +1,9 @@
-class Ares_Module_Test : Ares_Module_Base
+/*class Ares_Module_Test : Ares_Module_Base
 {
 	scopeCurator = 2;
 	displayName = "Ares Test";
 	function = "Ares_fnc_test";
-};
+};*/
 
 class Ares_Module_RemoveNvgSingle : Ares_Module_Base
 {

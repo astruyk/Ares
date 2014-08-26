@@ -38,7 +38,7 @@ class Ares // This bit will be prefixed when actually calling the function (e.g.
 		file = "\ares_zeusExtensions\functions\modules"; // All of the scripts defined in this class are in the '\ares_zeusExtensions\scripts' folder.
 
 		class Empty {};
-		class Test {};	// This will be found in "\ares_zeusExtensions\scripts\fn_<thisname>.sqf" and compiled into 'Ares_fnc_<thisname>'
+		//class Test {};	// This will be found in "\ares_zeusExtensions\scripts\fn_<thisname>.sqf" and compiled into 'Ares_fnc_<thisname>'
 		class RemoveNvgSingleUnit {};
 		class RemoveNvgGroup {};
 		class SurrenderSingleUnit {};
