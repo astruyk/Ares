@@ -10,7 +10,6 @@ if (_activated && local _logic) then
 	// set the actions available on each unit that is currently captured.
 	Ares_RefreshSurrenderActionsFunction =
 	{
-		[format ["Added Updating Actions (%1 items)", (count Ares_CapturedUnitList)]] call Ares_fnc_DisplayMessage;
 		// TODO support refreshing only one unit if it's passed in as a parameter
 		{
 			_unit = _x; //For readability.
@@ -27,7 +26,6 @@ if (_activated && local _logic) then
 
 			// Check the capture state and re-add the appropriate actions back
 			_currentUnitState = _unit getVariable ["AresCaptureState", -1];
-			[format ["Current state %1", _currentUnitState]] call Ares_fnc_DisplayMessage;
 			switch (_currentUnitState) do
 			{
 				case 0:
@@ -35,17 +33,14 @@ if (_activated && local _logic) then
 					// Surrendered
 					_id = _unit addAction ["Secure",  { [[_this select 0], "Ares_SecureCaptiveFunction", true] spawn BIS_fnc_MP; }];
 					_unit setVariable ["AresSecureActionId", _id];
-					["Added secure action"] call Ares_fnc_DisplayMessage;
 				};
 				case 1:
 				{
 					// Secured Nothing else you can do (yet)
-					["Secured (no actions)"] call Ares_fnc_DisplayMessage;
 				};
 				default
 				{
 					// Nothing to do here.
-					["Unknown (no actions)"] call Ares_fnc_DisplayMessage;
 				};
 			};
 
@@ -127,7 +122,7 @@ if (_activated && local _logic) then
 		publicVariable "Ares_CapturedUnitList";
 
 		// Set the correct state on the captured unit.
-		[[_unitToCapture], "Ares_SurrenderUnitFunction", true, false] spawn BIS_fnc_MP;
+		[[_unitToCapture], "Ares_SurrenderUnitFunction", true] spawn BIS_fnc_MP;
 
 		// Execute the function to update the actions on all JIP machines as well, so if they join later
 		// they get the actions added. Only make it persistent if this is the first call.
@@ -137,7 +132,7 @@ if (_activated && local _logic) then
 	}
 	else
 	{
-		[objnull, format["Unit %1 has already surrendered.", _unitToCapture]] call bis_fnc_showCuratorFeedbackMessage;
+		[objnull, format["Unit %1 has already surrendered. (State: )", _unitToCapture, (_unitToCapture getVariable ["AresCaptureState", -1])]] call bis_fnc_showCuratorFeedbackMessage;
 	};
 };
 
