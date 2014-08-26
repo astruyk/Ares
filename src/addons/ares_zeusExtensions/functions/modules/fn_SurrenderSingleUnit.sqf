@@ -6,71 +6,80 @@ if (_activated && local _logic) then
 {
 	_unitToCapture = [_logic] call Ares_fnc_GetUnitUnderCursor;
 
-	// These are all local actions, so we need to broadcast them to the world otherwise
-	// they will not show up on other machines
-	
-	Ares_MakeCaptiveFunction = {
-		["Making Captive"] call Ares_fnc_DisplayMessage;
-
-		_unitToCapture = _this select 0;
+	// TODO move these function definitions to a static place (no need to call publicVariable to sync them every time we surrender a unit).
+	Ares_RefreshSurrenderActionsFunction =
+	{
+		_unit = _this select 0;
 		
-		_unitToCapture setCaptive true;
-		[_unitToCapture] join grpNull;
-
-		// Have the unit drop their current weapons on the ground.
-		/*_primaryWeapon = primaryWeapon _unitToCapture;
-		if (_primaryWeapon != "") then
+		// Remove all the actions for each capture state
 		{
-			_unitToCapture action ["drop Weapon",_unitToCapture, _primaryWeapon];
-		};
-		_secondaryWeapon = secondaryWeapon _unitToCapture;
-		if (_secondaryWeapon != "") then
-		{
-			_unitToCapture action ["drop Weapon",_unitToCapture, _secondaryWeapon];
-		};*/
-		
-		removeAllWeapons _unitToCapture;
-		
-		// Prevent the unit from reacting to new targets. Otherwise they sometimes drop out of the captured animation.
-		_unitToCapture disableAI "TARGET";
-		_unitToCapture disableAI "AUTOTARGET";
-		
-		// Have the unit do the surrender animation. Since they don't have weapons they will stay in this mode
-		// until otherwise told. You can't move them!
-		_unitToCapture action ["Surrender", _unitToCapture];
-		
-		// Add an action that breaks the surrender anim. We have to use vanilla ARMA commands in here since other
-		// computers might not be running the Ares mod.
-		_unitToCapture addAction ["Secure",
+			_id = _unit getVariable [_x, -1];
+			if (_id != -1) then
 			{
-				_unit = _this select 0;
-				_caller = _this select 1;
-				_id = _this select 2;
-				_arguments = _this select 3;
+				_unit removeAction _id;
+				_unit setVariable [_x, -1];
+			};
+		} forEach  ["AresSecureActionId"];
 
-				[[_unit, _id], "Ares_SecureCaptiveFunction", true, false] spawn BIS_fnc_MP;
-			}, [], 10, false, false]; 
+		// Check the capture state and re-add the appropriate actions back
+		_currentUnitState = _unit getVariable "AresCaptureState";
+		switch (_currentUnitState) do
+		{
+			case 0:
+			{
+				// Surrendered
+				_id = _unit addAction ["Secure",  { [[_this select 0], "Ares_SecureCaptiveFunction", true, false] spawn BIS_fnc_MP }];
+				_unit setVariable ["AresSecureActionId", _id];
+			};
+			case 1:
+			{
+				// Secured Nothing else you can do (yet)
+			};
+			default:
+			{
+			};
+		};
 	};
+	publicVariable "Ares_CheckSurrenderStateFunction";
+	
+	Ares_SurrenderFunction = 
+	{
+		_unit = _this select 0;
+		if (local _unit) then
+		{
+			//Set this for all players so can set corre
+			_unit setVariable ["AresCaptureState", 0, true];
+			
+			_unit setCaptive true;			// Don't let other AI target them
+			[_unit] join grpNull;			// Leave the group so they don't do stupid AI things.
+			removeAllWeapons _unit;			// TODO have unit drop their weapon instead of magically disappearing
+			_unit disableAI "TARGET";		// Prevent the unit from reacting to existing targets. Otherwise they sometimes drop out of the captured animation.
+			_unit disableAI "AUTOTARGET";	// Prevent the unit from reacting to new targets. Otherwise they sometimes drop out of the captured animation.
+		};
+		
+		// Make sure all of the other clients have the right actions now that we've changed the units state.
+		[[_unit], "Ares_RefreshSurrenderActionsFunction", true, false] spawn BIS_fnc_MP;
+	};
+	publicVariable "Ares_SurrenderFunction";
 	
 	Ares_SecureCaptiveFunction = 
 	{
 		_unit = _this select 0;
-		_id = _this select 1;
 		
-		removeAllWeapons _unit;
-		_unit switchMove "";
-		_unit action ["sitDown", _unit];
-		_unit removeAction _id;
+		if (local _unit) then
+		{
+			removeAllWeapons _unit;
+			_unit switchMove "";
+			_unit action ["sitDown", _unit];
+		};
 		
-		hint "Enemy unit secured.";
+		// Make sure all of the other clients have the right actions now that we've changed the units state.
+		[[_unit], "Ares_RefreshSurrenderActionsFunction", true, false] spawn BIS_fnc_MP;
 	};
-	
-	// Make the code that executes the capture public so we can call it on other machines.
-	publicVariable "Ares_MakeCaptiveFunction";
 	publicVariable "Ares_SecureCaptiveFunction";
 	
-	// Execute the capture on all machines and JIP players.
-	[[_unitToCapture], "Ares_MakeCaptiveFunction", true, false] spawn BIS_fnc_MP;
+	// Execute the capture on all machines.
+	[[_unitToCapture], "Ares_SurrenderFunction", true, false] spawn BIS_fnc_MP;
 	
 	[objnull, format["Unit %1 has surrendered.", _unitToCapture]] call bis_fnc_showCuratorFeedbackMessage;
 };
