@@ -33,7 +33,7 @@ if (_activated && local _logic) then
 					case 0:
 					{
 						// Surrendered
-						_id = _unit addAction ["Secure",  { [[_this select 0], "Ares_SecureCaptiveFunction", true] spawn BIS_fnc_MP; }];
+						_id = _unit addAction ["Secure",  { [[_this select 0], "Ares_SecureCaptiveFunction", true] spawn BIS_fnc_MP; }, [], 0, false, true, "", "(alive _target) && (player distance _target < 3)"];
 						_unit setVariable ["AresSecureActionId", _id];
 					};
 					case 1:
