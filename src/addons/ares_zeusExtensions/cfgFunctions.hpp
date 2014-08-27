@@ -4,7 +4,7 @@ class Ares // This bit will be prefixed when actually calling the function (e.g.
 	class init
 	{
 		file = "\ares_zeusExtensions\functions\init";
-		
+
 		class InitAres { preInit = 1; }
 		class InitAresEvents { preInit = 1; }
 		class InitAresUi { preInit = 1; }
@@ -14,15 +14,15 @@ class Ares // This bit will be prefixed when actually calling the function (e.g.
 	class events
 	{
 		file = "\ares_zeusExtensions\functions\events";
-		
+
 		class OnModuleTreeLoad {};
 	}
-	
+
 	// Helper functions
 	class util
 	{
 		file = "\ares_zeusExtensions\functions\util";
-		
+
 		class DisplayMessage {};
 		class GetGroupUnderCursor {};
 		class GetUnitUnderCursor {};
@@ -31,7 +31,7 @@ class Ares // This bit will be prefixed when actually calling the function (e.g.
 		class MonitorCuratorDisplay {};
 		class WaitForZeus {};
 	};
-	
+
 	// Functions to perform module actions
 	class modules
 	{
@@ -42,6 +42,5 @@ class Ares // This bit will be prefixed when actually calling the function (e.g.
 		class RemoveNvgSingleUnit {};
 		class RemoveNvgGroup {};
 		class SurrenderSingleUnit {};
-		class FinishSurrenderSingleUnit {};
 	};
 };

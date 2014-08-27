@@ -25,10 +25,3 @@ class Ares_Module_SurrenderSingleUnit : Ares_Module_Base
 	displayName = "Surrender (Unit)";
 	function = "Ares_fnc_SurrenderSingleUnit";
 };
-
-class Ares_Module_FinishSurrenderSingleUnit : Ares_Module_Base
-{
-	scopeCurator = 2;
-	displayName = "Un-Surrender (Unit)";
-	function = "Ares_fnc_FinishSurrenderSingleUnit";
-};

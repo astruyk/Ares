@@ -24,23 +24,26 @@ if (_activated && local _logic) then
 				};
 			} forEach  ["AresSecureActionId"];
 
-			// Check the capture state and re-add the appropriate actions back
-			_currentUnitState = _unit getVariable ["AresCaptureState", -1];
-			switch (_currentUnitState) do
+			if ((alive _unit)) then
 			{
-				case 0:
+				// Check the capture state and re-add the appropriate actions back
+				_currentUnitState = _unit getVariable ["AresCaptureState", -1];
+				switch (_currentUnitState) do
 				{
-					// Surrendered
-					_id = _unit addAction ["Secure",  { [[_this select 0], "Ares_SecureCaptiveFunction", true] spawn BIS_fnc_MP; }];
-					_unit setVariable ["AresSecureActionId", _id];
-				};
-				case 1:
-				{
-					// Secured Nothing else you can do (yet)
-				};
-				default
-				{
-					// Nothing to do here.
+					case 0:
+					{
+						// Surrendered
+						_id = _unit addAction ["Secure",  { [[_this select 0], "Ares_SecureCaptiveFunction", true] spawn BIS_fnc_MP; }];
+						_unit setVariable ["AresSecureActionId", _id];
+					};
+					case 1:
+					{
+						// Secured Nothing else you can do (yet)
+					};
+					default
+					{
+						// Nothing to do here.
+					};
 				};
 			};
 
@@ -60,10 +63,12 @@ if (_activated && local _logic) then
 
 			_unit setCaptive true;			// Don't let other AI target them
 			[_unit] join grpNull;			// Leave the group so they don't do stupid AI things.
-			removeAllWeapons _unit;			// TODO have unit drop their weapon instead of magically disappearing
+			//removeAllWeapons _unit;			// TODO have unit drop their weapon instead of magically disappearing
+			//_unit action ["Surrender", _unit];	// Go into the 'surrendered' animation.
+			_unit playAction "Surrender";
+			_unit disableAI "ANIM";			// Prevent him from leaving the Surrender animation after it finishes
 			_unit disableAI "TARGET";		// Prevent the unit from reacting to existing targets. Otherwise they sometimes drop out of the captured animation.
 			_unit disableAI "AUTOTARGET";	// Prevent the unit from reacting to new targets. Otherwise they sometimes drop out of the captured animation.
-			_unit action ["Surrender", _unit];	// Go into the 'surrendered' animation.
 		};
 
 		// Make sure all of the other clients have the right actions now that we've changed the units state.
@@ -105,34 +110,34 @@ if (_activated && local _logic) then
 
 	// Determine if we've already captured the unit in the past
 	// TODO Maybe if Zeus tries to recapture an already captured unit it should secure them?
-	_wasAlreadyCaptured = false;
+	_wasAlreadyCaptured = _unitToCapture in Ares_CapturedUnitList;
+	if (alive _unitToCapture) then
 	{
-		if (_x == _unitToCapture) then
+		if (!_wasAlreadyCaptured) then
 		{
-			_wasAlreadyCaptured = true;
+			// Capture him now. We keep track of things in an array
+			// so that JIP players can be sure to get actions added to ALL captured units
+			// without requring a bunch of seperate persistent BIS_fnc_MP calls.
+			Ares_CapturedUnitList set [count Ares_CapturedUnitList, _unitToCapture];
+			publicVariable "Ares_CapturedUnitList";
+
+			// Set the correct state on the captured unit.
+			[[_unitToCapture], "Ares_SurrenderUnitFunction", true] spawn BIS_fnc_MP;
+
+			// Execute the function to update the actions on all JIP machines as well, so if they join later
+			// they get the actions added. Only make it persistent if this is the first call.
+			[[], "Ares_RefreshSurrenderActionsFunction", true, _firstCallToCaptureAnyUnit] spawn BIS_fnc_MP;
+
+			[objnull, format["Unit has surrendered. (Count: %1, State: %2)", (count Ares_CapturedUnitList), (_unitToCapture getVariable ["AresCaptureState", -1])]] call bis_fnc_showCuratorFeedbackMessage;
+		}
+		else
+		{
+			[objnull, format["Unit has already surrendered. (Count: %1, State: %2)", (count Ares_CapturedUnitList), (_unitToCapture getVariable ["AresCaptureState", -1])]] call bis_fnc_showCuratorFeedbackMessage;
 		};
-	} forEach (Ares_CapturedUnitList);
-
-	if (!_wasAlreadyCaptured) then
-	{
-		// Capture him now. We keep track of things in an array
-		// so that JIP players can be sure to get actions added to ALL captured units
-		// without requring a bunch of seperate persistent BIS_fnc_MP calls.
-		Ares_CapturedUnitList set [count Ares_CapturedUnitList, _unitToCapture];
-		publicVariable "Ares_CapturedUnitList";
-
-		// Set the correct state on the captured unit.
-		[[_unitToCapture], "Ares_SurrenderUnitFunction", true] spawn BIS_fnc_MP;
-
-		// Execute the function to update the actions on all JIP machines as well, so if they join later
-		// they get the actions added. Only make it persistent if this is the first call.
-		[[], "Ares_RefreshSurrenderActionsFunction", true, _firstCallToCaptureAnyUnit] spawn BIS_fnc_MP;
-
-		[objnull, format["Unit %1 has surrendered. (%2)", _unitToCapture, (count Ares_CapturedUnitList)]] call bis_fnc_showCuratorFeedbackMessage;
 	}
 	else
 	{
-		[objnull, format["Unit %1 has already surrendered. (State: )", _unitToCapture, (_unitToCapture getVariable ["AresCaptureState", -1])]] call bis_fnc_showCuratorFeedbackMessage;
+		[objnull, format["Unit must be alive. (Count: %1, State: %2)", (count Ares_CapturedUnitList), (_unitToCapture getVariable ["AresCaptureState", -1])]] call bis_fnc_showCuratorFeedbackMessage;
 	};
 };
 
