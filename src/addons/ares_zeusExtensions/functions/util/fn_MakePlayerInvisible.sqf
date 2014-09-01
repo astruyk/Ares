@@ -10,6 +10,10 @@ _unit = _this select 0;
 
 _unit setVariable ["Ares_unitVisibility", "invisible"];
 
+_unit allowDamage false;
+_unit setCaptive true;
+_unit hideObjectGlobal true;
+
 hint "Player is now invisible.";
 sleep 3;
 hint "";
