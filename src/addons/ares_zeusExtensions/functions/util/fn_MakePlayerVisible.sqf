@@ -7,7 +7,7 @@
 
 _unit = _this select 0;
 
-_unit setVariable ["Ares_isUnitInvisible", false];
+_unit setVariable ["Ares_unitVisibility", "visible"];
 
 hint "Player is now visible again.";
 sleep 3;
