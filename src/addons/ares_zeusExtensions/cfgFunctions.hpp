@@ -8,6 +8,7 @@ class Ares // This bit will be prefixed when actually calling the function (e.g.
 		class InitAres { preInit = 1; }
 		class InitAresEvents { preInit = 1; }
 		class InitAresUi { preInit = 1; }
+		class InitAresPlayerActions {};
 	};
 
 	// Functions called in response to events
@@ -31,6 +32,8 @@ class Ares // This bit will be prefixed when actually calling the function (e.g.
 		class MonitorCuratorDisplay {};
 		class WaitForZeus {};
 		class TeleportPlayers {};
+		class MakePlayerInvisible {};
+		class MakePlayerVisible {};
 	};
 
 	// Functions to perform module actions
