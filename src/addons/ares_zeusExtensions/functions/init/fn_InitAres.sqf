@@ -7,9 +7,11 @@ missionnamespace setVariable ["Ares_debugging", true];
 //[] spawn { activateAddons ["Ares"]; }; // This also works. Not sure which is best.
 
 [] spawn {
+	[] call Ares_fnc_waitForZeus;
+
 	["Initializing...."] call Ares_fnc_DisplayMessage;
 
-	// Do magic here.
-	
+	[] call Ares_fnc_InitAresPlayerActions;
+
 	["... Done Initializing."] call Ares_fnc_DisplayMessage;
 };
