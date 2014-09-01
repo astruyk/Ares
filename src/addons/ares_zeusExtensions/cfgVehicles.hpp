@@ -19,9 +19,9 @@ class Ares_Module_RemoveNvgGroup : Ares_Module_Base
 	function = "Ares_fnc_RemoveNvgGroup";
 };
 
-class Ares_Module_SurrenderSingleUnit : Ares_Module_Base
+/*class Ares_Module_SurrenderSingleUnit : Ares_Module_Base
 {
 	scopeCurator = 2;
 	displayName = "Surrender (Unit)";
 	function = "Ares_fnc_SurrenderSingleUnit";
-};
+};*/
