@@ -32,6 +32,8 @@ class Ares // This bit will be prefixed when actually calling the function (e.g.
 		class MonitorCuratorDisplay {};
 		class WaitForZeus {};
 		class TeleportPlayers {};
+		class MakePlayerInvisible {};
+		class MakePlayerVisible {};
 	};
 
 	// Functions to perform module actions

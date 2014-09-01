@@ -1,7 +1,7 @@
 
 // Add actions to Zeus to go invisible and to come back from being invisible
-if (player call Ares_fnc_IsZeus) then
+if ([player] call Ares_fnc_IsZeus) then
 {
-	_player addAction ["Go invisible", {hint "Hello!";}];
-	_player addAction ["Become Visible", {hint "Become visible!";}];
+	player addAction ["Go invisible", {[_this select 3] spawn Ares_fnc_MakePlayerInvisible; }, player, 1.5, false, false, "", "player getVariable [""Ares_isUnitInvisible"", false] == false"];
+	player addAction ["Become Visible", {[_this select 3] spawn Ares_fnc_MakePlayerVisible; }, player, 1.5, false, false, "", "player getVariable [""Ares_isUnitInvisible"", false] == true"];
 };
