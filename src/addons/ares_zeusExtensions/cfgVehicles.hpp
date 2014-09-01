@@ -50,7 +50,7 @@ class Ares_Module_Teleport_Zeus : Ares_Module_Base
 	function = "Ares_fnc_TeleportZeus";
 };
 
-clas Ares_Module_Teleport_CreateTeleporter : Ares_Module_Base
+class Ares_Module_Teleport_CreateTeleporter : Ares_Module_Base
 {
 	scopeCurator = 2;
 	displayName = "Create Teleport Marker";
