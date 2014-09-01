@@ -30,6 +30,7 @@ class Ares // This bit will be prefixed when actually calling the function (e.g.
 		class IsZeus {};
 		class MonitorCuratorDisplay {};
 		class WaitForZeus {};
+		class TeleportPlayers {};
 	};
 
 	// Functions to perform module actions
@@ -40,7 +41,11 @@ class Ares // This bit will be prefixed when actually calling the function (e.g.
 		class Empty {};
 		class RemoveNvgSingleUnit {};
 		class RemoveNvgGroup {};
-		class TeleportPlayers {};
 		//class SurrenderSingleUnit {};
+		class TeleportAllPlayers {};
+		class TeleportAafPlayers {};
+		class TeleportCivilianPlayers {};
+		class TeleportCsatPlayers {};
+		class TeleportNatoPlayers {};
 	};
 };

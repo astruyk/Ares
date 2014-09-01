@@ -30,6 +30,7 @@ class Ares_Module_Teleport_All : Ares_Module_Base
 {
 	scopeCurator = 2;
 	displayName = "Teleport All";
+	subCategory = "Teleport";
 	function = "Ares_fnc_TeleportAllPlayers";
 };
 

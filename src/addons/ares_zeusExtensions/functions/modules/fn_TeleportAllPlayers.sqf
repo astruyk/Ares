@@ -5,7 +5,7 @@ _playersToTeleport = [];
 {
 	if (isPlayer _x) then
 	{
-		_playersToTeleport set [count _playertToTeleport, _x];
+		_playersToTeleport set [count _playersToTeleport, _x];
 	};
 } forEach allUnits;
 
@@ -14,6 +14,8 @@ _location = getPos _logic;
 
 // Call the teleport function.
 [_playersToTeleport, _location] call Ares_fnc_TeleportPlayers;
+
+[objNull, format["Teleported %1 players to %2", (count _playersToTeleport), _location]] call bis_fnc_showCuratorFeedbackMessage;
 
 if (local _logic) then {
 	deleteVehicle _logic;
