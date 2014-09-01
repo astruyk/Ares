@@ -34,14 +34,6 @@ class Ares_Module_Teleport_All : Ares_Module_Base
 	function = "Ares_fnc_TeleportAllPlayers";
 };
 
-class Ares_Module_Teleport_Selected : Ares_Module_Base
-{
-	scopeCurator = 2;
-	displayName = "Teleport Selected Unit";
-	subCategory = "Teleport";
-	function = "Ares_fnc_TeleportSelectedUnit";
-};
-
 class Ares_Module_Teleport_Zeus : Ares_Module_Base
 {
 	scopeCurator = 2;
