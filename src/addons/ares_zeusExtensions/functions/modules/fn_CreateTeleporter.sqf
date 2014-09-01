@@ -54,7 +54,7 @@ if (_activated && local _logic) then
 	};
 
 	// Create a new teleport marker and add it to the list of markers that exist.
-	_teleportMarker = "Land_AncientPillar_F" createVehicle (getPos _logic);
+	_teleportMarker = "Land_AncientPillar_damaged_F" createVehicle (getPos _logic);
 	if (isNil "Ares_TeleportMarkers") then
 	{
 		Ares_TeleportMarkers = [];
