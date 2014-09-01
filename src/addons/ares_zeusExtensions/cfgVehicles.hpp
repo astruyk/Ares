@@ -25,3 +25,27 @@ class Ares_Module_RemoveNvgGroup : Ares_Module_Base
 	displayName = "Surrender (Unit)";
 	function = "Ares_fnc_SurrenderSingleUnit";
 };*/
+
+class Ares_Module_Teleport_All : Ares_Module_Base
+{
+	scopeCurator = 2;
+	displayName = "Teleport All";
+	subCategory = "Teleport";
+	function = "Ares_fnc_TeleportAllPlayers";
+};
+
+class Ares_Module_Teleport_Zeus : Ares_Module_Base
+{
+	scopeCurator = 2;
+	displayName = "Teleport Zeus";
+	subCategory = "Teleport";
+	function = "Ares_fnc_TeleportZeus";
+};
+
+class Ares_Module_Teleport_CreateTeleporter : Ares_Module_Base
+{
+	scopeCurator = 2;
+	displayName = "Create Teleport Marker";
+	subCategory = "Teleport";
+	function = "Ares_fnc_CreateTeleporter";
+};

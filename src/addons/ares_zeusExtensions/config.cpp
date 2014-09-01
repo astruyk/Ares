@@ -41,6 +41,12 @@ class CfgFactionClasses
 				displayname = "Common";
 				moduleClass = "Ares_Module_Empty";
 			};
+			
+			class Teleport
+			{
+				displayname = "Teleport";
+				moduleClass = "Ares_Module_Empty";
+			};
 		};
 	};
 };
