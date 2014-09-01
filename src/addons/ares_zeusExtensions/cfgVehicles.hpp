@@ -34,34 +34,26 @@ class Ares_Module_Teleport_All : Ares_Module_Base
 	function = "Ares_fnc_TeleportAllPlayers";
 };
 
-class Ares_Module_Teleport_Aaf : Ares_Module_Base
+class Ares_Module_Teleport_Selected : Ares_Module_Base
 {
 	scopeCurator = 2;
-	displayName = "Teleport AAF";
+	displayName = "Teleport Selected Unit";
 	subCategory = "Teleport";
-	function = "Ares_fnc_TeleportAafPlayers";
+	function = "Ares_fnc_TeleportSelectedUnit";
 };
 
-class Ares_Module_Teleport_Civilian : Ares_Module_Base
+class Ares_Module_Teleport_Zeus : Ares_Module_Base
 {
 	scopeCurator = 2;
-	displayName = "Teleport Civilians";
+	displayName = "Teleport Zeus";
 	subCategory = "Teleport";
-	function = "Ares_fnc_TeleportCivilianPlayers";
+	function = "Ares_fnc_TeleportZeus";
 };
 
-class Ares_Module_Teleport_Csat : Ares_Module_Base
+clas Ares_Module_Teleport_CreateTeleporter : Ares_Module_Base
 {
 	scopeCurator = 2;
-	displayName = "Teleport CSAT";
+	displayName = "Create Teleport Marker";
 	subCategory = "Teleport";
-	function = "Ares_fnc_TeleportCsatPlayers";
-};
-
-class Ares_Module_Teleport_Nato : Ares_Module_Base
-{
-	scopeCurator = 2;
-	displayName = "Teleport NATO";
-	subCategory = "Teleport";
-	function = "Ares_fnc_TeleportNatoPlayers";
+	function = "Ares_fnc_CreateTeleporter";
 };
