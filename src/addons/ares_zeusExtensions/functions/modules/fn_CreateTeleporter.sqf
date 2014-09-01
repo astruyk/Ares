@@ -4,6 +4,55 @@ _activated = _this select 2;
 
 if (_activated && local _logic) then
 {
+	// Create a function in the mission namespace on all players machines to add the
+	// teleport action.
+	Ares_addNewTeleportMarkerActions =
+	{
+		_newMarker = _this select 0;
+
+		if (isNil "Ares_TeleportMarkers") then { Ares_TeleportMarkers = []; };
+
+		{
+			// TODO deal with deleted markers.... Conditions?
+			if (_x != _newMarker) then
+			{
+				// Add an action to THIS marker to teleport to OTHER marker.
+				_actionName = format ["Teleport to %1", [_x getVariable ["teleportMarkerName", "??"]]];
+				_newMarker addAction [_actionName, {
+						_teleportTarget = _this select 3;
+						if (isNil "_teleportTarget" || !(alive _teleportTarget)) then
+						{
+							hint "Destination no longer exists...";
+							sleep 3;
+							hint "";
+						}
+						else
+						{
+							titleText ["You are being teleported...", "BLACK", 1]; titleFadeOut 2;
+							player setPos (getPos _teleportTarget);
+						};
+					}, _x];
+
+				// Add action to OTHER marker to teleport to THIS marker.
+				_actionName = format ["Teleport to %1", _newMarker getVariable ["teleportMarkerName", "??"]];
+				_x addAction [_actionName, {
+						_teleportTarget = _this select 3;
+						if (isNil "_teleportTarget" || !(alive _teleportTarget)) then
+						{
+							hint "Destination no longer exists...";
+							sleep 3;
+							hint "";
+						}
+						else
+						{
+							titleText ["You are being teleported...", "BLACK", 1]; titleFadeOut 2;
+							player setPos (getPos _teleportTarget);
+						};
+					}, _newMarker];
+			};
+		} forEach (Ares_TeleportMarkers);
+	};
+
 	// Create a new teleport marker and add it to the list of markers that exist.
 	_teleportMarker = "Land_AncientPillar_F" createVehicle (getPos _logic);
 	if (isNil "Ares_TeleportMarkers") then
@@ -19,30 +68,10 @@ if (_activated && local _logic) then
 	_teleportMarkerName = _teleportMarkerNames select ((count Ares_TeleportMarkers) - 1);
 	_teleportMarker setVariable ["teleportMarkerName", _teleportMarkerName, true];
 
-	// Create a function in the mission namespace on all players machines to add the
-	// teleport action.
-	Ares_addNewTeleportMarkerActions =
+	// Make the teleport marker editable in zeus.
 	{
-		_newMarker = _this select 0;
-
-		if (isNil "Ares_TeleportMarkers") then { Ares_TeleportMarkers = []; };
-
-		{
-			// TODO deal with deleted markers.... Conditions?
-			if (_x != _newMarker) then
-			{
-				// Add an action to THIS marker to teleport to OTHER marker.
-				_actionName = format ["Teleport to %1", [_x getVariable ["teleportMarkerName", "??"]]];
-				_actionText = format ["player setPos %1", getPos _x];
-				_newMarker addAction [_actionName, _actionText];
-
-				// Add action to OTHER marker to teleport to THIS marker.
-				_actionName = format ["Teleport to %1", _newMarker getVariable ["teleportMarkerName", "??"]];
-				_actionText = format ["player setPos %1", getPos _newMarker];
-				_x addAction [_actionName, _actionText];
-			};
-		} forEach (Ares_TeleportMarkers);
-	};
+		_x addCuratorEditableObjects [[_teleportMarker], true];
+	} foreach allCurators;
 
 	// Call this to add the teleport marker actions on all machines. Persistent for JIP people as well.
 	[[_teleportMarker], "Ares_addNewTeleportMarkerActions", true, true] call BIS_fnc_MP;
