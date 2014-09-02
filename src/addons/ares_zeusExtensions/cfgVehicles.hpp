@@ -37,7 +37,7 @@ class Ares_Module_Teleport_All : Ares_Module_Base
 class Ares_Module_Teleport_Single : Ares_Module_Base
 {
 	scopeCurator = 2;
-	displayName = "Teleport All";
+	displayName = "Teleport Single Unit";
 	subCategory = "Teleport";
 	function = "Ares_fnc_TeleportSinglePlayer";
 };
@@ -53,7 +53,7 @@ class Ares_Module_Teleport_Zeus : Ares_Module_Base
 class Ares_Module_Teleport_CreateTeleporter : Ares_Module_Base
 {
 	scopeCurator = 2;
-	displayName = "Create Teleport Marker";
+	displayName = "Create Teleporter";
 	subCategory = "Teleport";
 	function = "Ares_fnc_CreateTeleporter";
 };
