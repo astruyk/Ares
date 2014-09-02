@@ -14,7 +14,7 @@ if (_activated && local _logic) then
 
 		{
 			// TODO deal with deleted markers.... Conditions?
-			if (_x != _newMarker) then
+			if (_x != _newMarker && alive _x) then
 			{
 				// Add an action to THIS marker to teleport to OTHER marker.
 				_actionName = format ["Teleport to %1", [_x getVariable ["teleportMarkerName", "??"]]];
@@ -28,7 +28,7 @@ if (_activated && local _logic) then
 						}
 						else
 						{
-							titleText ["You are being teleported...", "BLACK", 1]; titleFadeOut 2;
+							titleText ["You are being teleported...", "BLACK", 1];  sleep 1; titleFadeOut 2;
 							player setPos (getPos _teleportTarget);
 						};
 					}, _x];
@@ -45,7 +45,7 @@ if (_activated && local _logic) then
 						}
 						else
 						{
-							titleText ["You are being teleported...", "BLACK", 1]; titleFadeOut 2;
+							titleText ["You are being teleported...", "BLACK", 1]; sleep 1; titleFadeOut 2;
 							player setPos (getPos _teleportTarget);
 						};
 					}, _newMarker];
@@ -55,9 +55,11 @@ if (_activated && local _logic) then
 
 	// Create a new teleport marker and add it to the list of markers that exist.
 	_teleportMarker = "Land_AncientPillar_damaged_F" createVehicle (getPos _logic);
+	_isFirstCallToCreateTeleporter = false;
 	if (isNil "Ares_TeleportMarkers") then
 	{
 		Ares_TeleportMarkers = [];
+		_isFirstCallToCreateTeleporter = true;
 		publicVariable "Ares_addNewTeleportMarkerActions";
 	};
 	Ares_TeleportMarkers set [count Ares_TeleportMarkers, _teleportMarker];
@@ -68,13 +70,11 @@ if (_activated && local _logic) then
 	_teleportMarkerName = _teleportMarkerNames select ((count Ares_TeleportMarkers) - 1);
 	_teleportMarker setVariable ["teleportMarkerName", _teleportMarkerName, true];
 
-	// Make the teleport marker editable in zeus.
-	{
-		_x addCuratorEditableObjects [[_teleportMarker], true];
-	} foreach allCurators;
+	// Make the teleport marker editable in zeus (needs to run on server)
+	{ _x addCuratorEditableObjects [[_teleportMarker], true]; } foreach allCurators;
 
 	// Call this to add the teleport marker actions on all machines. Persistent for JIP people as well.
-	[[_teleportMarker], "Ares_addNewTeleportMarkerActions", true, true] call BIS_fnc_MP;
+	[[_teleportMarker], "Ares_addNewTeleportMarkerActions", true, _isFirstCallToCreateTeleporter] call BIS_fnc_MP;
 
 	[objNull, format["Created teleporter '%1'", _teleportMarkerName]] call bis_fnc_showCuratorFeedbackMessage;
 };
