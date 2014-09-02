@@ -46,6 +46,7 @@ class Ares // This bit will be prefixed when actually calling the function (e.g.
 		class RemoveNvgGroup {};
 		//class SurrenderSingleUnit {};
 		class TeleportAllPlayers {};
+		class TeleportSinglePlayer {};
 		class TeleportZeus {};
 		class CreateTeleporter {};
 	};
