@@ -71,7 +71,7 @@ if (_activated && local _logic) then
 	_teleportMarker setVariable ["teleportMarkerName", _teleportMarkerName, true];
 
 	// Make the teleport marker editable in zeus (needs to run on server)
-	{ _x addCuratorEditableObjects [[_teleportMarker], true]; } foreach allCurators;
+	[[_teleportMarker]] call Ares_fnc_AddUnitsToCurator;
 
 	// Call this to add the teleport marker actions on all machines. Persistent for JIP people as well.
 	[[_teleportMarker], "Ares_addNewTeleportMarkerActions", true, _isFirstCallToCreateTeleporter] call BIS_fnc_MP;
