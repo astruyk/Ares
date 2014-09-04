@@ -35,6 +35,7 @@ class Ares // This bit will be prefixed when actually calling the function (e.g.
 		class MakePlayerInvisible {};
 		class MakePlayerVisible {};
 		class AddUnitsToCurator {};
+		class BroadcastCode {};
 	};
 
 	// Functions to perform module actions
@@ -45,6 +46,9 @@ class Ares // This bit will be prefixed when actually calling the function (e.g.
 		class Empty {};
 		class RemoveNvgSingleUnit {};
 		class RemoveNvgGroup {};
+		class ForceLightsOn {};
+		class ForceLightsOff {};
+		class ForceLightsAuto {};
 		//class SurrenderSingleUnit {};
 		class TeleportAllPlayers {};
 		class TeleportSinglePlayer {};

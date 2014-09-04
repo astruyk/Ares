@@ -8,15 +8,36 @@
 class Ares_Module_RemoveNvgSingle : Ares_Module_Base
 {
 	scopeCurator = 2;
-	displayName = "Remove Nvg (Single Unit)";
+	displayName = "Remove Nvg's (Unit)";
 	function = "Ares_fnc_RemoveNvgSingleUnit";
 };
 
 class Ares_Module_RemoveNvgGroup : Ares_Module_Base
 {
 	scopeCurator = 2;
-	displayName = "Remove Nvg (Group)";
+	displayName = "Remove Nvg's (Group)";
 	function = "Ares_fnc_RemoveNvgGroup";
+};
+
+class Ares_Module_ForceLightsOn : Ares_Module_Base
+{
+	scopeCurator = 2;
+	displayName = "Force Lights On";
+	function = "Ares_fnc_ForceLightsOn";
+};
+
+class Ares_Module_ForceLightsOff : Ares_Module_Base
+{
+	scopeCurator = 2;
+	displayName = "Force Lights Off";
+	function = "Ares_fnc_ForceLightsOff";
+};
+
+class Ares_Module_ForceLightsAuto : Ares_Module_Base
+{
+	scopeCurator = 2;
+	displayName = "Lights Auto";
+	function  = "Ares_fnc_ForceLightsAuto";
 };
 
 /*class Ares_Module_SurrenderSingleUnit : Ares_Module_Base

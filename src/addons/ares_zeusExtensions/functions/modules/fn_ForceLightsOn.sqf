@@ -9,15 +9,12 @@ if (_activated && local _logic) then
 	_blockToRunRemotely =
 	{
 		_group = _this select 0;
-		{
-			_x unlinkItem "NVGoggles";
-			_x addPrimaryWeaponItem "acc_flashlight";
-		} forEach units _group;
+		_group enableGunLights "forceOn";
 	};
 
 	[_blockToRunRemotely, [_groupUnderCursor], false] call Ares_fnc_BroadcastCode;
 
-	[objnull, "Removed NVGoogles from Group."] call bis_fnc_showCuratorFeedbackMessage;
+	[objnull, "Forced lights on."] call bis_fnc_showCuratorFeedbackMessage;
 };
 
 deleteVehicle _logic;
