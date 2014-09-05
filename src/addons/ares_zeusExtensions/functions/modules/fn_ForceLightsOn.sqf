@@ -10,6 +10,7 @@ if (_activated && local _logic) then
 	{
 		_group = _this select 0;
 		_group enableGunLights "forceOn";
+		_group enableIRLasers true;
 	};
 
 	[_blockToRunRemotely, [_groupUnderCursor], false] call Ares_fnc_BroadcastCode;
