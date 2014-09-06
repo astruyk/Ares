@@ -6,16 +6,23 @@ if (_activated && local _logic) then
 {
 	_groupUnderCursor = [_logic] call Ares_fnc_GetGroupUnderCursor;
 
-	_blockToRunRemotely =
+	if (isNil "Ares_RemoveNvgGroupCode") then
 	{
-		_group = _this select 0;
+		Ares_RemoveNvgGroupCode =
 		{
-			_x unlinkItem "NVGoggles";
-			_x addPrimaryWeaponItem "acc_flashlight";
-		} forEach units _group;
+			_group = _this select 0;
+			{
+				if (isServer) then
+				{
+					_x unlinkItem "NVGoggles";
+				};
+				_x addPrimaryWeaponItem "acc_flashlight";
+			} forEach units _group;
+		};
+		publicVariable "Ares_RemoveNvgGroupCode";
 	};
 
-	[_blockToRunRemotely, [_groupUnderCursor], false] call Ares_fnc_BroadcastCode;
+	[[_groupUnderCursor], "Ares_RemoveNvgGroupCode", true, true] call BIS_fnc_MP;
 
 	[objnull, "Removed NVGoogles from Group."] call bis_fnc_showCuratorFeedbackMessage;
 };
