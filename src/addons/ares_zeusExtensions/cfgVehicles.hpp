@@ -5,13 +5,6 @@
 	function = "Ares_fnc_test";
 };*/
 
-class Ares_Module_RemoveNvgSingle : Ares_Module_Base
-{
-	scopeCurator = 2;
-	displayName = "Remove Nvg's (Unit)";
-	function = "Ares_fnc_RemoveNvgSingleUnit";
-};
-
 class Ares_Module_RemoveNvgGroup : Ares_Module_Base
 {
 	scopeCurator = 2;
