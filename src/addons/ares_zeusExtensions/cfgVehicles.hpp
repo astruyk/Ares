@@ -71,3 +71,10 @@ class Ares_Module_Teleport_CreateTeleporter : Ares_Module_Base
 	subCategory = "Teleport";
 	function = "Ares_fnc_CreateTeleporter";
 };
+
+class Ares_Module_Save_Objects : Ares_Module_Base
+{
+	scopeCurator = 2;
+	displayName = "Save Objects (500m)";
+	function = "Ares_fnc_SaveObjects";
+};

@@ -11,4 +11,5 @@ units[] =
 	"Ares_Module_Teleport_Single",
 	"Ares_Module_Teleport_Zeus",
 	"Ares_Module_Teleport_CreateTeleporter",
+	"Ares_Module_Save_Objects",
 };
