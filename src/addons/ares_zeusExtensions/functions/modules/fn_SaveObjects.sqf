@@ -60,6 +60,7 @@ if (_activated && local _logic) then
 	    if(_typeX == "Rabbit_F") then {_flag = true;};
 	    if(_typeX == "Snake_random_F") then {_flag = true;};
 	    if(_typeX == "GroundWeaponHolder") then {_flag = true;};
+	    if(_typeX == "Ares_Module_Save_Objects") then {_flag = true;};
 	    if(_x == player) then {_flag = true;};
 	    if(_filterAmmoboxes && {_x isKindOf "ReammoBox_F"}) then {_flag = true};
 	    if(!_flag) then
