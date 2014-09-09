@@ -54,5 +54,7 @@ class Ares // This bit will be prefixed when actually calling the function (e.g.
 		class TeleportZeus {};
 		class CreateTeleporter {};
 		class SaveObjectsForComposition {};
+		class SaveObjectsForPaste {};
+		class PasteObjects {};
 	};
 };

@@ -75,6 +75,20 @@ class Ares_Module_Teleport_CreateTeleporter : Ares_Module_Base
 class Ares_Module_Save_Objects_For_Composition : Ares_Module_Base
 {
 	scopeCurator = 2;
-	displayName = "Save Objects (500m)";
+	displayName = "Save For Comp.";
 	function = "Ares_fnc_SaveObjectsForComposition";
+};
+
+class Ares_Module_Save_Objects_For_Paste : Ares_Module_Base
+{
+	scopeCurator = 2;
+	displayName = "Save For Paste";
+	function = "Ares_fnc_SaveObjectsForPaste";
+};
+
+class Ares_Module_Paste_Objects : Ares_Module_Base
+{
+	scopeCurator = 2;
+	displayName = "Paste Objects";
+	function = "Ares_fnc_PasteObjects";
 };
