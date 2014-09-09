@@ -72,9 +72,9 @@ class Ares_Module_Teleport_CreateTeleporter : Ares_Module_Base
 	function = "Ares_fnc_CreateTeleporter";
 };
 
-class Ares_Module_Save_Objects : Ares_Module_Base
+class Ares_Module_Save_Objects_For_Composition : Ares_Module_Base
 {
 	scopeCurator = 2;
 	displayName = "Save Objects (500m)";
-	function = "Ares_fnc_SaveObjects";
+	function = "Ares_fnc_SaveObjectsForComposition";
 };
