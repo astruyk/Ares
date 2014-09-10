@@ -36,6 +36,8 @@ class Ares // This bit will be prefixed when actually calling the function (e.g.
 		class MakePlayerVisible {};
 		class AddUnitsToCurator {};
 		class BroadcastCode {};
+		class ObjectsGrabber {};
+		class ObjectsMapper {};
 	};
 
 	// Functions to perform module actions
