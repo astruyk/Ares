@@ -56,6 +56,10 @@ class Ares // This bit will be prefixed when actually calling the function (e.g.
 		class TeleportAllPlayers {};
 		class TeleportSinglePlayer {};
 		class TeleportZeus {};
+		class TeleportSideNato {};
+		class TeleportSideIndependent {};
+		class TeleportSideCsat {};
+		class TeleportSideCivilian {};
 		class CreateTeleporter {};
 		class SaveObjectsForComposition {};
 		class SaveObjectsForPaste {};

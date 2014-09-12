@@ -64,6 +64,38 @@ class Ares_Module_Teleport_Zeus : Ares_Module_Base
 	function = "Ares_fnc_TeleportZeus";
 };
 
+class Ares_Module_Teleport_Side_Nato : Ares_Module_Base
+{
+	scopeCurator = 2;
+	displayName = "Teleport NATO";
+	subCategory = "Teleport";
+	function = "Ares_fnc_TeleportSideNato";
+};
+
+class Ares_Module_Teleport_Side_Independent : Ares_Module_Base
+{
+	scopeCurator = 2;
+	displayName = "Teleport Independent";
+	subCategory = "Teleport";
+	function = "Ares_fnc_TeleportSideIndependent";
+};
+
+class Ares_Module_Teleport_Side_Csat : Ares_Module_Base
+{
+	scopeCurator = 2;
+	displayName = "Teleport CSAT";
+	subCategory = "Teleport";
+	function = "Ares_fnc_TeleportSideCsat";
+};
+
+class Ares_Module_Teleport_Side_Civilian : Ares_Module_Base
+{
+	scopeCurator = 2;
+	displayName = "Teleport Civilian";
+	subCategory = "Teleport";
+	function = "Ares_fnc_TeleportSideCivilian";
+};
+
 class Ares_Module_Teleport_CreateTeleporter : Ares_Module_Base
 {
 	scopeCurator = 2;
