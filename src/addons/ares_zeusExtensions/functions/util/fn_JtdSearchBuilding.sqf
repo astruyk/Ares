@@ -69,8 +69,6 @@ if !(isServer) exitWith {diag_log text "Not server, exiting building search.";};
 
 private ["_grpFM", "_FunctionsManager", "_group", "_leader", "_ldrPos", "_behaviour", "_srchRad", "_whichOne", "_initialPos", "_andOne", "_occupy", "_bldgArray", "_tempArray", "_bldgLoc", "_bldgSelect", "_searchersT", "_searchers", "_searcherCount", "_s", "_checkTime", "_wpArray", "_currWP", "_wpCnt", "_d", "_t", "_b", "_bldg", "_bldgPos", "_bldgCnt", "_nameMarker", "_marker", "_bldgBB", "_wpRad", "_wp", "_p", "_totTime", "_activeBP", "_loop", "_cycle", "_unitSelect", "_units"];
 
-if (isNil "JTD_bldgsrchPath") then {JTD_bldgsrchPath = "";};
-
 // check for functions
 if (isNil "bis_fnc_init") then
 {
@@ -78,11 +76,6 @@ if (isNil "bis_fnc_init") then
     _grpFM = createGroup sideLogic;
     _FunctionsManager = _grpFM createUnit ["FunctionsManager", [1, 1, 1], [], 0, "NONE"];
     waitUntil {!isNil "bis_fnc_init"};
-};
-
-if (isNil "JTD_arrayShuffleFunc") then
-{
-    JTD_arrayShuffleFunc = compile preprocessFileLineNumbers (JTD_bldgsrchPath +"JTD_arrayShuffle.sqf");
 };
 
 if (isNil "JTD_lockedSearchGroups") then {JTD_lockedSearchGroups = [];};
@@ -265,7 +258,7 @@ else
 
 // shuffle
 //diag_log text format ["searcher temp array = %1", _searchersT];
-_searchers = [_searchersT] call JTD_arrayShuffleFunc;
+_searchers = [_searchersT] call Ares_fnc_JtdArrayShuffle;
 //diag_log text format ["searcher array = %1", _searchers];
 // loop to string out the units
 

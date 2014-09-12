@@ -6,6 +6,8 @@ if (_activated && local _logic) then
 {
 	_groupUnderCursor = [_logic] call Ares_fnc_GetGroupUnderCursor;
 
+	[_groupUnderCursor, 50, "NEAREST"] call Ares_fnc_JtdSearchBuilding;
+
 	[objnull, "Searching nearby building."] call bis_fnc_showCuratorFeedbackMessage;
 };
 
