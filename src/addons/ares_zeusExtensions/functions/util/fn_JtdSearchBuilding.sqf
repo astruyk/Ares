@@ -193,8 +193,8 @@ if (_bldgCnt == 0) exitWith
 // select building - either the nearest or the randomest
 if (_whichOne == "NEAREST") then
 {
-    _bldgSelect = _bldgArray select 0;        // need to do a real distance check?
-    //_bldgSelect = nearestBuilding (getPos _leader);
+    //_bldgSelect = _bldgArray select 0;        // need to do a real distance check?
+    _bldgSelect = nearestBuilding (getPos _leader);
 }
 else
 {
