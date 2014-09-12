@@ -53,6 +53,12 @@ class CfgFactionClasses
 				displayname = "Save/Load";
 				moduleClass = "Ares_Module_Empty";
 			};
+			
+			class Garrison
+			{
+				displayName = "Garrison";
+				moduleClass = "Ares_Module_Empty";
+			};
 		};
 	};
 };

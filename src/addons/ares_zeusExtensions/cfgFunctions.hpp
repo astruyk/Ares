@@ -38,6 +38,8 @@ class Ares // This bit will be prefixed when actually calling the function (e.g.
 		class BroadcastCode {};
 		class ObjectsGrabber {};
 		class ObjectsMapper {};
+		class ZenOccupyHouse {};
+		class GetSafePos {};
 	};
 
 	// Functions to perform module actions
@@ -58,5 +60,7 @@ class Ares // This bit will be prefixed when actually calling the function (e.g.
 		class SaveObjectsForComposition {};
 		class SaveObjectsForPaste {};
 		class PasteObjects {};
+		class GarrisonNearest {};
+		class UnGarrison {};
 	};
 };

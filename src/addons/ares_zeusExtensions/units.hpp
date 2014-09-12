@@ -14,4 +14,6 @@ units[] =
 	"Ares_Module_Save_Objects_For_Composition",
 	"Ares_Module_Save_Objects_For_Paste",
 	"Ares_Module_Paste_Objects",
+	"Ares_Module_Garrison_Nearest",
+	"Ares_Module_UnGarrison",
 };
