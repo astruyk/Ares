@@ -18,7 +18,7 @@
 #define I(X) X = X + 1;
 #define EYE_HEIGHT 1.53
 #define CHECK_DISTANCE 5
-#define FOV_ANGLE 15
+#define FOV_ANGLE 10
 #define ROOF_CHECK 4
 #define ROOF_EDGE 2
 
