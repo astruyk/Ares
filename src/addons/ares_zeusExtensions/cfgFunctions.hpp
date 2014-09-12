@@ -40,6 +40,8 @@ class Ares // This bit will be prefixed when actually calling the function (e.g.
 		class ObjectsMapper {};
 		class ZenOccupyHouse {};
 		class GetSafePos {};
+		class JtdSearchBuilding {};
+		class JtdArrayShuffle {};
 	};
 
 	// Functions to perform module actions
@@ -66,5 +68,6 @@ class Ares // This bit will be prefixed when actually calling the function (e.g.
 		class PasteObjects {};
 		class GarrisonNearest {};
 		class UnGarrison {};
+		class SearchNearbyBuilding {};
 	};
 };
