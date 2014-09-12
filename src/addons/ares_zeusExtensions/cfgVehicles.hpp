@@ -99,6 +99,7 @@ class Ares_Module_Paste_Objects : Ares_Module_Base
 class Ares_Module_Garrison_Nearest : Ares_Module_Base
 {
 	scopeCurator = 2;
+	subCategory = "Garrison";
 	displayName = "Garrison Nearest";
 	function = "Ares_fnc_GarrisonNearest";
 }
@@ -106,6 +107,7 @@ class Ares_Module_Garrison_Nearest : Ares_Module_Base
 class Ares_Module_UnGarrison : Ares_Module_Base
 {
 	scopeCurator = 2;
+	subCategory = "Garrison";
 	displayName = "Un-Garrison";
 	function = "Ares_fnc_UnGarrison";
 }
