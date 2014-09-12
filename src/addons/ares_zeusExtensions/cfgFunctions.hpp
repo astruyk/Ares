@@ -58,5 +58,6 @@ class Ares // This bit will be prefixed when actually calling the function (e.g.
 		class SaveObjectsForComposition {};
 		class SaveObjectsForPaste {};
 		class PasteObjects {};
+		class GarrisonNearest {};
 	};
 };
