@@ -7,7 +7,7 @@ if (_activated && local _logic) then
 	_groupUnderCursor = [_logic] call Ares_fnc_GetGroupUnderCursor;
 
 	{
-		_x doMove (getPos _x);
+		_x doMove (getPos (leader _x));
 	} forEach(units _groupUnderCursor);
 
 	[objnull, "Units released from garrison."] call bis_fnc_showCuratorFeedbackMessage;
