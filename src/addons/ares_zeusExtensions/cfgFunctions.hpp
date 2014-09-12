@@ -39,6 +39,7 @@ class Ares // This bit will be prefixed when actually calling the function (e.g.
 		class ObjectsGrabber {};
 		class ObjectsMapper {};
 		class ZenOccupyHouse {};
+		class GetSafePos {};
 	};
 
 	// Functions to perform module actions
