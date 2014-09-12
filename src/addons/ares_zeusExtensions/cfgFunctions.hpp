@@ -36,6 +36,8 @@ class Ares // This bit will be prefixed when actually calling the function (e.g.
 		class MakePlayerVisible {};
 		class AddUnitsToCurator {};
 		class BroadcastCode {};
+		class ObjectsGrabber {};
+		class ObjectsMapper {};
 	};
 
 	// Functions to perform module actions
@@ -53,5 +55,8 @@ class Ares // This bit will be prefixed when actually calling the function (e.g.
 		class TeleportSinglePlayer {};
 		class TeleportZeus {};
 		class CreateTeleporter {};
+		class SaveObjectsForComposition {};
+		class SaveObjectsForPaste {};
+		class PasteObjects {};
 	};
 };

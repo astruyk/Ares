@@ -47,6 +47,12 @@ class CfgFactionClasses
 				displayname = "Teleport";
 				moduleClass = "Ares_Module_Empty";
 			};
+			
+			class SaveLoad
+			{
+				displayname = "Save/Load";
+				moduleClass = "Ares_Module_Empty";
+			};
 		};
 	};
 };

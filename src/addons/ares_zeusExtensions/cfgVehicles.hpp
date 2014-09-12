@@ -71,3 +71,27 @@ class Ares_Module_Teleport_CreateTeleporter : Ares_Module_Base
 	subCategory = "Teleport";
 	function = "Ares_fnc_CreateTeleporter";
 };
+
+class Ares_Module_Save_Objects_For_Composition : Ares_Module_Base
+{
+	scopeCurator = 2;
+	subCategory = "SaveLoad";
+	displayName = "Save For Comp.";
+	function = "Ares_fnc_SaveObjectsForComposition";
+};
+
+class Ares_Module_Save_Objects_For_Paste : Ares_Module_Base
+{
+	scopeCurator = 2;
+	subCategory = "SaveLoad";
+	displayName = "Copy To Clipboard";
+	function = "Ares_fnc_SaveObjectsForPaste";
+};
+
+class Ares_Module_Paste_Objects : Ares_Module_Base
+{
+	scopeCurator = 2;
+	subCategory = "SaveLoad";
+	displayName = "Paste From Clipboard";
+	function = "Ares_fnc_PasteObjects";
+};
