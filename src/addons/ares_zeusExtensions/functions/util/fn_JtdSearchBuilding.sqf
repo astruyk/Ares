@@ -128,7 +128,7 @@ if (isNil "_leader") exitWith
 if (isNil "_srchRad") then {_srchRad = 50};
 if (_srchRad < 1) then {_srchRad = 1};
 if (isNil "_whichOne") then {_whichOne = "RANDOM"};
-if ((_whichOne != "NEAREST") || (_whichOne != "RANDOM")) then {_whichOne = "RANDOM"};
+if ((_whichOne != "NEAREST") && (_whichOne != "RANDOM")) then {_whichOne = "RANDOM"};
 if (isNil "_initialPos") then {_initialPos = _ldrPos};
 if ((typeName _initialPos) == "OBJECT") then {_initialPos = getPos (this select 3)};
 if ((typeName _initialPos) != "ARRAY") then {_initialPos = _ldrPos};
@@ -194,7 +194,7 @@ if (_bldgCnt == 0) exitWith
 if (_whichOne == "NEAREST") then
 {
     //_bldgSelect = _bldgArray select 0;        // need to do a real distance check?
-    _bldgSelect = nearestBuilding (getPos _leader);
+    _bldgSelect = nearestBuilding _initialPos;
 }
 else
 {
