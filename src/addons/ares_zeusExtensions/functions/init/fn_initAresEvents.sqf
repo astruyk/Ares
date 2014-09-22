@@ -7,11 +7,11 @@ if(isServer && isDedicated) exitWith {};
 	//Skip event loading for non-curator players
 	if(!([player] call Ares_fnc_isZeus)) exitWith {};
 
-	["Initializing Events ..."] call Ares_fnc_DisplayMessage;
+	["Initializing Events ..."] call Ares_fnc_LogMessage;
 	{
 		_x addEventHandler ["CuratorGroupSelectionChanged", { _this call Ares_fnc_HandleGroupSelectionChanged; }];
 		_x addEventHandler ["CuratorObjectSelectionChanged", { _this call Ares_fnc_HandleObjectSelectionChanged; }];
 	} foreach allCurators;
 
-	["... Done initializing events."] call Ares_fnc_DisplayMessage;
+	["... Done initializing events."] call Ares_fnc_LogMessage;
 };

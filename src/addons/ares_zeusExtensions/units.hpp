@@ -20,4 +20,5 @@ units[] =
 	"Ares_Module_Paste_Objects",
 	"Ares_Module_Garrison_Nearest",
 	"Ares_Module_UnGarrison",
+	"Ares_Module_Search_Nearby_Building",
 };

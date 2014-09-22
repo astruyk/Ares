@@ -9,9 +9,9 @@ missionnamespace setVariable ["Ares_debugging", true];
 [] spawn {
 	[] call Ares_fnc_waitForZeus;
 
-	["Initializing...."] call Ares_fnc_DisplayMessage;
+	["Initializing...."] call Ares_fnc_LogMessage;
 
 	[] call Ares_fnc_InitAresPlayerActions;
 
-	["... Done Initializing."] call Ares_fnc_DisplayMessage;
+	["... Done Initializing."] call Ares_fnc_LogMessage;
 };
