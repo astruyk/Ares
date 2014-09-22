@@ -24,7 +24,7 @@ class Ares // This bit will be prefixed when actually calling the function (e.g.
 	{
 		file = "\ares_zeusExtensions\functions\util";
 
-		class DisplayMessage {};
+		class LogMessage {};
 		class GetGroupUnderCursor {};
 		class GetUnitUnderCursor {};
 		class GlobalExecute {};

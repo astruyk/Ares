@@ -4,5 +4,5 @@ _selectedGroup = _this select 1;
 
 setVariable ["Ares_SelectedGroup", [_curator, _selectedGroup]];
 
-[format ["Selected Group %1", _selectedGroup]] call Ares_fnc_DisplayMessage;
+[format ["Selected Group %1", _selectedGroup]] call Ares_fnc_LogMessage;
 hint "Group selected";

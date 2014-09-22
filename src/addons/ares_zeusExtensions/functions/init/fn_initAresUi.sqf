@@ -1,4 +1,4 @@
-["Ares_fnc_InitAresUi called..."] call Ares_fnc_DisplayMessage;
+["Ares_fnc_InitAresUi called..."] call Ares_fnc_LogMessage;
 
 // Only worry about doing this if we're not a dedicated server. Dedicated servers don't get UI.
 if(isServer && isDedicated) exitWith {};
@@ -10,14 +10,14 @@ if(isServer && isDedicated) exitWith {};
 	// Wait until THIS player is a zeus unit.
 	while { !([player] call Ares_fnc_isZeus) } do
 	{
-		["Unit not zeus..."] call Ares_fnc_DisplayMessage;
+		["Unit not zeus..."] call Ares_fnc_LogMessage;
 		sleep 1;
 	};
 	
-	["Initializing UI ..."] call Ares_fnc_DisplayMessage;
+	["Initializing UI ..."] call Ares_fnc_LogMessage;
 	
 	["Ares"] spawn Ares_fnc_MonitorCuratorDisplay;
 	//[] spawn Ares_fnc_SetupDisplayHandlers;
 
-	["... Done initializing UI."] call Ares_fnc_DisplayMessage;
+	["... Done initializing UI."] call Ares_fnc_LogMessage;
 };
