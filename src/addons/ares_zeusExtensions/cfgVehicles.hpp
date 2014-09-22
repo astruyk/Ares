@@ -148,6 +148,6 @@ class Ares_Module_Search_Nearby_Building : Ares_Module_Base
 {
 	scopeCurator = 2;
 	subCategory = "Garrison";
-	displayName = "Search Nearby House";
+	displayName = "Search Nearest House";
 	function = "Ares_fnc_SearchNearbyBuilding";
 };
