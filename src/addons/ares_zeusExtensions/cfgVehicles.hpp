@@ -152,16 +152,16 @@ class Ares_Module_Search_Nearby_Building : Ares_Module_Base
 	function = "Ares_fnc_SearchNearbyBuilding";
 };
 
-class Ares_Module_Start_Charge : Ares_Module_Base
+class Ares_Module_Charge : Ares_Module_Base
 {
 	scopeCurator = 2;
-	displayName = "AI Start Charge";
-	function = "Ares_fnc_StartCharge";
+	displayName = "Charge (AI)";
+	function = "Ares_fnc_Charge";
 };
 
-class Ares_Module_Stop_Charge : Ares_Module_Base
+class Ares_Module_Flee : Ares_Module_Base
 {
 	scopeCurator = 2;
-	displayName = "AI Stop Charge";
-	function = "Ares_fnc_StopCharge";
+	displayName = "Flee (AI)";
+	function = "Ares_fnc_Flee";
 };

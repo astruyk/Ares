@@ -6,8 +6,9 @@ if (_activated && local _logic) then
 {
 	_groupUnderCursor = [_logic] call Ares_fnc_GetGroupUnderCursor;
 
+	_groupUnderCursor allowFleeing 1;
 
-	[objnull, "Units now ignoring bullets."] call bis_fnc_showCuratorFeedbackMessage;
+	[objnull, "Units fleeing."] call bis_fnc_showCuratorFeedbackMessage;
 };
 
 deleteVehicle _logic;
