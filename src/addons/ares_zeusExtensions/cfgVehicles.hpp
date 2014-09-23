@@ -151,3 +151,17 @@ class Ares_Module_Search_Nearby_Building : Ares_Module_Base
 	displayName = "Search Nearest House";
 	function = "Ares_fnc_SearchNearbyBuilding";
 };
+
+class Ares_Module_Start_Charge : Ares_Module_Base
+{
+	scopeCurator = 2;
+	displayName = "AI Start Charge";
+	function = "Ares_fnc_StartCharge";
+};
+
+class Ares_Module_Stop_Charge : Ares_Module_Base
+{
+	scopeCurator = 2;
+	displayName = "AI Stop Charge";
+	function = "Ares_fnc_StopCharge";
+};
