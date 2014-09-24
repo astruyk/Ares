@@ -21,7 +21,6 @@ units[] =
 	"Ares_Module_Garrison_Nearest",
 	"Ares_Module_UnGarrison",
 	"Ares_Module_Search_Nearby_Building",
-	"Ares_Module_Charge",
+	"Ares_Module_Charge_Start",
 	"Ares_Module_Charge_Stop",
-	"Ares_Module_Flee",
 };

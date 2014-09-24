@@ -152,11 +152,11 @@ class Ares_Module_Search_Nearby_Building : Ares_Module_Base
 	function = "Ares_fnc_SearchNearbyBuilding";
 };
 
-class Ares_Module_Charge : Ares_Module_Base
+class Ares_Module_Charge_Start : Ares_Module_Base
 {
 	scopeCurator = 2;
 	displayName = "Charge Start (AI)";
-	function = "Ares_fnc_Charge";
+	function = "Ares_fnc_ChargeStart";
 };
 
 class Ares_Module_Charge_Stop : Ares_Module_Base
@@ -165,11 +165,3 @@ class Ares_Module_Charge_Stop : Ares_Module_Base
 	displayName = "Charge Stop (AI)";
 	function = "Ares_fnc_ChargeStop";
 };
-
-class Ares_Module_Flee : Ares_Module_Base
-{
-	scopeCurator = 2;
-	displayName = "Flee (AI)";
-	function = "Ares_fnc_Flee";
-};
-
