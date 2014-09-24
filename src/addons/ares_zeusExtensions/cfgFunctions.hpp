@@ -70,6 +70,7 @@ class Ares // This bit will be prefixed when actually calling the function (e.g.
 		class UnGarrison {};
 		class SearchNearbyBuilding {};
 		class Charge {};
+		class ChargeStop {};
 		class Flee {};
 	};
 };
