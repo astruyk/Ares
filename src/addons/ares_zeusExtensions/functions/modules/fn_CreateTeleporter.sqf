@@ -17,7 +17,7 @@ if (_activated && local _logic) then
 			if (_x != _newMarker && alive _x) then
 			{
 				// Add an action to THIS marker to teleport to OTHER marker.
-				_actionName = format ["Teleport to %1", [_x getVariable ["teleportMarkerName", "??"]]];
+				_actionName = format ["Teleport to %1", _x getVariable ["teleportMarkerName", "??"]];
 				_newMarker addAction [_actionName, {
 						_teleportTarget = _this select 3;
 						if (isNil "_teleportTarget" || !(alive _teleportTarget)) then
