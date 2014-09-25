@@ -151,3 +151,17 @@ class Ares_Module_Search_Nearby_Building : Ares_Module_Base
 	displayName = "Search Nearest House";
 	function = "Ares_fnc_SearchNearbyBuilding";
 };
+
+class Ares_Module_Disable_Thermals : Ares_Module_Base
+{
+	scopeCurator = 2;
+	displayName = "Disable Thermals";
+	function = "Ares_fnc_DisableThermals";
+};
+
+class Ares_Module_Enable_Thermals : Ares_Module_Base
+{
+	scopeCurator = 2;
+	displayName = "Enable Thermals";
+	function = "Ares_fnc_EnableThermals";
+};
