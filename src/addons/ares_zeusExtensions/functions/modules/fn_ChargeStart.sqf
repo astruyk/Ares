@@ -9,13 +9,14 @@ if (_activated && local _logic) then
 	_groupUnderCursor setBehaviour "AWARE";
 	_groupUnderCursor setSpeedMode "FULL";
 	_groupUnderCursor setCombatMode "BLUE";
+	_groupUnderCursor enableAttack false;
 	{
 		[_x] spawn
 		{
 			_unit = _this select 0;
 			_unit disableAI "TARGET";
 			_unit disableAI "AUTOTARGET";
-			//_unit disableAI "FSM";
+			_unit disableAI "FSM";
 			_unit setVariable ["Ares_IsCharging", true];
 
 			_isCharging = true;
@@ -30,11 +31,15 @@ if (_activated && local _logic) then
 				_isCharging = _unit getVariable["Ares_IsCharging", false];
 			};
 
-			_unit setUnitPos "AUTO";
-			_unit enableAI "TARGET";
-			_unit enableAI "AUTOTARGET";
-			//_unit enableAI "FSM";
-			(group _unit) setCombatMode "YELLOW";
+			if (alive _unit) then
+			{
+				_unit setUnitPos "AUTO";
+				_unit enableAI "TARGET";
+				_unit enableAI "AUTOTARGET";
+				_unit enableAI "FSM";
+				(group _unit) setCombatMode "YELLOW";
+				(group _unit) enableAttack true;
+			};
 		};
 	} forEach units _groupUnderCursor;
 	[objnull, "Units charging."] call bis_fnc_showCuratorFeedbackMessage;

@@ -6,8 +6,6 @@ if (_activated && local _logic) then
 {
 	_groupUnderCursor = [_logic] call Ares_fnc_GetGroupUnderCursor;
 
-	_groupUnderCursor setBehaviour "AWARE";
-	_groupUnderCursor setSpeedMode "NORMAL";
 	{
 		_x setVariable ["Ares_IsCharging", false];
 	} forEach units _groupUnderCursor;
