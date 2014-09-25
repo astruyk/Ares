@@ -33,7 +33,6 @@ class Ares // This bit will be prefixed when actually calling the function (e.g.
 		class WaitForZeus {};
 		class TeleportPlayers {};
 		class MakePlayerInvisible {};
-		class MakePlayerVisible {};
 		class AddUnitsToCurator {};
 		class BroadcastCode {};
 		class ObjectsGrabber {};
