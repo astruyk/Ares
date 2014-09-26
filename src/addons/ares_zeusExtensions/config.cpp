@@ -40,24 +40,28 @@ class CfgFactionClasses
 			{
 				displayname = "AI Behaviours";
 				moduleClass = "Ares_Module_Empty";
+				icon = "\ares_zeusExtensions\data\icon_ares.paa";
 			};
 			
 			class Equipment
 			{
 				displayname = "Equipment";
 				moduleClass = "Ares_Module_Empty";
+				icon = "\ares_zeusExtensions\data\icon_ares.paa";
 			};
 			
 			class SaveLoad
 			{
 				displayname = "Save/Load";
 				moduleClass = "Ares_Module_Empty";
+				icon = "\ares_zeusExtensions\data\icon_ares.paa";
 			};
 			
 			class Teleport
 			{
 				displayName = "Teleport";
 				moduleClass = "Ares_Module_Empty";
+				icon = "\ares_zeusExtensions\data\icon_ares.paa";
 			};
 		};
 	};
@@ -89,9 +93,9 @@ class CfgVehicles
 		scopeCurator = 1;		// Curator visibility; 2 will show it in the menu, 1 will hide it.
 
 		displayName = "Ares Module Base";	// Name displayed in the menu
-		icon = "\ares_zeusExtensions\data\icon_ca.paa";		// Map icon. Delete this entry to use the default icon
-		picture = "\ares_zeusExtensions\data\icon_ca.paa";
-		portrait = "\ares_zeusExtensions\data\icon_ca.paa";
+		icon = "\ares_zeusExtensions\data\icon_default.paa";		// Map icon. Delete this entry to use the default icon
+		picture = "\ares_zeusExtensions\data\icon_default.paa";
+		portrait = "\ares_zeusExtensions\data\icon_default.paa";
 
 		function = "";			// Name of function triggered once conditions are met
 		functionPriority = 1;	// Execution priority, modules with lower number are executed first. 0 is used when the attribute is undefined
