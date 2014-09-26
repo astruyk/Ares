@@ -1,4 +1,4 @@
-name = "Ares 0.0.0";
+name = "Ares 0.0.1";
 picture = "ares_logo.paa";
 actionName = "Website";
 action = "https://github.com/astruyk/Ares";
