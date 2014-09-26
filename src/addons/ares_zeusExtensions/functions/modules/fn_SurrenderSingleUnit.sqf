@@ -24,31 +24,38 @@ if (_activated && local _logic) then
 				};
 				
 				// Set the animation states for the units based on their current capture state.
-				if (_unit getVariable["AresCaptureState", -1] == 0) then
+				switch (_unit getVariable["AresCaptureState", -1]) do
 				{
-					if (local _unit) then
+					case 0:
 					{
-						_unit setCaptive true;			// Don't let other AI target them
-						[_unit] join grpNull;			// Leave the group so they don't do stupid AI things.
-						
-						_unit disableAI "ANIM";		// Prevent him from leaving the Surrender animation after it finishes
-						_unit disableAI "TARGET";		// Prevent the unit from reacting to existing targets. Otherwise they sometimes drop out of the captured animation.
-						_unit disableAI "AUTOTARGET";	// Prevent the unit from reacting to new targets. Otherwise they sometimes drop out of the captured animation.
+						if (local _unit) then
+						{
+							_unit setCaptive true;			// Don't let other AI target them
+							[_unit] join grpNull;			// Leave the group so they don't do stupid AI things.
+							
+							_unit disableAI "ANIM";		// Prevent him from leaving the Surrender animation after it finishes
+							_unit disableAI "TARGET";		// Prevent the unit from reacting to existing targets. Otherwise they sometimes drop out of the captured animation.
+							_unit disableAI "AUTOTARGET";	// Prevent the unit from reacting to new targets. Otherwise they sometimes drop out of the captured animation.
+						};
+						_unit switchMove "";
+						_unit playActionNow "Surrender";
 					};
-					_unit switchMove "";
-					_unit playActionNow "Surrender";
-				};
-				if (_unit getVariable["AresCaptureState", -1] == 1) then
-				{
-					if (local _unit) then
+					case 1:
 					{
-						removeAllWeapons _unit; // TODO have them drop their stuff instead of disappearing
-						_unit enableAI "ANIM";
-						_unit enableAI "TARGET";
-						_unit enableAI "AUTOTARGET";
+						if (local _unit) then
+						{
+							removeAllWeapons _unit; // TODO have them drop their stuff instead of disappearing
+							_unit enableAI "ANIM";
+							_unit enableAI "TARGET";
+							_unit enableAI "AUTOTARGET";
+						};
+						_unit switchMove "";
+						_unit playActionNow "SitDown";
 					};
-					_unit switchMove "";
-					_unit playActionNow "SitDown";
+					default
+					{
+						// Unknown capture state!
+					};
 				};
 			};
 		};
@@ -59,21 +66,35 @@ if (_activated && local _logic) then
 	// TODO Maybe if Zeus tries to recapture an already captured unit it should secure them?
 	if (alive _unitToCapture) then
 	{
-		_wasAlreadyCaptured = _unitToCapture getVariable ["AresCaptureState", -1] != -1;
-		if (!_wasAlreadyCaptured) then
+		_captureState = _unitToCapture getVariable ["AresCaptureState", -1];
+		switch (_captureState) do
 		{
-			//Set this for all players so can add correct actions.
-			_unitToCapture setVariable ["AresCaptureState", 0, true];
+			case -1: //Not yet captured
+			{
+				//Set this for all players so can add correct actions.
+				_unitToCapture setVariable ["AresCaptureState", 0, true];
 
-			// Capture him now. We keep track of things in an array
-			// Set the correct state on the captured unit.
-			[[_unitToCapture], "Ares_AddSurrenderActionsFunction", true, true] spawn BIS_fnc_MP;
+				// Broadcast to all players that this unit is surrendered. Will update their anim states in the mission.
+				// We use a persistant call because we want it to be called later for JIP.
+				[[_unitToCapture], "Ares_AddSurrenderActionsFunction", true, true] spawn BIS_fnc_MP;
 
-			[objnull, format["Unit has surrendered. (State: %1)", (_unitToCapture getVariable ["AresCaptureState", -1])]] call bis_fnc_showCuratorFeedbackMessage;
-		}
-		else
-		{
-			[objnull, format["Unit has already surrendered. (State: %1)",(_unitToCapture getVariable ["AresCaptureState", -1])]] call bis_fnc_showCuratorFeedbackMessage;
+				[objnull, "Unit surrendered."] call bis_fnc_showCuratorFeedbackMessage;
+			};
+			case 0: // Captured but not secured
+			{
+				//Set this for all players so can add correct actions.
+				_unitToCapture setVariable ["AresCaptureState", 1, true];
+
+				// Broadcast to all players that this unit is surrendered. Will update their anim states in the mission.
+				// We use a persistant call because we want it to be called later for JIP.
+				[[_unitToCapture], "Ares_AddSurrenderActionsFunction", true, true] spawn BIS_fnc_MP;
+
+				[objnull, "Unit secured."] call bis_fnc_showCuratorFeedbackMessage;
+			};
+			default // Something else (secured maybe?)
+			{
+				[objnull, "Unit has already been secured."] call bis_fnc_showCuratorFeedbackMessage;
+			};
 		};
 	}
 	else
