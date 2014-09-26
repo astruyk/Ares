@@ -36,15 +36,15 @@ class CfgFactionClasses
 
 		class subCategories
 		{
-			class Common
+			class Behaviours
 			{
-				displayname = "Common";
+				displayname = "AI Behaviours";
 				moduleClass = "Ares_Module_Empty";
 			};
 			
-			class Teleport
+			class Equipment
 			{
-				displayname = "Teleport";
+				displayname = "Equipment";
 				moduleClass = "Ares_Module_Empty";
 			};
 			
@@ -54,9 +54,9 @@ class CfgFactionClasses
 				moduleClass = "Ares_Module_Empty";
 			};
 			
-			class Garrison
+			class Teleport
 			{
-				displayName = "Garrison";
+				displayName = "Teleport";
 				moduleClass = "Ares_Module_Empty";
 			};
 		};
@@ -82,7 +82,7 @@ class CfgVehicles
 		author = "Anton Struyk";
 		vehicleClass = "Modules";
 		category = "Ares";
-		subCategory = "Common";
+		subCategory = "AI Behaviours";
 		side = 7;
 
 		scope = 1;				// Editor visibility; 2 will show it in the menu, 1 will hide it.
@@ -106,6 +106,26 @@ class CfgVehicles
 			description = "Ares Module Base";
 		};
 	};
+	
+	class Ares_Behaviours_Module_Base : Ares_Module_Base
+	{
+		subCategory = "AI Behaviours";
+	};
+	
+	class Ares_Equipment_Module_Base : Ares_Module_Base
+	{
+		subCategory = "Equipment";
+	};
+	
+	class Ares_SaveLoad_Module_Base : Ares_Module_Base
+	{
+		subCategory = "Save/Load";
+	};
+	
+	class Ares_Teleport_Module_Base : Ares_Module_Base
+	{
+		subCategory = "Teleport";
+	};
 
 	// Placeholder class that doesn't do anything. Used for generating categories in UI.
 	class Ares_Module_Empty : Ares_Module_Base
@@ -120,6 +140,10 @@ class CfgVehicles
 	}
 
 	#include "cfgVehicles.hpp"
+	#include "cfgVehiclesModulesBehaviour"
+	#include "cfgVehiclesModulesEquipment"
+	#include "cfgVehiclesModulesSaveLoad"
+	#include "cfgVehiclesModulesTeleport"
 };
 
 class CfgFunctions
