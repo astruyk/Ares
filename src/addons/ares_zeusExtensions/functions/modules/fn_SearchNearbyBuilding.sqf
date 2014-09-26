@@ -6,6 +6,8 @@ if (_activated && local _logic) then
 {
 	_groupUnderCursor = [_logic] call Ares_fnc_GetGroupUnderCursor;
 
+	// TODO - This is kind of hacky. We should run this locally and just send the commands we need
+	// to over to the server from the JtdSearchBuilding script internally. This was faster/easier though :/
 	_JtdSearchBuildingBlock = 
 	{
 		if !(isServer) exitWith {diag_log text "Not server, exiting building search.";};
