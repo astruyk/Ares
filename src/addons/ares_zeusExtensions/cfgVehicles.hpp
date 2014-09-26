@@ -33,12 +33,12 @@ class Ares_Module_ForceLightsAuto : Ares_Module_Base
 	function  = "Ares_fnc_ForceLightsAuto";
 };
 
-/*class Ares_Module_SurrenderSingleUnit : Ares_Module_Base
+class Ares_Module_SurrenderSingleUnit : Ares_Module_Base
 {
 	scopeCurator = 2;
 	displayName = "Surrender (Unit)";
 	function = "Ares_fnc_SurrenderSingleUnit";
-};*/
+};
 
 class Ares_Module_Teleport_All : Ares_Module_Base
 {

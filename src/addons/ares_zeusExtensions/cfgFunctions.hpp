@@ -53,7 +53,7 @@ class Ares // This bit will be prefixed when actually calling the function (e.g.
 		class ForceLightsOn {};
 		class ForceLightsOff {};
 		class ForceLightsAuto {};
-		//class SurrenderSingleUnit {};
+		class SurrenderSingleUnit {};
 		class TeleportAllPlayers {};
 		class TeleportSinglePlayer {};
 		class TeleportZeus {};
