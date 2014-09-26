@@ -82,7 +82,7 @@ class CfgVehicles
 		author = "Anton Struyk";
 		vehicleClass = "Modules";
 		category = "Ares";
-		subCategory = "AI Behaviours";
+		subCategory = "Behaviours";
 		side = 7;
 
 		scope = 1;				// Editor visibility; 2 will show it in the menu, 1 will hide it.
@@ -109,7 +109,7 @@ class CfgVehicles
 	
 	class Ares_Behaviours_Module_Base : Ares_Module_Base
 	{
-		subCategory = "AI Behaviours";
+		subCategory = "Behaviours";
 	};
 	
 	class Ares_Equipment_Module_Base : Ares_Module_Base
@@ -119,7 +119,7 @@ class CfgVehicles
 	
 	class Ares_SaveLoad_Module_Base : Ares_Module_Base
 	{
-		subCategory = "Save/Load";
+		subCategory = "SaveLoad";
 	};
 	
 	class Ares_Teleport_Module_Base : Ares_Module_Base
