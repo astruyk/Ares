@@ -140,10 +140,10 @@ class CfgVehicles
 	}
 
 	#include "cfgVehicles.hpp"
-	#include "cfgVehiclesModulesBehaviour"
-	#include "cfgVehiclesModulesEquipment"
-	#include "cfgVehiclesModulesSaveLoad"
-	#include "cfgVehiclesModulesTeleport"
+	#include "cfgVehiclesModulesBehaviours.hpp"
+	#include "cfgVehiclesModulesEquipment.hpp"
+	#include "cfgVehiclesModulesSaveLoad.hpp"
+	#include "cfgVehiclesModulesTeleport.hpp"
 };
 
 class CfgFunctions
