@@ -5,7 +5,7 @@ _activated = _this select 2;
 if (_activated && local _logic) then
 {
 	// Create the ammo box
-	_ammoBox = "Box_NATO_Wps_F" createVehicle (getPos _logic);
+	_ammoBox = "Box_Wps_F" createVehicle (getPos _logic);
 	[[_ammoBox]] call Ares_fnc_AddUnitsToCurator;
 
 	// Add arsenal to the box
