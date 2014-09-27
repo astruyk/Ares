@@ -12,6 +12,13 @@ class Ares_Module_Arsenal_Paste_From_Clipboard : Ares_Arsenal_Module_Base
 	function = "Ares_fnc_ArsenalPasteFromClipboard";
 };
 
+class Ares_Module_Arsenal_Pase_Additive : Ares_Arsenal_Module_base
+{
+	scopeCurator = 2;
+	displayName = "Paste Additively";
+	function = "Ares_fnc_ArsenalPasteAdditive";
+};
+
 class Ares_Module_Arsenal_Create_Nato : Ares_Arsenal_Module_Base
 {
 	scopeCurator = 2;
