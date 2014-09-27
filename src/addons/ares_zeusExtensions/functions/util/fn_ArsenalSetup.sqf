@@ -11,11 +11,12 @@
 		4 - Array - The set of weapons to be added.
 */
 
-_ammoBox = _this select 0;
-_backpacks = _this select 1;
-_items = _this select 2;
-_magazines = _this select 3;
-_weapons = _this select 4;
+_ammoBox = [_this, 0] call BIS_fnc_Param;
+_backpacks = [_this, 1, [], [[]]] call BIS_fnc_Param;
+_items = [_this, 2, [], [[]]] call BIS_fnc_Param;
+_magazines = [_this, 3, [], [[]]] call BIS_fnc_Param;
+_weapons = [_this, 4, [], [[]]] call BIS_fnc_Param;
+_addGlasses = [_this, 5, false, [false]] call BIS_fnc_Param;
 
 // Remove all the non-virtual things from the box
 // TODO make this optional?
@@ -34,6 +35,33 @@ clearItemCargoGlobal _ammoBox;
 [_ammoBox, _items, true] call BIS_fnc_addVirtualItemCargo;
 [_ammoBox, _magazines, true] call BIS_fnc_addVirtualMagazineCargo;
 [_ammoBox, _weapons, true] call BIS_fnc_addVirtualWeaponCargo;
+
+if (_addGlasses) then
+{
+	// For some reason you can't add glasses in the ammo box config. Add them manually.
+	_allGlasses = [
+		"G_Diving",			//Diving Goggles
+		"G_Shades_Black",		//Shades (Black)
+		"G_Shades_Blue",		//Shades (Blue)
+		"G_Sport_Blackred",	//Sport Shades (Vulcan)
+		"G_Tactical_Clear",	//Tactical Glasses
+		"G_Spectacles",		//Spectacle Glasses
+		"G_Spectacles_Tinted",	//Tinted Spectacles
+		"G_Combat",			//Combat Goggles
+		"G_Lowprofile",		//Low Profile Goggles
+		"G_Shades_Green",		//Shades (Green)
+		"G_Shades_Red",		//Shades (Red)
+		"G_Squares",			//Square Spectacles
+		"G_Squares_Tinted",	//Square Shades
+		"G_Sport_BlackWhite",	//Sport Shades (Shadow)
+		"G_Sport_Blackyellow",	//Sport Shades (Poison)
+		"G_Sport_Greenblack",	//Sport Shades (Yetti)
+		"G_Sport_Checkered",	//Sport Shades (Style)
+		"G_Sport_Red",		//Sport Shades (Fire)
+		"G_Tactical_Black"	//Tactical Shades
+	];
+	[_ammoBox, _allGlasses, true] call BIS_fnc_addVirtualItemCargo;
+};
 
 // Mark the object as an arsenal object
 ["AmmoboxInit", [_ammoBox, false, {true}]] call BIS_fnc_arsenal;

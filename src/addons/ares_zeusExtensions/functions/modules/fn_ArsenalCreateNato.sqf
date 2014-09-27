@@ -22,7 +22,8 @@ if (_activated && local _logic) then
 		_data select 0,
 		_data select 1,
 		_data select 2,
-		_data select 3
+		_data select 3,
+		true
 	] call Ares_fnc_ArsenalSetup;
 
 	[objNull, "Created basic arsenal ammo box."] call bis_fnc_showCuratorFeedbackMessage;
