@@ -70,6 +70,7 @@ class Ares // This bit will be prefixed when actually calling the function (e.g.
 		class SearchNearbyBuilding {};
 		class DisableThermals {};
 		class EnableThermals {};
-		class CreateArsenalNato {};
+		class ArsenalCopyToClipboard {};
+		class ArsenalCreateNato {};
 	};
 };

@@ -3,6 +3,7 @@ units[] =
 {
 	//"Ares_Module_Test",
 	"Ares_Module_Arsenal_Create_Nato",
+	"Ares_Module_Arsenal_Copy_To_Clipboard",
 	"Ares_Module_RemoveNvgGroup",
 	"Ares_Module_ForceLightsOn",
 	"Ares_Module_ForceLightsOff",
