@@ -36,27 +36,34 @@ class CfgFactionClasses
 
 		class subCategories
 		{
+			class Arsenal
+			{
+				displayName = "Arsenal";
+				moduleClass = "Ares_Module_Empty";
+				icon = "\ares_zeusExtensions\data\icon_ares.paa";
+			};
+
 			class Behaviours
 			{
 				displayname = "AI Behaviours";
 				moduleClass = "Ares_Module_Empty";
 				icon = "\ares_zeusExtensions\data\icon_ares.paa";
 			};
-			
+
 			class Equipment
 			{
 				displayname = "Equipment";
 				moduleClass = "Ares_Module_Empty";
 				icon = "\ares_zeusExtensions\data\icon_ares.paa";
 			};
-			
+
 			class SaveLoad
 			{
 				displayname = "Save/Load";
 				moduleClass = "Ares_Module_Empty";
 				icon = "\ares_zeusExtensions\data\icon_ares.paa";
 			};
-			
+
 			class Teleport
 			{
 				displayName = "Teleport";
@@ -111,6 +118,11 @@ class CfgVehicles
 		};
 	};
 	
+	class Ares_Arsenal_Module_Base : Ares_Module_base
+	{
+		subCategory = "Arsenal";
+	};
+
 	class Ares_Behaviours_Module_Base : Ares_Module_Base
 	{
 		subCategory = "Behaviours";
@@ -148,6 +160,7 @@ class CfgVehicles
 	#include "cfgVehiclesModulesEquipment.hpp"
 	#include "cfgVehiclesModulesSaveLoad.hpp"
 	#include "cfgVehiclesModulesTeleport.hpp"
+	#include "cfgVehiclesModulesArsenal.hpp"
 };
 
 class CfgFunctions
