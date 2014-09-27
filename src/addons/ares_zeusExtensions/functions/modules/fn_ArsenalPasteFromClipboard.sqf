@@ -10,13 +10,7 @@ if (_activated && local _logic) then
 	
 	if (count _objectArray == 4) then
 	{
-			[
-			_ammoBox,
-			_objectArray select 0,
-			_objectArray select 1,
-			_objectArray select 2,
-			_objectArray select 3
-		] call Ares_fnc_ArsenalSetup;
+		[_ammoBox, _objectArray] call Ares_fnc_ArsenalSetup;
 		[objNull, "Arsenal objects added."] call bis_fnc_showCuratorFeedbackMessage;
 	}
 	else

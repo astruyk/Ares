@@ -5,36 +5,35 @@
 
 	Params:
 		0 - Object - The object to configure as the arsenal object
-		1 - Array - The set of backpacks to be added.
-		2 - Array - The set of items to be added.
-		3 - Array - The set of magazines to be added.
-		4 - Array - The set of weapons to be added.
+		2 - Array of Arrays - A 4-item array containing arrays for the [<backpacks>, <items>, <magazines>, <weapons>].
+		3 - Bool - (Optional) True to remove existing virtual and normal items from the box before adding the new items. Default true.
+		4 - Bool - (Optional) True to automatically add glasses, false to leave them out. Default false.
 */
 
 _ammoBox = [_this, 0] call BIS_fnc_Param;
-_backpacks = [_this, 1, [], [[]]] call BIS_fnc_Param;
-_items = [_this, 2, [], [[]]] call BIS_fnc_Param;
-_magazines = [_this, 3, [], [[]]] call BIS_fnc_Param;
-_weapons = [_this, 4, [], [[]]] call BIS_fnc_Param;
-_addGlasses = [_this, 5, false, [false]] call BIS_fnc_Param;
+_itemData = [_this, 1, [], [[]], [4]] call BIS_fnc_Param;
+_removeItems = [_this, 2, false, [false]] call BIS_fnc_Param;
+_addGlasses = [_this, 3, false, [false]] call BIS_fnc_Param;
 
-// Remove all the non-virtual things from the box
-// TODO make this optional?
-clearWeaponCargoGlobal _ammoBox;
-clearMagazineCargoGlobal _ammoBox;
-clearItemCargoGlobal _ammoBox;
+if (_removeItems) then
+{
+	// Remove all the non-virtual things from the box
+	clearWeaponCargoGlobal _ammoBox;
+	clearMagazineCargoGlobal _ammoBox;
+	clearItemCargoGlobal _ammoBox;
 
-// Remove all the virtual things from the box
-[_ammoBox, ([_ammoBox] call BIS_fnc_getVirtualBackpackCargo), true] call BIS_fnc_removeVirtualBackpackCargo;
-[_ammoBox, ([_ammoBox] call BIS_fnc_getVirtualItemCargo), true] call BIS_fnc_removeVirtualItemCargo;
-[_ammoBox, ([_ammoBox] call BIS_fnc_getVirtualMagazineCargo), true] call BIS_fnc_removeVirtualMagazineCargo;
-[_ammoBox, ([_ammoBox] call BIS_fnc_getVirtualWeaponCargo), true] call BIS_fnc_removeVirtualWeaponCargo;
+	// Remove all the virtual things from the box
+	[_ammoBox, ([_ammoBox] call BIS_fnc_getVirtualBackpackCargo), true] call BIS_fnc_removeVirtualBackpackCargo;
+	[_ammoBox, ([_ammoBox] call BIS_fnc_getVirtualItemCargo), true] call BIS_fnc_removeVirtualItemCargo;
+	[_ammoBox, ([_ammoBox] call BIS_fnc_getVirtualMagazineCargo), true] call BIS_fnc_removeVirtualMagazineCargo;
+	[_ammoBox, ([_ammoBox] call BIS_fnc_getVirtualWeaponCargo), true] call BIS_fnc_removeVirtualWeaponCargo;
+};
 
 // Add the user supplied items
-[_ammoBox, _backpacks, true] call BIS_fnc_addVirtualBackpackCargo;
-[_ammoBox, _items, true] call BIS_fnc_addVirtualItemCargo;
-[_ammoBox, _magazines, true] call BIS_fnc_addVirtualMagazineCargo;
-[_ammoBox, _weapons, true] call BIS_fnc_addVirtualWeaponCargo;
+[_ammoBox, _itemData select 0, true] call BIS_fnc_addVirtualBackpackCargo;
+[_ammoBox, _itemData select 1, true] call BIS_fnc_addVirtualItemCargo;
+[_ammoBox, _itemData select 2, true] call BIS_fnc_addVirtualMagazineCargo;
+[_ammoBox, _itemData select 3, true] call BIS_fnc_addVirtualWeaponCargo;
 
 if (_addGlasses) then
 {

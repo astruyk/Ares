@@ -17,14 +17,7 @@ if (_activated && local _logic) then
 			["arifle_MXC_F","arifle_MX_F","arifle_MXM_Black_F","arifle_MX_GL_Black_F","arifle_MX_Black_F","arifle_MXC_Black_F","arifle_MX_SW_F","srifle_EBR_F","launch_NLAW_F","launch_B_Titan_F","launch_B_Titan_short_F","hgun_P07_F","hgun_Rook40_F","hgun_ACPC2_F","hgun_Pistol_heavy_01_F","hgun_Pistol_heavy_02_F","MineDetector"]
 		];
 
-	[
-		_ammoBox,
-		_data select 0,
-		_data select 1,
-		_data select 2,
-		_data select 3,
-		true
-	] call Ares_fnc_ArsenalSetup;
+	[_ammoBox, _data, true, true] call Ares_fnc_ArsenalSetup;
 
 	[objNull, "Created basic arsenal ammo box."] call bis_fnc_showCuratorFeedbackMessage;
 };
