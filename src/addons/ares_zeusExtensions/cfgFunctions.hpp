@@ -24,6 +24,7 @@ class Ares // This bit will be prefixed when actually calling the function (e.g.
 	{
 		file = "\ares_zeusExtensions\functions\util";
 
+		class ArsenalSetup {};
 		class LogMessage {};
 		class GetGroupUnderCursor {};
 		class GetUnitUnderCursor {};
@@ -70,5 +71,12 @@ class Ares // This bit will be prefixed when actually calling the function (e.g.
 		class SearchNearbyBuilding {};
 		class DisableThermals {};
 		class EnableThermals {};
+		class ArsenalCopyToClipboard {};
+		class ArsenalPasteFromClipboard {};
+		class ArsenalPasteAdditive {};
+		class ArsenalCreateNato {};
+		class ArsenalCreateCsat {};
+		class ArsenalCreateAaf {};
+		class ArsenalCreateGuerilla {};
 	};
 };
