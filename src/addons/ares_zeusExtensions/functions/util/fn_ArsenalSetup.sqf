@@ -21,6 +21,7 @@ if (_removeItems) then
 	clearWeaponCargoGlobal _ammoBox;
 	clearMagazineCargoGlobal _ammoBox;
 	clearItemCargoGlobal _ammoBox;
+	clearBackpackCargoGlobal _ammoBox;
 
 	// Remove all the virtual things from the box
 	[_ammoBox, ([_ammoBox] call BIS_fnc_getVirtualBackpackCargo), true] call BIS_fnc_removeVirtualBackpackCargo;
