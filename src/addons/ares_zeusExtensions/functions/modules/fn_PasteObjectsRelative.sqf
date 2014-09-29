@@ -9,7 +9,7 @@ if (_activated && local _logic) then
 	{
 		_createdUnits = [(position _logic), _parsedValue] call Ares_fnc_ObjectsMapper;
 		[_createdUnits] call Ares_fnc_AddUnitsToCurator;
-		[objNull, format["%1 Objects Created.", count _createdUnits]] call bis_fnc_showCuratorFeedbackMessage;
+		[objNull, format["%1 Objects Created at %2.", count _createdUnits, (position _logic)]] call bis_fnc_showCuratorFeedbackMessage;
 	}
 	else
 	{
