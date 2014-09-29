@@ -4,6 +4,7 @@ class Ares_CopyPaste_Dialog
 {
 	idd = 123;
 	movingEnable = false;
+	onUnload = "missionNamespace setVariable ['Ares_CopyPaste_Dialog_Text', ctrlText ((_this select 0) displayCtrl 1400)];";
 
 	class controls 
 	{
@@ -32,7 +33,7 @@ class Ares_CopyPaste_Dialog
 			y = 22 * GUI_GRID_H + GUI_GRID_Y;
 			w = 4 * GUI_GRID_W;
 			h = 1.5 * GUI_GRID_H;
-			onButtonClick = "missionNamespace setVariable ['Ares_clipboard', ctrlText ((ctrlParent (_this select 0)) displayCtrl 1400)];";
+			onButtonClick = "missionNamespace setVariable ['Ares_CopyPaste_Dialog_Result', 1];";
 		};
 		class Ares_CopyPaste_CancelButton: RscButtonMenuCancel
 		{
@@ -40,6 +41,7 @@ class Ares_CopyPaste_Dialog
 			y = 22 * GUI_GRID_H + GUI_GRID_Y;
 			w = 4 * GUI_GRID_W;
 			h = 1.5 * GUI_GRID_H;
+			onButtonClick = "missionNamespace setVariable ['Ares_CopyPaste_Dialog_Result', 0];";
 		};
 		class Ares_CopyPaste_EditBox: RscEdit
 		{

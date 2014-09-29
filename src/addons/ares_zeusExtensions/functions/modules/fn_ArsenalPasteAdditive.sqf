@@ -5,17 +5,25 @@ _activated = _this select 2;
 if (_activated && local _logic) then
 {
 	_ammoBox = [_logic] call Ares_fnc_GetUnitUnderCursor;
-	_text = copyFromClipboard;
-	_objectArray = call (compile _text);
-	
-	if (count _objectArray == 4) then
+	if (not isNil "_ammoBox") then
 	{
-		[_ammoBox, _objectArray, false] call Ares_fnc_ArsenalSetup;
-		[objNull, "Arsenal objects added."] call bis_fnc_showCuratorFeedbackMessage;
-	}
-	else
-	{
-		[objNull, "Clipboard data could not be decoded. Was it in the right format?"] call bis_fnc_showCuratorFeedbackMessage;
+		_parsedValue = [4] call Ares_fnc_GetArrayDataFromUser;
+		if (typeName _parsedValue == typeName []) then
+		{
+			[_ammoBox, _parsedValue, false] call Ares_fnc_ArsenalSetup;
+			[objNull, "Arsenal objects added."] call bis_fnc_showCuratorFeedbackMessage;
+		}
+		else
+		{
+			if (_parsedValue == "CANCELLED") then
+			{
+				// Do nothing. The paste was cancelled by the user.
+			}
+			else
+			{
+				[objNull, format ["%1. Was the data in the right format?", _parsedValue]] call bis_fnc_showCuratorFeedbackMessage;
+			};
+		};
 	};
 };
 

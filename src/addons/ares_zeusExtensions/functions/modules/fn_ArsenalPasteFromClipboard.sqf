@@ -4,36 +4,25 @@ _activated = _this select 2;
 
 if (_activated && local _logic) then
 {
-	private["_objectArray"];
-	
 	_ammoBox = [_logic] call Ares_fnc_GetUnitUnderCursor;
 	if (not isNil "_ammoBox") then
 	{
-		_dialog = createDialog "Ares_CopyPaste_Dialog";
-		waitUntil { dialog };
-		waitUntil { !dialog };
-		_text = missionNamespace getVariable ["Ares_clipboard", "[]"];
-		try
+		_parsedValue = [4] call Ares_fnc_GetArrayDataFromUser;
+		if (typeName _parsedValue == typeName []) then
 		{
-			if (isNil { call (compile _text) }) then
-			{
-				throw "Failed to parse";
-			};
-			_objectArray = call (compile _text);
-			if (typeName _objectArray != typeName []) then
-			{
-				throw "Bad clipboard data";
-			};
-			if (count _objectArray != 4) then
-			{
-				throw "Wrong number of elements in array";
-			};
-			[_ammoBox, _objectArray] call Ares_fnc_ArsenalSetup;
+			[_ammoBox, _parsedValue] call Ares_fnc_ArsenalSetup;
 			[objNull, "Arsenal objects added."] call bis_fnc_showCuratorFeedbackMessage;
 		}
-		catch
+		else
 		{
-			[objNull, format ["%1. Was the data in the right format?", _exception]] call bis_fnc_showCuratorFeedbackMessage;
+			if (_parsedValue == "CANCELLED") then
+			{
+				// Do nothing. The paste was cancelled by the user.
+			}
+			else
+			{
+				[objNull, format ["%1. Was the data in the right format?", _parsedValue]] call bis_fnc_showCuratorFeedbackMessage;
+			};
 		};
 	};
 };

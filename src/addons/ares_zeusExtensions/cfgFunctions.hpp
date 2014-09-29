@@ -42,6 +42,7 @@ class Ares // This bit will be prefixed when actually calling the function (e.g.
 		class GetSafePos {};
 		class JtdSearchBuilding {};
 		class JtdArrayShuffle {};
+		class GetArrayDataFromUser {};
 	};
 
 	// Functions to perform module actions
