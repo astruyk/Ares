@@ -172,3 +172,5 @@ class CfgGroups
 {
 	#include "compositions.hpp"
 };
+
+#include "ui\dialogs.hpp"
