@@ -4,13 +4,24 @@ _activated = _this select 2;
 
 if (_activated && local _logic) then
 {
-	_text = copyFromClipboard;
-	_objectArray = call (compile _text);
-
-	_createdUnits = [(position _logic), 0, _objectArray] call Ares_fnc_ObjectsMapper;
-	[_createdUnits] call Ares_fnc_AddUnitsToCurator;
-
-	[objNull, format["%1 Objects Created (out of %2).", count _createdUnits, count _objectArray]] call bis_fnc_showCuratorFeedbackMessage;
+	_parsedValue = [] call Ares_fnc_GetArrayDataFromUser;
+	if (typeName _parsedValue == typeName []) then
+	{
+		_createdUnits = [(position _logic), 0, _parsedValue] call Ares_fnc_ObjectsMapper;
+		[_createdUnits] call Ares_fnc_AddUnitsToCurator;
+		[objNull, format["%1 Objects Created.", count _createdUnits]] call bis_fnc_showCuratorFeedbackMessage;
+	}
+	else
+	{
+		if (_parsedValue == "CANCELLED") then
+		{
+			// Do nothing. The paste was cancelled by the user.
+		}
+		else
+		{
+			[objNull, format ["%1. Was the data in the right format?", _parsedValue]] call bis_fnc_showCuratorFeedbackMessage;
+		};
+	};
 };
 
 deleteVehicle _logic;
