@@ -7,7 +7,7 @@ if (_activated && local _logic) then
 	_parsedValue = [] call Ares_fnc_GetArrayDataFromUser;
 	if (typeName _parsedValue == typeName []) then
 	{
-		_createdUnits = [(position _logic), 0, _parsedValue] call Ares_fnc_ObjectsMapper;
+		_createdUnits = [(position _logic), _parsedValue] call Ares_fnc_ObjectsMapper;
 		[_createdUnits] call Ares_fnc_AddUnitsToCurator;
 		[objNull, format["%1 Objects Created.", count _createdUnits]] call bis_fnc_showCuratorFeedbackMessage;
 	}
