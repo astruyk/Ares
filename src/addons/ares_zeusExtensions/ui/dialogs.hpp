@@ -52,6 +52,7 @@ class Ares_CopyPaste_Dialog
 			h = 18.5 * GUI_GRID_H;
 			style = 16;
 			linespacing = 1;
+			default = 1;
 		};
 		class Ares_CopyPaste_Instructions: RscText
 		{

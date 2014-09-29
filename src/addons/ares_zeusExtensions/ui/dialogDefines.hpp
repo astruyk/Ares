@@ -199,7 +199,6 @@ class RscButtonMenuOK : RscButton
 		156
 	};
 	text = "OK";
-	default = 1;
 };
 class RscButtonMenuCancel : RscButton
 {
