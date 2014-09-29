@@ -108,12 +108,12 @@ _objectsToSave = [];
 
 	_outputArray = [_type, [_xPos, _yPos, _zPos], _azimuth, _fuel, _damage, _orientation, _varName, _init, _simulation, _ASL];
 	_outputText = _outputText + _tab + (str _outputArray);
-	_outputText + ", " + _br;
+	_outputText = _outputText + ", " + _br;
 
 	//debugLog (format ["Log: objectGrabber: %1", _outputArray]);
 } forEach _objs;
 
 // Add an entry for holding the anchor position. This will be extracted if we want to do a relative paste later.
-_outputText = _outputText + format ["%1 [%2, %3, 0]]", _tab, _anchorPos select 0, _anchorPos select 1];
+_outputText = _outputText + _tab + format ["[%1, %1, 0]", _anchorPos select 0, _anchorPos select 1] + _br + "]";
 copyToClipboard _outputText;
 _outputText
