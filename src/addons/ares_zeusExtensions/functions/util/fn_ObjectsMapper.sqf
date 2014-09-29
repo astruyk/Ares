@@ -75,8 +75,9 @@ _multiplyMatrixFunc =
 		//                  = (new anchor position) + (old absolute position - old anchor position)
 		_newPos = [
 			_posX + ((_newPos select 0) - (_anchorPosition select 0)),
-			_poxY + ((_newPos select 1) - (_anchorPosition select 1)),
-			_newPos select 2];
+			_posY + ((_newPos select 1) - (_anchorPosition select 1)),
+			_newPos select 2
+			];
 	};
 
 	//Create the object and make sure it's in the correct location
