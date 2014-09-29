@@ -12,9 +12,16 @@ class Ares_Module_Save_Objects_For_Paste : Ares_SaveLoad_Module_Base
 	function = "Ares_fnc_SaveObjectsForPaste";
 };
 
-class Ares_Module_Paste_Objects : Ares_SaveLoad_Module_Base
+class Ares_Module_Paste_Objects_Relative : Ares_SaveLoad_Module_Base
 {
 	scopeCurator = 2;
 	displayName = "Paste Relative";
-	function = "Ares_fnc_PasteObjects";
+	function = "Ares_fnc_PasteObjectsRelative";
+};
+
+class Ares_Module_Paste_Objects_Absolute: Ares_SaveLoad_Module_Base
+{
+	scopeCurator = 2;
+	displayName = "Paste Absolute";
+	function = "Ares_fnc_PasteObjectsAbsolute";
 };

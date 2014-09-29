@@ -66,7 +66,8 @@ class Ares // This bit will be prefixed when actually calling the function (e.g.
 		class CreateTeleporter {};
 		class SaveObjectsForComposition {};
 		class SaveObjectsForPaste {};
-		class PasteObjects {};
+		class PasteObjectsRelative {};
+		class PasteObjectsAbsolute {};
 		class GarrisonNearest {};
 		class UnGarrison {};
 		class SearchNearbyBuilding {};

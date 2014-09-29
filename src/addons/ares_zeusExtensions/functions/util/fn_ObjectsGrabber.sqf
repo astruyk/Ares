@@ -14,7 +14,7 @@
 	Returns:
 	Ouput text (String)
 
-	(Modified for use with Ares)
+	(Modified for use with Ares by AntonStruyk)
 */
 
 private ["_anchorPos", "_anchorDim", "_grabOrientation"];
@@ -43,9 +43,10 @@ _outputText = "[" + _br;
 //First filter illegal objects
 {
 	//Exclude non-dynamic objects (world objects)
-	private ["_allDynamic"];
+	private ["_allDynamic", "_excludeFlag", "_objectType"];
 	_allDynamic = allMissionObjects "All";
 
+	_excludeFlag = false;
 	if (_x in _allDynamic) then
 	{
 		//Exclude characters
@@ -54,10 +55,25 @@ _outputText = "[" + _br;
 
 		if (_sim in ["soldier"]) then
 		{
-			_objs set [_forEachIndex, -1];
+			_excludeFlag = true;
 		};
 	}
 	else
+	{
+		_excludeFlag = true;
+	};
+	
+	 _objectType = typeOf _x;
+	 if ( _objectType == "Rabbit_F"
+		|| _objectType == "Snake_random_F"
+		|| _objectType == "GroundWeaponHolder"
+		|| _objectType == "Ares_Module_Save_Objects_For_Paste"
+		|| _x == player) then
+	{
+		_excludeFlag = true;
+	};
+	
+	if (_excludeFlag) then
 	{
 		_objs set [_forEachIndex, -1];
 	};
@@ -66,14 +82,17 @@ _outputText = "[" + _br;
 _objs = _objs - [-1];
 
 //Process remaining objects
+_objectsToSave = [];
 {
 	private ["_type", "_ASL", "_objPos", "_dX", "_dY", "_z", "_azimuth", "_fuel", "_damage", "_orientation", "_varName", "_init", "_simulation", "_replaceBy", "_outputArray"];
 	_type = typeOf _x;
 	_ASL = _x getVariable ["ASL", false];
 	if (!_ASL) then {_objPos = position _x;} else {_objPos = getPosASL _x;}; //To cover some situations (inside objects with multiple roadways)
-	_dX = (_objPos select 0) - (_anchorPos select 0);
-	_dY = (_objPos select 1) - (_anchorPos select 1);
-	_z = _objPos select 2;
+	//_dX = (_objPos select 0) - (_anchorPos select 0);
+	//_dY = (_objPos select 1) - (_anchorPos select 1);
+	_xPos = _objPos select 0;
+	_yPos = _objPos select 1;
+	_zPos = _objPos select 2;
 	_azimuth = direction _x;
 	_fuel = fuel _x;
 	_damage = damage _x;
@@ -87,14 +106,14 @@ _objs = _objs - [-1];
 	_replaceBy = _x getVariable ["replaceBy", ""];
 	if (_replaceBy != "") then {_type = _replaceBy;};
 
-	_outputArray = [_type, [_dX, _dY, _z], _azimuth, _fuel, _damage, _orientation, _varName, _init, _simulation, _ASL];
+	_outputArray = [_type, [_xPos, _yPos, _zPos], _azimuth, _fuel, _damage, _orientation, _varName, _init, _simulation, _ASL];
 	_outputText = _outputText + _tab + (str _outputArray);
-	_outputText = if (_forEachIndex < ((count _objs) - 1)) then {_outputText + ", " + _br} else {_outputText + _br};
+	_outputText = _outputText + ", " + _br;
 
-	debugLog (format ["Log: objectGrabber: %1", _outputArray]);
+	//debugLog (format ["Log: objectGrabber: %1", _outputArray]);
 } forEach _objs;
 
-_outputText = _outputText + "]";
+// Add an entry for holding the anchor position. This will be extracted if we want to do a relative paste later.
+_outputText = _outputText + _tab + format ["[%1, %2, 0]", _anchorPos select 0, _anchorPos select 1] + _br + "]";
 copyToClipboard _outputText;
-
 _outputText
