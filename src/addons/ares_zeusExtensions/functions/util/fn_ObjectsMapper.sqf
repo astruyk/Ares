@@ -39,7 +39,7 @@ if ((_rdm < 0.0) || (_rdm > 1.0)) exitWith {debugLog "Log: [BIS_fnc_objectMapper
 
 // The copy script will have added the reference point as the last object in the array.
 // Get the position from it, and then remove it from the array so we no longer process it.
-_relativePositionAnchorObject = _objs select ((count _objs) - 1);
+_anchorPosition = _objs select ((count _objs) - 1);
 _objs resize ((count _objs) - 1);
 
 //Make sure there are definitions in the final object array
@@ -104,7 +104,7 @@ _multiplyMatrixFunc =
 	
 		if (_useRelativePositions) then
 		{
-			_newPos = [_posX + (_newRelPos select 0), _posY + (_newRelPos select 1), _z];
+			_newPos = [(_anchorPosition select 0) + (_newRelPos select 0), (_anchorPosition select 1) + (_newRelPos select 1), _z];
 		}
 		else
 		{
