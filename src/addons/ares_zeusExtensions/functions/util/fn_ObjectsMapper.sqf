@@ -6,13 +6,15 @@
 	Takes an array of data about a dynamic object template and creates the objects.
 
 	Parameter(s):
-	_this select 0: position of the template - Array [X, Y, Z]
+	_this select 0: position of the template - Array [X, Y, Z]. [0,0] or [0,0,0] for absolute positioning.
 	_this select 1: azimuth of the template in degrees - Number 
 	_this select 2: objects for the template - Array / composition class - String / tag list - Array
 	_this select 3: (optional) randomizer value (how much chance each object has of being created. 0.0 is 100% chance) - Number
 
 	Returns:
 	Created objects (Array)
+	
+	Modified for Ares by Anton Struyk
 */
 
 private ["_pos", "_azi", "_objs", "_rdm"];
@@ -35,65 +37,21 @@ if (!((typeName _objs) in [(typeName ""), (typeName [])])) exitWith {debugLog "L
 if ((typeName _rdm) != (typeName 0)) exitWith {debugLog "Log: [BIS_fnc_objectMapper] Randomizer value (3) must be a Number!"; []};
 if ((_rdm < 0.0) || (_rdm > 1.0)) exitWith {debugLog "Log: [BIS_fnc_objectMapper] Randomizer value (3) must be a Number between 0.0 and 1.0!"; []};
 
-private ["_newObjs"];
-
-//See if an object array, specific composition class or tag array was given
-private ["_cfgObjectComps", "_script"];
-_cfgObjectComps = configFile >> "CfgObjectCompositions";
-
-if ((typeName _objs) == (typeName "")) then 
-{
-	//Composition class was given
-	_script = getText(_cfgObjectComps >> _objs >> "objectScript");
-	_objs = [];
-} 
-else 
-{
-	private ["_testSample"];
-	_testSample = _objs select 0;
-	if ((typeName _testSample) != (typeName [])) then 
-	{
-		//Tag list was given
-		private ["_queryTags"];
-		_queryTags = +_objs;
-		_objs = [];
-		
-		//Make a list of candidates which match all given tags
-		private ["_candidates"];
-		_candidates = [];
-		
-		for "_i" from 0 to ((count _cfgObjectComps) - 1) do 
-		{
-			private ["_candidate", "_candidateTags"];
-			_candidate = _cfgObjectComps select _i;
-			_candidateTags = getArray(_candidate >> "tags");
-			
-			//Are all tags in this candidate?
-			if (({_x in _candidateTags} count _queryTags) == (count _queryTags)) then 
-			{
-				_candidates = _candidates + [getText(_candidate >> "objectScript")];
-			};
-		};
-		
-		//Select a random candidate
-		_script = _candidates select (floor (random (count _candidates)));
-	};
-};
-
-//If the object array is in a script, call it
-if (!isNil "_script") then 
-{
-	_objs = call (compile (preprocessFileLineNumbers _script));
-};
+// The copy script will have added the reference point as the last object in the array.
+// Get the position from it, and then remove it from the array so we no longer process it.
+_relativePositionAnchorObject = _objs select ((count _objs) - 1);
+_objs resize ((count _objs) - 1);
 
 //Make sure there are definitions in the final object array
-if ((count _objs) == 0) exitWith {debugLog "Log: [BIS_fnc_objectMapper] No elements in the object composition array!"; []};
+if ((count _objs) == 0) exitWith {debugLog "Log: [BIS_fnc_objectMapper] No elements in the object array!"; []};
 
+private ["_newObjs"];
 _newObjs = [];
 
 private ["_posX", "_posY"];
 _posX = _pos select 0;
 _posY = _pos select 1;
+_useRelativePositions = _posX == 0 && _posY == 0;
 
 //Function to multiply a [2, 2] matrix by a [2, 1] matrix
 private ["_multiplyMatrixFunc"];
@@ -144,7 +102,15 @@ _multiplyMatrixFunc =
 		private ["_z"];
 		if ((count _relPos) > 2) then {_z = _relPos select 2} else {_z = 0};
 	
-		_newPos = [_posX + (_newRelPos select 0), _posY + (_newRelPos select 1), _z];
+		if (_useRelativePositions) then
+		{
+			_newPos = [_posX + (_newRelPos select 0), _posY + (_newRelPos select 1), _z];
+		}
+		else
+		{
+			// Paste into their original positions, which is exactly at the stored values.
+			_newPos = [_newRelPos select 0, _newRelPos select 1, _z];
+		};
 	
 		//Create the object and make sure it's in the correct location
 		_newObj = _type createVehicle _newPos;
