@@ -26,14 +26,15 @@ if (_activated && local _logic) then
 		} foreach(units _infantryGroup);
 		
 		// Send the vehicle to the RP to unload the troops and then return to current location
-		_vehicleWp = _vehicleGroup addWaypoint [position _lz, 0];
-		[_vehicleGroup, 0] setWaypointType "TR UNLOAD";
-		_vehicleGroup addWaypoint [position _logic, 1];
-		
+		_vehicleDummyWp = _vehicleGroup addWaypoint [position _vehicle, 5];
+		_vehicleUnloadWp = _vehicleGroup addWaypoint [position _lz, 0];
+		_vehicleUnloadWp setWaypointType "UNLOAD";
+		_vehicleReturnWp = _vehicleGroup addWaypoint [position _logic, 5];
+
 		// Get out at the LZ
-		_infantryGetOutWp = _infantryGroup addWaypoint [position _lz, 0];
-		[_infantryGroup, 0] setWaypointType "GETOUT";
-		[_infantryGroup, 0] synchronizeWaypoint [[_vehicleGroup,0]];
+		_infantryUnloadWP = _infantryGroup addWaypoint [position _lz, 0];
+		_infantryUnloadWP setWaypointType "GETOUT";
+		_infantryUnloadWP synchronizeWaypoint [_vehicleUnloadWp];
 		
 		// Choose a RP for the squad to head to once unloaded and set their waypoint.
 		_allRps = allMissionObjects "Ares_Module_Reinforcements_Create_Rp";
@@ -41,16 +42,18 @@ if (_activated && local _logic) then
 		if (count _allRps > 0) then
 		{
 			_rp = _allRps call BIS_fnc_selectRandom;
-			_infantryRallyWp = _infantryGroup addWaypoint [position _rp, 1];
-			[_infantryGroup, 1] setWaypointType "DESTROY";
+			_infantryRpWp = _infantryGroup addWaypoint [position _rp, 10];
+			_infantryRpWp setWaypointType "DESTROY";
 			[objNull, "Transport dispatched to LZ. Squad will head to RP."] call bis_fnc_showCuratorFeedbackMessage;
 		}
 		else
 		{
+			_infantryMoveOnWp = _infantryGroup addWaypoint [position _lz, 50];
+			_infantryMoveOnWp setWaypointType "DESTROY";
 			[objNull, "Transport dispatched to LZ. Squad will defend LZ."] call bis_fnc_showCuratorFeedbackMessage;
 		};
 		
-		[(units _infantryGroup) + (units _vehicleGroup)] call Ares_fnc_AddUnitsToCurator;
+		[(units _infantryGroup) + (units _vehicleGroup) + (vehicle (leader _vehicleGroup))] call Ares_fnc_AddUnitsToCurator;
 	}
 	else
 	{
