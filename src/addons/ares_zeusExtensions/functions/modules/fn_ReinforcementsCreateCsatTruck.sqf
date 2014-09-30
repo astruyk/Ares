@@ -24,7 +24,7 @@ if (_activated && local _logic) then
 		_vehicleType = _vehicleClasses call BIS_fnc_selectRandom;
 		_vehicleGroup = ([position _logic, 0, _vehicleType, east] call BIS_fnc_spawnVehicle) select 2;
 		_vehicleDummyWp = _vehicleGroup addWaypoint [position _vehicle, 0];
-		_vehicleUnloadWp = _vehicleGroup addWaypoint [position _lz, 20];
+		_vehicleUnloadWp = _vehicleGroup addWaypoint [position _lz, 50];
 		_vehicleUnloadWp setWaypointType "TR UNLOAD";
 		_vehicleReturnWp = _vehicleGroup addWaypoint [position _logic, 0];
 		_vehicleReturnWp setWaypointStatements ["true", "deleteVehicle (vehicle this); {deleteVehicle _x} foreach thisList;"];
@@ -48,7 +48,7 @@ if (_activated && local _logic) then
 			} foreach(units _infantryGroup);
 
 			// Get out at the LZ
-			_infantryUnloadWP = _infantryGroup addWaypoint [position _lz, 0];
+			_infantryUnloadWP = _infantryGroup addWaypoint [(getWpPos _vehicleUnloadWp), 0];
 			_infantryUnloadWP setWaypointType "GETOUT";
 			_infantryUnloadWP synchronizeWaypoint [_vehicleUnloadWp];
 			
@@ -56,7 +56,7 @@ if (_activated && local _logic) then
 			if (count _allRps > 0) then
 			{
 				_rp = _allRps call BIS_fnc_selectRandom;
-				_infantryRpWp = _infantryGroup addWaypoint [position _rp, 0];
+				_infantryRpWp = _infantryGroup addWaypoint [position _rp, 20];
 			}
 			else
 			{
