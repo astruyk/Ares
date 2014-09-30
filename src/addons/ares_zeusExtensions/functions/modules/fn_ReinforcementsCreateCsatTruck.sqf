@@ -26,6 +26,7 @@ if (_activated && local _logic) then
 		_vehicleDummyWp = _vehicleGroup addWaypoint [position _vehicle, 0];
 		_vehicleUnloadWp = _vehicleGroup addWaypoint [position _lz, 50];
 		_vehicleUnloadWp setWaypointType "TR UNLOAD";
+		_vehicleUnloadWp setWaypointTimeout [5,10,20]; // Give the units some time to get away from truck
 		_vehicleReturnWp = _vehicleGroup addWaypoint [position _logic, 0];
 		_vehicleReturnWp setWaypointStatements ["true", "deleteVehicle (vehicle this); {deleteVehicle _x} foreach thisList;"];
 		
