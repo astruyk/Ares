@@ -18,18 +18,17 @@ if (_activated && local _logic) then
 		lbSetCurSel  [2100, missionNamespace getVariable ["Ares_ReinforcementDialog_LastSelected_Side", 1]];
 		
 		// Add Vehicle Type options
-		lbAdd [2101, "Unarmed Light Vehicles"];
+		lbAdd [2101, "Unarmed Light Vehicles + Scouts"];
 		lbAdd [2101, "Armed Light Vehicles"];
 		lbAdd [2101, "Dedicated Troop Trucks"];
 		lbAdd [2101, "APC's & Heavy Troop Transports"];
 		lbAdd [2101, "Unarmed Aircraft"];
-		lbAdd [2101, "Armed Aircraft"];
+		lbAdd [2101, "Light Armed Aircraft"];
 		lbSetCurSel  [2101, missionNamespace getVariable ["Ares_ReinforcementDialog_LastSelected_VehicleType", 2]];
 		
 		// Add vehicle behaviours
-		lbAdd [2102, "RTB"];
+		lbAdd [2102, "RTB and Despawn"];
 		lbAdd [2102, "Stay at LZ"];
-		lbAdd [2102, "Move to RP"];
 		lbSetCurSel  [2102, missionNamespace getVariable ["Ares_ReinforcementDialog_LastSelected_VehicleBehaviour", 0]];
 		
 		// Add LZ choosing algorithms
@@ -157,22 +156,47 @@ if (_activated && local _logic) then
 			
 			[format ["Dialog results: Side=%1, VehicleType=%2, Behaviour=%3, LzAlgorithm=%4, RpAlgorithm=%5", _dialogSide, _dialogVehicleClass, _dialogVehicleBehaviour, _dialogLzAlgorithm, _dialogRpAlgorithm]] call Ares_fnc_LogMessage;
 
+			// Convert into a usable value
+			_side = west;
+			if (_dialogSide == 1) then { _side = east; };
+			if (_dialogSide == 2) then { _side = resistance; };
+			
 			// Choose an LZ to unload at.
-			// TODO support LZ algorithms (only Random ATM).
 			_lz = _allLzs call BIS_fnc_selectRandom;
+			
+			// Choose the nearest LZ to the spawn point if that behaviour was chosen.
+			if (_dialogLzAlgorithm == 1) then
+			{
+				{
+					if (_lz distance _x < _lz distance (position _logic)) then
+					{
+						_lz = _x;
+					};
+				} forEach _allLzs;
+			};
 
 			// Spawn a vehicle, send it to the LZ and have it unload the troops before returning home and
 			// deleting itself.
 			_vehicleType = (((_data select _dialogSide) select 0) select _dialogVehicleClass) call BIS_fnc_selectRandom;
-			_vehicleGroup = ([position _logic, 0, _vehicleType, east] call BIS_fnc_spawnVehicle) select 2;
+			_vehicleGroup = ([position _logic, 0, _vehicleType, _side] call BIS_fnc_spawnVehicle) select 2;
 			_vehicleDummyWp = _vehicleGroup addWaypoint [position _vehicle, 0];
 			_vehicleUnloadWp = _vehicleGroup addWaypoint [position _lz, 50];
 			_vehicleUnloadWp setWaypointType "TR UNLOAD";
 			_vehicleUnloadWp setWaypointTimeout [5,10,20]; // Give the units some time to get away from truck
 			
-			// TODO implement vehicle behaviour (right now only RTB is supported)
-			_vehicleReturnWp = _vehicleGroup addWaypoint [position _logic, 0];
-			_vehicleReturnWp setWaypointStatements ["true", "deleteVehicle (vehicle this); {deleteVehicle _x} foreach thisList;"];
+			// Generate the waypoints for after the transport drops off the troops.
+			if (_dialogVehicleBehaviour == 0) then
+			{
+				// RTB and despawn.
+				_vehicleReturnWp = _vehicleGroup addWaypoint [position _logic, 0];
+				_vehicleReturnWp setWaypointTimeout [5,10,20]; // Sit for a few seconds before disappearing.
+				_vehicleReturnWp setWaypointStatements ["true", "deleteVehicle (vehicle this); {deleteVehicle _x} foreach thisList;"];
+			};
+			if (_dialogVehicleBehaviour == 1) then
+			{
+				// Nothing to do. Vehicle will sit tight.
+			};
+			
 			
 			// Add vehicle to curator
 			 [(units _vehicleGroup) + [(vehicle (leader _vehicleGroup))]] call Ares_fnc_AddUnitsToCurator;
@@ -194,9 +218,7 @@ if (_activated && local _logic) then
 					// Trim the squad size so they will fit.
 					_squadType resize _freeSpace;
 				};
-				_side = west;
-				if (_dialogSide == 1) then { _side = east; };
-				if (_dialogSide == 2) then { _side = resistance; };
+				
 				_infantryGroup = [[0, 0, 0], _side, _squadType] call BIS_fnc_spawnGroup;
 				{
 					_x moveInCargo (vehicle (leader _vehicleGroup));
@@ -206,13 +228,23 @@ if (_activated && local _logic) then
 				_infantryUnloadWP = _infantryGroup addWaypoint [(getWpPos _vehicleUnloadWp), 0];
 				_infantryUnloadWP setWaypointType "GETOUT";
 				_infantryUnloadWP synchronizeWaypoint [_vehicleUnloadWp];
-				
-				// TODO implement RP behaviours (right now only 'random' is supported).
-				
+
 				// Choose a RP for the squad to head to once unloaded and set their waypoint.
 				if (count _allRps > 0) then
 				{
 					_rp = _allRps call BIS_fnc_selectRandom;
+
+					// Choose the nearest RP to the LZ instead if that behaviour was selected.
+					if (_dialogRpAlgorithm == 1) then
+					{
+						{
+							if (_lz distance _x < _lz distance _rp) then
+							{
+								_rp = _x;
+							};
+						} forEach _allRps;
+					};
+					
 					_infantryRpWp = _infantryGroup addWaypoint [position _rp, 20];
 				}
 				else
