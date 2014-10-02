@@ -10,7 +10,38 @@ if (_activated && local _logic) then
 	{
 		// Show the dialog to let the user choose options.
 		_dialog = createDialog "Ares_Reinforcement_Dialog";
-		waitUntil { dialog };
+		
+		// Add Side options
+		lbAdd [2100, "NATO"];
+		lbAdd [2100, "CSAT"];
+		lbAdd [2100, "AAF"];
+		lbSetCurSel  [2100, missionNamespace getVariable ["Ares_ReinforcementDialog_LastSelected_Side", 1]];
+		
+		// Add Vehicle Type options
+		lbAdd [2101, "Unarmed Light Vehicles"];
+		lbAdd [2101, "Armed Light Vehicles"];
+		lbAdd [2101, "Dedicated Troop Trucks"];
+		lbAdd [2101, "APC's & Heavy Troop Transports"];
+		lbAdd [2101, "Unarmed Aircraft"];
+		lbAdd [2101, "Armed Aircraft"];
+		lbSetCurSel  [2101, missionNamespace getVariable ["Ares_ReinforcementDialog_LastSelected_VehicleType", 2]];
+		
+		// Add vehicle behaviours
+		lbAdd [2102, "RTB"];
+		lbAdd [2102, "Stay at LZ"];
+		lbAdd [2102, "Move to RP"];
+		lbSetCurSel  [2102, missionNamespace getVariable ["Ares_ReinforcementDialog_LastSelected_VehicleBehaviour", 0]];
+		
+		// Add LZ choosing algorithms
+		lbAdd [2103, "Random"];
+		lbAdd [2103, "Nearest"];
+		lbSetCurSel  [2103, missionNamespace getVariable ["Ares_ReinforcementDialog_LastSelected_Lz_Algorithm", 0]];
+
+		// Add RP choosing algorithms
+		lbAdd [2104, "Random"];
+		lbAdd [2104, "Nearest"];
+		lbSetCurSel  [2104, missionNamespace getVariable ["Ares_ReinforcementDialog_LastSelected_Rp_Algorithm", 0]];
+
 		waitUntil { !dialog; };
 		_dialogResult = missionNamespace getVariable ["Ares_ReinforcementDialog_Result", -1];
 		
@@ -111,11 +142,18 @@ if (_activated && local _logic) then
 			];
 		
 			// Get the data from the dialog to use when choosing what units to spawn
-			_dialogSide = missionNamespace getVariable ["Ares_ReinforcementDialog_Side", 0];							// 0 - NATO, 1 - CSAT, 2 - AAF
-			_dialogVehicleClass = missionNamespace getVariable ["Ares_ReinforcementDialog_VehicleType", 2];				// 0 - Unarmed Light, 1 - Armed Light, 2 - Dedicated Troop, 3 - Armed + Armoured Troop, 4 - Unarmed Air, 5 - Armed Air
-			_dialogVehicleBehaviour = missionNamespace getVariable ["Ares_ReinforcementDialog_VehicleBehaviour", 0]; 	// 0 - RTB, 1 - Stay at LZ, 2 - Go to RP (mounted), 3 - Go to RP (dismounted)
-			_dialogLzAlgorithm = missionNamespace getVariable ["Ares_ReinforcementDialog_Lz_Algorithm", 0]; 			// 0 - Random, 1 - Nearest
-			_dialogRpAlgorithm = missionNamespace getVariable ["Ares_ReinforcementDialog_Rp_Algorithm", 0]; 			// 0 - Random, 1 - Nearest
+			_dialogSide = lbCurSel 2100;							// 0 - NATO, 1 - CSAT, 2 - AAF
+			_dialogVehicleClass = lbCurSel 2101;				// 0 - Unarmed Light, 1 - Armed Light, 2 - Dedicated Troop, 3 - Armed + Armoured Troop, 4 - Unarmed Air, 5 - Armed Air
+			_dialogVehicleBehaviour = lbCurSel 2102; 	// 0 - RTB, 1 - Stay at LZ, 2 - Go to RP (mounted), 3 - Go to RP (dismounted)
+			_dialogLzAlgorithm = lbCurSel 2103; 			// 0 - Random, 1 - Nearest
+			_dialogRpAlgorithm = lbCurSel 2104; 			// 0 - Random, 1 - Nearest
+			
+			// Save the chosen values for next time the dialog is shown.
+			missionNamespace setVariable ["Ares_ReinforcementDialog_LastSelected_Side", _dialogSide];
+			missionNamespace setVariable ["Ares_ReinforcementDialog_LastSelected_VehicleType", _dialogVehicleClass];
+			missionNamespace setVariable ["Ares_ReinforcementDialog_LastSelected_VehicleBehaviour", _dialogVehicleBehaviour];
+			missionNamespace setVariable ["Ares_ReinforcementDialog_LastSelected_Lz_Algorithm", _dialogLzAlgorithm];
+			missionNamespace setVariable ["Ares_ReinforcementDialog_LastSelected_Rp_Algorithm", _dialogRpAlgorithm];
 
 			// Choose an LZ to unload at.
 			// TODO support LZ algorithms (only Random ATM).
@@ -137,10 +175,13 @@ if (_activated && local _logic) then
 			// Add vehicle to curator
 			 [(units _vehicleGroup) + [(vehicle (leader _vehicleGroup))]] call Ares_fnc_AddUnitsToCurator;
 
+			// Define this once.. Before spawning troops.
+			_allRps = allMissionObjects "Ares_Module_Reinforcements_Create_Rp";
+
 			// Spawn the units and load them into the vehicle
 			while {((vehicle (leader _vehicleGroup)) emptyPositions "Cargo") >= 2} do
 			{
-				_squadType = (((_data select _dialogSide) select 1) call BIS_fnc_selectRandom;
+				_squadType = ((_data select _dialogSide) select 1) call BIS_fnc_selectRandom;
 				_freeSpace = (vehicle (leader _vehicleGroup)) emptyPositions "Cargo";
 				if (_freeSpace < count _squadType) then
 				{
@@ -160,7 +201,6 @@ if (_activated && local _logic) then
 				// TODO implement RP behaviours (right now only 'closest' is supported).
 				
 				// Choose a RP for the squad to head to once unloaded and set their waypoint.
-				_allRps = allMissionObjects "Ares_Module_Reinforcements_Create_Rp";
 				if (count _allRps > 0) then
 				{
 					_rp = _allRps call BIS_fnc_selectRandom;
