@@ -102,7 +102,7 @@
 ///////////////////////////////////////////////////////////////////////////
 /// Base Classes
 ///////////////////////////////////////////////////////////////////////////
-
+/*
 class IGUIBack
 {
 	type = CT_STATIC;
@@ -287,4 +287,16 @@ class RscCombo
 		color[] = {1,1,1,1}; // Scrollbar color
 	};
 };
+*/
+
+
+class IGUIBack;
+class RscFrame;
+class RscEdit;
+class RscText;
+class RscCombo;
+class RscButtonMenuOK;
+class RscButtonMenuCancel;
+
+
 

@@ -12,18 +12,19 @@ $[
 	[1003,"Ares_ReinforcementDialog_Text_LZ",[2,"Vehicle Landing Zone",["2 * GUI_GRID_W + GUI_GRID_X","8 * GUI_GRID_H + GUI_GRID_Y","16.5 * GUI_GRID_W","1.5 * GUI_GRID_H"],[-1,-1,-1,-1],[-1,-1,-1,-1],[-1,-1,-1,-1],"","-1"],[]],
 	[1004,"Ares_ReinforcementDialog_Text_RP",[2,"Unit Rally Point",["2 * GUI_GRID_W + GUI_GRID_X","10 * GUI_GRID_H + GUI_GRID_Y","16.5 * GUI_GRID_W","1.5 * GUI_GRID_H"],[-1,-1,-1,-1],[-1,-1,-1,-1],[-1,-1,-1,-1],"","-1"],[]],
 	[2103,"Ares_ReinforcementDialog_Combo_LZ",[2,"",["21.5 * GUI_GRID_W + GUI_GRID_X","8 * GUI_GRID_H + GUI_GRID_Y","16.5 * GUI_GRID_W","1.5 * GUI_GRID_H"],[-1,-1,-1,-1],[-1,-1,-1,-1],[-1,-1,-1,-1],"How the vehicle should choose an LZ.","-1"],[]],
-	[2104,"Ares_ReinforcementDialog_Combo_LZ",[2,"",["21.5 * GUI_GRID_W + GUI_GRID_X","10 * GUI_GRID_H + GUI_GRID_Y","16.5 * GUI_GRID_W","1.5 * GUI_GRID_H"],[-1,-1,-1,-1],[-1,-1,-1,-1],[-1,-1,-1,-1],"How the units should choose a Rally Point.","-1"],[]],
+	[2104,"Ares_ReinforcementDialog_Combo_RP",[2,"",["21.5 * GUI_GRID_W + GUI_GRID_X","10 * GUI_GRID_H + GUI_GRID_Y","16.5 * GUI_GRID_W","1.5 * GUI_GRID_H"],[-1,-1,-1,-1],[-1,-1,-1,-1],[-1,-1,-1,-1],"How the units should choose a Rally Point.","-1"],[]],
 	[2600,"",[2,"",["29.5 * GUI_GRID_W + GUI_GRID_X","12 * GUI_GRID_H + GUI_GRID_Y","4 * GUI_GRID_W","1.5 * GUI_GRID_H"],[-1,-1,-1,-1],[-1,-1,-1,-1],[-1,-1,-1,-1],"","-1"],[]],
 	[2700,"",[2,"",["34 * GUI_GRID_W + GUI_GRID_X","12 * GUI_GRID_H + GUI_GRID_Y","4 * GUI_GRID_W","1.5 * GUI_GRID_H"],[-1,-1,-1,-1],[-1,-1,-1,-1],[-1,-1,-1,-1],"","-1"],[]]
 ]
 */
 
+
+
 class Ares_Reinforcement_Dialog
 {
-	idd = 123;
+	idd = 124;
 	movingEnable = false;
-	onUnload = "missionNamespace setVariable ['Ares_CopyPaste_Dialog_Text', ctrlText ((_this select 0) displayCtrl 1400)];";
-	
+
 	class controls
 	{
 		////////////////////////////////////////////////////////
@@ -100,6 +101,15 @@ class Ares_Reinforcement_Dialog
 			w = 16.5 * GUI_GRID_W;
 			h = 1.5 * GUI_GRID_H;
 		};
+		class Ares_ReinforcementDialog_Combo_LZ: RscCombo
+		{
+			idc = 2103;
+			x = 21.5 * GUI_GRID_W + GUI_GRID_X;
+			y = 8 * GUI_GRID_H + GUI_GRID_Y;
+			w = 16.5 * GUI_GRID_W;
+			h = 1.5 * GUI_GRID_H;
+			tooltip = "How the vehicle should choose the LZ."; //--- ToDo: Localize;
+		};
 		class Ares_ReinforcementDialog_Text_RP: RscText
 		{
 			idc = 1004;
@@ -109,14 +119,14 @@ class Ares_Reinforcement_Dialog
 			w = 16.5 * GUI_GRID_W;
 			h = 1.5 * GUI_GRID_H;
 		};
-		class Ares_ReinforcementDialog_Combo_LZ: RscCombo
+		class Ares_ReinforcementDialog_Combo_RP: RscCombo
 		{
-			idc = 2103;
+			idc = 2104;
 			x = 21.5 * GUI_GRID_W + GUI_GRID_X;
-			y = 8 * GUI_GRID_H + GUI_GRID_Y;
+			y = 10 * GUI_GRID_H + GUI_GRID_Y;
 			w = 16.5 * GUI_GRID_W;
 			h = 1.5 * GUI_GRID_H;
-			tooltip = "How the vehicle should choose an LZ."; //--- ToDo: Localize;
+			tooltip = "How the dismounting units should choose an RP."; //--- ToDo: Localize;
 		};
 		class RscButtonMenuOK_2600: RscButtonMenuOK
 		{
@@ -125,6 +135,7 @@ class Ares_Reinforcement_Dialog
 			w = 4 * GUI_GRID_W;
 			h = 1.5 * GUI_GRID_H;
 			onButtonClick = "missionNamespace setVariable ['Ares_ReinforcementDialog_Result', 1];";
+			default = 1;
 		};
 		class RscButtonMenuCancel_2700: RscButtonMenuCancel
 		{
