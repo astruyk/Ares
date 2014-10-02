@@ -16,6 +16,6 @@ class Ares_Module_Reinforcements_Spawn_Csat_Truck : Ares_Reinforcements_Module_B
 {
 	scopeCurator = 2;
 	displayName = "Spawn CSAT Truck";
-	function = "Ares_fnc_ReinforcementsCreateCsatTruck";
+	function = "Ares_fnc_ReinforcementsCreateUnits";
 };
 
