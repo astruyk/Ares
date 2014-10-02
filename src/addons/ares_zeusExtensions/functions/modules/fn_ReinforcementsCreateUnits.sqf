@@ -181,7 +181,11 @@ if (_activated && local _logic) then
 			_allRps = allMissionObjects "Ares_Module_Reinforcements_Create_Rp";
 
 			// Spawn the units and load them into the vehicle
-			while {((vehicle (leader _vehicleGroup)) emptyPositions "Cargo") >= 2} do
+			while	{
+					((vehicle (leader _vehicleGroup)) emptyPositions "Cargo") >= 3 // Don't try to fill in slots with a squad if there are only 3 spaces left
+					|| (_dialogVehicleClass == 0 && ((vehicle (leader _vehicleGroup)) emptyPositions "Cargo") > 0) // ... unless this is a light vehicle (and so will have fewer positions total)
+					}
+			do
 			{
 				_squadType = ((_data select _dialogSide) select 1) call BIS_fnc_selectRandom;
 				_freeSpace = (vehicle (leader _vehicleGroup)) emptyPositions "Cargo";
@@ -190,7 +194,10 @@ if (_activated && local _logic) then
 					// Trim the squad size so they will fit.
 					_squadType resize _freeSpace;
 				};
-				_infantryGroup = [[0, 0, 0], EAST, _squadType] call BIS_fnc_spawnGroup;
+				_side = west;
+				if (_dialogSide == 1) then { _side = east; };
+				if (_dialogSide == 2) then { _side = resistance; };
+				_infantryGroup = [[0, 0, 0], _side, _squadType] call BIS_fnc_spawnGroup;
 				{
 					_x moveInCargo (vehicle (leader _vehicleGroup));
 				} foreach(units _infantryGroup);
@@ -200,7 +207,7 @@ if (_activated && local _logic) then
 				_infantryUnloadWP setWaypointType "GETOUT";
 				_infantryUnloadWP synchronizeWaypoint [_vehicleUnloadWp];
 				
-				// TODO implement RP behaviours (right now only 'closest' is supported).
+				// TODO implement RP behaviours (right now only 'random' is supported).
 				
 				// Choose a RP for the squad to head to once unloaded and set their waypoint.
 				if (count _allRps > 0) then
