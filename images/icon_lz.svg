@@ -14,7 +14,7 @@
    id="svg2985"
    version="1.1"
    inkscape:version="0.48.5 r10040"
-   sodipodi:docname="Ares_Logo.svg"
+   sodipodi:docname="icon_lz.svg"
    inkscape:export-filename="C:\Users\Anton\Desktop\Ares_LZ_icon.png"
    inkscape:export-xdpi="90"
    inkscape:export-ydpi="90">
@@ -67,14 +67,14 @@
   </defs>
   <sodipodi:namedview
      id="base"
-     pagecolor="#ffffff"
+     pagecolor="#499dff"
      bordercolor="#666666"
      borderopacity="1.0"
-     inkscape:pageopacity="0.0"
+     inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.97227183"
-     inkscape:cx="0.65541595"
-     inkscape:cy="41.020968"
+     inkscape:zoom="1.9445437"
+     inkscape:cx="77.438911"
+     inkscape:cy="121.80832"
      inkscape:current-layer="layer2"
      showgrid="false"
      inkscape:document-units="px"
@@ -102,7 +102,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -113,31 +113,16 @@
      style="display:inline"
      transform="translate(0,192)">
     <path
-       style="fill:#ffffff;fill-opacity:1;stroke:none"
-       d="m 223.63636,60 c 0,0 -54.86876,35.122845 -90.54545,90.54546 C 110.86877,105.2408 82.181818,99.636363 82.181818,99.636363 L 92.72727,77.454545 22.545454,83.272727 c 0,0 35.059713,62.820853 37.241531,59.911763 2.181818,-2.90909 11.423351,-23.31683 11.423351,-23.31683 0,0 32.869074,8.593 61.880574,78.31415 34.82968,-45.91521 111.63636,-86.54545 111.63636,-86.54545 l -6.54545,-26.909087 z"
-       id="path3788"
+       sodipodi:nodetypes="cccccsccccc"
        inkscape:connector-curvature="0"
-       transform="translate(0,-192)"
-       sodipodi:nodetypes="cccccsccccc" />
+       id="path3000"
+       d="m 229.87383,-150.23054 c 0,0 -62.10768,39.75666 -102.49125,102.491263 -25.15394,-51.281774 -57.625595,-57.625613 -57.625595,-57.625613 l 11.936728,-25.10829 -79.4410166,6.58578 c 0,0 39.6851926,71.108899 42.1548636,67.816009 2.469671,-3.292891 12.93045,-26.393056 12.93045,-26.393056 0,0 37.20554,9.726688 70.04457,88.646257 39.42482,-51.972875 126.36472,-97.963525 126.36472,-97.963525 l -7.409,-30.459235 z"
+       style="fill:#ffffff;fill-opacity:1;stroke:none" />
     <path
        style="fill:#ffffff;fill-opacity:1;stroke:none"
-       d="m 38.909091,205.09091 26.545455,21.63637 126.545454,0 25.81818,-21.63637 z"
+       d="m 5.3757181,13.09091 19.2486149,21.63637 209.328687,0 16.67126,-21.63637 z"
        id="path3792"
        inkscape:connector-curvature="0"
-       transform="translate(0,-192)"
        sodipodi:nodetypes="ccccc" />
-    <path
-       sodipodi:type="arc"
-       style="fill:none;stroke:#ffffff;stroke-width:3.79221869;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;display:inline"
-       id="path3776"
-       sodipodi:cx="131.3933"
-       sodipodi:cy="140.03448"
-       sodipodi:rx="111.85143"
-       sodipodi:ry="111.85143"
-       d="m 131.3933,28.183052 a 111.85143,111.85143 0 1 1 -4e-5,0"
-       transform="matrix(1.0547915,0,0,1.0547915,-10.592531,-211.70718)"
-       sodipodi:start="4.712389"
-       sodipodi:end="10.995574"
-       sodipodi:open="true" />
   </g>
 </svg>
