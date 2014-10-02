@@ -19,7 +19,7 @@ if (_activated && local _logic) then
 			// The user chose 'OK'. We should spawn stuff.
 		
 			// Side indexes are used to lookup things in the tables
-			_sideIndex = missionNamespace getVariable ["Ares_ReinforcementDialog_Result", 0];
+			
 			
 			// Data can be accessed as follows:
 			// (((_data select <sideIndex>) select <dataTypeIndex>) select <specificDataOrArray>
@@ -39,7 +39,7 @@ if (_activated && local _logic) then
 						[	// 2 - Dedicated Troop Transports
 							"B_Truck_01_transport_F", "B_Truck_01_covered_F"
 						],
-						[	// 3 - Armed + Armored Troop Transports
+						[	// 3 - Armed + Armoured Troop Transports
 							"B_APC_Tracked_01_rcws_F", "B_APC_Wheeled_01_cannon_F"
 						],
 						[	// 4 - Unarmed Aircraft
@@ -66,7 +66,7 @@ if (_activated && local _logic) then
 						[	// 2 - Dedicated Troop Transports
 							"O_Truck_02_covered_F", "O_Truck_02_transport_F", "O_Truck_03_transport_F", "O_Truck_03_covered_F"
 						],
-						[	// 3 - Armed + Armored Troop Transports
+						[	// 3 - Armed + Armoured Troop Transports
 							"O_APC_Tracked_02_cannon_F", "O_APC_Wheeled_02_rcws_F"
 						],
 						[	// 4 - Unarmed Aircraft
@@ -93,7 +93,7 @@ if (_activated && local _logic) then
 						[	// 2 - Dedicated Troop Transports
 							"I_Truck_02_covered_F", "I_Truck_02_transport_F"
 						],
-						[	// 3 - Armed + Armored Troop Transports
+						[	// 3 - Armed + Armoured Troop Transports
 							"I_APC_tracked_03_cannon_F", "I_APC_Wheeled_03_cannon_F"
 						],
 						[	// 4 - Unarmed Aircraft
@@ -111,11 +111,11 @@ if (_activated && local _logic) then
 			];
 		
 			// Get the data from the dialog to use when choosing what units to spawn
-			_dialogSide = 0;	// 0 - NATO, 1 - CSAT, 2 - AAF
-			_dialogVehicleClass = 0;	// 0 - Unarmed Light, 1 - Armed Light, 2 - Dedicated Troop, 3 - Armed + Armored Troop, 4 - Unarmed Air, 5 - Armed Air
-			_dialogVehicleBehaviour = 0; // 0 - RTB, 1 - Stay at LZ, 2 - Go to RP
-			_dialogLzAlgorithm = 0; // 0 - Nearest, 1 - Random
-			_dialogRpAlgorithm = 0; // 0 - Nearest, 1 - Random
+			_dialogSide = missionNamespace getVariable ["Ares_ReinforcementDialog_Side", 0];							// 0 - NATO, 1 - CSAT, 2 - AAF
+			_dialogVehicleClass = missionNamespace getVariable ["Ares_ReinforcementDialog_VehicleType", 2];				// 0 - Unarmed Light, 1 - Armed Light, 2 - Dedicated Troop, 3 - Armed + Armoured Troop, 4 - Unarmed Air, 5 - Armed Air
+			_dialogVehicleBehaviour = missionNamespace getVariable ["Ares_ReinforcementDialog_VehicleBehaviour", 0]; 	// 0 - RTB, 1 - Stay at LZ, 2 - Go to RP (mounted), 3 - Go to RP (dismounted)
+			_dialogLzAlgorithm = missionNamespace getVariable ["Ares_ReinforcementDialog_Lz_Algorithm", 0]; 			// 0 - Random, 1 - Nearest
+			_dialogRpAlgorithm = missionNamespace getVariable ["Ares_ReinforcementDialog_Rp_Algorithm", 0]; 			// 0 - Random, 1 - Nearest
 
 			// Choose an LZ to unload at.
 			// TODO support LZ algorithms (only Random ATM).
