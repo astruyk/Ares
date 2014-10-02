@@ -186,4 +186,7 @@ class CfgGroups
 	#include "compositions.hpp"
 };
 
-#include "ui\dialogs.hpp"
+#include "ui\baseDialogs.hpp"
+#include "ui\copyPasteDialog.hpp"
+#include "ui\reinforcementDialog.hpp"
+
