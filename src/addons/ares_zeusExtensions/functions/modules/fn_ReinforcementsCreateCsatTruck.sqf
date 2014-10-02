@@ -107,7 +107,7 @@ if (_activated && local _logic) then
 						["I_Soldier_SL_F", "I_Soldier_AR_F", "I_Soldier_A_F", "I_Soldier_lite_F", "I_Soldier_lite_F"],
 						["I_Soldier_TL_F", "I_Soldier_GL_F", "I_soldier_F", "I_soldier_F", "I_Soldier_lite_F"]
 					]
-				],
+				]
 			];
 		
 			// Get the data from the dialog to use when choosing what units to spawn
