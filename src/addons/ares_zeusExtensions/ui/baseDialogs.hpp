@@ -115,6 +115,7 @@ class IGUIBack
 	sizeEx = 0.02;
 	text = "";
 };
+
 class RscFrame
 {
 	type = CT_STATIC;
@@ -127,6 +128,7 @@ class RscFrame
 	sizeEx = 0.02;
 	text = "";
 };
+
 class RscEdit
 {
 	access = 0;
@@ -154,6 +156,7 @@ class RscEdit
 	colorDisabled[] = { 1, 1, 1, 0.25 };
 	canModify = 1;
 };
+
 class RscButton
 {
 	borderSize = 0;
@@ -184,6 +187,7 @@ class RscButton
 	x = 0;
 	y = 0;
 };
+
 class RscButtonMenuOK : RscButton
 {
 	idc = 1;
@@ -200,6 +204,7 @@ class RscButtonMenuOK : RscButton
 	};
 	text = "OK";
 };
+
 class RscButtonMenuCancel : RscButton
 {
 	idc = 2;
@@ -213,20 +218,73 @@ class RscButtonMenuCancel : RscButton
 	};
 	text = "Cancel";
 };
+
 class RscText
 {
- access = 0;
- type = CT_STATIC;
- idc = -1;
- style = ST_LEFT;
- w = 0.1; h = 0.05;
- //x and y are not part of a global class since each rsctext will be positioned 'somewhere'
- font = "PuristaMedium";
- sizeEx = 0.04;
- colorBackground[] = {0,0,0,0};
- colorText[] = {1,1,1,1};
- text = "";
- fixedWidth = 0;
- shadow = 0;
+	idc = -1;
+	access = 0;
+	type = CT_STATIC;
+	style = ST_LEFT;
+	w = 0.1; h = 0.05;
+	//x and y are not part of a global class since each rsctext will be positioned 'somewhere'
+	font = "PuristaMedium";
+	sizeEx = 0.04;
+	colorBackground[] = {0,0,0,0};
+	colorText[] = {1,1,1,1};
+	text = "";
+	fixedWidth = 0;
+	shadow = 0;
+};
+
+class RscCombo
+{
+	idc = -1;
+	type = CT_COMBO; // Type is 4
+	style = ST_LEFT + LB_TEXTURES; // Style
+	blinkingPeriod = 0; // Time in which control will fade out and back in. Use 0 to disable the effect.
+
+	colorBackground[] = {0.2,0.2,0.2,1}; // Fill color
+	colorSelectBackground[] = {1,0.5,0,1}; // Selected item fill color
+
+	sizeEx = 0.04; // Text size
+	font = "PuristaMedium"; // Font from CfgFontFamilies
+	shadow = 0; // Shadow (0 - none, 1 - N/A, 2 - black outline)
+	colorText[] = {1,1,1,1}; // Text and frame color
+	colorDisabled[] = {1,1,1,0.5}; // Disabled text color
+	colorSelect[] = {1,1,1,1}; // Text selection color
+
+	pictureColor[] = {1,0.5,0,1}; // Picture color
+	pictureColorSelect[] = {1,1,1,1}; // Selected picture color
+	pictureColorDisabled[] = {1,1,1,0.5}; // Disabled picture color
+
+	tooltip = ""; // Tooltip text
+	tooltipColorShade[] = {0,0,0,1}; // Tooltip background color
+	tooltipColorText[] = {1,1,1,1}; // Tooltip text color
+	tooltipColorBox[] = {1,1,1,1}; // Tooltip frame color
+
+	arrowEmpty = "\A3\ui_f\data\GUI\RscCommon\rsccombo\arrow_combo_ca.paa"; // Expand arrow
+	arrowFull = "\A3\ui_f\data\GUI\RscCommon\rsccombo\arrow_combo_active_ca.paa"; // Collapse arrow
+
+	wholeHeight = 5 * GUI_GRID_H; // Maximum height of expanded box (including the control height)
+	maxHistoryDelay = 1; // Time since last keyboard type search to reset it
+
+	soundExpand[] = {"\A3\ui_f\data\sound\RscCombo\soundExpand",0.1,1}; // Sound played when the list is expanded
+	soundCollapse[] = {"\A3\ui_f\data\sound\RscCombo\soundCollapse",0.1,1}; // Sound played when the list is collapsed
+	soundSelect[] = {"\A3\ui_f\data\sound\RscCombo\soundSelect",0.1,1}; // Sound played when an item is selected
+
+	// Scrollbar configuration (applied only when LB_TEXTURES style is used)
+	class ComboScrollBar
+	{
+		width = 0; // width of ComboScrollBar
+		height = 0; // height of ComboScrollBar
+		scrollSpeed = 0.01; // scrollSpeed of ComboScrollBar
+
+		arrowEmpty = "\A3\ui_f\data\gui\cfg\scrollbar\arrowEmpty_ca.paa"; // Arrow
+		arrowFull = "\A3\ui_f\data\gui\cfg\scrollbar\arrowFull_ca.paa"; // Arrow when clicked on
+		border = "\A3\ui_f\data\gui\cfg\scrollbar\border_ca.paa"; // Slider background (stretched vertically)
+		thumb = "\A3\ui_f\data\gui\cfg\scrollbar\thumb_ca.paa"; // Dragging element (stretched vertically)
+
+		color[] = {1,1,1,1}; // Scrollbar color
+	};
 };
 
