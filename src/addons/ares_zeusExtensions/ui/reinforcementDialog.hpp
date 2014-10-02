@@ -124,6 +124,7 @@ class Ares_Reinforcement_Dialog
 			y = 12 * GUI_GRID_H + GUI_GRID_Y;
 			w = 4 * GUI_GRID_W;
 			h = 1.5 * GUI_GRID_H;
+			onButtonClick = "missionNamespace setVariable ['Ares_ReinforcementDialog_Result', 1];";
 		};
 		class RscButtonMenuCancel_2700: RscButtonMenuCancel
 		{
@@ -131,6 +132,7 @@ class Ares_Reinforcement_Dialog
 			y = 12 * GUI_GRID_H + GUI_GRID_Y;
 			w = 4 * GUI_GRID_W;
 			h = 1.5 * GUI_GRID_H;
+			onButtonClick = "missionNamespace setVariable ['Ares_ReinforcementDialog_Result', 0];";
 		};
 		////////////////////////////////////////////////////////
 		// GUI EDITOR OUTPUT END
