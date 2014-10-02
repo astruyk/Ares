@@ -113,7 +113,7 @@ if (_activated && local _logic) then
 					]
 				],
 				
-				[	// AAF
+				[	// 2 - AAF
 					[	// Vehicle Classes
 						[	// 0 - Unarmed Light (recon) vehicles & Trucks
 							"I_G_Offroad_01_F","I_Quadbike_01_F", "I_MRAP_03_F"
@@ -142,11 +142,11 @@ if (_activated && local _logic) then
 			];
 		
 			// Get the data from the dialog to use when choosing what units to spawn
-			_dialogSide = lbCurSel 2100;							// 0 - NATO, 1 - CSAT, 2 - AAF
-			_dialogVehicleClass = lbCurSel 2101;				// 0 - Unarmed Light, 1 - Armed Light, 2 - Dedicated Troop, 3 - Armed + Armoured Troop, 4 - Unarmed Air, 5 - Armed Air
-			_dialogVehicleBehaviour = lbCurSel 2102; 	// 0 - RTB, 1 - Stay at LZ, 2 - Go to RP (mounted), 3 - Go to RP (dismounted)
-			_dialogLzAlgorithm = lbCurSel 2103; 			// 0 - Random, 1 - Nearest
-			_dialogRpAlgorithm = lbCurSel 2104; 			// 0 - Random, 1 - Nearest
+			_dialogSide =             missionNamespace getVariable ["Ares_ReinforcementDialog_Selected_Side", -1];
+			_dialogVehicleClass =     missionNamespace getVariable ["Ares_ReinforcementDialog_Selected_VehicleType", -1];
+			_dialogVehicleBehaviour = missionNamespace getVariable ["Ares_ReinforcementDialog_Selected_VehicleBehaviour", -1];
+			_dialogLzAlgorithm =      missionNamespace getVariable ["Ares_ReinforcementDialog_Selected_Lz_Algorithm", -1];
+			_dialogRpAlgorithm =      missionNamespace getVariable ["Ares_ReinforcementDialog_Selected_Rp_Algorithm", -1];
 			
 			// Save the chosen values for next time the dialog is shown.
 			missionNamespace setVariable ["Ares_ReinforcementDialog_LastSelected_Side", _dialogSide];
@@ -154,6 +154,8 @@ if (_activated && local _logic) then
 			missionNamespace setVariable ["Ares_ReinforcementDialog_LastSelected_VehicleBehaviour", _dialogVehicleBehaviour];
 			missionNamespace setVariable ["Ares_ReinforcementDialog_LastSelected_Lz_Algorithm", _dialogLzAlgorithm];
 			missionNamespace setVariable ["Ares_ReinforcementDialog_LastSelected_Rp_Algorithm", _dialogRpAlgorithm];
+			
+			[format ["Dialog results: Side=%1, VehicleType=%2, Behaviour=%3, LzAlgorithm=%4, RpAlgorithm=%5", _dialogSide, _dialogVehicleClass, _dialogVehicleBehaviour, _dialogLzAlgorithm, _dialogRpAlgorithm]] call Ares_fnc_LogMessage;
 
 			// Choose an LZ to unload at.
 			// TODO support LZ algorithms (only Random ATM).

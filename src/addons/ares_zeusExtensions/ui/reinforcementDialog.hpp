@@ -134,7 +134,7 @@ class Ares_Reinforcement_Dialog
 			y = 12 * GUI_GRID_H + GUI_GRID_Y;
 			w = 4 * GUI_GRID_W;
 			h = 1.5 * GUI_GRID_H;
-			onButtonClick = "missionNamespace setVariable ['Ares_ReinforcementDialog_Result', 1];";
+			onButtonClick = "missionNamespace setVariable ['Ares_ReinforcementDialog_Result', 1]; missionNamespace setVariable ['Ares_ReinforcementDialog_Selected_Side', lbCurSel 2100]; missionNamespace setVariable ['Ares_ReinforcementDialog_Selected_VehicleType', lbCurSel 2101]; missionNamespace setVariable ['Ares_ReinforcementDialog_Selected_VehicleBehaviour', lbCurSel 2102]; missionNamespace setVariable ['Ares_ReinforcementDialog_Selected_Lz_Algorithm', lbCurSel 2103]; missionNamespace setVariable ['Ares_ReinforcementDialog_Selected_Rp_Algorithm', lbCurSel 2104];";
 			default = 1;
 		};
 		class RscButtonMenuCancel_2700: RscButtonMenuCancel
