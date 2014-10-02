@@ -179,7 +179,7 @@ if (_activated && local _logic) then
 			// deleting itself.
 			_vehicleType = (((_data select _dialogSide) select 0) select _dialogVehicleClass) call BIS_fnc_selectRandom;
 			_vehicleGroup = ([position _logic, 0, _vehicleType, _side] call BIS_fnc_spawnVehicle) select 2;
-			if (_dialogVehicleClass == 4 || _dialogVehicleClass == 5)
+			if (_dialogVehicleClass == 4 || _dialogVehicleClass == 5) then 
 			{
 				// Special settings for helicopters. Otherwise they tend to run away instead of land
 				// if the LZ is hot.
