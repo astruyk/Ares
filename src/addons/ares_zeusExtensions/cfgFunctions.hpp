@@ -83,5 +83,6 @@ class Ares // This bit will be prefixed when actually calling the function (e.g.
 		class ReinforcementsCreateLz {};
 		class ReinforcementsCreateRp {};
 		class ReinforcementsCreateUnits {};
+		class ReinforcementsDeleteMarker {};
 	};
 };
