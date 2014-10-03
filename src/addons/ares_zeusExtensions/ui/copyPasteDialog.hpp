@@ -19,6 +19,7 @@ class Ares_CopyPaste_Dialog
 			y = 1 * GUI_GRID_H + GUI_GRID_Y;
 			w = 38 * GUI_GRID_W;
 			h = 23 * GUI_GRID_H;
+			colorBackground[] = {0,0,0,1};
 		};
 		class Ares_CopyPaste_Background_Frame : RscFrame
 		{
@@ -27,6 +28,7 @@ class Ares_CopyPaste_Dialog
 			y = 1 * GUI_GRID_H + GUI_GRID_Y;
 			w = 38 * GUI_GRID_W;
 			h = 23 * GUI_GRID_H;
+			colorBackground[] = {0,0,0,1};
 		};
 		class Ares_CopyPaste_Ok_Button: RscButtonMenuOK
 		{
@@ -35,6 +37,7 @@ class Ares_CopyPaste_Dialog
 			w = 4 * GUI_GRID_W;
 			h = 1.5 * GUI_GRID_H;
 			onButtonClick = "missionNamespace setVariable ['Ares_CopyPaste_Dialog_Result', 1];";
+			default = 0;
 		};
 		class Ares_CopyPaste_CancelButton: RscButtonMenuCancel
 		{
@@ -43,6 +46,7 @@ class Ares_CopyPaste_Dialog
 			w = 4 * GUI_GRID_W;
 			h = 1.5 * GUI_GRID_H;
 			onButtonClick = "missionNamespace setVariable ['Ares_CopyPaste_Dialog_Result', 0];";
+			default = 0;
 		};
 		class Ares_CopyPaste_EditBox: RscEdit
 		{

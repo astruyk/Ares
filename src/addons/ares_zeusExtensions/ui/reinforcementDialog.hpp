@@ -30,6 +30,15 @@ class Ares_Reinforcement_Dialog
 		////////////////////////////////////////////////////////
 		// GUI EDITOR OUTPUT START (by Anton SSGT., v1.063, #Rocaru)
 		////////////////////////////////////////////////////////
+		class Ares_ReinforcementDialog_Background: IGUIBack
+		{
+			idc = 0001;
+			x = 1.5 * GUI_GRID_W + GUI_GRID_X;
+			y = 1.5 * GUI_GRID_H + GUI_GRID_Y;
+			w = 37.5 * GUI_GRID_W;
+			h = 13 * GUI_GRID_H;
+			colorBackground[] = {0,0,0,1};
+		};
 		class Ares_ReinforcementDialog_Frame: RscFrame
 		{
 			idc = 1800;
