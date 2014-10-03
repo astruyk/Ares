@@ -5,12 +5,12 @@ _activated = _this select 2;
 if (_activated && local _logic) then
 {
 	_itemToDelete = nil;
-	_itemToDeleteDistance = 5;
+	_itemToDeleteDistance = 15;
 	_type = "";
 	
 	// Find the closest LZ.
 	{
-		if (_x distance _logic <= 5) then
+		if (_x distance _logic <= _itemToDeleteDistance) then
 		{
 			if (isNil "_itemToDelete") then
 			{
@@ -30,7 +30,7 @@ if (_activated && local _logic) then
 
 	// Find the closest RP (if it's closer than the closest LZ)
 	{
-		if (_x distance _logic <= 5) then
+		if (_x distance _logic <= _itemToDeleteDistance) then
 		{
 			if (isNil "_itemToDelete") then
 			{
