@@ -4,6 +4,7 @@ _activated = _this select 2;
 
 if (_activated && local _logic) then
 {
+	_logic setName "LZ";
 	[objNull, "Created LZ"] call bis_fnc_showCuratorFeedbackMessage;
 };
 
