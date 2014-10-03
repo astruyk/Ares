@@ -3,6 +3,12 @@ Check out the documentation at: https://github.com/astruyk/Ares/wiki
 
 Changelists
 
+V.0.1.1
+	* Fixed backgrounds on some UI elements being transparent
+	* Reinforcements - Expanded deletion radius of 'Delete LZ/RP' module to 15m (from 5m)
+	* Reinforcements - Helicopters no longer wait after unloading troops.
+	* Reinforcements - Units don't wait as long before deleting themselves.
+
 V.0.1.0 - BETA!
 	* Add 'Reinforcements' module. 
 	* Fix backpacks not being removed when clearing inventory for Arsenal
