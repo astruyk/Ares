@@ -70,6 +70,13 @@ class CfgFactionClasses
 				moduleClass = "Ares_Module_Empty";
 				icon = "\ares_zeusExtensions\data\icon_ares.paa";
 			};
+			
+			class Reinforcements
+			{
+				displayName = "Reinforcements";
+				moduleClass = "Ares_Module_Empty";
+				icon = "\ares_zeusExtensions\data\icon_ares.paa";
+			};
 		};
 	};
 };
@@ -142,6 +149,11 @@ class CfgVehicles
 	{
 		subCategory = "Teleport";
 	};
+	
+	class Ares_Reinforcements_Module_base : Ares_Module_Base
+	{
+		subCategory = "Reinforcements";
+	};
 
 	// Placeholder class that doesn't do anything. Used for generating categories in UI.
 	class Ares_Module_Empty : Ares_Module_Base
@@ -161,6 +173,7 @@ class CfgVehicles
 	#include "cfgVehiclesModulesSaveLoad.hpp"
 	#include "cfgVehiclesModulesTeleport.hpp"
 	#include "cfgVehiclesModulesArsenal.hpp"
+	#include "cfgVehiclesModulesReinforcements.hpp"
 };
 
 class CfgFunctions
@@ -173,4 +186,7 @@ class CfgGroups
 	#include "compositions.hpp"
 };
 
-#include "ui\dialogs.hpp"
+#include "ui\baseDialogs.hpp"
+#include "ui\copyPasteDialog.hpp"
+#include "ui\reinforcementDialog.hpp"
+

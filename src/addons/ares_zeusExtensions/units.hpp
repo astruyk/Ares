@@ -31,4 +31,8 @@ units[] =
 	"Ares_Module_Search_Nearby_Building",
 	"Ares_Module_Disable_Thermals",
 	"Ares_Module_Enable_Thermals",
+	"Ares_Module_Reinforcements_Create_Lz",
+	"Ares_Module_Reinforcements_Create_Rp",
+	"Ares_Module_Reinforcements_Spawn_Units",
+	"Ares_Module_Reinforcements_DeleteMarker"
 };

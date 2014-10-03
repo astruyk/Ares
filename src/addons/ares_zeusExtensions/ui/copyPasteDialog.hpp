@@ -1,4 +1,5 @@
-#include "dialogDefines.hpp"
+
+
 
 class Ares_CopyPaste_Dialog
 {
