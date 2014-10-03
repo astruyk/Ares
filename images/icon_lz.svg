@@ -15,7 +15,7 @@
    version="1.1"
    inkscape:version="0.48.5 r10040"
    sodipodi:docname="icon_lz.svg"
-   inkscape:export-filename="C:\Users\Anton\Desktop\Ares_LZ_icon.png"
+   inkscape:export-filename="C:\Users\Anton\Documents\PlasticSCM\Ares\images\icon_lz.png"
    inkscape:export-xdpi="90"
    inkscape:export-ydpi="90">
   <defs
@@ -81,8 +81,8 @@
      inkscape:grid-bbox="true"
      inkscape:window-width="1296"
      inkscape:window-height="832"
-     inkscape:window-x="327"
-     inkscape:window-y="73"
+     inkscape:window-x="257"
+     inkscape:window-y="270"
      inkscape:window-maximized="0"
      showguides="true"
      inkscape:guide-bbox="true">
@@ -102,7 +102,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
