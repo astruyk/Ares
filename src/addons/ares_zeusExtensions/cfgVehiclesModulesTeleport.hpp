@@ -12,6 +12,13 @@ class Ares_Module_Teleport_Single : Ares_Teleport_Module_Base
 	function = "Ares_fnc_TeleportSinglePlayer";
 };
 
+class Ares_Module_Teleport_Group : Ares_Teleport_Module_Base
+{
+	scopeCurator = 2;
+	displayName = "Teleport Group";
+	function = "Ares_fnc_TeleportGroup";
+};
+
 class Ares_Module_Teleport_Zeus : Ares_Teleport_Module_Base
 {
 	scopeCurator = 2;

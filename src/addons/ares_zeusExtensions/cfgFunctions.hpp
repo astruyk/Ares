@@ -58,6 +58,7 @@ class Ares // This bit will be prefixed when actually calling the function (e.g.
 		class SurrenderSingleUnit {};
 		class TeleportAllPlayers {};
 		class TeleportSinglePlayer {};
+		class TeleportGroup {};
 		class TeleportZeus {};
 		class TeleportSideNato {};
 		class TeleportSideIndependent {};

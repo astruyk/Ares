@@ -16,6 +16,7 @@ units[] =
 	"Ares_Module_SurrenderSingleUnit",
 	"Ares_Module_Teleport_All",
 	"Ares_Module_Teleport_Single",
+	"Ares_Module_Teleport_Group",
 	"Ares_Module_Teleport_Zeus",
 	"Ares_Module_Teleport_Side_Nato",
 	"Ares_Module_Teleport_Side_Independent",
