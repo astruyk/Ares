@@ -84,6 +84,6 @@ class Ares // This bit will be prefixed when actually calling the function (e.g.
 		class ReinforcementsCreateRp {};
 		class ReinforcementsCreateUnits {};
 		class ReinforcementsDeleteMarker {};
-		class AddObjectsToCurator {}; // TODO better name. Is confusing w/ the other function.
+		class AddAllObjectsToCuratorModule {};
 	};
 };
