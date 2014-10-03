@@ -146,6 +146,8 @@ if (_activated && local _logic) then
 			_dialogVehicleBehaviour = missionNamespace getVariable ["Ares_ReinforcementDialog_Selected_VehicleBehaviour", -1];
 			_dialogLzAlgorithm =      missionNamespace getVariable ["Ares_ReinforcementDialog_Selected_Lz_Algorithm", -1];
 			_dialogRpAlgorithm =      missionNamespace getVariable ["Ares_ReinforcementDialog_Selected_Rp_Algorithm", -1];
+			_lzSize = 20;	// TODO make this a dialog parameter.
+			_rpSize = 20;	// TODO make this a dialog parameters.
 			
 			// Save the chosen values for next time the dialog is shown.
 			missionNamespace setVariable ["Ares_ReinforcementDialog_LastSelected_Side", _dialogSide];
@@ -179,23 +181,28 @@ if (_activated && local _logic) then
 			// deleting itself.
 			_vehicleType = (((_data select _dialogSide) select 0) select _dialogVehicleClass) call BIS_fnc_selectRandom;
 			_vehicleGroup = ([position _logic, 0, _vehicleType, _side] call BIS_fnc_spawnVehicle) select 2;
+
+			_vehicleDummyWp = _vehicleGroup addWaypoint [position _vehicle, 0];
+			_vehicleUnloadWp = _vehicleGroup addWaypoint [position _lz, _lzSize];
+			_vehicleUnloadWp setWaypointType "TR UNLOAD";
 			if (_dialogVehicleClass == 4 || _dialogVehicleClass == 5) then 
 			{
 				// Special settings for helicopters. Otherwise they tend to run away instead of land
 				// if the LZ is hot.
 				_vehicleGroup allowFleeing 0; // Especially for helos... They're very cowardly.
+				_vehicleUnloadWp setWaypointTimeout [0,0,0];
+			}
+			else
+			{
+				_vehicleUnloadWp setWaypointTimeout [5,10,20]; // Give the units some time to get away from truck
 			};
-			_vehicleDummyWp = _vehicleGroup addWaypoint [position _vehicle, 0];
-			_vehicleUnloadWp = _vehicleGroup addWaypoint [position _lz, 50];
-			_vehicleUnloadWp setWaypointType "TR UNLOAD";
-			_vehicleUnloadWp setWaypointTimeout [5,10,20]; // Give the units some time to get away from truck
 			
 			// Generate the waypoints for after the transport drops off the troops.
 			if (_dialogVehicleBehaviour == 0) then
 			{
 				// RTB and despawn.
 				_vehicleReturnWp = _vehicleGroup addWaypoint [position _logic, 0];
-				_vehicleReturnWp setWaypointTimeout [5,10,20]; // Sit for a few seconds before disappearing.
+				_vehicleReturnWp setWaypointTimeout [2,2,2]; // Let the unit stop before being despawned.
 				_vehicleReturnWp setWaypointStatements ["true", "deleteVehicle (vehicle this); {deleteVehicle _x} foreach thisList;"];
 			};
 			if (_dialogVehicleBehaviour == 1) then
@@ -212,7 +219,7 @@ if (_activated && local _logic) then
 
 			// Spawn the units and load them into the vehicle
 			while	{
-					((vehicle (leader _vehicleGroup)) emptyPositions "Cargo") >= 3 // Don't try to fill in slots with a squad if there are only 3 spaces left
+					((vehicle (leader _vehicleGroup)) emptyPositions "Cargo") >= 3 // Don't try to fill in slots with a squad if there are less than 3 spaces
 					|| (_dialogVehicleClass == 0 && ((vehicle (leader _vehicleGroup)) emptyPositions "Cargo") > 0) // ... unless this is a light vehicle (and so will have fewer positions total)
 					}
 			do
@@ -251,11 +258,11 @@ if (_activated && local _logic) then
 						} forEach _allRps;
 					};
 					
-					_infantryRpWp = _infantryGroup addWaypoint [position _rp, 20];
+					_infantryRpWp = _infantryGroup addWaypoint [position _rp, _rpSize];
 				}
 				else
 				{
-					_infantryMoveOnWp = _infantryGroup addWaypoint [position _lz, 20];
+					_infantryMoveOnWp = _infantryGroup addWaypoint [position _lz, _rpSize];
 				};
 				
 				// Add infantry to curator
@@ -268,7 +275,7 @@ if (_activated && local _logic) then
 			}
 			else
 			{
-				[objNull, "Transport dispatched to LZ. Squad will defend LZ."] call bis_fnc_showCuratorFeedbackMessage;
+				[objNull, "Transport dispatched to LZ. Squad will stay at LZ."] call bis_fnc_showCuratorFeedbackMessage;
 			};
 		}
 		else
