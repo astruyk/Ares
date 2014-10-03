@@ -11,6 +11,9 @@ if (_activated && local _logic) then
 		_text = [_centerPosition, 500, true] call Ares_fnc_ObjectsGrabber;
 
 		copyToClipBoard _text;
+		
+		missionNamespace setVariable ['Ares_CopyPaste_Dialog_Text', _text];
+		_dialog = createDialog "Ares_CopyPaste_Dialog";
 	};
 
 	[objNull, format["Copied objects to clipboard."]] call bis_fnc_showCuratorFeedbackMessage;

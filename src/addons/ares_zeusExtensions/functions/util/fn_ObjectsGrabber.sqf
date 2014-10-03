@@ -38,7 +38,7 @@ _tab = toString [9];
 //_outputText = _outputText + "Area size: " + (str _anchorDim) + _br;
 //_outputText = _outputText + "Using orientation of objects: " + (if (_grabOrientation) then {"yes"} else {"no"}) + _br + "*/" + _br + _br;
 //_outputText = _outputText + "[" + _br;
-_outputText = "[" + _br;
+_outputText = "[";
 
 //First filter illegal objects
 {
@@ -107,13 +107,13 @@ _objectsToSave = [];
 	if (_replaceBy != "") then {_type = _replaceBy;};
 
 	_outputArray = [_type, [_xPos, _yPos, _zPos], _azimuth, _fuel, _damage, _orientation, _varName, _init, _simulation, _ASL];
-	_outputText = _outputText + _tab + (str _outputArray);
-	_outputText = _outputText + ", " + _br;
+	_outputText = _outputText + (str _outputArray);
+	_outputText = _outputText + ", ";
 
 	//debugLog (format ["Log: objectGrabber: %1", _outputArray]);
 } forEach _objs;
 
 // Add an entry for holding the anchor position. This will be extracted if we want to do a relative paste later.
-_outputText = _outputText + _tab + format ["[%1, %2, 0]", _anchorPos select 0, _anchorPos select 1] + _br + "]";
+_outputText = _outputText + format ["[%1, %2, 0]", _anchorPos select 0, _anchorPos select 1] + "]";
 copyToClipboard _outputText;
 _outputText

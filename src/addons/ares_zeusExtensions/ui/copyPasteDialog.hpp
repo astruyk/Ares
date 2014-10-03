@@ -5,6 +5,7 @@ class Ares_CopyPaste_Dialog
 {
 	idd = 123;
 	movingEnable = false;
+	onLoad = "((_this select 0) displayCtrl 1400) ctrlSetText (missionNamespace getVariable ['Ares_CopyPaste_Dialog_Text', '']);";
 	onUnload = "missionNamespace setVariable ['Ares_CopyPaste_Dialog_Text', ctrlText ((_this select 0) displayCtrl 1400)];";
 
 	class controls 
@@ -62,7 +63,7 @@ class Ares_CopyPaste_Dialog
 		class Ares_CopyPaste_Instructions: RscText
 		{
 			idc = 1000;
-			text = "Paste clipboard contents using CTRL+V"; //--- ToDo: Localize;
+			text = "Copy/Paste clipboard contents using CTRL+C and CTRL+V"; //--- ToDo: Localize;
 			x = 2 * GUI_GRID_W + GUI_GRID_X;
 			y = 0.5 * GUI_GRID_H + GUI_GRID_Y;
 			w = 35.5 * GUI_GRID_W;

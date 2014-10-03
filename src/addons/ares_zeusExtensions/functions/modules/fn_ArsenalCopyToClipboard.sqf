@@ -12,13 +12,14 @@ if (_activated && local _logic) then
 	_weapons = [_ammoBox] call BIS_fnc_getVirtualWeaponCargo;
 
 	_stringData = format [
-"[
-	%1,
-	%2,
-	%3,
-	%4
-]", str(_backpacks), str(_items), str(_magazines), str(_weapons)];
+"[%1,
+%2,
+%3,
+%4]", str(_backpacks), str(_items), str(_magazines), str(_weapons)];
 	copyToClipboard _stringData;
+	
+	missionNamespace setVariable ['Ares_CopyPaste_Dialog_Text', _stringData];
+	_dialog = createDialog "Ares_CopyPaste_Dialog";
 
 	[objNull, "Copied items from arsenal to clipboard."] call bis_fnc_showCuratorFeedbackMessage;
 };

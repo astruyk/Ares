@@ -15,6 +15,7 @@ _numberOfElements = [_this, 0, -1, [0]] call BIS_fnc_param;
 
 // Show the paste dialog to the user
 _returnValue = "CANCELLED";
+missionNamespace setVariable ["Ares_CopyPaste_Dialog_Result", ""];
 _dialog = createDialog "Ares_CopyPaste_Dialog";
 waitUntil { dialog };
 waitUntil { !dialog };
