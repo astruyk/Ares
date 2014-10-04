@@ -8,6 +8,7 @@ Parameters:
 	3 - (Optional) Position Array - The center point to use as the search. Default is group leader position.
 	4 - (Optional) Boolean - True to include the group leader in the search, False to have him wait outside. Default is 'False'.
 	5 - (Optional) Boolean - True to have units stay in their building positions, false to return outside after completing the search. Default false.
+	6 - (Optional) Boolean - True to show debug spheres during search, false otherwise. Default false.
 
 JTD Building Search Script
 	by Trexian
@@ -42,6 +43,7 @@ _whichOne = [_this, 2, "RANDOM", ["RANDOM"]] call BIS_fnc_param;
 _initialPos = [_this, 3, _ldrPos, [[]], 3] call BIS_fnc_param;
 _includeLeaderInSearch = [_this, 4, false, [false]] call BIS_fnc_param;
 _occupy = [_this, 5, false, [false]] call BIS_fnc_param;
+_debug = [_this, 6, false, [false]] call BIS_fnc_param;
 
 // This file needs to be Self-Contained and use only standard BIS functions
 // since it will be run on the server and Ares functions may not be available.
@@ -122,27 +124,43 @@ else
 _bldgLoc = getPos _bldgSelect;
 
 // Make the group move near the building before starting the search
-_bldgBB = boundingBox _bldgSelect;        // [[minX, minY, minZ], [maxX, maxY, maxZ]] 
+/*_bldgBB = boundingBox _bldgSelect;        // [[minX, minY, minZ], [maxX, maxY, maxZ]] 
 _wpRad = ((abs((_bldgBB select 0) select 0) + abs((_bldgBB select 1) select 0)) max (abs((_bldgBB select 0) select 1) + abs((_bldgBB select 1) select 1))) + 10;    // gets the longest side of the building + 10
 _wp = _group addWaypoint [_bldgLoc, _wpRad];
 _wp setWaypointPosition [_bldgLoc, 1];
 _wp setWaypointType "MOVE";
 _group setCurrentWaypoint _wp;
-waituntil {unitready _leader};
+waituntil {unitready _leader};*/
 
 // Make the group ready for shootin'
-_group setbehaviour "combat";
+_group setbehaviour "AWARE";
 
 // Generate an array of all the positions in the building to search.
 _positionsInBuilding = [];
-while { str(_bldgSelect buildingPos (count _positionsInBuilding)) != "[0,0,0]" }
-do { _positionsInBuilding = _positionsInBuilding + [(_bldgSelect buildingPos (count _positionsInBuilding))]; };
+_debugMarkers = [];
+_positionCount = 0;
+while { str(_bldgSelect buildingPos _positionCount) != "[0,0,0]" }
+do
+{
+	_currentPosition = _bldgSelect buildingPos _positionCount;
+	// Check that the point isn't outside.
+	if (!lineIntersects [_currentPosition, [_currentPosition select 0, _currentPosition select 1, (_currentPosition select 2) + 25], objNull, objNull]) then
+	{
+		_positionsInBuilding = _positionsInBuilding + [_currentPosition];
+		if (_debug) then
+		{
+			_debugMarkers = _debugMarkers + ["Sign_Sphere100cm_F" createVehicle [0,0,0]];
+			(_debugMarkers select (count _debugMarkers - 1)) setPosAtl _currentPosition;
+		};
+	};
+	_positionCount = _positionCount + 1;
+};
 
 // Determine the list of potential searchers. Only allocate the same number of searchers
 // as there are positions in the building.
 _searchers = [];
 {
-	if (_includeLeaderInSearch || (leader _group != _x)) then
+	if (_includeLeaderInSearch || (_leader != _x)) then
 	{
 		if (!isNull _x && alive _x) then
 		{
@@ -150,84 +168,109 @@ _searchers = [];
 			_searchers = _searchers + [_x];
 		};
 	};
-	
-	if (count _searchers >= count _positionsInBuilding) exitWith {};
 } forEach (units _group);
 
 // Shuffle the order of the searcher array so that we have somewhat varied search behaviour.
 // This way the same guys don't search the same places if you do things twice.
-_searchers = [_searchers] call _arrayShuffle;
-
-// Record the time that the search started at so we can bail if it takes too long.
-_checkTime = daytime;
-_totTime = (count _positionsInBuilding) * .009;        // roughly 30 seconds per position
+//_searchers = [_searchers] call _arrayShuffle;
 
 // loop to string out the units
+diag_log format["Starting search with %1 searchers and %2 positions.", count _searchers, count _positionsInBuilding];
+
+_isAnySearcherAlive = true;
 scopeName "bldgSearchMainScope";
 {
+	diag_log format["Searching position %1", _x];
+
 	// Get the first searcher that is available for tasking. If none
 	// is available for tasking wait until one becomes available.
 	_currentSearcherIndex = -1;
-	while {true} do
+	while {_isAnySearcherAlive} do
 	{
-		if (!alive _leader) then
-		{
-			// Dump out of the entire search loop if the leader dies.
-			_occupy = false;
-			breakTo "bldgSearchMainScope";
-		};
-		
-		if (daytime > _checkTime + _totTime) then
-		{
-			// Search is taking too long. Abort
-			breakTo "bldgSearchMainScope";
-		};
-
+		diag_log "Looking for a ready searcher...";
 		// Look for a ready searcher
-		_aliveSearcherCount = 0;
+		_isAnySearcherAlive = false;
 		{
 			if (alive _x) then
 			{
-				_aliveSearcherCount = _aliveSearcherCount + 1;
+				diag_log "Found searcher!";
+				_isAnySearcherAlive = true;
 				if (not (_x getVariable ["Ares_isSearching", false])) exitWith { _currentSearcherIndex = _foreachIndex; };
-				//if (unitready _x) exitWith { _currentSearcherIndex = _foreachIndex; };
 			};
 		} foreach _searchers;
 
-		if (_currentSearcherIndex != -1 || _aliveSearcherCount == 0) exitWith {};
+		if (_currentSearcherIndex != -1 || !_isAnySearcherAlive) exitWith {};
 
 		// Wait a bit and try again.
+		diag_log "None found. Waiting.";
 		sleep 1;
 	};
 
 	if (_currentSearcherIndex != -1) then
 	{
 		// Send the searcher to the current building position.
-		_positionToSearch = _x;
+		diag_log format["Sending searcher %1 to position %2", _currentSearcherIndex, _x];
 		_searcher = _searchers select _currentSearcherIndex;
-		_searcher doMove _positionToSearch;
+		_searcher doMove _x;
 		_searcher setVariable ["Ares_isSearching", true];
+		_searcher setVariable ["Ares_searchLocation", (ATLtoASL _x)];
+		_searcher setVariable ["Ares_searchStartTime", daytime];
+		if (_debug) then
+		{
+			_debugMarker = "Sign_Sphere100cm_F" createVehicle [0,0,0];
+			_debugMarker attachTo [_searcher, [0,0,2]];
+			_searcher setVariable ["Ares_searchingDebugMarker", _debugMarker];
+		};
+		
 		_searcher spawn
 		{
-			waitUntil { moveToCompleted _this || moveToFailed _this; };
+			diag_log format["Starting search logic."];
+			_debugMarker = _this getVariable ["Ares_searchingDebugMarker", objNull];
+			waitUntil
+			{
+				((getPosASL _this) vectorDistance (_this getVariable ["Ares_searchLocation", [0,0,0]]) < 0.5 /*&& !lineIntersects [eyepos _this, (_this getVariable ["Ares_searchLocation", [0,0,0]]), _this, _debugMarker]*/)// The unit is close enough to the search location.
+				|| dayTime > ((_this getVariable ["Ares_searchStartTime", dayTime + 10]) + (1/60)) // Enough time has passed (currently 1min)
+			};
+			diag_log "Searcher arrived at position (or timed out).";
 			_this setVariable ["Ares_isSearching", false];
+			if (!isNil "_debugMarker") then
+			{
+				_this setVariable ["Ares_searchingDebugMarker", objNull];
+				deleteVehicle _debugMarker;
+			};
 		};
+		
+		diag_log "Searcher sent.";
 	};
 } foreach _positionsInBuilding;
 
+diag_log "Done searching.";
+
 _group setbehaviour _previousBehaviour;
 
-// check if occupy is specified
-if !(_occupy) then
+// The units will end up in a position inside the building.
+if (_occupy) then
 {
-	// need some sort of wait to make sure they are ready
-	//_ldrPos = getPos _leader;
+	// Don't need to do anything to move the units around. They're already in position.
+	{
+		doStop _x;
+	} forEach _searchers;
+}
+else
+{
+	// Make the units return to the group and go back to following the leader.
 	{
 		_x doMove _ldrPos;
-		waitUntil { moveToCompleted _x };
+		waitUntil { moveToCompleted _x || moveToFailed _x };
 		_x doFollow _leader;
-
 	} foreach _searchers;
+};
+
+if (_debug) then
+{
+	{
+		deleteVehicle _x;
+	} forEach _debugMarkers;
 };
 
 true  
