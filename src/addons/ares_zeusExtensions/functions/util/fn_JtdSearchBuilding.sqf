@@ -1,200 +1,118 @@
-// Imported from http://forums.bistudio.com/showthread.php?112775-JTD-Building-Search-script
-// Modified by Anton Struyk
-/* JTD Building Search Script
-by Trexian
-
+/* 
 Purpose: have an AI squad search a building.
 
-Implementation: executed from trigger or script (can be as a function)
-ooooooooooooooooooooooooooooooooooooooooooooooooooo
-Usage:
-Requires 1 parameter, with an option for 4 more: group(, searchRadius , "NEAREST" or "RANDOM", initial position, include leader, occupy building)
-group = group that will be searching the building (required)
-searchRadius = number that is radius around the leader to use to generate the array of buildings (default is 50) (optional)
-NEAREST/RANDOM = string that tells the script which building, either the nearest to the position or a random one (default is random) (optional)
-initial position = position array or object  around which to search (default is leader's position at script execution) (optional)
-include leader = boolean, where 'true' includes the leader in the search (default is false, but if group has 2 or less, default is true) (optional)
-occupy building = boolean, where 'true' means that the group will stay in the building positions (default is false)
+Parameters:
+	0 - Group or Object - The group (or a member of the group) that will be searching the building.
+	1 - (Optional) Number - The radius around the group leader to use when generating the set of possible buildings to search. Default 50.
+	2 - (Optional) String - The strategy to use when choosing which of the candidate houses to search. One of "NEAREST" or "RANDOM". Default "RANDOM".
+	3 - (Optional) Position Array - The center point to use as the search. Default is group leader position.
+	4 - (Optional) Boolean - True to include the group leader in the search, False to have him wait outside. Default is 'False'.
+	5 - (Optional) Boolean - True to have units stay in their building positions, false to return outside after completing the search. Default false.
 
-ooooooooooooooooooooooooooooooooooooooooooooooooooo
+JTD Building Search Script
+	by Trexian
 Credits:
-OFPEC
-Rommel for CBA function searchNearby
-Tophe for random house patrol
+	OFPEC
+	Rommel for CBA function searchNearby
+	Tophe for random house patrol
 
 Testers/Feedback:
-MadRussian
-GvsE
-Kremator
-Manzilla
-ooooooooooooooooooooooooooooooooooooooooooooooooooo
-Version:
-01a
-POC (addWaypointHousePosition doesn't work)
-
-01b
-used CBA searchNearby by Rommel for commandMove instead of waypoints
-
-01c
-Improved methodology
-
-01d - release version
-Improved the rejoining of the searchers
-Added ability to specify initial position of building search
-
-01e
-Added optional parameter to include leader in search, also an option to occupy the building
-More robust error-checking
-Can pass object instead of intialposition
-Shuffles searcher array
-
-01f - release version
-Added server check
-Added global JTD_lockedSearchGroups
-Added time check to make sure script ends at some point
-
-01g - release version
-Added JTD_bldgsrchPath as variable for Manzilla
-Array functionality wrapper
-
-ooooooooooooooooooooooooooooooooooooooooooooooooooo
-TTD:
-
-ooooooooooooooooooooooooooooooooooooooooooooooooooo
+	MadRussian
+	GvsE
+	Kremator
+	Manzilla
+	
+	Imported from http://forums.bistudio.com/showthread.php?112775-JTD-Building-Search-script
+	Modified by Anton Struyk
 */
 
+// Must be run on the server.
 if !(isServer) exitWith {diag_log text "Not server, exiting building search.";};
 
-//diag_log text "JTD bldg search activated";
+private ["_grpFM", "_FunctionsManager", "_group", "_leader", "_ldrPos", "_previousBehaviour", "_srchRad", "_whichOne", "_initialPos", "_includeLeaderInSearch", "_occupy", "_bldgArray", "_tempArray", "_bldgLoc", "_bldgSelect", "_searchersT", "_searchers", "_searcherCount", "_s", "_checkTime", "_wpArray", "_currWP", "_wpCnt", "_d", "_t", "_b", "_bldg", "_bldgPos", "_bldgCnt", "_nameMarker", "_marker", "_bldgBB", "_wpRad", "_wp", "_positionsInBuilding", "_totTime", "_activeBP", "_loop", "_cycle", "_unitSelect", "_units"];
 
-private ["_grpFM", "_FunctionsManager", "_group", "_leader", "_ldrPos", "_behaviour", "_srchRad", "_whichOne", "_initialPos", "_andOne", "_occupy", "_bldgArray", "_tempArray", "_bldgLoc", "_bldgSelect", "_searchersT", "_searchers", "_searcherCount", "_s", "_checkTime", "_wpArray", "_currWP", "_wpCnt", "_d", "_t", "_b", "_bldg", "_bldgPos", "_bldgCnt", "_nameMarker", "_marker", "_bldgBB", "_wpRad", "_wp", "_p", "_totTime", "_activeBP", "_loop", "_cycle", "_unitSelect", "_units"];
-
-// check for functions
-if (isNil "bis_fnc_init") then
-{
-    createCenter sideLogic;
-    _grpFM = createGroup sideLogic;
-    _FunctionsManager = _grpFM createUnit ["FunctionsManager", [1, 1, 1], [], 0, "NONE"];
-    waitUntil {!isNil "bis_fnc_init"};
-};
-
-if (isNil "JTD_lockedSearchGroups") then {JTD_lockedSearchGroups = [];};
-
-_group = _this select 0;
-JTD_lockedSearchGroups = JTD_lockedSearchGroups + [_group];
+// Extract necessary values from parameters
+_group = [_this, 0] call BIS_fnc_param;
 if ((typeName _group) == "OBJECT") then {_group = group (_this select 0)};
-
-//diag_log text format ["group searching: %1", _group];
 _leader = leader _group;
-//diag_log text format ["group leader: %1", _leader];
 _ldrPos = getPos _leader;
-_behaviour = behaviour _leader;
-if ((count _this) >= 2) then {
-    _srchRad = _this select 1;}
-    else {
-    _srchRad = 50;};
-if ((count _this) >= 3) then {
-    _whichOne = _this select 2;
-    } else {
-    _whichOne = "RANDOM";};
-if ((count _this) >=4) then {
-    _initialPos = _this select 3;
-    } else {
-    _initialPos = _ldrPos;};
-if ((count _this) >=5) then {
-    _andOne = _this select 4;
-    } else {
-    _andOne = false;};
-if ((count _this) >=6) then {
-    _occupy = _this select 5;
-    } else {
-    _occupy = false;};
+_previousBehaviour = behaviour _leader;
+_srchRad = [_this, 1, 50, [1]] call BIS_fnc_param;
+_whichOne = [_this, 2, "RANDOM", ["RANDOM"]] call BIS_fnc_param;
+_initialPos = [_this, 3, _ldrPos, [[]], 3] call BIS_fnc_param;
+_includeLeaderInSearch = [_this, 4, false, [false]] call BIS_fnc_param;
+_occupy = [_this, 5, false, [false]] call BIS_fnc_param;
 
-_bldgArray = [];
-_tempArray = [];
-_bldgLoc = [];
-_bldgSelect = [];
-_searchersT = [];
-_searchers = [];
-_searcherCount = 0;
-_s = 0;
+// This file needs to be Self-Contained and use only standard BIS functions
+// since it will be run on the server and Ares functions may not be available.
+_arrayShuffle = {
+	private ["_array", "_count", "_arrayT", "_arrayN", "_c", "_r"];
+	_array = _this select 0;
+	_count = count _array;
+	_arrayN = [];
+	_arrayT = [];
+	_c = 0;
+	_r = 0;
 
-// error catching
-if (isNil "_leader") exitWith
-{
-    diag_log text "No valid leader selected!";
-    false
+	while {_c < (count _array)} do
+	{
+		while {_r in _arrayT} do
+		{_r = floor (random (count _array));
+		};
+		_arrayT = _arrayT + [_r];
+		_arrayN set [_c, _array select _r];
+		_c = _c + 1;
+	};
+
+	_arrayN
 };
-if (isNil "_srchRad") then {_srchRad = 50};
+
+// Check parameters
 if (_srchRad < 1) then {_srchRad = 1};
-if (isNil "_whichOne") then {_whichOne = "RANDOM"};
 if ((_whichOne != "NEAREST") && (_whichOne != "RANDOM")) then {_whichOne = "RANDOM"};
-if (isNil "_initialPos") then {_initialPos = _ldrPos};
-if ((typeName _initialPos) == "OBJECT") then {_initialPos = getPos (this select 3)};
-if ((typeName _initialPos) != "ARRAY") then {_initialPos = _ldrPos};
-if (isNil "_andOne") then
-{
-    if ((count (units _group)) < 3) then
-    {
-        _andOne = true;
-    }
-    else
-    {
-        _andOne = false;
-    };
-};
-if ((typeName _andOne) != "BOOL") then {_andOne = false};
-if (isNil "_occupy") then {_occupy = false};
-if ((typeName _occupy) != "BOOL") then {_occupy = false};
-
-// gets time that script starts
-_checkTime = daytime;
 
 // remove group's waypoints
 _wpArray = waypoints _group;
-//_currWP = currentWaypoint _group;
 _wpCnt = count _wpArray;
-
 if (_wpCnt > 1) then
 {
-    for [{_d = 0}, {_d <= _wpCnt}, {_d = _d + 1}] do
-        {
-            deleteWaypoint [_group, _d];
-        };
+	for [{_d = 0}, {_d <= _wpCnt}, {_d = _d + 1}] do
+	{
+		deleteWaypoint [_group, _d];
+	};
 };
 
-// building check
+// Go through all the nearby buildings and make sure they at least have one searchable space. If they
+// do then add them to our list of candidates.
+_bldgArray = [];
 _tempArray = nearestObjects [_initialPos, ["HOUSE"], _srchRad];
 _t = count _tempArray;  // count number of buildings in array
-
-//for each building, find building position
-//this should serially select each building in the array, then remove it if position 0 (1) is 0,0,0
-
 _t = _t - 1;
-
 for [{_b = 0},{_b <= _t},{_b = _b+1}] do
 {
-    _bldg = _tempArray select _b;
-    _bldgPos = _bldg buildingPos 0;
-
-    if (((_bldgPos select 0) != 0) && ((_bldgPos select 1) != 0)) then
-     {
-     _bldgArray = _bldgArray + [_bldg];
-     };
+	_bldg = _tempArray select _b;
+	_bldgPos = _bldg buildingPos 0;
+	if (((_bldgPos select 0) != 0) && ((_bldgPos select 1) != 0)) then
+	{
+		_bldgArray = _bldgArray + [_bldg];
+	};
 };
 
+// Check that we could actually find a building to search.
 _bldgCnt = count _bldgArray;
 if (_bldgCnt == 0) exitWith 
 {
-    diag_log text "No buildings to search!";
-    false
+	diag_log text "No buildings to search!";
+	false
 };
 
-// select building - either the nearest or the randomest
+// Choose the building to be searched - either the nearest or a random one.
+_bldgSelect = [];
 if (_whichOne == "NEAREST") then
 {
-    //_bldgSelect = _bldgArray select 0;        // need to do a real distance check?
-    _bldgSelect = nearestBuilding _initialPos;
+	// nearestObjects is sorted from nearest -> furthest objects. Since we didn't change the order when
+	// we filtered candidate houses we can just choose the first element here.
+	_bldgSelect = _bldgArray select 0;
 }
 else
 {
@@ -203,136 +121,113 @@ else
 
 _bldgLoc = getPos _bldgSelect;
 
-if (JTD_searchDebug) then
-{
-    _nameMarker = format ["srch_%1", str _bldgSelect];
-    _marker = createMarkerLocal [_nameMarker, [_bldgLoc select 0, _bldgLoc select 1]];
-    _marker setMarkerShapeLocal "ICON";
-    _marker setMarkerTypeLocal "dot";
-    _marker setMarkerColor "ColorRed";
-};
-
-// set new waypoint for near the building for the group
+// Make the group move near the building before starting the search
 _bldgBB = boundingBox _bldgSelect;        // [[minX, minY, minZ], [maxX, maxY, maxZ]] 
 _wpRad = ((abs((_bldgBB select 0) select 0) + abs((_bldgBB select 1) select 0)) max (abs((_bldgBB select 0) select 1) + abs((_bldgBB select 1) select 1))) + 10;    // gets the longest side of the building + 10
 _wp = _group addWaypoint [_bldgLoc, _wpRad];
 _wp setWaypointPosition [_bldgLoc, 1];
 _wp setWaypointType "MOVE";
 _group setCurrentWaypoint _wp;
-
-//_group lockwp true;
 waituntil {unitready _leader};
 
+// Make the group ready for shootin'
 _group setbehaviour "combat";
 
-// find building position max
-_p = 0;        // will end up being the total number of building positions
-while {str(_bldgSelect buildingPos _p) != "[0,0,0]"} do {_p = _p + 1;};
+// Generate an array of all the positions in the building to search.
+_positionsInBuilding = [];
+while { str(_bldgSelect buildingPos (count _positionsInBuilding)) != "[0,0,0]" }
+do { _positionsInBuilding = _positionsInBuilding + [(_bldgSelect buildingPos (count _positionsInBuilding))]; };
 
-// check if more units than positions (or equal), if so, select which ones to search
-// gets the lesser of available units or positions
-
-_totTime = _p * .009;        // roughly 30 seconds per position
-scopeName "bldgSearchMainScope";
-// loop through each unit to identify the searchers
-if (_andOne) then
+// Determine the list of potential searchers. Only allocate the same number of searchers
+// as there are positions in the building.
+_searchers = [];
 {
-    _searcherCount = (count (units _group)) min _p;
-    _s = 0;
-}
-else
-{
-    _searcherCount = ((count (units _group)) - 1) min _p;
-    _s = 1;
-};
-//diag_log text format ["searchers = %1  (%2, %3)", _searcherCount, ((count (units _group)) - 1), _p];
-    while {_s <= _searcherCount} do
-    {
-        if !(isNull ((units _group) select _s)) then
-        {
-            // start at #2 (which is select 1) and add searchers up to number of house positions
-            _searchersT = _searchersT + [(units _group) select _s];
-        };
-        _s = _s + 1;
-    };
+	if (_includeLeaderInSearch || (leader _group != _x)) then
+	{
+		if (!isNull _x && alive _x) then
+		{
+			_x setVariable ["Ares_isSearching", false];
+			_searchers = _searchers + [_x];
+		};
+	};
+	
+	if (count _searchers >= count _positionsInBuilding) exitWith {};
+} forEach (units _group);
 
-// shuffle
-//diag_log text format ["searcher temp array = %1", _searchersT];
-_searchers = [_searchersT] call Ares_fnc_JtdArrayShuffle;
-//diag_log text format ["searcher array = %1", _searchers];
+// Shuffle the order of the searcher array so that we have somewhat varied search behaviour.
+// This way the same guys don't search the same places if you do things twice.
+_searchers = [_searchers] call _arrayShuffle;
+
+// Record the time that the search started at so we can bail if it takes too long.
+_checkTime = daytime;
+_totTime = (count _positionsInBuilding) * .009;        // roughly 30 seconds per position
+
 // loop to string out the units
-
-_activeBP = 0;        // building position iterator
-while {_activeBP < _p} do
+scopeName "bldgSearchMainScope";
 {
-    _s = 0;            // searcher iterator
-    _loop = 0;
-    // searcher assignment loop
-    _cycle = _activeBP;    // cycle through searchers based on house position number
-    while {_loop <= _activeBP} do
-    {
-        _bldgPos = _bldgSelect buildingPos _cycle;
-        _unitSelect = _searchers select _s;
-        //diag_log text format ["unit select %1 bpos %2 %3", _unitSelect, _bldgPos, _cycle];
-         if (unitready _unitSelect) then
-        {
-            _unitSelect commandmove _bldgPos;
-            //_unitSelect domove _bldgPos;
-            _unitSelect spawn 
-            {
-                sleep 5;
-                waituntil {unitready _this};        // try without this, too?
-            };
-        };
-        _s = _s + 1;
-        if (_s >= (count _searchers)) then {_loop = _activeBP};    // break out of loop if out of searchers
-        _cycle = _cycle - 1;
-        _loop = _loop + 1;
-        
-        // time check
-        if (daytime > (_checkTime + _totTime)) then
-        {
-            breakTo "bldgSearchMainScope";
-            if (JTD_searchDebug) then
-            {
-                diag_log text "Building search taking too long, exiting";
-            };
-        };
-        if (! alive (leader group (_searchers select _s))) then
-        {
-            breakTo "bldgSearchMainScope";
-            _occupy = false;
-            if (JTD_searchDebug) then
-            {
-                diag_log text "No leader of search group";
-            };
-        };
-    };
-    _activeBP = _activeBP + 1;
-};
+	// Get the first searcher that is available for tasking. If none
+	// is available for tasking wait until one becomes available.
+	_currentSearcherIndex = -1;
+	while {true} do
+	{
+		if (!alive _leader) then
+		{
+			// Dump out of the entire search loop if the leader dies.
+			_occupy = false;
+			breakTo "bldgSearchMainScope";
+		};
+		
+		if (daytime > _checkTime + _totTime) then
+		{
+			// Search is taking too long. Abort
+			breakTo "bldgSearchMainScope";
+		};
 
-//diag_log text "Out of bldgSearch loop";
+		// Look for a ready searcher
+		_aliveSearcherCount = 0;
+		{
+			if (alive _x) then
+			{
+				_aliveSearcherCount = _aliveSearcherCount + 1;
+				if (not (_x getVariable ["Ares_isSearching", false])) exitWith { _currentSearcherIndex = _foreachIndex; };
+				//if (unitready _x) exitWith { _currentSearcherIndex = _foreachIndex; };
+			};
+		} foreach _searchers;
 
-_group setbehaviour _behaviour;
+		if (_currentSearcherIndex != -1 || _aliveSearcherCount == 0) exitWith {};
+
+		// Wait a bit and try again.
+		sleep 1;
+	};
+
+	if (_currentSearcherIndex != -1) then
+	{
+		// Send the searcher to the current building position.
+		_positionToSearch = _x;
+		_searcher = _searchers select _currentSearcherIndex;
+		_searcher doMove _positionToSearch;
+		_searcher setVariable ["Ares_isSearching", true];
+		_searcher spawn
+		{
+			waitUntil { moveToCompleted _this || moveToFailed _this; };
+			_this setVariable ["Ares_isSearching", false];
+		};
+	};
+} foreach _positionsInBuilding;
+
+_group setbehaviour _previousBehaviour;
 
 // check if occupy is specified
 if !(_occupy) then
 {
+	// need some sort of wait to make sure they are ready
+	//_ldrPos = getPos _leader;
+	{
+		_x doMove _ldrPos;
+		waitUntil { moveToCompleted _x };
+		_x doFollow _leader;
 
-    // need some sort of wait to make sure they are ready
-    //waituntil {sleep 3; {unitready _x} count _units == count (units _group) - 1};
-    _ldrPos = getPos _leader;
-    {
-        //diag_log text format ["srcher loop  %1", _x];
-        _x doMove _ldrPos;
-        waitUntil {moveToCompleted _x};
-        _x doFollow _leader;
-
-    } foreach _searchers;
+	} foreach _searchers;
 };
-// waituntil ??
 
-//_group lockwp false;
-JTD_lockedSearchGroups = JTD_lockedSearchGroups - [_group];
-//diag_log text "bldg srch ended";
 true  
