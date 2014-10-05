@@ -34,11 +34,13 @@ if (_activated && local _logic) then
 		// Add LZ choosing algorithms
 		lbAdd [2103, "Random"];
 		lbAdd [2103, "Nearest"];
+		lbAdd [2103, "Furthest"];
 		lbSetCurSel  [2103, missionNamespace getVariable ["Ares_ReinforcementDialog_LastSelected_Lz_Algorithm", 0]];
 
 		// Add RP choosing algorithms
 		lbAdd [2104, "Random"];
 		lbAdd [2104, "Nearest"];
+		lbAdd [2104, "Furthest"];
 		lbSetCurSel  [2104, missionNamespace getVariable ["Ares_ReinforcementDialog_LastSelected_Rp_Algorithm", 0]];
 
 		waitUntil { !dialog; };
@@ -170,7 +172,16 @@ if (_activated && local _logic) then
 			if (_dialogLzAlgorithm == 1) then
 			{
 				{
-					if (_lz distance _x < _lz distance (position _logic)) then
+					if (_logic distance _x < _logic distance _lz) then
+					{
+						_lz = _x;
+					};
+				} forEach _allLzs;
+			};
+			if (_dialogLzAlgorithm == 2) then
+			{
+				{
+					if (_logic distance _x > _logic distance _lz) then
 					{
 						_lz = _x;
 					};
@@ -185,11 +196,18 @@ if (_activated && local _logic) then
 			_vehicleDummyWp = _vehicleGroup addWaypoint [position _vehicle, 0];
 			_vehicleUnloadWp = _vehicleGroup addWaypoint [position _lz, _lzSize];
 			_vehicleUnloadWp setWaypointType "TR UNLOAD";
+			
+			// Make the driver full skill. This makes him less likely to do dumb things
+			// when they take contact.
+			(driver (vehicle (leader _vehicleGroup))) setSkill 1;
+			
 			if (_dialogVehicleClass == 4 || _dialogVehicleClass == 5) then 
 			{
 				// Special settings for helicopters. Otherwise they tend to run away instead of land
 				// if the LZ is hot.
-				_vehicleGroup allowFleeing 0; // Especially for helos... They're very cowardly.
+				{
+					_x allowFleeing 0; // Especially for helos... They're very cowardly.
+				} forEach (crew (vehicle (leader _vehicleGroup)));
 				_vehicleUnloadWp setWaypointTimeout [0,0,0];
 			}
 			else
@@ -252,6 +270,15 @@ if (_activated && local _logic) then
 					{
 						{
 							if (_lz distance _x < _lz distance _rp) then
+							{
+								_rp = _x;
+							};
+						} forEach _allRps;
+					};
+					if (_dialogRpAlgorithm == 2) then
+					{
+						{
+							if (_lz distance _x > _lz distance _rp) then
 							{
 								_rp = _x;
 							};
