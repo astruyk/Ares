@@ -5,7 +5,7 @@ _activated = _this select 2;
 if (_activated && local _logic) then
 {
 	_ammoBox = [_logic] call Ares_fnc_GetUnitUnderCursor;
-	if (not isNil "_ammoBox") then
+	if (not isnull _ammoBox) then
 	{
 		_parsedValue = [4] call Ares_fnc_GetArrayDataFromUser;
 		if (typeName _parsedValue == typeName []) then
