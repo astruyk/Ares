@@ -4,19 +4,30 @@ _activated = _this select 2;
 
 if (_activated && local _logic) then
 {
-	[position _logic] spawn
+	// Ask the user for the radius to copy from.
+	_dialogResult = [["50m", "100m", "500m"], 0, "Choose radius of copy:"] call Ares_fnc_GetDialogChoiceFromUser;
+	[format["User chose radius with index '%1'", _dialogResult]] call Ares_fnc_LogMessage;
+	if (_dialogResult != -1) then
 	{
-		_centerPosition = _this select 0;
-		sleep 0.01;
-		_text = [_centerPosition, 500, true] call Ares_fnc_ObjectsGrabber;
+		_radius = 100;
+		switch (_dialogResult) do
+		{
+			case 0: { _radius = 50; };
+			case 1: { _radius = 100; };
+			case 2: { _radius = 500; };
+			default { _radius = 100; };
+		};
+		
+		_centerPosition = position _logic;
+		_text = [_centerPosition, _radius, true] call Ares_fnc_ObjectsGrabber;
 
 		copyToClipBoard _text;
 		
 		missionNamespace setVariable ['Ares_CopyPaste_Dialog_Text', _text];
 		_dialog = createDialog "Ares_CopyPaste_Dialog";
-	};
 
-	[objNull, format["Copied objects to clipboard."]] call bis_fnc_showCuratorFeedbackMessage;
+		[objNull, format["Copied all objects in %1 metre radius.", _radius]] call bis_fnc_showCuratorFeedbackMessage;
+	};
 };
 
 deleteVehicle _logic;

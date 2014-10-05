@@ -18,8 +18,6 @@ $[
 ]
 */
 
-
-
 class Ares_Reinforcement_Dialog
 {
 	idd = 124;
