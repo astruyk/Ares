@@ -123,15 +123,6 @@ else
 
 _bldgLoc = getPos _bldgSelect;
 
-// Make the group move near the building before starting the search
-/*_bldgBB = boundingBox _bldgSelect;        // [[minX, minY, minZ], [maxX, maxY, maxZ]] 
-_wpRad = ((abs((_bldgBB select 0) select 0) + abs((_bldgBB select 1) select 0)) max (abs((_bldgBB select 0) select 1) + abs((_bldgBB select 1) select 1))) + 10;    // gets the longest side of the building + 10
-_wp = _group addWaypoint [_bldgLoc, _wpRad];
-_wp setWaypointPosition [_bldgLoc, 1];
-_wp setWaypointType "MOVE";
-_group setCurrentWaypoint _wp;
-waituntil {unitready _leader};*/
-
 // Make the group ready for shootin'
 _group setbehaviour "AWARE";
 
@@ -185,7 +176,7 @@ scopeName "bldgSearchMainScope";
 	// Get the first searcher that is available for tasking. If none
 	// is available for tasking wait until one becomes available.
 	_currentSearcherIndex = -1;
-	while {_isAnySearcherAlive} do
+	while {_isAnySearcherAlive && _currentSearcherIndex == -1} do
 	{
 		diag_log "Looking for a ready searcher...";
 		// Look for a ready searcher
@@ -193,17 +184,18 @@ scopeName "bldgSearchMainScope";
 		{
 			if (alive _x) then
 			{
-				diag_log "Found searcher!";
 				_isAnySearcherAlive = true;
 				if (not (_x getVariable ["Ares_isSearching", false])) exitWith { _currentSearcherIndex = _foreachIndex; };
+				diag_log "Available searcher found!";
 			};
 		} foreach _searchers;
 
-		if (_currentSearcherIndex != -1 || !_isAnySearcherAlive) exitWith {};
-
-		// Wait a bit and try again.
-		diag_log "None found. Waiting.";
-		sleep 1;
+		if (_currentSearcherIndex == -1 && _isAnySearcherAlive) then
+		{
+			// Wait a bit and try again.
+			diag_log "None found. Waiting.";
+			sleep 1;
+		};
 	};
 
 	if (_currentSearcherIndex != -1) then
@@ -211,13 +203,14 @@ scopeName "bldgSearchMainScope";
 		// Send the searcher to the current building position.
 		diag_log format["Sending searcher %1 to position %2", _currentSearcherIndex, _x];
 		_searcher = _searchers select _currentSearcherIndex;
+		doStop _searcher;
 		_searcher doMove _x;
 		_searcher setVariable ["Ares_isSearching", true];
 		_searcher setVariable ["Ares_searchLocation", (ATLtoASL _x)];
 		_searcher setVariable ["Ares_searchStartTime", daytime];
 		if (_debug) then
 		{
-			_debugMarker = "Sign_Sphere100cm_F" createVehicle [0,0,0];
+			_debugMarker = "Sign_Sphere25cm_F" createVehicle [0,0,0];
 			_debugMarker attachTo [_searcher, [0,0,2]];
 			_searcher setVariable ["Ares_searchingDebugMarker", _debugMarker];
 		};
@@ -226,26 +219,44 @@ scopeName "bldgSearchMainScope";
 		{
 			diag_log format["Starting search logic."];
 			_debugMarker = _this getVariable ["Ares_searchingDebugMarker", objNull];
-			waitUntil
+			while {true} do
 			{
-				((getPosASL _this) vectorDistance (_this getVariable ["Ares_searchLocation", [0,0,0]]) < 0.5 /*&& !lineIntersects [eyepos _this, (_this getVariable ["Ares_searchLocation", [0,0,0]]), _this, _debugMarker]*/)// The unit is close enough to the search location.
-				|| dayTime > ((_this getVariable ["Ares_searchStartTime", dayTime + 10]) + (1/60)) // Enough time has passed (currently 1min)
+				if ((getPosASL _this) vectorDistance (_this getVariable ["Ares_searchLocation", [0,0,0]]) < 1
+					/*&& !lineIntersects [eyepos _this, (_this getVariable ["Ares_searchLocation", [0,0,0]]), _this, _debugMarker]*/) exitWith
+				{
+					diag_log "Unit is close enough to search location. Finishing.";
+				};
+				if (dayTime > (_this getVariable ["Ares_searchStartTime", dayTime + 10]) + (0.5/60) ) exitWith
+				{
+					diag_log "Search timed out.";
+				};
+				diag_log format ["Unit %1 is %2 from target.", _this, (getPosASL _this) vectorDistance (_this getVariable ["Ares_searchLocation", [0,0,0]])];
+				sleep 0.5;
 			};
-			diag_log "Searcher arrived at position (or timed out).";
-			_this setVariable ["Ares_isSearching", false];
+			diag_log format ["%1 finished search (or timed out).", _this];
 			if (!isNil "_debugMarker") then
 			{
 				_this setVariable ["Ares_searchingDebugMarker", objNull];
 				deleteVehicle _debugMarker;
 			};
+			_this setVariable ["Ares_isSearching", false];
+			doStop _this;
 		};
 		
 		diag_log "Searcher sent.";
 	};
 } foreach _positionsInBuilding;
 
-diag_log "Done searching.";
+// Wait until all units are done searching.
+_isDoneSearching = true;
+while {!_isDoneSearching} do
+{
+	{
+		if (_x getVariable ["Ares_isSearching", false]) exitWith { _isDoneSearching = false;};
+	} forEach _searchers;
+};
 
+diag_log "Done searching.";
 _group setbehaviour _previousBehaviour;
 
 // The units will end up in a position inside the building.
