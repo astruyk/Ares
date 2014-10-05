@@ -24,7 +24,14 @@ if (_activated && local _logic) then
 			
 			// Make the group walk
 			_groupUnderCursor setBehaviour "SAFE";
-			
+			_groupUnderCursor setSpeedMode "LIMITED";
+
+			// Remove other waypoints.
+			 while {(count (waypoints _groupUnderCursor)) > 0} do
+			{
+				deleteWaypoint ((waypoints _groupUnderCursor) select 0);
+			};
+
 			// Make a box with the unit's current location at the center. Takes 4 WP's (for each corner) and then one for the cycle.
 			_centerPoint = position _logic;
 			_waypoint = _groupUnderCursor addWaypoint [[(_centerPoint select 0) + (0.5 * _radius), (_centerPoint select 1) + (0.5 * _radius)], 5];
