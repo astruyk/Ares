@@ -73,6 +73,7 @@ class Ares // This bit will be prefixed when actually calling the function (e.g.
 		class UnGarrison {};
 		class BehaviourSearchNearbyBuilding {};
 		class BehaviourSearchNearbyAndGarrison {};
+		class BehaviourPatrol {};
 		class DisableThermals {};
 		class EnableThermals {};
 		class ArsenalCopyToClipboard {};

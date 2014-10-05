@@ -33,3 +33,9 @@ class Ares_Module_Behaviour_Search_Nearby_And_Garrison : Ares_Behaviours_Module_
 	function = "Ares_fnc_BehaviourSearchNearbyAndGarrison";
 };
 
+class Ares_Module_Behaviour_Patrol : Ares_Behaviours_Module_Base
+{
+	scopeCurator = 2;
+	displayName = "Setup Patrol";
+	function = "Ares_fnc_BehaviourPatrol";
+};
