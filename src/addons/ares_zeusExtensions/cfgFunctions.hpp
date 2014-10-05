@@ -22,72 +22,40 @@ class Ares // This bit will be prefixed when actually calling the function (e.g.
 	// Helper functions
 	class util
 	{
-		file = "\ares_zeusExtensions\functions\util";
+		file = "\ares_zeusExtensions\functions";
 
+		class AddUnitsToCurator {};
 		class ArsenalSetup {};
-		class LogMessage {};
+		class BroadcastCode {};
+		class GetArrayDataFromUser {};
+		class GetDialogChoiceFromUser {};
 		class GetGroupUnderCursor {};
+		class GetSafePos {};
 		class GetUnitUnderCursor {};
 		class GlobalExecute {};
 		class IsZeus {};
-		class MonitorCuratorDisplay {};
-		class WaitForZeus {};
-		class TeleportPlayers {};
+		class LogMessage {};
 		class MakePlayerInvisible {};
-		class AddUnitsToCurator {};
-		class BroadcastCode {};
+		class MonitorCuratorDisplay {};
 		class ObjectsGrabber {};
 		class ObjectsMapper {};
-		class ZenOccupyHouse {};
-		class GetSafePos {};
 		class SearchBuilding {};
-		class GetArrayDataFromUser {};
-		class GetDialogChoiceFromUser {};
+		class TeleportPlayers {};
+		class WaitForZeus {};
+		class ZenOccupyHouse {};
 	};
 
 	// Functions to perform module actions
 	class modules
 	{
-		file = "\ares_zeusExtensions\functions\modules"; // All of the scripts defined in this class are in the '\ares_zeusExtensions\scripts' folder.
-
+		file = "\ares_zeusExtensions\functions\modules";
 		class Empty {};
-		class RemoveNvgGroup {};
-		class ForceLightsOn {};
-		class ForceLightsOff {};
-		class ForceLightsAuto {};
-		class SurrenderSingleUnit {};
-		class TeleportAllPlayers {};
-		class TeleportSinglePlayer {};
-		class TeleportGroup {};
-		class TeleportZeus {};
-		class TeleportSideNato {};
-		class TeleportSideIndependent {};
-		class TeleportSideCsat {};
-		class TeleportSideCivilian {};
-		class CreateTeleporter {};
-		class SaveObjectsForComposition {};
-		class SaveObjectsForPaste {};
-		class PasteObjectsRelative {};
-		class PasteObjectsAbsolute {};
-		class GarrisonNearest {};
-		class UnGarrison {};
-		class BehaviourSearchNearbyBuilding {};
-		class BehaviourSearchNearbyAndGarrison {};
-		class BehaviourPatrol {};
-		class DisableThermals {};
-		class EnableThermals {};
-		class ArsenalCopyToClipboard {};
-		class ArsenalPasteFromClipboard {};
-		class ArsenalPasteAdditive {};
-		class ArsenalCreateNato {};
-		class ArsenalCreateCsat {};
-		class ArsenalCreateAaf {};
-		class ArsenalCreateGuerilla {};
-		class ReinforcementsCreateLz {};
-		class ReinforcementsCreateRp {};
-		class ReinforcementsCreateUnits {};
-		class ReinforcementsDeleteMarker {};
-		class AddAllObjectsToCuratorModule {};
-		class RemoveObjectsFromCuratorModule {};
 	};
+	
+	#include "cfgFunctionsArsenal.hpp"
+	#include "cfgFunctionsBehaviour.hpp"
+	#include "cfgFunctionsEquipment.hpp"
+	#include "cfgFunctionsReinforcements.hpp"
+	#include "cfgFunctionsSaveLoad.hpp"
+	#include "cfgFunctionsTeleport.hpp"
 };
