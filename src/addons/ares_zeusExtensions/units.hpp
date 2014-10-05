@@ -38,5 +38,6 @@ units[] =
 	"Ares_Module_Reinforcements_Create_Rp",
 	"Ares_Module_Reinforcements_Spawn_Units",
 	"Ares_Module_Reinforcements_DeleteMarker",
-	"Ares_Module_Behaviour_Patrol"
+	"Ares_Module_Behaviour_Patrol",
+	"Ares_Module_Remove_Objects_From_Curator"
 };

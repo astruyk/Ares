@@ -8,7 +8,7 @@ if (_activated && local _logic) then
 
 	if (_dialogResult != -1) then
 	{
-		_objectsToAdd = vehicles + (allMissionObjects "Man") + (allMissionObjects "Air") + (allMissionObjects "Ammo");
+		_objectsToRemove = vehicles + (allMissionObjects "Man") + (allMissionObjects "Air") + (allMissionObjects "Ammo");
 		
 		if (_dialogResult != 0) then
 		{
@@ -27,13 +27,13 @@ if (_activated && local _logic) then
 				{
 					_filteredList set [count _filteredList, _x];
 				};
-			} forEach _objectsToAdd;
-			_objectsToAdd = _filteredList;
+			} forEach _objectsToRemove;
+			_objectsToRemove = _filteredList;
 		};
 		
-		[_objectsToAdd] call Ares_fnc_AddUnitsToCurator;
+		[_objectsToRemove, false] call Ares_fnc_AddUnitsToCurator;
 
-		[objNull, format["Added %1 objects to curator.", count _objectsToAdd]] call bis_fnc_showCuratorFeedbackMessage;
+		[objNull, format["Removed %1 objects to curator.", count _objectsToRemove]] call bis_fnc_showCuratorFeedbackMessage;
 	};
 };
 
