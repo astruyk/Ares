@@ -255,11 +255,6 @@ if (_activated && local _logic) then
 					_x moveInCargo (vehicle (leader _vehicleGroup));
 				} foreach(units _infantryGroup);
 
-				// Get out at the LZ
-				_infantryUnloadWP = _infantryGroup addWaypoint [(getWpPos _vehicleUnloadWp), 0];
-				_infantryUnloadWP setWaypointType "GETOUT";
-				_infantryUnloadWP synchronizeWaypoint [_vehicleUnloadWp];
-
 				// Choose a RP for the squad to head to once unloaded and set their waypoint.
 				if (count _allRps > 0) then
 				{
