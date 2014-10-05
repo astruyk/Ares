@@ -226,6 +226,14 @@ scopeName "bldgSearchMainScope";
 				{
 					diag_log "Unit is close enough to search location. Finishing.";
 				};
+				if (moveToCompleted _this) exitWith
+				{
+					diag_log "Move to completed.";
+				};
+				if (moveToFailed _this) exitWith
+				{
+					diag_log "Move to failed.";
+				};
 				if (dayTime > (_this getVariable ["Ares_searchStartTime", dayTime + 10]) + (0.5/60) ) exitWith
 				{
 					diag_log "Search timed out.";
@@ -248,15 +256,25 @@ scopeName "bldgSearchMainScope";
 } foreach _positionsInBuilding;
 
 // Wait until all units are done searching.
-_isDoneSearching = true;
+_isDoneSearching = false;
 while {!_isDoneSearching} do
 {
+	_isDoneSearching = true;
 	{
-		if (_x getVariable ["Ares_isSearching", false]) exitWith { _isDoneSearching = false;};
+		if (_x getVariable ["Ares_isSearching", false]) exitWith
+		{
+			_isDoneSearching = false;
+			diag_log format ["%1 is not done searching.", _x];
+	};
 	} forEach _searchers;
+	if (_isDoneSearching) then
+	{
+		diag_log "Still waiting for all units to finish searching...";
+		sleep 1;
+	};
 };
 
-diag_log "Done searching.";
+diag_log "All units done searching.";
 _group setbehaviour _previousBehaviour;
 
 // The units will end up in a position inside the building.
