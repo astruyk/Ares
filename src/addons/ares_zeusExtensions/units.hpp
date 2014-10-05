@@ -32,6 +32,7 @@ units[] =
 	"Ares_Module_UnGarrison",
 	"Ares_Module_Behaviour_Search_Nearby_Building",
 	"Ares_Module_Behaviour_Search_Nearby_And_Garrison",
+	"Ares_Module_Behaviour_Flee",
 	"Ares_Module_Disable_Thermals",
 	"Ares_Module_Enable_Thermals",
 	"Ares_Module_Reinforcements_Create_Lz",

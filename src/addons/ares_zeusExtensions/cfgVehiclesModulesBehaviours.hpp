@@ -33,3 +33,9 @@ class Ares_Module_Behaviour_Search_Nearby_And_Garrison : Ares_Behaviours_Module_
 	function = "Ares_fnc_BehaviourSearchNearbyAndGarrison";
 };
 
+class Ares_Module_Behaviour_Flee : Ares_Behaviours_Module_Base
+{
+	scopeCurator = 2;
+	displayName = "Make Units Flee";
+	function = "Ares_fnc_BehaviourFlee";
+};
