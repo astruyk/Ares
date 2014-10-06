@@ -11,38 +11,19 @@ if (_activated && local _logic) then
 	
 	if (count _allAmmunition > 0) then
 	{
-		// Create the dialog to ask the user about the rounds to fire.
-		_dialog = createDialog "Ares_Artillery_Dialog";
-		
-		// Add ammunition types
-		{
-			lbAdd [2100, _x];
-		} forEach _allAmmunition;
-		lbSetCurSel  [2100, missionNamespace getVariable ["Ares_ArtilleryDialog_AmmoType", 0]];
-		
-		// Add Ammo Counts
-		lbAdd [2101, "1"];
-		lbAdd [2101, "2"];
-		lbAdd [2101, "3"];
-		lbAdd [2101, "4"];
-		lbAdd [2101, "5"];
-		lbSetCurSel  [2101, missionNamespace getVariable ["Ares_ArtilleryDialog_Rounds", 0]];
-		
-		// Add target choices
-		lbAdd [2102, "Random"];
-		lbAdd [2102, "Nearest"];
-		lbAdd [2102, "Farthest"];
-		lbSetCurSel  [2102, missionNamespace getVariable ["Ares_ArtilleryDialog_ChooseTarget", 0]];
-		
-		waitUntil { !dialog };
-		
-		_dialogResult = missionNamespace getVariable ["Ares_Dialog_Result", -1];
-		if (_dialogResult != -1) then
+		_dialogResult = [
+			"Artillery Configuration",
+			[
+				["Ammunition Type", _allAmmuniation],
+				["Rounds", ["1", "2", "3", "4", "5"]],
+				["Choose Target", ["Random", "Nearest", "Farthest"]]
+			]] call Ares_fnc_ShowChooseDialog;
+		if (count _dialogResult > 0) then
 		{
 			// Get the data that the dialog set.
-			_selectedAmmoType = _allAmmunition select (missionNamespace getVariable ["Ares_ArtilleryDialog_AmmoType", 0]);
-			_roundsToFire = (missionNamespace getVariable ["Ares_ArtilleryDialog_Rounds", 1]) + 1; // +1 since the options are 0-based. (0 actually fires a whole clip)
-			_targetChooseAlgorithm = missionNamespace getVariable ["Ares_ArtilleryDialog_ChooseTarget", 0];
+			_selectedAmmoType = _dialogResult select 0;
+			_roundsToFire = (_dialogResult select 1) + 1; // +1 since the options are 0-based. (0 actually fires a whole clip)
+			_targetChooseAlgorithm = _dialogResult select 2;
 			
 			// Choose a target to fire at
 			_allTargets = allMissionObjects "Ares_Module_Behaviour_Create_Artillery_Target";
