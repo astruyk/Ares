@@ -159,7 +159,7 @@ class CfgVehicles
 
 	class Ares_Spawn_Module_Base : Ares_Module_Base
 	{
-		subCategor = "Spawn";
+		subCategory = "Spawn";
 	};
 
 	class Ares_Teleport_Module_Base : Ares_Module_Base
@@ -179,7 +179,6 @@ class CfgVehicles
 		function = "Ares_fnc_Empty";
 	}
 
-	#include "cfgVehicles.hpp"
 	#include "cfgVehiclesModulesBehaviours.hpp"
 	#include "cfgVehiclesModulesEquipment.hpp"
 	#include "cfgVehiclesModulesSaveLoad.hpp"
