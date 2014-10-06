@@ -32,7 +32,7 @@ if (_activated && local _logic) then
 	else
 	{
 		deleteVehicle _itemToDelete;
-		[objNull, format["Deleted %1", _type]] call bis_fnc_showCuratorFeedbackMessage;
+		[objNull, "Deleted Target"] call bis_fnc_showCuratorFeedbackMessage;
 	};
 	
 };
