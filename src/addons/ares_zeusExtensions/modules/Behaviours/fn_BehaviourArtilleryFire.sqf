@@ -7,9 +7,6 @@ if (_activated && local _logic) then
 	_artillery = [_logic] call Ares_fnc_GetUnitUnderCursor;
 	
 	// Choose the kind of ammunition to fire
-	// TODO allow the user to choose how the target is chosen
-	// TODO translate the ammunition classes into something more readable.
-	// TODO allow the player to choose the number of rounds to fire
 	_allAmmunition = getArtilleryAmmo [_artillery];
 	
 	// Create the dialog to ask the user about the rounds to fire.
@@ -36,7 +33,6 @@ if (_activated && local _logic) then
 	lbSetCurSel  [2102, missionNamespace getVariable ["Ares_ArtilleryDialog_ChooseTarget", 0]];
 	
 	waitUntil { !dialog };
-	
 	
 	_dialogResult = missionNamespace getVariable ["Ares_Dialog_Result", -1];
 	if (_dialogResult != -1) then
