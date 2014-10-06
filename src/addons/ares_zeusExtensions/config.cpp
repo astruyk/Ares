@@ -56,6 +56,13 @@ class CfgFactionClasses
 				moduleClass = "Ares_Module_Empty";
 				icon = "\ares_zeusExtensions\data\icon_ares.paa";
 			};
+			
+			class Reinforcements
+			{
+				displayName = "Reinforcements";
+				moduleClass = "Ares_Module_Empty";
+				icon = "\ares_zeusExtensions\data\icon_ares.paa";
+			};
 
 			class SaveLoad
 			{
@@ -63,17 +70,17 @@ class CfgFactionClasses
 				moduleClass = "Ares_Module_Empty";
 				icon = "\ares_zeusExtensions\data\icon_ares.paa";
 			};
+			
+			class Spawn
+			{
+				displayName = "Spawn";
+				moduleClass = "Ares_Module_Empty";
+				icon = "\ares_zeusExtensions\data\icon_ares.paa";
+			};
 
 			class Teleport
 			{
 				displayName = "Teleport";
-				moduleClass = "Ares_Module_Empty";
-				icon = "\ares_zeusExtensions\data\icon_ares.paa";
-			};
-			
-			class Reinforcements
-			{
-				displayName = "Reinforcements";
 				moduleClass = "Ares_Module_Empty";
 				icon = "\ares_zeusExtensions\data\icon_ares.paa";
 			};
@@ -140,19 +147,24 @@ class CfgVehicles
 		subCategory = "Equipment";
 	};
 	
+	class Ares_Reinforcements_Module_base : Ares_Module_Base
+	{
+		subCategory = "Reinforcements";
+	};
+	
 	class Ares_SaveLoad_Module_Base : Ares_Module_Base
 	{
 		subCategory = "SaveLoad";
 	};
-	
+
+	class Ares_Spawn_Module_Base : Ares_Module_Base
+	{
+		subCategor = "Spawn";
+	};
+
 	class Ares_Teleport_Module_Base : Ares_Module_Base
 	{
 		subCategory = "Teleport";
-	};
-	
-	class Ares_Reinforcements_Module_base : Ares_Module_Base
-	{
-		subCategory = "Reinforcements";
 	};
 
 	// Placeholder class that doesn't do anything. Used for generating categories in UI.
@@ -171,6 +183,7 @@ class CfgVehicles
 	#include "cfgVehiclesModulesBehaviours.hpp"
 	#include "cfgVehiclesModulesEquipment.hpp"
 	#include "cfgVehiclesModulesSaveLoad.hpp"
+	#include "cfgVehiclesModulesSpawn.hpp"
 	#include "cfgVehiclesModulesTeleport.hpp"
 	#include "cfgVehiclesModulesArsenal.hpp"
 	#include "cfgVehiclesModulesReinforcements.hpp"

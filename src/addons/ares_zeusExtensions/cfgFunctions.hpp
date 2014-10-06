@@ -48,7 +48,7 @@ class Ares // This bit will be prefixed when actually calling the function (e.g.
 	// Functions to perform module actions
 	class modules
 	{
-		file = "\ares_zeusExtensions\functions\modules";
+		file = "\ares_zeusExtensions\modules";
 		class Empty {};
 	};
 	
@@ -57,5 +57,6 @@ class Ares // This bit will be prefixed when actually calling the function (e.g.
 	#include "cfgFunctionsEquipment.hpp"
 	#include "cfgFunctionsReinforcements.hpp"
 	#include "cfgFunctionsSaveLoad.hpp"
+	#include "cfgFunctionsSpawn.hpp"
 	#include "cfgFunctionsTeleport.hpp"
 };
