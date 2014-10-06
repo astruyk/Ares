@@ -172,12 +172,12 @@ if (_activated && local _logic) then
 			if (_dialogLzAlgorithm == 1) then
 			{
 				// Nearest
-				[position _logic, _allLzs] call Ares_fnc_GetNearest;
+				_lz = [position _logic, _allLzs] call Ares_fnc_GetNearest;
 			};
 			if (_dialogLzAlgorithm == 2) then
 			{
 				// Farthest
-				[position _logic, _allLzs] call Ares_fnc_GetFarthest;
+				_lz = [position _logic, _allLzs] call Ares_fnc_GetFarthest;
 			};
 
 			// Spawn a vehicle, send it to the LZ and have it unload the troops before returning home and
