@@ -18,7 +18,7 @@ if (_activated && local _logic) then
 		{
 			lbAdd [2100, _x];
 		} forEach _allAmmunition;
-		lbSetCurSel  [2101, missionNamespace getVariable ["Ares_ArtilleryDialog_AmmoType", 0]];
+		lbSetCurSel  [2100, missionNamespace getVariable ["Ares_ArtilleryDialog_AmmoType", 0]];
 		
 		// Add Ammo Counts
 		lbAdd [2101, "1"];
@@ -41,12 +41,13 @@ if (_activated && local _logic) then
 		{
 			// Get the data that the dialog set.
 			_selectedAmmoType = _allAmmunition select (missionNamespace getVariable ["Ares_ArtilleryDialog_AmmoType", 0]);
-			_roundsToFire = missionNamespace getVariable ["Ares_ArtilleryDialog_Rounds", 1];
+			_roundsToFire = (missionNamespace getVariable ["Ares_ArtilleryDialog_Rounds", 1]) + 1; // +1 since the options are 0-based. (0 actually fires a whole clip)
 			_targetChooseAlgorithm = missionNamespace getVariable ["Ares_ArtilleryDialog_ChooseTarget", 0];
 			
 			// Choose a target to fire at
 			_allTargets = allMissionObjects "Ares_Module_Behaviour_Create_Artillery_Target";
 			
+			// Make sure we only consider targets that are in range.
 			_targetsInRange = [];
 			{
 				if ((position _x) inRangeOfArtillery [[_artillery], _selectedAmmoType]) then
@@ -57,21 +58,23 @@ if (_activated && local _logic) then
 			
 			if (count _targetsInRange > 0) then
 			{
+				// Choose a target to fire at
 				_selectedTarget = _allTargets call BIS_fnc_selectRandom;
 				if (_targetChooseAlgorithm == 1) then
 				{
-					[position _logic, _targetsInRange] call Ares_fnc_GetNearest;
+					_selectedTarget = [position _logic, _targetsInRange] call Ares_fnc_GetNearest;
 				};
 				if (_targetChooseAlgorithm == 2) then
 				{
-					[position _logic, _targetsInRange] call Ares_fnc_GetFarthest;
+					_selectedTarget = [position _logic, _targetsInRange] call Ares_fnc_GetFarthest;
 				};
 				
+				// Fire at the target
 				enableEngineArtillery true;
 				_roundEta = _artillery getArtilleryETA [position _selectedTarget, _selectedAmmoType];
 				_artillery commandArtilleryFire [(position _selectedTarget), _selectedAmmoType, _roundsToFire];
 				
-				[objNull, format ["Firing at target. ETA %1", _roundEta]] call bis_fnc_showCuratorFeedbackMessage;
+				[objNull, format ["Firing %1 rounds of '%2' at target. ETA %3", _roundsToFire, _selectedAmmoType, _roundEta]] call bis_fnc_showCuratorFeedbackMessage;
 			}
 			else
 			{
