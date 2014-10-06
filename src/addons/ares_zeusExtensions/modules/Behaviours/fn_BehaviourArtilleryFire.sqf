@@ -22,7 +22,10 @@ if (_activated && local _logic) then
 		
 		_targetsInRange = [];
 		{
-			(position _x) inRangeOfArtillery [[_artillery], _selectedAmmoType];
+			if ((position _x) inRangeOfArtillery [[_artillery], _selectedAmmoType]) then
+			{
+				_targetsInRange set [count _targetsInRange, _x];
+			};
 		} forEach _allTargets;
 		
 		if (count _targetsInRange > 0) then
@@ -30,9 +33,10 @@ if (_activated && local _logic) then
 			_selectedTarget = _allTargets call BIS_fnc_selectRandom;
 			
 			enableEngineArtillery true;
+			_roundEta = _artillery getArtilleryETA [position _selectedTarget, _selectedAmmoType];
 			_artillery commandArtilleryFire [(position _selectedTarget), _selectedAmmoType, 1];
 			
-			[objNull, "Firing"] call bis_fnc_showCuratorFeedbackMessage;
+			[objNull, format ["Firing at target. ETA %1", _roundEta]] call bis_fnc_showCuratorFeedbackMessage;
 		}
 		else
 		{
@@ -40,5 +44,5 @@ if (_activated && local _logic) then
 		};
 	};
 };
-
+deleteVehicle _logic;
 true
