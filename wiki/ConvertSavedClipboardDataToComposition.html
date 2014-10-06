@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+
+<p>
+<textarea id="sourceTextArea" rows="20" cols="150">
+[["Land_Sack_F",[4006.72,4260.35,0],0,1,0,[0,0],"","",true,false], ["Land_ScrapHeap_1_F",[4005.05,4262.33,0],0,1,0,[0,0],"","",true,false], ["Land_PaperBox_closed_F",[4007.65,4261.72,0],0,1,0,[0,0],"","",true,false], ["Land_Sacks_goods_F",[4005.25,4259.58,0.133071],0,1,0,[0,0],"","",true,false], ["Land_PaperBox_open_empty_F",[4007.05,4263.88,0],29.1504,1,0,[0,0],"","",true,false], [4006.04, 4261.16, 0]]
+</textarea>
+</p>
+
+<p>
+<input type="button" value="Process" onClick="myFunction()" />
+</p>
+
+<p>
+	<textarea id="destinationTextArea" rows="20" cols="150">
+	</textarea>
+</p>
+</body>
+
+<script>
+function myFunction()
+{
+	var sourceText = document.getElementById("sourceTextArea").value.trim();
+	// Capture elements of the form:
+	//   ["Land_Sack_F",[4006.72,4260.35,0],0,1,0,[0,0],"","",true,false]
+	var entryRegex = /\["(\w+)",\[([\d\.]+,[\d\.]+,[\d\.]+)\],([\d\.]+),[\d\.]+,[\d\.]+,\[[\d\.]+,[\d\.]+\],"\w*","\w*",[true|false]+,[true|false]+\]/g;
+	var match;
+	
+	processedText = "class NEW_COMPOSITION_CLASS_NAME\n{\n\tname=\"Zeus Display Name\";";
+	var currentClassNumber = 0;
+	while (match = entryRegex.exec(sourceText))
+	{
+		processedText += "\n\tclass Object" + currentClassNumber + " {side=8;vehicle=\"" + match[1] + "\";rank=\"\";position[]={" + match[2] + "};dir=" + match [3] + ";};";
+		currentClassNumber++;
+	}
+	processedText += "\n}";
+	
+	document.getElementById("destinationTextArea").value = processedText;
+}
+</script>
+</html>
