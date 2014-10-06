@@ -4,28 +4,9 @@ _activated = _this select 2;
 
 if (_activated && local _logic) then
 {
-	_itemToDelete = nil;
-	_itemToDeleteDistance = 15;
-	
-	// Find the closest Artillery target.
-	{
-		if (_x distance _logic <= _itemToDeleteDistance) then
-		{
-			if (isNil "_itemToDelete") then
-			{
-				_itemToDelete = _x;
-			}
-			else
-			{
-				if ((_x distance _logic) < (_itemToDelete distance _logic)) then
-				{
-					_itemToDelete = _x;
-				};
-			};
-		};
-	} forEach (allMissionObjects "Ares_Module_Behaviour_Create_Artillery_Target");
+	_itemToDelete = [position _logic, allMissionObjects "Ares_Module_Behaviour_Create_Artillery_Target"] call Ares_fnc_GetNearest;
 
-	if (isNil "_itemToDelete") then
+	if (isNull _itemToDelete || _itemToDelete distance _logic > 15) then
 	{
 		[objNull, "No Nearby Artillery Target Found"] call bis_fnc_showCuratorFeedbackMessage;
 	}

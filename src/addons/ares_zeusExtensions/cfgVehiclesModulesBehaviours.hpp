@@ -57,7 +57,7 @@ class Ares_Module_Behaviour_Remove_Artillery_Target : Ares_Behaviours_Module_Bas
 class Ares_Module_Behaviour_Fire_At_Artillery_Target : Ares_Behaviours_Module_Base
 {
 	scopeCurator = 2;
-	displayName = "Artillery Fire At Target";
+	displayName = "Fire Artillery";
 	function = "Ares_fnc_BehaviourArtilleryFire";
 };
 

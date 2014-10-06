@@ -112,7 +112,7 @@ if (_bldgCnt == 0) exitWith
 _bldgSelect = [];
 if (_whichOne == "NEAREST") then
 {
-	// nearestObjects is sorted from nearest -> furthest objects. Since we didn't change the order when
+	// nearestObjects is sorted from nearest -> farthest objects. Since we didn't change the order when
 	// we filtered candidate houses we can just choose the first element here.
 	_bldgSelect = _bldgArray select 0;
 }
