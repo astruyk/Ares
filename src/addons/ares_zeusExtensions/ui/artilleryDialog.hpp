@@ -74,6 +74,7 @@ class Ares_Artillery_Dialog
 			y = 8.5 * GUI_GRID_H + GUI_GRID_Y;
 			w = 4 * GUI_GRID_W;
 			h = 1.5 * GUI_GRID_H;
+			onButtonClick = "missionNamespace setVariable ['Ares_Dialog_Result', 1]; missionNamespace setVariable ['Ares_ArtilleryDialog_AmmoType', lbCurSel 2100]; missionNamespace setVariable ['Ares_ArtilleryDialog_Rounds', lbCurSel 2101]; missionNamespace setVariable ['Ares_ArtilleryDialog_ChooseTarget', lbCurSel 2102];";
 		};
 		class Ares_ArtilleryDialog_Button_Cancel: RscButtonMenuCancel
 		{
@@ -81,6 +82,7 @@ class Ares_Artillery_Dialog
 			y = 8.5 * GUI_GRID_H + GUI_GRID_Y;
 			w = 4 * GUI_GRID_W;
 			h = 1.5 * GUI_GRID_H;
+			onButtonClick = "missionNamespace setVariable ['Ares_Dialog_Result', 0];";
 		};
 		////////////////////////////////////////////////////////
 		// GUI EDITOR OUTPUT END
