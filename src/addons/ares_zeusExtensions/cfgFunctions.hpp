@@ -43,6 +43,8 @@ class Ares // This bit will be prefixed when actually calling the function (e.g.
 		class TeleportPlayers {};
 		class WaitForZeus {};
 		class ZenOccupyHouse {};
+		class GetNearest {};
+		class GetFarthest {};
 	};
 
 	// Functions to perform module actions

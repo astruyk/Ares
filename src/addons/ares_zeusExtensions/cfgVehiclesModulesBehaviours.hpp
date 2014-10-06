@@ -36,6 +36,28 @@ class Ares_Module_Behaviour_Search_Nearby_And_Garrison : Ares_Behaviours_Module_
 class Ares_Module_Behaviour_Patrol : Ares_Behaviours_Module_Base
 {
 	scopeCurator = 2;
-	displayName = "Setup Patrol";
+	displayName = "Patrol";
 	function = "Ares_fnc_BehaviourPatrol";
 };
+
+class Ares_Module_Behaviour_Create_Artillery_Target : Ares_Behaviours_Module_Base
+{
+	scopeCurator = 2;
+	displayName = "Create Artillery Target";
+	function = "Ares_fnc_BehaviourArtilleryCreateTarget";
+};
+
+class Ares_Module_Behaviour_Remove_Artillery_Target : Ares_Behaviours_Module_Base
+{
+	scopeCurator = 2;
+	displayName = "Remove Artillery Target";
+	function = "Ares_fnc_BehaviourArtilleryDeleteTarget";
+};
+
+class Ares_Module_Behaviour_Fire_At_Artillery_Target : Ares_Behaviours_Module_Base
+{
+	scopeCurator = 2;
+	displayName = "Fire Artillery";
+	function = "Ares_fnc_BehaviourArtilleryFire";
+};
+

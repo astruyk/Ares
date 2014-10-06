@@ -34,13 +34,13 @@ if (_activated && local _logic) then
 		// Add LZ choosing algorithms
 		lbAdd [2103, "Random"];
 		lbAdd [2103, "Nearest"];
-		lbAdd [2103, "Furthest"];
+		lbAdd [2103, "Farthest"];
 		lbSetCurSel  [2103, missionNamespace getVariable ["Ares_ReinforcementDialog_LastSelected_Lz_Algorithm", 0]];
 
 		// Add RP choosing algorithms
 		lbAdd [2104, "Random"];
 		lbAdd [2104, "Nearest"];
-		lbAdd [2104, "Furthest"];
+		lbAdd [2104, "Farthest"];
 		lbSetCurSel  [2104, missionNamespace getVariable ["Ares_ReinforcementDialog_LastSelected_Rp_Algorithm", 0]];
 
 		waitUntil { !dialog; };
@@ -171,21 +171,13 @@ if (_activated && local _logic) then
 			// Choose the nearest LZ to the spawn point if that behaviour was chosen.
 			if (_dialogLzAlgorithm == 1) then
 			{
-				{
-					if (_logic distance _x < _logic distance _lz) then
-					{
-						_lz = _x;
-					};
-				} forEach _allLzs;
+				// Nearest
+				_lz = [position _logic, _allLzs] call Ares_fnc_GetNearest;
 			};
 			if (_dialogLzAlgorithm == 2) then
 			{
-				{
-					if (_logic distance _x > _logic distance _lz) then
-					{
-						_lz = _x;
-					};
-				} forEach _allLzs;
+				// Farthest
+				_lz = [position _logic, _allLzs] call Ares_fnc_GetFarthest;
 			};
 
 			// Spawn a vehicle, send it to the LZ and have it unload the troops before returning home and
@@ -263,21 +255,11 @@ if (_activated && local _logic) then
 					// Choose the nearest RP to the LZ instead if that behaviour was selected.
 					if (_dialogRpAlgorithm == 1) then
 					{
-						{
-							if (_lz distance _x < _lz distance _rp) then
-							{
-								_rp = _x;
-							};
-						} forEach _allRps;
+						_rp = [position _lz, _allRps] call Ares_fnc_GetNearest;
 					};
 					if (_dialogRpAlgorithm == 2) then
 					{
-						{
-							if (_lz distance _x > _lz distance _rp) then
-							{
-								_rp = _x;
-							};
-						} forEach _allRps;
+						_rp = [position _lz, _allRps] call Ares_fnc_GetFarthest;
 					};
 					
 					_infantryRpWp = _infantryGroup addWaypoint [position _rp, _rpSize];
