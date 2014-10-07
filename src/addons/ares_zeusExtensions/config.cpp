@@ -203,3 +203,4 @@ class CfgGroups
 #include "ui\reinforcementDialog.hpp"
 #include "ui\chooseDialog.hpp"
 #include "ui\ArtilleryDialog.hpp"
+#include "ui\dynamicDialog.hpp"

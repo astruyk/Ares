@@ -36,7 +36,7 @@ _choicesArray = [_this, 1, [], [[]]] call BIS_fnc_param;
 #define CANCEL_BUTTON_WIDTH		(4 * GUI_GRID_W)
 #define CANCEL_BUTTON_HEIGHT	(1.5 * GUI_GRID_H)
 #define TOTAL_ROW_HEIGHT		(2 * GUI_GRID_H)
-#define BASE_IDC = 9000;
+#define BASE_IDC				(9000)
 
 // Bring up the dialog frame we are going to add things to.
 _createdDialogOk = createDialog "Ares_Dynamic_Dialog";
