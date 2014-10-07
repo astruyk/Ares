@@ -6,7 +6,7 @@
 		1 - Array of Arrays - The set of choices to display to the user. Each element in the array should be an array in the following format: ["Choice Description", ["Choice1", "Choice2", etc...]] optionally the last element can be a number that indicates which element to select. For example: ["Choose A Pie", ["Apple", "Pumpkin"], 1] will have "Pumpkin" selected by default.
 
 	Returns:
-		An array containing the indices of each of the values chosen, or an empty array ([]) if the user cancelled the dialog.
+		An array containing the indices of each of the values chosen, or a null object if nothing was selected.
 */
 disableSerialization;
 
@@ -130,5 +130,5 @@ if (missionNamespace getVariable "Ares_ChooseDialog_Result" == 1) then
 }
 else
 {
-	[];
+	objNull;
 };

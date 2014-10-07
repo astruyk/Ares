@@ -18,7 +18,7 @@ if (_activated && local _logic) then
 				["Rounds", ["1", "2", "3", "4", "5"]],
 				["Choose Target", ["Random", "Nearest", "Farthest"], 1]
 			]] call Ares_fnc_ShowChooseDialog;
-		if (count _dialogResult > 0) then
+		if (!isNull _dialogResult) then
 		{
 			// Get the data that the dialog set.
 			_selectedAmmoType = _dialogResult select 0;
