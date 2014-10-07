@@ -84,6 +84,13 @@ class CfgFactionClasses
 				moduleClass = "Ares_Module_Empty";
 				icon = "\ares_zeusExtensions\data\icon_ares.paa";
 			};
+			
+			class Util
+			{
+				displayName = "Util";
+				moduleClass = "Ares_Module_Empty";
+				icon = "\ares_zeusExtensions\data\icon_ares.paa";
+			};
 		};
 	};
 };
@@ -166,6 +173,11 @@ class CfgVehicles
 	{
 		subCategory = "Teleport";
 	};
+	
+	class Ares_Util_Module_Base : Ares_Module_Base
+	{
+		subCategory = "Util";
+	};
 
 	// Placeholder class that doesn't do anything. Used for generating categories in UI.
 	class Ares_Module_Empty : Ares_Module_Base
@@ -186,6 +198,7 @@ class CfgVehicles
 	#include "cfgVehiclesModulesTeleport.hpp"
 	#include "cfgVehiclesModulesArsenal.hpp"
 	#include "cfgVehiclesModulesReinforcements.hpp"
+	#include "cfgVehiclesModulesUtil.hpp"
 };
 
 class CfgFunctions
