@@ -49,12 +49,9 @@ _dialog = findDisplay 133798;
 _background = _dialog ctrlCreate ["IGUIBack", BASE_IDC];
 _background ctrlSetPosition [BG_X, BG_Y, BG_WIDTH, 10 * GUI_GRID_H];
 _background ctrlCommit 0;
-/*_frame = _dialog ctrlCreate ["RscFrame", BASE_IDC + 1];
-_frame ctrlSetPosition [BG_X, BG_Y, BG_WIDTH, 100]; // TODO make this the right height
-_frame ctrlCommit 0;*/
 
 // Start placing controls 1 units down in the window.
-_yCoord = BG_Y + (1 * GUI_GRID_H); // Start at 1 down for padding.
+_yCoord = BG_Y + (0.5 * GUI_GRID_H);
 _controlCount = 2;
 
 _titleRowHeight = 0;
@@ -128,7 +125,7 @@ _controlCount = _controlCount + 1;
 _backgroundHeight = (TOTAL_ROW_HEIGHT * (count _choicesArray))
 					+ _titleRowHeight
 					+ OK_BUTTON_HEIGHT
-					+ (2 * GUI_GRID_H); // We want some padding on the top and bottom
+					+ (1.5 * GUI_GRID_H); // We want some padding on the top and bottom
 _background ctrlSetPosition [BG_X, BG_Y, BG_WIDTH, _backgroundHeight];
 _background ctrlCommit 0;
 
