@@ -1,11 +1,11 @@
-class Ares_Module_Start_Group_Cleanup : Ares_Util_Module_Base
+class Ares_Module_Util_Start_Group_Cleanup : Ares_Util_Module_Base
 {
 	scopeCurator = 2;
 	displayName = "Start Group Auto-Cleanup Script";
 	function = "Ares_fnc_UtilStartGroupCleanup";
 };
 
-class Ares_Module_Stop_Group_Cleanup : Ares_Util_Module_Base
+class Ares_Module_Util_Stop_Group_Cleanup : Ares_Util_Module_Base
 {
 	scopeCurator = 2;
 	displayName = "Stop Group Auto-Cleanup Script";

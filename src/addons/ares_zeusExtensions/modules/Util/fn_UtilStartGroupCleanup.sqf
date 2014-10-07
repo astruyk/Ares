@@ -10,9 +10,8 @@ if (_activated && local _logic) then
 	if (isNil "Ares_RunningGroupCleanup") then
 	{
 		Ares_RunningGroupCleanup = false;
-		publicVariable "Ares_RunningGroupCleanup";
 	};
-	
+
 	if (!Ares_RunningGroupCleanup) then
 	{
 		Ares_RunningGroupCleanup = true;
@@ -29,9 +28,9 @@ if (_activated && local _logic) then
 	}
 	else
 	{
-		[objNull, "Group cleanup script already running."] call bis_fnc_showCuratorFeedbackMessage;
+		[{{deleteGroup _x} foreach allGroups;}] call Ares_fnc_BroadcastCode;
+		[objNull, "Group cleanup script already running. Performing cleanup now."] call bis_fnc_showCuratorFeedbackMessage;
 	};
-	
 };
 
 deleteVehicle _logic;
