@@ -12,11 +12,11 @@ if (_activated && local _logic) then
 	if (count _allAmmunition > 0) then
 	{
 		_dialogResult = [
-			"Artillery Configuration",
+			"Artillery Options",
 			[
 				["Ammunition Type", _allAmmunition],
 				["Rounds", ["1", "2", "3", "4", "5"]],
-				["Choose Target", ["Random", "Nearest", "Farthest"]]
+				["Choose Target", ["Random", "Nearest", "Farthest"], 1]
 			]] call Ares_fnc_ShowChooseDialog;
 		if (count _dialogResult > 0) then
 		{
