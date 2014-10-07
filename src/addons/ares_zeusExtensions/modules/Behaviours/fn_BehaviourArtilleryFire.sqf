@@ -21,7 +21,7 @@ if (_activated && local _logic) then
 		if (count _dialogResult > 0) then
 		{
 			// Get the data that the dialog set.
-			_selectedAmmoType = _dialogResult select 0;
+			_selectedAmmoType = _allAmmunition select (_dialogResult select 0);
 			_roundsToFire = (_dialogResult select 1) + 1; // +1 since the options are 0-based. (0 actually fires a whole clip)
 			_targetChooseAlgorithm = _dialogResult select 2;
 			
