@@ -43,4 +43,5 @@ units[] =
 	"Ares_Module_Teleport_Single",
 	"Ares_Module_Teleport_Zeus",
 	"Ares_Module_UnGarrison",
+	"Ares_Module_Util_CountGroups",
 };

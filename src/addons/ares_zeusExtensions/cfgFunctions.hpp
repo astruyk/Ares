@@ -61,4 +61,5 @@ class Ares // This bit will be prefixed when actually calling the function (e.g.
 	#include "cfgFunctionsSaveLoad.hpp"
 	#include "cfgFunctionsSpawn.hpp"
 	#include "cfgFunctionsTeleport.hpp"
+	#include "cfgFunctionsUtil.hpp"
 };
