@@ -71,12 +71,11 @@ if (_titleText != "") then
 
 // Make a global variable so that event handlers can access it and set the selected values
 // directly.
-missionNamespace setVariable ["Ares_ChooseDialog_ReturnValues", 0];
 {
 	_choiceName = _x select 0;
 	_choices = _x select 1;
 	_defaultChoice = 0;
-	if (count _x > 1) then
+	if (count _x > 2) then
 	{
 		_defaultChoice = _x select 2;
 	};
@@ -99,8 +98,8 @@ missionNamespace setVariable ["Ares_ChooseDialog_ReturnValues", 0];
 	
 	// Set the current choice, record it in the global variable, and setup the event handler to update it.
 	_choiceCombo lbSetCurSel _defaultChoice;
-	(missionNamespace getVariable "Ares_ChooseDialog_ReturnValues") set [_forEachIndex, _defaultChoice];
-	_choiceCombo ctrlSetEventHandler ["LBSelChanged", "(missionNamespace getVariable 'Ares_ChooseDialog_ReturnValues') set [" + _forEachIndex + ", _this select 1]);"];
+	missionNamespace setVariable [format["Ares_ChooseDialog_ReturnValue_%1",_forEachIndex], _defaultChoice];
+	_choiceCombo ctrlSetEventHandler ["LBSelChanged", "missionNamespace setVariable [format['Ares_ChooseDialog_ReturnValue_%1'," + str (_forEachIndex) + "], _defaultChoice];"];
 	_controlCount = _controlCount + 1;
 	
 	// Move onto the next row
@@ -113,20 +112,25 @@ missionNamespace setVariable ["Ares_ChooseDialog_Result", -1];
 _okButton = _dialog ctrlCreate ["RscButtonMenuOK", BASE_IDC + _controlCount];
 _okButton ctrlSetPosition [OK_BUTTON_X, _yCoord, OK_BUTTON_WIDTH, OK_BUTTON_HEIGHT];
 _okButton ctrlCommit 0;
-_okButton ctrlSetEventHandler ["ButtonClick", "missionNamespace setVariable ['Ares_ChooseDialog_Result', 1];"];
+_okButton ctrlSetEventHandler ["ButtonClick", "missionNamespace setVariable ['Ares_ChooseDialog_Result', 1]; closeDialog 1;"];
 _controlCount = _controlCount + 1;
 
 _cancelButton = _dialog ctrlCreate ["RscButtonMenuCancel", BASE_IDC + _controlCount];
 _cancelButton ctrlSetPosition [CANCEL_BUTTON_X, _yCoord, CANCEL_BUTTON_WIDTH, CANCEL_BUTTON_HEIGHT];
-_okButton ctrlSetEventHandler ["ButtonClick", "missionNamespace setVariable ['Ares_ChooseDialog_Result', -1];"];
+_cancelButton ctrlSetEventHandler ["ButtonClick", "missionNamespace setVariable ['Ares_ChooseDialog_Result', -1]; closeDialog 2;"];
 _cancelButton ctrlCommit 0;
+_controlCount = _controlCount + 1;
 
 waitUntil { !dialog };
 
 // Check whether the user confirmed the selection or not, and return the appropriate values.
 if (missionNamespace getVariable "Ares_ChooseDialog_Result" == 1) then
 {
-	missionNamespace getVariable "Ares_ChooseDialog_ReturnValues";
+	_returnValue = [];
+	{
+		_returnValue set [_forEachIndex, missionNamespace getVariable (format["Ares_ChooseDialog_ReturnValue_%1",_forEachIndex])];
+	}forEach _choicesArray;
+	_returnValue;
 }
 else
 {
