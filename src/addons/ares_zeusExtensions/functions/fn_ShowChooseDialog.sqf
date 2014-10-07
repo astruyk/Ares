@@ -24,7 +24,6 @@ _choicesArray = [_this, 1, [], [[]]] call BIS_fnc_param;
 #define BG_X					(1 * GUI_GRID_W + GUI_GRID_X)
 #define BG_Y					(1 * GUI_GRID_H + GUI_GRID_Y)
 #define BG_WIDTH				(38.5 * GUI_GRID_W)
-#define TITLE_Y					(2 * GUI_GRID_H + GUI_GRID_Y)
 #define TITLE_WIDTH				(14 * GUI_GRID_W)
 #define TITLE_HEIGHT			(1.5 * GUI_GRID_H)
 #define LABEL_COLUMN_X			(2 * GUI_GRID_W + GUI_GRID_X)
@@ -54,16 +53,22 @@ _background ctrlCommit 0;
 _frame ctrlSetPosition [BG_X, BG_Y, BG_WIDTH, 100]; // TODO make this the right height
 _frame ctrlCommit 0;*/
 
-// Create the label
-_labelControl = _dialog ctrlCreate ["RscText", BASE_IDC + 2];
-_labelControl ctrlSetPosition [LABEL_COLUMN_X,TITLE_Y,TITLE_WIDTH,TITLE_HEIGHT];
-_labelControl ctrlCommit 0;
-_labelControl ctrlSetText _titleText;
-ctrlSetText [BASE_IDC + 2, "BAR"];
+// Start placing controls 1 units down in the window.
+_yCoord = BG_Y + (1 * GUI_GRID_H + GUI_GRID_Y);
+_controlCount = 2;
 
-// This will always be the current y-coordinate of the control we're dynamically adding.
-_yCoord = 4 * GUI_GRID_H + GUI_GRID_Y;
-_controlCount = 3;
+if (_titleText != "") then
+{
+	// Create the label
+	_labelControl = _dialog ctrlCreate ["RscText", BASE_IDC + _controlCount];
+	_labelControl ctrlSetPosition [LABEL_COLUMN_X,TITLE_Y,TITLE_WIDTH,TITLE_HEIGHT];
+	_labelControl ctrlCommit 0;
+	_labelControl ctrlSetText _titleText;
+	ctrlSetText [BASE_IDC + 2, "BAR"];
+	_yCoord = _yCoord + TOTAL_ROW_HEIGHT;
+	_controlCount = _controlCount + 1;
+};
+
 {
 	_choiceName = _x select 0;
 	_choices = _x select 1;
@@ -75,24 +80,21 @@ _controlCount = 3;
 	_choiceLabel ctrlCommit 0;
 	_controlCount = _controlCount + 1;
 	
-	// Create the combo box for this entry
-	_choiceComboIdc = BASE_IDC + _controlCount;
-	_choiceCombo = _dialog ctrlCreate ["RscCombo", _choiceComboIdc];
+	// Create the combo box for this entry and populate it.
+	_choiceCombo = _dialog ctrlCreate ["RscCombo", BASE_IDC + _controlCount];
 	_choiceCombo ctrlSetPosition [COMBO_COLUMN_X, _yCoord, COMBO_WIDTH, COMBO_HEIGHT];
 	_choiceCombo ctrlCommit 0;
-	_controlCount = _controlCount + 1;
-	
-	// Populate the combo box for this entry
 	{
-		lbAdd [_choiceComboIdc, _x];
+		_choiceCombo lbAdd _x;
 	} forEach _choices;
-	
-	// TODO support setting this as part of the parameters
-	lbSetCurSel [_choiceComboIdc, 0];
+	_choiceCombo lbSetCurSel 0; // TODO support setting this as part of the parameters
+	_controlCount = _controlCount + 1;
 	
 	// Move onto the next row
 	_yCoord = _yCoord + TOTAL_ROW_HEIGHT;
 } forEach _choicesArray;
+
+// Create the Ok and Cancel buttons
 
 waitUntil { !dialog };
 _returnValue = [];
