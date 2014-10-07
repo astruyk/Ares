@@ -8,6 +8,7 @@
 	Returns:
 		An array containing the indices of each of the values chosen, or an empty array ([]) if the user cancelled the dialog.
 */
+disableSerialization;
 
 _titleText = [_this, 0] call BIS_fnc_param;
 _choicesArray = [_this, 1, [], [[]]] call BIS_fnc_param;
@@ -23,6 +24,9 @@ _choicesArray = [_this, 1, [], [[]]] call BIS_fnc_param;
 #define BG_X					(1 * GUI_GRID_W + GUI_GRID_X)
 #define BG_Y					(1 * GUI_GRID_H + GUI_GRID_Y)
 #define BG_WIDTH				(38.5 * GUI_GRID_W)
+#define TITLE_Y					(2 * GUI_GRID_H + GUI_GRID_Y)
+#define TITLE_WIDTH				(14 * GUI_GRID_W)
+#define TITLE_HEIGHT			(1.5 * GUI_GRID_H)
 #define LABEL_COLUMN_X			(2 * GUI_GRID_W + GUI_GRID_X)
 #define LABEL_WIDTH				14 * GUI_GRID_W)
 #define LABEL_HEIGHT			(1.5 * GUI_GRID_H)
@@ -44,17 +48,17 @@ _dialog = findDisplay 133798;
 
 // Create the BG and Frame
 _background = _dialog ctrlCreate ["IGUIBack", BASE_IDC];
-_background ctrlSetPosition [BG_X, _yCoord, BG_WIDTH, 100]; // TODO make this the right height
+_background ctrlSetPosition [BG_X, BG_Y, BG_WIDTH, 10 * GUI_GRID_H]; // TODO make this the right height
 _background ctrlCommit 0;
-_frame = _dialog ctrlCreate ["RscFrame", BASE_IDC + 1];
-_frame ctrlSetPosition [BG_X, _yCoord, BG_WIDTH, 100]; // TODO make this the right height
-_frame ctrlCommit 0;
+/*_frame = _dialog ctrlCreate ["RscFrame", BASE_IDC + 1];
+_frame ctrlSetPosition [BG_X, BG_Y, BG_WIDTH, 100]; // TODO make this the right height
+_frame ctrlCommit 0;*/
 
 // Create the label
 _labelControl = _dialog ctrlCreate ["RscText", BASE_IDC + 2];
-_labelControl ctrlSetPosition [0,0,10,10];
+_labelControl ctrlSetPosition [LABEL_COLUMN_X,TITLE_Y,TITLE_WIDTH,TITLE_HEIGHT];
 _labelControl ctrlCommit 0;
-ctrlSetText [BASE_IDC, _labelText];
+ctrlSetText [BASE_IDC + 2, _titleText];
 
 // This will always be the current y-coordinate of the control we're dynamically adding.
 _yCoord = 1 * GUI_GRID_H + GUI_GRID_Y;

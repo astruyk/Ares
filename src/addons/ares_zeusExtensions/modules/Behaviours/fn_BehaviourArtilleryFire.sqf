@@ -14,7 +14,7 @@ if (_activated && local _logic) then
 		_dialogResult = [
 			"Artillery Configuration",
 			[
-				["Ammunition Type", _allAmmuniation],
+				["Ammunition Type", _allAmmunition],
 				["Rounds", ["1", "2", "3", "4", "5"]],
 				["Choose Target", ["Random", "Nearest", "Farthest"]]
 			]] call Ares_fnc_ShowChooseDialog;
