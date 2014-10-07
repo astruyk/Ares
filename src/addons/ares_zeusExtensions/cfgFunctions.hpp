@@ -28,7 +28,6 @@ class Ares // This bit will be prefixed when actually calling the function (e.g.
 		class ArsenalSetup {};
 		class BroadcastCode {};
 		class GetArrayDataFromUser {};
-		class GetDialogChoiceFromUser {};
 		class GetGroupUnderCursor {};
 		class GetSafePos {};
 		class GetUnitUnderCursor {};

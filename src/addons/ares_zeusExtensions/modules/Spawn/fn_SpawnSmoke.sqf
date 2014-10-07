@@ -17,8 +17,8 @@ if (_activated && local _logic) then
 		"Small Mixed Smoke",
 		"Large Mixed Smoke"
 		];
-	_dialogResult = [_options, 0, "Choose the type of smoke to spawn:"] call Ares_fnc_GetDialogChoiceFromUser;
-	if (_dialogResult != -1) then
+	_dialogResult = ["", ["Smoke Type", _options]] call Ares_fnc_ShowChooseDialog;
+	if (count _dialogResult > 0) then
 	{
 		if (isNil "Ares_SmokeGroup") then
 		{
@@ -26,9 +26,9 @@ if (_activated && local _logic) then
 			publicVariable "Ares_SmokeGroup";
 		};
 		_sourceObject = Ares_SmokeGroup createUnit ["LOGIC", (position _logic), [], 0, ""];
-		_sourceObject setName format["Smoke Source (%1)", _options select _dialogResult];
+		_sourceObject setName format["Smoke Source (%1)", _options select (_dialogResult select 0)];
 		[[_sourceObject]] call Ares_fnc_AddUnitsToCurator;
-		switch(_dialogResult) do
+		switch(_dialogResult select 0) do
 		{
 			case 0:
 			{
