@@ -1,8 +1,8 @@
 /*
-	Displays a dialog that prompts the user to choose an option from a set of combo boxes.
+	Displays a dialog that prompts the user to choose an option from a set of combo boxes. If the dialog has a title then the default values provided will be used the FIRST time a dialog is displayed, and the selected values remembered for the next time it is displayed.
 	
 	Params:
-		0 - String - The title to display for the combo box.
+		0 - String - The title to display for the combo box. Do not use non-standard characters (e.g. %&$*()!@#*%^&) that cannot appear in variable names
 		1 - Array of Arrays - The set of choices to display to the user. Each element in the array should be an array in the following format: ["Choice Description", ["Choice1", "Choice2", etc...]] optionally the last element can be a number that indicates which element to select. For example: ["Choose A Pie", ["Apple", "Pumpkin"], 1] will have "Pumpkin" selected by default.
 
 	Alternate Params:
@@ -15,7 +15,7 @@ disableSerialization;
 
 _titleText = [_this, 0] call BIS_fnc_param;
 _choicesArray = _this select 1;
-if ((count _this) == 2) then
+if ((count _this) == 2 && typeName (_choicesArray select 0) == typeName "") then
 {
 	// Person is using the 'short' alternate syntax. Automatically wrap in another array.
 	_choicesArray = [_this select 1];
@@ -76,8 +76,56 @@ if (_titleText != "") then
 	_titleRowHeight = TITLE_HEIGHT;
 };
 
-// Make a global variable so that event handlers can access it and set the selected values
-// directly.
+// TODO move these to seperate functions...
+KRON_StrToArray = {
+	private["_in","_i","_arr","_out"];
+	_in=_this select 0;
+	_arr = toArray(_in);
+	_out=[];
+	for "_i" from 0 to (count _arr)-1 do {
+		_out set [count _out, toString([_arr select _i])];
+	};
+	_out
+};
+
+KRON_StrLen = {
+	private["_in","_arr","_len"];
+	_in=_this select 0;
+	_arr=[_in] call KRON_StrToArray;
+	_len=count (_arr);
+	_len
+};
+
+KRON_Replace = {
+	private["_str","_old","_new","_out","_tmp","_jm","_la","_lo","_ln","_i"];
+	_str=_this select 0;
+	_arr=toArray(_str);
+	_la=count _arr;
+	_old=_this select 1;
+	_new=_this select 2;
+	_na=[_new] call KRON_StrToArray;
+	_lo=[_old] call KRON_StrLen;
+	_ln=[_new] call KRON_StrLen;
+	_out="";
+	for "_i" from 0 to (count _arr)-1 do {
+		_tmp="";
+		if (_i <= _la-_lo) then {
+			for "_j" from _i to (_i+_lo-1) do {
+				_tmp=_tmp + toString([_arr select _j]);
+			};
+		};
+		if (_tmp==_old) then {
+			_out=_out+_new;
+			_i=_i+_lo-1;
+		} else {
+			_out=_out+toString([_arr select _i]);
+		};
+	};
+	_out
+};
+
+// Get the ID for use when looking up previously selected values.
+_titleVariableIdentifier = format ["Ares_ChooseDialog_DefaultValues_%1", [_titleText, " ", "_"] call KRON_Replace];
 {
 	_choiceName = _x select 0;
 	_choices = _x select 1;
@@ -85,6 +133,16 @@ if (_titleText != "") then
 	if (count _x > 2) then
 	{
 		_defaultChoice = _x select 2;
+	};
+	
+	// If this dialog is named, attmept to get the default value from a previously displayed version
+	if (_titleText != "") then
+	{
+		_defaultVariableId = format["%1_%2", _titleVariableIdentifier, _forEachIndex];
+		if (missionNamespace getVariable [_defaultVariableId, -1] != -1) then
+		{
+			_defaultChoice = missionNamespace getVariable _defaultVariableId;
+		};
 	};
 
 	// Create the label for this entry
@@ -146,6 +204,16 @@ if (missionNamespace getVariable "Ares_ChooseDialog_Result" == 1) then
 	{
 		_returnValue set [_forEachIndex, missionNamespace getVariable (format["Ares_ChooseDialog_ReturnValue_%1",_forEachIndex])];
 	}forEach _choicesArray;
+	
+	// Save the selections as defaults for next time
+	if (_titleText != "") then
+	{
+		{
+			_defaultVariableId = format["%1_%2", _titleVariableIdentifier, _forEachIndex];
+			missionNamespace setVariable [_defaultVariableId, _x];
+		} forEach _returnValue;
+	};
+	
 	_returnValue;
 }
 else

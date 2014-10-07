@@ -7,7 +7,7 @@ Ares integrates code from the following mods or scripts:
     * http://www.armaholic.com/page.php?id=26343
 * JTD Building Search Script (by TRexian)
     * http://www.armaholic.com/page.php?id=13130
-* X39's Composition Creation Script (by X39)
-    * http://www.reddit.com/r/arma/comments/2b2cef/creating_custom_zeus_compositions_in_arma_3_x39/
+* Kronzky's String manipulation functions
+    * http://kronzky.info/snippets/strings/index.htm
 
 Ares is provided without warranty. Use at your own risk.
