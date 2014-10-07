@@ -17,7 +17,7 @@ if (_activated && local _logic) then
 		"Small Mixed Smoke",
 		"Large Mixed Smoke"
 		];
-	_dialogResult = ["", ["Smoke Type", _options]] call Ares_fnc_ShowChooseDialog;
+	_dialogResult = ["Create Smoke Effect", ["Smoke Type", _options]] call Ares_fnc_ShowChooseDialog;
 	if (count _dialogResult > 0) then
 	{
 		if (isNil "Ares_SmokeGroup") then

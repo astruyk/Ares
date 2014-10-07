@@ -4,7 +4,7 @@ _activated = _this select 2;
 
 if (_activated && local _logic) then
 {
-	_dialogResult = ["", ["Add...", ["All units in mission", "All units within 50m", "All units within 100m", "All units within 500m"], 1]] call Ares_fnc_ShowChooseDialog;
+	_dialogResult = ["Add Objects To Curator", ["Add...", ["All units in mission", "All units within 50m", "All units within 100m", "All units within 500m"], 1]] call Ares_fnc_ShowChooseDialog;
 
 	if (count _dialogResult > 0) then
 	{

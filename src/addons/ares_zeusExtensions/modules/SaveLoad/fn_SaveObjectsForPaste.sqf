@@ -5,7 +5,7 @@ _activated = _this select 2;
 if (_activated && local _logic) then
 {
 	// Ask the user for the radius to copy from.
-	_dialogResult = ["", ["Radius of copy", ["50m", "100m", "500m"]]] call Ares_fnc_ShowChooseDialog;
+	_dialogResult = ["Save Objects To Clipboard", ["Radius of copy", ["50m", "100m", "500m"]]] call Ares_fnc_ShowChooseDialog;
 	[format["User chose radius with index '%1'", _dialogResult]] call Ares_fnc_LogMessage;
 	if (count _dialogResult > 0) then
 	{
