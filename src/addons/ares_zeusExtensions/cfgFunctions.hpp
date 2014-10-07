@@ -9,6 +9,7 @@ class Ares // This bit will be prefixed when actually calling the function (e.g.
 		class InitAresEvents { preInit = 1; }
 		class InitAresUi { preInit = 1; }
 		class InitAresPlayerActions {};
+		class InitAresGroupCleanup {};
 	};
 
 	// Functions called in response to events

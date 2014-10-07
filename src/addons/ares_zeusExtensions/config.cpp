@@ -198,7 +198,7 @@ class CfgVehicles
 	#include "cfgVehiclesModulesTeleport.hpp"
 	#include "cfgVehiclesModulesArsenal.hpp"
 	#include "cfgVehiclesModulesReinforcements.hpp"
-	#include "cfgVehicleModulesUtil.hpp"
+	#include "cfgVehiclesModulesUtil.hpp"
 };
 
 class CfgFunctions

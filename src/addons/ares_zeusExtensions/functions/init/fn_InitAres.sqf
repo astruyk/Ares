@@ -12,6 +12,7 @@ missionnamespace setVariable ["Ares_debugging", true];
 	["Initializing...."] call Ares_fnc_LogMessage;
 
 	[] call Ares_fnc_InitAresPlayerActions;
+	[] call Ares_fnc_InitAresGroupCleanup;
 
 	["... Done Initializing."] call Ares_fnc_LogMessage;
 };
