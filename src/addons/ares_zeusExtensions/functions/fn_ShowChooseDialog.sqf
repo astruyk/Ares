@@ -95,6 +95,14 @@ if (_titleText != "") then
 } forEach _choicesArray;
 
 // Create the Ok and Cancel buttons
+_okButton = _dialog ctrlCreate ["RscButtonMenuOK", BASE_IDC + _controlCount];
+_okButton ctrlSetPosition [OK_BUTTON_X, _yCoord, OK_BUTTON_WIDTH, OK_BUTTON_HEIGHT];
+_okButton ctrlCommit 0;
+_controlCount = _controlCount + 1;
+
+_cancelButton = _dialog ctrlCreate ["RscButtonMenuCancel", BASE_IDC + _controlCount];
+_cancelButton ctrlSetPosition [CANCEL_BUTTON_X, _yCoord, CANCEL_BUTTON_WIDTH, CANCEL_BUTTON_HEIGHT];
+_cancelButton ctrlCommit 0;
 
 waitUntil { !dialog };
 _returnValue = [];
