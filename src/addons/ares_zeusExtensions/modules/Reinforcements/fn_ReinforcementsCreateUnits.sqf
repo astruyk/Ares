@@ -8,51 +8,21 @@ if (_activated && local _logic) then
 	_allLzs = allMissionObjects "Ares_Module_Reinforcements_Create_Lz";
 	if (count _allLzs > 0) then
 	{
-		// Show the dialog to let the user choose options.
-		_dialog = createDialog "Ares_Reinforcement_Dialog";
-		
-		// Add Side options
-		lbAdd [2100, "NATO"];
-		lbAdd [2100, "CSAT"];
-		lbAdd [2100, "AAF"];
-		lbSetCurSel  [2100, missionNamespace getVariable ["Ares_ReinforcementDialog_LastSelected_Side", 1]];
-		
-		// Add Vehicle Type options
-		lbAdd [2101, "Unarmed Light Vehicles + Scouts"];
-		lbAdd [2101, "Armed Light Vehicles"];
-		lbAdd [2101, "Dedicated Troop Trucks"];
-		lbAdd [2101, "APC's & Heavy Troop Transports"];
-		lbAdd [2101, "Unarmed Aircraft"];
-		lbAdd [2101, "Light Armed Aircraft"];
-		lbSetCurSel  [2101, missionNamespace getVariable ["Ares_ReinforcementDialog_LastSelected_VehicleType", 2]];
-		
-		// Add vehicle behaviours
-		lbAdd [2102, "RTB and Despawn"];
-		lbAdd [2102, "Stay at LZ"];
-		lbSetCurSel  [2102, missionNamespace getVariable ["Ares_ReinforcementDialog_LastSelected_VehicleBehaviour", 0]];
-		
-		// Add LZ choosing algorithms
-		lbAdd [2103, "Random"];
-		lbAdd [2103, "Nearest"];
-		lbAdd [2103, "Farthest"];
-		lbSetCurSel  [2103, missionNamespace getVariable ["Ares_ReinforcementDialog_LastSelected_Lz_Algorithm", 0]];
+		_dialogResult = ["Create Reinforcements",
+			[
+				["Side", ["NATO", "CSAT", "AAF"], 1],
+				["Vehicle Type", ["Unarmed Light Vehicles + Scouts", "Armed Light Vehicles", "Dedicated Troop Trucks", "APC's & Heavy Troop Transports", "Unarmed Aircraft", "Light Armed Aircraft"]],
+				["Vehicle Behaviour After Dropoff", ["RTB and Despawn", "Stay at LZ"]],
+				["Vehicle Landing Zone", ["Random", "Nearest", "Farthest"]],
+				["Unit Rally Point", ["Random", "Nearest", "Farthest"]]
+			]
+		] call Ares_fnc_ShowChooseDialog;
 
-		// Add RP choosing algorithms
-		lbAdd [2104, "Random"];
-		lbAdd [2104, "Nearest"];
-		lbAdd [2104, "Farthest"];
-		lbSetCurSel  [2104, missionNamespace getVariable ["Ares_ReinforcementDialog_LastSelected_Rp_Algorithm", 0]];
-
-		waitUntil { !dialog; };
-		_dialogResult = missionNamespace getVariable ["Ares_ReinforcementDialog_Result", -1];
-		
-		if (_dialogResult == 1) then
+		if (count _dialogResult > 0) then
 		{
 			// The user chose 'OK'. We should spawn stuff.
-		
+
 			// Side indexes are used to lookup things in the tables
-			
-			
 			// Data can be accessed as follows:
 			// (((_data select <sideIndex>) select <dataTypeIndex>) select <specificDataOrArray>
 			// Where <sideIndex> is the index of the side you want (0=NATO, 1=CSAT, 2=AAF)
@@ -143,21 +113,14 @@ if (_activated && local _logic) then
 			];
 		
 			// Get the data from the dialog to use when choosing what units to spawn
-			_dialogSide =             missionNamespace getVariable ["Ares_ReinforcementDialog_Selected_Side", -1];
-			_dialogVehicleClass =     missionNamespace getVariable ["Ares_ReinforcementDialog_Selected_VehicleType", -1];
-			_dialogVehicleBehaviour = missionNamespace getVariable ["Ares_ReinforcementDialog_Selected_VehicleBehaviour", -1];
-			_dialogLzAlgorithm =      missionNamespace getVariable ["Ares_ReinforcementDialog_Selected_Lz_Algorithm", -1];
-			_dialogRpAlgorithm =      missionNamespace getVariable ["Ares_ReinforcementDialog_Selected_Rp_Algorithm", -1];
-			_lzSize = 20;	// TODO make this a dialog parameter.
-			_rpSize = 20;	// TODO make this a dialog parameters.
-			
-			// Save the chosen values for next time the dialog is shown.
-			missionNamespace setVariable ["Ares_ReinforcementDialog_LastSelected_Side", _dialogSide];
-			missionNamespace setVariable ["Ares_ReinforcementDialog_LastSelected_VehicleType", _dialogVehicleClass];
-			missionNamespace setVariable ["Ares_ReinforcementDialog_LastSelected_VehicleBehaviour", _dialogVehicleBehaviour];
-			missionNamespace setVariable ["Ares_ReinforcementDialog_LastSelected_Lz_Algorithm", _dialogLzAlgorithm];
-			missionNamespace setVariable ["Ares_ReinforcementDialog_LastSelected_Rp_Algorithm", _dialogRpAlgorithm];
-			
+			_dialogSide =             _dialogResult select 0;
+			_dialogVehicleClass =     _dialogResult select 1;
+			_dialogVehicleBehaviour = _dialogResult select 2;
+			_dialogLzAlgorithm =      _dialogResult select 3;
+			_dialogRpAlgorithm =      _dialogResult select 4;
+			_lzSize = 20;	// TODO make this a dialog parameter?
+			_rpSize = 20;	// TODO make this a dialog parameters?
+
 			[format ["Dialog results: Side=%1, VehicleType=%2, Behaviour=%3, LzAlgorithm=%4, RpAlgorithm=%5", _dialogSide, _dialogVehicleClass, _dialogVehicleBehaviour, _dialogLzAlgorithm, _dialogRpAlgorithm]] call Ares_fnc_LogMessage;
 
 			// Convert into a usable value

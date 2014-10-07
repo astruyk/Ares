@@ -5,6 +5,5 @@ class SaveLoadModules
 	class PasteObjectsAbsolute {};
 	class PasteObjectsRelative {};
 	class RemoveObjectsFromCuratorModule {};
-	class SaveObjectsForComposition {};
 	class SaveObjectsForPaste {};
 };

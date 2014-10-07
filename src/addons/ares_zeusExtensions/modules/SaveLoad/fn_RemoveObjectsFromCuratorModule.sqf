@@ -4,17 +4,17 @@ _activated = _this select 2;
 
 if (_activated && local _logic) then
 {
-	_dialogResult = [["All units in mission", "All units within 50m", "All units within 100m", "All units within 500m"], 1, "Please choose an option:"] call Ares_fnc_GetDialogChoiceFromUser;
+	_dialogResult = ["Remove Objects From Curator", ["Remove...", ["All units in mission", "All units within 50m", "All units within 100m", "All units within 500m"], 1]] call Ares_fnc_ShowChooseDialog;
 
-	if (_dialogResult != -1) then
+	if (count _dialogResult > 0) then
 	{
 		_objectsToRemove = vehicles + (allMissionObjects "Man") + (allMissionObjects "Air") + (allMissionObjects "Ammo");
 		
-		if (_dialogResult != 0) then
+		if (_dialogResult select 0 != 0) then
 		{
 			_filteredList = [];
 			_radius = 50;
-			switch (_dialogResult) do
+			switch (_dialogResult select 0) do
 			{
 				case 1: { _radius = 50; };
 				case 2: { _radius = 100; };

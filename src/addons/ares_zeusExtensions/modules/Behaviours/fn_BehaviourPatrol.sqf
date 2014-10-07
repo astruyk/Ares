@@ -8,11 +8,11 @@ if (_activated && local _logic) then
 
 	if (not isnull _groupUnderCursor) then
 	{
-		_dialogResult = [["50m", "100m", "150m", "200m", "500m"], 0, "Choose size of patrol grid:"] call Ares_fnc_GetDialogChoiceFromUser;
-		if (_dialogResult != -1) then
+		_dialogResult = ["Begin Patrol", ["Size of patrol grid:", ["50m", "100m", "150m", "200m", "500m"]]] call Ares_fnc_ShowChooseDialog;
+		if (count _dialogResult > 0) then
 		{
 			_radius = 50;
-			switch (_dialogResult) do
+			switch (_dialogResult select 0) do
 			{
 				case 0: { _radius = 50; };
 				case 1: { _radius = 100; };
