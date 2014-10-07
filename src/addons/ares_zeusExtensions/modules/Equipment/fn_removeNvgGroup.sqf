@@ -11,13 +11,15 @@ if (_activated && local _logic) then
 		Ares_RemoveNvgGroupCode =
 		{
 			_group = _this select 0;
+			if (local _group) then
 			{
-				if (isServer) then
 				{
 					_x unlinkItem "NVGoggles";
-				};
-				_x addPrimaryWeaponItem "acc_flashlight";
-			} forEach units _group;
+					_x unlinkItem "NVGoggles_OPFOR";
+					_x unlinkItem "NVGoggles_INDEP";
+					_x addPrimaryWeaponItem "acc_flashlight";
+				} forEach units _group;
+			};
 		};
 		publicVariable "Ares_RemoveNvgGroupCode";
 	};
