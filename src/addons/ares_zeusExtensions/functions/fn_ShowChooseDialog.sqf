@@ -99,7 +99,7 @@ if (_titleText != "") then
 	// Set the current choice, record it in the global variable, and setup the event handler to update it.
 	_choiceCombo lbSetCurSel _defaultChoice;
 	missionNamespace setVariable [format["Ares_ChooseDialog_ReturnValue_%1",_forEachIndex], _defaultChoice];
-	_choiceCombo ctrlSetEventHandler ["LBSelChanged", "missionNamespace setVariable [format['Ares_ChooseDialog_ReturnValue_%1'," + str (_forEachIndex) + "], _defaultChoice];"];
+	_choiceCombo ctrlSetEventHandler ["LBSelChanged", "missionNamespace setVariable [format['Ares_ChooseDialog_ReturnValue_%1'," + str (_forEachIndex) + "], _this select 1];"];
 	_controlCount = _controlCount + 1;
 	
 	// Move onto the next row
