@@ -47,16 +47,17 @@ _dialog = findDisplay 133798;
 
 // Create the BG and Frame
 _background = _dialog ctrlCreate ["IGUIBack", BASE_IDC];
-_background ctrlSetPosition [BG_X, BG_Y, BG_WIDTH, 10 * GUI_GRID_H]; // TODO make this the right height
+_background ctrlSetPosition [BG_X, BG_Y, BG_WIDTH, 10 * GUI_GRID_H];
 _background ctrlCommit 0;
 /*_frame = _dialog ctrlCreate ["RscFrame", BASE_IDC + 1];
 _frame ctrlSetPosition [BG_X, BG_Y, BG_WIDTH, 100]; // TODO make this the right height
 _frame ctrlCommit 0;*/
 
 // Start placing controls 1 units down in the window.
-_yCoord = BG_Y + (1 * GUI_GRID_H + GUI_GRID_Y);
+_yCoord = BG_Y + (1 * GUI_GRID_H); // Start at 1 down for padding.
 _controlCount = 2;
 
+_titleRowHeight = 0;
 if (_titleText != "") then
 {
 	// Create the label
@@ -67,6 +68,7 @@ if (_titleText != "") then
 	ctrlSetText [BASE_IDC + 2, "BAR"];
 	_yCoord = _yCoord + TOTAL_ROW_HEIGHT;
 	_controlCount = _controlCount + 1;
+	_titleRowHeight = TITLE_HEIGHT;
 };
 
 // Make a global variable so that event handlers can access it and set the selected values
@@ -120,6 +122,15 @@ _cancelButton ctrlSetPosition [CANCEL_BUTTON_X, _yCoord, CANCEL_BUTTON_WIDTH, CA
 _cancelButton ctrlSetEventHandler ["ButtonClick", "missionNamespace setVariable ['Ares_ChooseDialog_Result', -1]; closeDialog 2;"];
 _cancelButton ctrlCommit 0;
 _controlCount = _controlCount + 1;
+
+// Resize the background to fit all the controls we've created.
+// controlCount, and 2 for the OK/Cancel buttons. +2 for padding on top and bottom.
+_backgroundHeight = (TOTAL_ROW_HEIGHT * (count _choicesArray))
+					+ _titleRowHeight
+					+ OK_BUTTON_HEIGHT
+					+ (2 * GUI_GRID_H); // We want some padding on the top and bottom
+_background ctrlSetPosition [BG_X, BG_Y, BG_WIDTH, _backgroundHeight];
+_background ctrlCommit 0;
 
 waitUntil { !dialog };
 
