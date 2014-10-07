@@ -134,5 +134,5 @@ if (missionNamespace getVariable "Ares_ChooseDialog_Result" == 1) then
 }
 else
 {
-	objNull;
+	[];
 };
