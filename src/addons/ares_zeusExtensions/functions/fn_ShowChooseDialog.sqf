@@ -61,7 +61,7 @@ if (_titleText != "") then
 {
 	// Create the label
 	_labelControl = _dialog ctrlCreate ["RscText", BASE_IDC + _controlCount];
-	_labelControl ctrlSetPosition [LABEL_COLUMN_X,TITLE_Y,TITLE_WIDTH,TITLE_HEIGHT];
+	_labelControl ctrlSetPosition [LABEL_COLUMN_X, _yCoord, TITLE_WIDTH, TITLE_HEIGHT];
 	_labelControl ctrlCommit 0;
 	_labelControl ctrlSetText _titleText;
 	ctrlSetText [BASE_IDC + 2, "BAR"];
