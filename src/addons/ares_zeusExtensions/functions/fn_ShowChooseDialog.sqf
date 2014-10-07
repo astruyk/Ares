@@ -28,7 +28,7 @@ _choicesArray = [_this, 1, [], [[]]] call BIS_fnc_param;
 #define TITLE_WIDTH				(14 * GUI_GRID_W)
 #define TITLE_HEIGHT			(1.5 * GUI_GRID_H)
 #define LABEL_COLUMN_X			(2 * GUI_GRID_W + GUI_GRID_X)
-#define LABEL_WIDTH				14 * GUI_GRID_W)
+#define LABEL_WIDTH				(14 * GUI_GRID_W)
 #define LABEL_HEIGHT			(1.5 * GUI_GRID_H)
 #define COMBO_COLUMN_X			(17.5 * GUI_GRID_W + GUI_GRID_X)
 #define COMBO_WIDTH				(21 * GUI_GRID_W)
@@ -58,10 +58,41 @@ _frame ctrlCommit 0;*/
 _labelControl = _dialog ctrlCreate ["RscText", BASE_IDC + 2];
 _labelControl ctrlSetPosition [LABEL_COLUMN_X,TITLE_Y,TITLE_WIDTH,TITLE_HEIGHT];
 _labelControl ctrlCommit 0;
-ctrlSetText [BASE_IDC + 2, _titleText];
+_labelControl ctrlSetText _titleText;
+ctrlSetText [BASE_IDC + 2, "BAR"];
 
 // This will always be the current y-coordinate of the control we're dynamically adding.
-_yCoord = 1 * GUI_GRID_H + GUI_GRID_Y;
+_yCoord = 4 * GUI_GRID_H + GUI_GRID_Y;
+_controlCount = 3;
+{
+	_choiceName = _x select 0;
+	_choices = _x select 1;
+
+	// Create the label for this entry
+	_choiceLabel = _dialog ctrlCreate ["RscText", BASE_IDC + _controlCount];
+	_choiceLabel ctrlSetPosition [LABEL_COLUMN_X, _yCoord, LABEL_WIDTH, LABEL_HEIGHT];
+	_choiceLabel ctrlSetText _choiceName;
+	_choiceLabel ctrlCommit 0;
+	_controlCount = _controlCount + 1;
+	
+	// Create the combo box for this entry
+	_choiceComboIdc = BASE_IDC + _controlCount;
+	_choiceCombo = _dialog ctrlCreate ["RscCombo", _choiceComboIdc];
+	_choiceCombo ctrlSetPosition [COMBO_COLUMN_X, _yCoord, COMBO_WIDTH, COMBO_HEIGHT];
+	_choiceCombo ctrlCommit 0;
+	_controlCount = _controlCount + 1;
+	
+	// Populate the combo box for this entry
+	{
+		lbAdd [_choiceComboIdc, _x];
+	} forEach _choices;
+	
+	// TODO support setting this as part of the parameters
+	lbSetCurSel [_choiceComboIdc, 0];
+	
+	// Move onto the next row
+	_yCoord = _yCoord + TOTAL_ROW_HEIGHT;
+} forEach _choicesArray;
 
 waitUntil { !dialog };
 _returnValue = [];
