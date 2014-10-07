@@ -200,5 +200,4 @@ class CfgGroups
 
 #include "ui\baseDialogs.hpp"
 #include "ui\copyPasteDialog.hpp"
-#include "ui\reinforcementDialog.hpp"
 #include "ui\dynamicDialog.hpp"
