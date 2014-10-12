@@ -13,21 +13,36 @@ _shouldBeInvisible = _this select 1;
 _updateVisibilityBlock = {
 	_unit = _this select 0;
 	_shouldBeInvisible = _this select 1;
-	if (_shouldBeInvisible) then
-	{
-		_unit setVariable ["Ares_isUnitInvisible", "true", true];
-	}
-	else
-	{
-		_unit setVariable ["Ares_isUnitInvisible", "false", true];
-	};
-	_unit setDamage 0;
-	_unit allowDamage !_shouldBeInvisible;
-	_unit setCaptive _shouldBeInvisible;
-	_unit hideObjectGlobal _shouldBeInvisible;
-};
-[_updateVisibilityBlock, [_unit, _shouldBeInvisible], false] call Ares_fnc_BroadcastCode;
 
-hint "Player is now invisible.";
+	if (local _unit) then
+	{
+		if (_shouldBeInvisible) then
+		{
+			_unit setVariable ["Ares_isUnitInvisible", "true", true];
+		}
+		else
+		{
+			_unit setVariable ["Ares_isUnitInvisible", "false", true];
+		};
+		
+		_unit setDamage 0;
+		_unit allowDamage !_shouldBeInvisible;
+		_unit setCaptive _shouldBeInvisible;
+	};
+	if (isServer) then
+	{
+		_unit hideObjectGlobal _shouldBeInvisible;
+	};
+};
+[_updateVisibilityBlock, [_unit, _shouldBeInvisible], true] call Ares_fnc_BroadcastCode;
+
+if (_shouldBeInvisible) then
+{
+	hint "Player is now invisible.";
+}
+else
+{
+	hint "Player is no longer invisible.";
+};
 sleep 3;
 hint "";
