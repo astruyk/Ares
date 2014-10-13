@@ -10,6 +10,7 @@ if (_activated && local _logic) then
 	// garrisoning. Choose a point outside so they try to leave the building.
 	_outsidePos = [getPos (leader _groupUnderCursor), [3,15], 2, 0] call Ares_fnc_GetSafePos;
 	{
+		_x enableAI "MOVE";
 		_x doMove _outsidePos;
 	} forEach(units _groupUnderCursor);
 
