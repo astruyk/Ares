@@ -14,10 +14,13 @@ if (_activated && local _logic) then
 			if (local _group) then
 			{
 				{
-					_x unlinkItem "NVGoggles";
-					_x unlinkItem "NVGoggles_OPFOR";
-					_x unlinkItem "NVGoggles_INDEP";
-					_x addPrimaryWeaponItem "acc_flashlight";
+					_unit = _x;
+					{
+						_unit unassignItem _x;
+						_unit removeItem _x;
+					} forEach ["NVGoggles", "NVGoggles_OPFOR", "NVGoggles_INDEP"];
+					_unit removePrimaryWeaponItem "acc_pointer_IR";
+					_unit addPrimaryWeaponItem "acc_flashlight";
 				} forEach units _group;
 			};
 		};
