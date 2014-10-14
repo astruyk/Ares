@@ -13,8 +13,8 @@ if (_activated && local _logic) then
 				["Side", ["NATO", "CSAT", "AAF"], 1],
 				["Vehicle Type", ["Unarmed Light Vehicles + Scouts", "Armed Light Vehicles", "Dedicated Troop Trucks", "APC's & Heavy Troop Transports", "Unarmed Aircraft", "Light Armed Aircraft"]],
 				["Vehicle Behaviour After Dropoff", ["RTB and Despawn", "Stay at LZ"]],
-				["Vehicle Landing Zone", ["Random", "Nearest", "Farthest"]],
-				["Unit Rally Point", ["Random", "Nearest", "Farthest"]]
+				["Vehicle Landing Zone", ["Random", "Nearest", "Farthest", "Least Used"]],
+				["Unit Rally Point", ["Random", "Nearest", "Farthest", "Least Used"]]
 			]
 		] call Ares_fnc_ShowChooseDialog;
 
@@ -131,7 +131,7 @@ if (_activated && local _logic) then
 			// Choose an LZ to unload at.
 			_lz = _allLzs call BIS_fnc_selectRandom;
 			
-			// Choose the nearest LZ to the spawn point if that behaviour was chosen.
+			// Choose the LZ based on the chosen behaviour
 			if (_dialogLzAlgorithm == 1) then
 			{
 				// Nearest
@@ -142,6 +142,19 @@ if (_activated && local _logic) then
 				// Farthest
 				_lz = [position _logic, _allLzs] call Ares_fnc_GetFarthest;
 			};
+			if (_dialogLzAlgorithm == 3) then
+			{
+				// Least used
+				{
+					if (_x getVariable ["Ares_Lz_Count", 0] < _lz getVariable ["Ares_Lz_Count", 0]) then
+					{
+						_lz = _x;
+					};
+				} forEach _allLzs;
+			};
+			
+			// Now that we've chosen an LZ, increment the count for it.
+			_lz setVariable ["Ares_Lz_Count", (_lz getVariable ["Ares_Lz_Count", 0]) + 1];
 
 			// Spawn a vehicle, send it to the LZ and have it unload the troops before returning home and
 			// deleting itself.
@@ -215,7 +228,7 @@ if (_activated && local _logic) then
 				{
 					_rp = _allRps call BIS_fnc_selectRandom;
 
-					// Choose the nearest RP to the LZ instead if that behaviour was selected.
+					// Choose the RP based on the algorithm chosen
 					if (_dialogRpAlgorithm == 1) then
 					{
 						_rp = [position _lz, _allRps] call Ares_fnc_GetNearest;
@@ -224,6 +237,19 @@ if (_activated && local _logic) then
 					{
 						_rp = [position _lz, _allRps] call Ares_fnc_GetFarthest;
 					};
+					if (_dialogRpAlgorithm == 3) then
+					{
+						// Least used
+						{
+							if (_x getVariable ["Ares_Rp_Count", 0] < _rp getVariable ["Ares_Rp_Count", 0]) then
+							{
+								_rp = _x;
+							};
+						} forEach _allRps;
+					};
+
+					// Now that we've chosen an RP, increment the count for it.
+					_rp setVariable ["Ares_Rp_Count", (_rp getVariable ["Ares_Rp_Count", 0]) + 1];
 					
 					_infantryRpWp = _infantryGroup addWaypoint [position _rp, _rpSize];
 				}
