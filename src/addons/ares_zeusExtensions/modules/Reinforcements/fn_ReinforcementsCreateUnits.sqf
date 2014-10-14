@@ -11,7 +11,7 @@ if (_activated && local _logic) then
 		_dialogResult = ["Create Reinforcements",
 			[
 				["Side", ["NATO", "CSAT", "AAF"], 1],
-				["Vehicle Type", ["Unarmed Light Vehicles + Scouts", "Armed Light Vehicles", "Dedicated Troop Trucks", "APC's & Heavy Troop Transports", "Unarmed Aircraft", "Light Armed Aircraft"]],
+				["Vehicle Type", ["Unarmed Light Vehicles + Scouts", "Armed Light Vehicles", "Dedicated Troop Trucks", "APC's & Heavy Troop Transports", "Unarmed Aircraft", "Light Armed Aircraft", "Unarmed Boats", "Armed Boats"]],
 				["Vehicle Behaviour After Dropoff", ["RTB and Despawn", "Stay at LZ"]],
 				["Vehicle Landing Zone", ["Random", "Nearest", "Farthest", "Least Used"]],
 				["Unit Rally Point", ["Random", "Nearest", "Farthest", "Least Used"]]
@@ -49,6 +49,12 @@ if (_activated && local _logic) then
 						],
 						[	// 5 - Armed Transport Aircraft
 							"B_Heli_Transport_01_F", "B_Heli_Transport_01_camo_F"
+						],
+						[	// 6 - Unarmed Boats
+							"B_Boat_Transport_01_F", "B_G_Boat_Transport_01_F"
+						],
+						[	// 7 - Armed Boats
+							"B_Boat_Armed_01_minigun_F"
 						]
 					],
 					[	// 1 - Squad Sets
@@ -76,6 +82,12 @@ if (_activated && local _logic) then
 						],
 						[	// 5 - Armed Transport Aircraft
 							"O_Heli_Light_02_F"
+						],
+						[	// 6 - Unarmed Boats
+							"O_Boat_Transport_01_F", "O_G_Boat_Transport_01_F"
+						],
+						[	// 7 - Armed Boats
+							"O_Boat_Armed_01_hmg_F"
 						]
 					],
 					[	// 1 - Squad Sets
@@ -103,6 +115,12 @@ if (_activated && local _logic) then
 						],
 						[	// 5 - Armed Transport Aircraft
 							"I_Heli_light_03_F"
+						],
+						[	// 6 - Unarmed Boats
+							"I_Boat_Transport_01_F", "I_G_Boat_Transport_01_F"
+						],
+						[	// 7 - Armed Boats
+							"I_Boat_Armed_01_minigun_F"
 						]
 					],
 					[	// 1 - Squad Sets
