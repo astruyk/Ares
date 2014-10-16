@@ -18,6 +18,7 @@
 private ["_pos", "_objs"];
 _pos = [_this, 0, [0, 0], [[]]] call BIS_fnc_Param;
 _objs = [_this, 1, [[0,0,0]], [[]]] call BIS_fnc_Param;
+_preserveOrientations = [_this, 2, false, [false]] call BIS_fnc_Param;
 
 // The copy script will have added the reference point as the last object in the array.
 // Get the position from it, and then remove it from the array so we no longer process it.
@@ -85,12 +86,9 @@ _multiplyMatrixFunc =
 	//If fuel and damage were grabbed, map them
 	if (!isNil "_fuel") then {_newObj setFuel _fuel};
 	if (!isNil "_damage") then {_newObj setDamage _damage;};
-	if (!isNil "_orientation") then 
+	if (!isNil "_orientation" && _preserveOrientations && ((count _orientation) > 0)) then 
 	{
-		if ((count _orientation) > 0) then 
-		{
-			([_newObj] + _orientation) call BIS_fnc_setPitchBank;
-		};
+		([_newObj] + _orientation) call BIS_fnc_setPitchBank;
 	};
 	_newObjs = _newObjs + [_newObj];
 } forEach _objs;
