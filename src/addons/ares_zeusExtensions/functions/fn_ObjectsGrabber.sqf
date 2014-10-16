@@ -80,7 +80,7 @@ _outputText = "[";
 		"Cock_random_F",
 		"Cock_white_F",
 		"Sheep_random_F"];
-	if (_objectType in _typeBlacklist_objectType || _x == player) then
+	if (_objectType in _typeBlacklist || _x == player) then
 	{
 		_excludeFlag = true;
 	};
@@ -96,7 +96,7 @@ _objs = _objs - [-1];
 //Process remaining objects
 _objectsToSave = [];
 {
-	private ["_type", "_ASL", "_objPos", "_dX", "_dY", "_z", "_azimuth", "_fuel", "_damage", "_orientation", "_varName", "_init", "_simulation", "_replaceBy", "_outputArray"];
+	private ["_type", "_ASL", "_objPos", "_dX", "_dY", "_z", "_azimuth", "_fuel", "_damage", "_orientation", "_outputArray"];
 	_type = typeOf _x;
 	_ASL = _x getVariable ["ASL", false];
 	if (!_ASL) then {_objPos = position _x;} else {_objPos = getPosASL _x;}; //To cover some situations (inside objects with multiple roadways)
@@ -109,16 +109,8 @@ _objectsToSave = [];
 	_fuel = fuel _x;
 	_damage = damage _x;
 	if (_grabOrientation) then {_orientation = _x call BIS_fnc_getPitchBank;} else {_orientation = [];};
-	_varName = vehicleVarName _x;
-	_init = _x getVariable ["init", ""];
-	//TODO: re-enable once 3D editor simulation is fixed
-	//_simulation = simulationEnabled _x;
-	_simulation = _x getVariable ["simulation", true];
-
-	_replaceBy = _x getVariable ["replaceBy", ""];
-	if (_replaceBy != "") then {_type = _replaceBy;};
-
-	_outputArray = [_type, [_xPos, _yPos, _zPos], _azimuth, _fuel, _damage, _orientation, _varName, _init, _simulation, _ASL];
+	
+	_outputArray = [_type, [_xPos, _yPos, _zPos], _azimuth, _fuel, _damage, _orientation, _ASL];
 	_outputText = _outputText + (str _outputArray);
 	_outputText = _outputText + ",";
 

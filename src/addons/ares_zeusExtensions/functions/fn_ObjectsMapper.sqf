@@ -53,19 +53,16 @@ _multiplyMatrixFunc =
 };
 
 {
-	private ["_type", "_relPos", "_azimuth", "_fuel", "_damage", "_orientation", "_varName", "_init", "_simulation", "_ASL", "_newObj"];
+	private ["_type", "_relPos", "_azimuth", "_fuel", "_damage", "_orientation", "_ASL", "_newObj"];
 	_type = _x select 0;
 	_relPos = _x select 1;
 	_azimuth = _x select 2;
 	
-	//Optionally map certain features for backwards compatibility
+	//Optionally map certain features if they're included in the data. Order must match the grabber order.
 	if ((count _x) > 3) then {_fuel = _x select 3};
 	if ((count _x) > 4) then {_damage = _x select 4};
 	if ((count _x) > 5) then {_orientation = _x select 5};
-	if ((count _x) > 6) then {_varName = _x select 6};
-	if ((count _x) > 7) then {_init = _x select 7};
-	if ((count _x) > 8) then {_simulation = _x select 8};
-	if ((count _x) > 9) then {_ASL = _x select 9};
+	if ((count _x) > 6) then {_ASL = _x select 6};
 	if (isNil "_ASL") then {_ASL = false;};
 
 	_newPos = [_relPos select 0, _relPos select 1, _relPos select 2];
@@ -83,7 +80,7 @@ _multiplyMatrixFunc =
 	//Create the object and make sure it's in the correct location
 	_newObj = _type createVehicle _newPos;
 	_newObj setDir (_azimuth);
-	if (!_ASL) then {_newObj setPos _newPos;} else {_newObj setPosASL _newPos; _newObj setVariable ["BIS_DynO_ASL", true];};
+	if (!_ASL) then {_newObj setPos _newPos;} else {_newObj setPosASL _newPos;};
 	
 	//If fuel and damage were grabbed, map them
 	if (!isNil "_fuel") then {_newObj setFuel _fuel};
@@ -95,17 +92,6 @@ _multiplyMatrixFunc =
 			([_newObj] + _orientation) call BIS_fnc_setPitchBank;
 		};
 	};
-	if (!isNil "_varName") then 
-	{
-		if (_varName != "") then 
-		{
-			_newObj setVehicleVarName _varName;
-			call (compile (_varName + " = _newObj;"));
-		};
-	};
-	if (!isNil "_init") then {_newObj call (compile ("this = _this; " + _init));}; //TODO: remove defining this hotfix?
-	if (!isNil "_simulation") then {_newObj enableSimulation _simulation};
-
 	_newObjs = _newObjs + [_newObj];
 } forEach _objs;
 
