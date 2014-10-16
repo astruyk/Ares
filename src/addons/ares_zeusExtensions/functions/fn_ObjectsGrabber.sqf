@@ -64,11 +64,23 @@ _outputText = "[";
 	};
 	
 	 _objectType = typeOf _x;
-	 if ( _objectType == "Rabbit_F"
-		|| _objectType == "Snake_random_F"
-		|| _objectType == "GroundWeaponHolder"
-		|| _objectType == "Ares_Module_Save_Objects_For_Paste"
-		|| _x == player) then
+	 _typeBlacklist = [
+		"Ares_Module_Save_Objects_For_Paste",
+		"GroundWeaponHolder",
+		"Salema_F",
+		"Ornate_random_F",
+		"Mackerel_F",
+		"Tuna_F",
+		"Mullet_F", 
+		"CatShark_F",
+		"Rabbit_F",
+		"Snake_random_F",
+		"Turtle_F",
+		"Hen_random_F",
+		"Cock_random_F",
+		"Cock_white_F",
+		"Sheep_random_F"];
+	if (_objectType in _typeBlacklist_objectType || _x == player) then
 	{
 		_excludeFlag = true;
 	};
@@ -108,7 +120,7 @@ _objectsToSave = [];
 
 	_outputArray = [_type, [_xPos, _yPos, _zPos], _azimuth, _fuel, _damage, _orientation, _varName, _init, _simulation, _ASL];
 	_outputText = _outputText + (str _outputArray);
-	_outputText = _outputText + ", ";
+	_outputText = _outputText + ",";
 
 	//debugLog (format ["Log: objectGrabber: %1", _outputArray]);
 } forEach _objs;
