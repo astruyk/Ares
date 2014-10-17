@@ -10,6 +10,13 @@ if (_activated && local _logic) then
 	if (_vehicle isKindOf "Helicopter") then
 	{
 		_groupUnderCursor = (group _unitUnderCursor);
+		
+		// Determine if there are any passengers to drop off in the vehicle.
+		_hasAnyUnitsInCargo = false;
+		{
+			if (_vehicle getCargoIndex _x != -1) exitWith { _hasAnyUnitsInCargo = true; }
+		} forEach crew _vehicle;
+
 		_landingPos = (position _vehicle) findEmptyPosition [0, 500, (typeOf _vehicle)];
 		if (count _landingPos > 0) then
 		{
@@ -19,11 +26,18 @@ if (_activated && local _logic) then
 				deleteWaypoint ((waypoints _groupUnderCursor) select 0);
 			};
 
-			_waypoint = _groupUnderCursor addWaypoint [_landingPos, 0];
-			_waypoint setWaypointType "TR UNLOAD";
+			if (_hasAnyUnitsInCargo) then
+			{
+				_waypoint = _groupUnderCursor addWaypoint [_landingPos, 0];
+				_waypoint setWaypointType "TR UNLOAD";
+			}
+			else
+			{
+				_vehicle land "LAND";
+			};
 			_unitUnderCursor allowFleeing 0;
 			
-			[objnull, "Landing helicopter ASAP."] call bis_fnc_showCuratorFeedbackMessage;
+			[objnull, "Landing helicopter."] call bis_fnc_showCuratorFeedbackMessage;
 		}
 		else
 		{
