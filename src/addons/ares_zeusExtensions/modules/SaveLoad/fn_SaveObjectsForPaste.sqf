@@ -18,8 +18,7 @@ if (_activated && local _logic) then
 			default { _radius = 100; };
 		};
 		
-		_centerPosition = position _logic;
-		_text = [_centerPosition, _radius, true] call Ares_fnc_ObjectsGrabber;
+		_text = [_logic, _radius, true] call Ares_fnc_ObjectsGrabber;
 
 		copyToClipBoard _text;
 		

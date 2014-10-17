@@ -15,14 +15,14 @@
 	Modified for Ares by Anton Struyk
 */
 
-private ["_pos", "_objs"];
-_pos = [_this, 0, [0, 0], [[]]] call BIS_fnc_Param;
+private ["_newAnchorObject", "_objs", "_preserveOrientations"];
+_newAnchorObject = [_this, 0, objNull, [objNull]] call BIS_fnc_Param;
 _objs = [_this, 1, [[0,0,0]], [[]]] call BIS_fnc_Param;
 _preserveOrientations = [_this, 2, false, [false]] call BIS_fnc_Param;
 
 // The copy script will have added the reference point as the last object in the array.
 // Get the position from it, and then remove it from the array so we no longer process it.
-_anchorPosition = _objs select ((count _objs) - 1);
+_originalAnchorPosition = _objs select ((count _objs) - 1);
 _objs resize ((count _objs) - 1);
 
 //Make sure there are definitions in the final object array
@@ -31,32 +31,18 @@ if ((count _objs) == 0) exitWith {debugLog "Log: [BIS_fnc_objectMapper] No eleme
 private ["_newObjs"];
 _newObjs = [];
 
-private ["_posX", "_posY", "_useAbsolutePositions"];
-_posX = _pos select 0;
-_posY = _pos select 1;
-_useAbsolutePositions = _posX == 0 && _posY == 0;
+private ["_useAbsolutePositions"];
+_useAbsolutePositions = isNull _newAnchorObject;
 
-//Function to multiply a [2, 2] matrix by a [2, 1] matrix
-private ["_multiplyMatrixFunc"];
-_multiplyMatrixFunc =
-{
-	private ["_array1", "_array2", "_result"];
-	_array1 = _this select 0;
-	_array2 = _this select 1;
-
-	_result =
-	[
-		(((_array1 select 0) select 0) * (_array2 select 0)) + (((_array1 select 0) select 1) * (_array2 select 1)),
-		(((_array1 select 1) select 0) * (_array2 select 0)) + (((_array1 select 1) select 1) * (_array2 select 1))
-	];
-
-	_result
-};
+private ["_newAnchorX", "_newAnchorY", "_newAnchorZ"];
+_newAnchorX = (position _newAnchorObject) select 0;
+_newAnchorY = (position _newAnchorObject) select 1;
+_newAnchorZ = (position _newAnchorObject) select 2;
 
 {
-	private ["_type", "_relPos", "_azimuth", "_fuel", "_damage", "_orientation", "_ASL", "_newObj"];
+	private ["_type", "_originalPosition", "_azimuth", "_fuel", "_damage", "_orientation", "_ASL", "_newObj"];
 	_type = _x select 0;
-	_relPos = _x select 1;
+	_originalPosition = _x select 1;
 	_azimuth = _x select 2;
 	
 	//Optionally map certain features if they're included in the data. Order must match the grabber order.
@@ -66,15 +52,15 @@ _multiplyMatrixFunc =
 	if ((count _x) > 6) then {_ASL = _x select 6};
 	if (isNil "_ASL") then {_ASL = false;};
 
-	_newPos = [_relPos select 0, _relPos select 1, _relPos select 2];
+	_newPos = [_originalPosition select 0, _originalPosition select 1, _originalPosition select 2];
 	if (!_useAbsolutePositions) then
 	{
 		// The new position = (new anchor position) + (old position relative to anchor)
 		//                  = (new anchor position) + (old absolute position - old anchor position)
 		_newPos = [
-			_posX + ((_newPos select 0) - (_anchorPosition select 0)),
-			_posY + ((_newPos select 1) - (_anchorPosition select 1)),
-			_newPos select 2
+			_newAnchorX + ((_originalPosition select 0) - (_originalAnchorPosition select 0)),
+			_newAnchorY + ((_originalPosition select 1) - (_originalAnchorPosition select 1)),
+			_newAnchorZ + ((_originalPosition select 2) - (_originalAnchorPosition select 2))
 			];
 	};
 

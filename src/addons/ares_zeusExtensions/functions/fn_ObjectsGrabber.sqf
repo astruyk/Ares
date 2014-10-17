@@ -17,27 +17,20 @@
 	(Modified for use with Ares by AntonStruyk)
 */
 
-private ["_anchorPos", "_anchorDim", "_grabOrientation"];
-_anchorPos = [_this, 0, [0, 0], [[]]] call BIS_fnc_Param;
+private ["_anchorObject", "_anchorDim", "_grabOrientation"];
+_anchorObject = [_this, 0] call BIS_fnc_Param;
 _anchorDim = [_this, 1, 50, [-1]] call BIS_fnc_Param;
 _grabOrientation = [_this, 2, false, [false]] call BIS_fnc_Param;
 
 private ["_objs"];
-_objs = nearestObjects [_anchorPos, ["All"], _anchorDim];
+_objs = nearestObjects [(position _anchorObject), ["All"], _anchorDim];
 
 //Formatting for output
 private ["_br", "_tab", "_outputText"];
 _br = toString [13, 10];
 _tab = toString [9];
 
-//Adding meta-data
-//_outputText = "/*" + _br + "Grab data:" + _br;
-//_outputText = _outputText + "Mission: " + (if (missionName == "") then {"Unnamed"} else {missionName}) + _br;
-//_outputText = _outputText + "World: " + worldName + _br;
-//_outputText = _outputText + "Anchor position: [" + (str (_anchorPos select 0)) + ", " + (str (_anchorPos select 1)) + "]" + _br;
-//_outputText = _outputText + "Area size: " + (str _anchorDim) + _br;
-//_outputText = _outputText + "Using orientation of objects: " + (if (_grabOrientation) then {"yes"} else {"no"}) + _br + "*/" + _br + _br;
-//_outputText = _outputText + "[" + _br;
+// Start the output
 _outputText = "[";
 
 //First filter illegal objects
@@ -100,8 +93,6 @@ _objectsToSave = [];
 	_type = typeOf _x;
 	_ASL = _x getVariable ["ASL", false];
 	if (!_ASL) then {_objPos = position _x;} else {_objPos = getPosASL _x;}; //To cover some situations (inside objects with multiple roadways)
-	//_dX = (_objPos select 0) - (_anchorPos select 0);
-	//_dY = (_objPos select 1) - (_anchorPos select 1);
 	_xPos = _objPos select 0;
 	_yPos = _objPos select 1;
 	_zPos = _objPos select 2;
@@ -118,6 +109,6 @@ _objectsToSave = [];
 } forEach _objs;
 
 // Add an entry for holding the anchor position. This will be extracted if we want to do a relative paste later.
-_outputText = _outputText + format ["[%1, %2, 0]", _anchorPos select 0, _anchorPos select 1] + "]";
+_outputText = _outputText + format ["[%1, %2, %3]", (position _anchorObject) select 0,  (position _anchorObject) select 1, (position _anchorObject) select 2] + "]";
 copyToClipboard _outputText;
 _outputText
