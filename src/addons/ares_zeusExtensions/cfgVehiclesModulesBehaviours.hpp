@@ -61,3 +61,9 @@ class Ares_Module_Behaviour_Fire_At_Artillery_Target : Ares_Behaviours_Module_Ba
 	function = "Ares_fnc_BehaviourArtilleryFire";
 };
 
+class Ares_Module_Behaviour_Land_Helicopter : Ares_Behaviours_Module_Base
+{
+	scopeCurator = 2;
+	displayName = "Land Helicopter";
+	function = "Ares_fnc_BehaviourLandHelicopter";
+};

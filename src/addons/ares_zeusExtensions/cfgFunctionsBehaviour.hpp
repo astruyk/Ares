@@ -4,6 +4,7 @@ class BehaviourModules
 	class BehaviourArtilleryCreateTarget {};
 	class BehaviourArtilleryDeleteTarget {};
 	class BehaviourArtilleryFire {};
+	class BehaviourLandHelicopter {};
 	class BehaviourPatrol {};
 	class BehaviourSearchNearbyAndGarrison {};
 	class BehaviourSearchNearbyBuilding {};

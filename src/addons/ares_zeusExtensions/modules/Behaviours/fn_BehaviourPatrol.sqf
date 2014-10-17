@@ -77,7 +77,7 @@ if (_activated && local _logic) then
 			};
 			
 			// Remove other waypoints.
-			 while {(count (waypoints _groupUnderCursor)) > 0} do
+			while {(count (waypoints _groupUnderCursor)) > 0} do
 			{
 				deleteWaypoint ((waypoints _groupUnderCursor) select 0);
 			};
