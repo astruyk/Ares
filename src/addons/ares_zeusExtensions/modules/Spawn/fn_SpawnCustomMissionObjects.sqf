@@ -32,11 +32,11 @@ if (_activated && local _logic) then
 			{
 				if (typeName _objectsToAddToCurator == typeName []) then
 				{
-					_objectsToAddToCurator call Ares_fnc_AddUnitsToCurator;
+					[_objectsToAddToCurator] call Ares_fnc_AddUnitsToCurator;
 				}
 				else
 				{
-					[_objectsToAddToCurator] call Ares_fnc_AddUnitsToCurator;
+					[[_objectsToAddToCurator]] call Ares_fnc_AddUnitsToCurator;
 				};
 			};
 			

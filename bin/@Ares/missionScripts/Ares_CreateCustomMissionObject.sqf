@@ -8,7 +8,7 @@
 	
 	Example:
 		Adds an entry where the user can spawn a custom pointer that is not normally available through zeus.
-		["Pink Arrow", { "Sign_Arrow_Large_Pink_F" createVehicle (_this select 0); }] execVM "Ares_CreateCustomMissionObject.sqf";
+		["Pink Arrow", { "Sign_Arrow_Large_Pink_F" createVehicle (_this select 0) }] execVM "Ares_CreateCustomMissionObject.sqf";
 		
 	Alternate Version:
 		Accepts an array of option-codeblock pairs to add.
@@ -19,8 +19,8 @@
 	Example:
 		Adds two entries in a single call, one for a blue arrow and one for a pink arrow:
 		[
-			["Blue Arrow", { "Sign_Arrow_Large_Blue_F" createVehicle (_this select 0); }],
-			["Pink Arrow", { "Sign_Arrow_Large_Pink_F" createVehicle (_this select 0); }]
+			["Blue Arrow", { "Sign_Arrow_Large_Blue_F" createVehicle (_this select 0) }],
+			["Pink Arrow", { "Sign_Arrow_Large_Pink_F" createVehicle (_this select 0) }]
 		] execVM "Ares_CreateCustomMissionObject.sqf";
 */
 
