@@ -15,7 +15,7 @@ if (_activated && local _logic) then
 		{
 			_optionNames pushBack (_x select 0);
 		} forEach Ares_CustomMissionObjectData;
-		_dialogResult = ["Custom Mission Objects", ["Object Type:", _optionNames]] call Ares_fnc_ShowChooseDialog;
+		_dialogResult = ["Spawn Custom Mission Object", ["Type:", _optionNames]] call Ares_fnc_ShowChooseDialog;
 
 		if (count _dialogResult > 0) then
 		{
