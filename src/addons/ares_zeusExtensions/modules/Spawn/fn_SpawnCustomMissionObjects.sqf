@@ -4,7 +4,7 @@ _activated = _this select 2;
 
 if (_activated && local _logic) then
 {
-	if (isNil "Ares_CustomMissionObjectData") then
+	if (isNil "Ares_CustomMissionObjectData" || (typeName Ares_CustomMissionObjectData != typeName []) || (count Ares_CustomMissionObjectData == 0)) then
 	{
 		[objNull, "This mission does not define any custom objects."] call bis_fnc_showCuratorFeedbackMessage;
 	}
