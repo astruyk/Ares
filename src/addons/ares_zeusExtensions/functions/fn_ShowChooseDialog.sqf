@@ -70,7 +70,6 @@ if (_titleText != "") then
 	_labelControl ctrlSetPosition [LABEL_COLUMN_X, _yCoord, TITLE_WIDTH, TITLE_HEIGHT];
 	_labelControl ctrlCommit 0;
 	_labelControl ctrlSetText _titleText;
-	ctrlSetText [BASE_IDC + 2, "BAR"];
 	_yCoord = _yCoord + TOTAL_ROW_HEIGHT;
 	_controlCount = _controlCount + 1;
 	_titleRowHeight = TITLE_HEIGHT;
