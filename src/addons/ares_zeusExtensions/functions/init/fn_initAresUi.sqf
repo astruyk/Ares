@@ -10,7 +10,7 @@ if(isServer && isDedicated) exitWith {};
 	// Wait until THIS player is a zeus unit.
 	while { !([player] call Ares_fnc_isZeus) } do
 	{
-		["Unit not zeus..."] call Ares_fnc_LogMessage;
+		//["Unit not zeus..."] call Ares_fnc_LogMessage;
 		sleep 1;
 	};
 	

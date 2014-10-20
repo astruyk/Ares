@@ -5,23 +5,23 @@ _category = _this select 0;
 disableSerialization;
 
 while {true} do {
-	["Monitor curator display..."] call Ares_fnc_LogMessage;
+	//["Monitor curator display..."] call Ares_fnc_LogMessage;
 	
 	// Wait for the player to become zeus again (if they're not - eg. if on dedicated server and logged out)
 	while { !([player] call Ares_fnc_IsZeus) } do
 	{
-		["Unit not zeus..."] call Ares_fnc_LogMessage;
+		//["Unit not zeus..."] call Ares_fnc_LogMessage;
 		sleep 1;
 	};
-	["Zeus has arrived!"] call Ares_fnc_LogMessage;
+	//["Zeus has arrived!"] call Ares_fnc_LogMessage;
 
 	//Wait for the curator screen to be displayed
 	while {isNull (findDisplay IDD_RSCDISPLAYCURATOR)} do
 	{
-		["Display not open."] call Ares_fnc_LogMessage;
+		//["Display not open."] call Ares_fnc_LogMessage;
 		sleep 1;
 	};
-	["Display opened!"] call Ares_fnc_LogMessage;
+	//["Display opened!"] call Ares_fnc_LogMessage;
 	
 	_display = findDisplay IDD_RSCDISPLAYCURATOR;
 	_ctrl = _display displayCtrl IDC_RSCDISPLAYCURATOR_MODEMODULES;
@@ -32,8 +32,8 @@ while {true} do {
 	//Wait for the curator screen to be removed
 	while {!isNull (findDisplay IDD_RSCDISPLAYCURATOR)} do
 	{
-		["Display not closed."] call Ares_fnc_LogMessage;
+		//["Display not closed."] call Ares_fnc_LogMessage;
 		sleep 1;
 	};
-	["Display closed!"] call Ares_fnc_LogMessage;
+	//["Display closed!"] call Ares_fnc_LogMessage;
 };
