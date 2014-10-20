@@ -47,13 +47,6 @@ class Ares_Module_Behaviour_Create_Artillery_Target : Ares_Behaviours_Module_Bas
 	function = "Ares_fnc_BehaviourArtilleryCreateTarget";
 };
 
-class Ares_Module_Behaviour_Remove_Artillery_Target : Ares_Behaviours_Module_Base
-{
-	scopeCurator = 2;
-	displayName = "Remove Artillery Target";
-	function = "Ares_fnc_BehaviourArtilleryDeleteTarget";
-};
-
 class Ares_Module_Behaviour_Fire_At_Artillery_Target : Ares_Behaviours_Module_Base
 {
 	scopeCurator = 2;

@@ -4,5 +4,4 @@ class ReinforcementsModules
 	class ReinforcementsCreateLz {};
 	class ReinforcementsCreateRp {};
 	class ReinforcementsCreateUnits {};
-	class ReinforcementsDeleteMarker {};
 };
