@@ -20,7 +20,6 @@
 private ["_anchorObject", "_anchorDim", "_grabOrientation"];
 _anchorObject = [_this, 0] call BIS_fnc_Param;
 _anchorDim = [_this, 1, 50, [-1]] call BIS_fnc_Param;
-_grabOrientation = [_this, 2, false, [false]] call BIS_fnc_Param;
 
 private ["_objs"];
 _objs = nearestObjects [(position _anchorObject), ["All"], _anchorDim];
@@ -89,7 +88,7 @@ _outputText = "[";
 //Process non-filtered objects
 _objectsToSave = [];
 {
-	private ["_type", "_objPos", "_dX", "_dY", "_z", "_azimuth", "_fuel", "_damage", "_orientation", "_outputArray"];
+	private ["_type", "_objPos", "_dX", "_dY", "_z", "_azimuth", "_fuel", "_damage", "_outputArray"];
 	_type = typeOf _x;
 	_objPos = getPosASL _x;
 	_xPos = _objPos select 0;
@@ -98,9 +97,8 @@ _objectsToSave = [];
 	_azimuth = direction _x;
 	_fuel = fuel _x;
 	_damage = damage _x;
-	if (_grabOrientation) then {_orientation = _x call BIS_fnc_getPitchBank;} else {_orientation = [];};
-	
-	_outputArray = [_type, [_xPos, _yPos, _zPos], _azimuth, _fuel, _damage, _orientation];
+
+	_outputArray = [_type, [_xPos, _yPos, _zPos], _azimuth, _fuel, _damage];
 	_outputText = _outputText + (str _outputArray);
 	_outputText = _outputText + ",";
 } forEach _objs;

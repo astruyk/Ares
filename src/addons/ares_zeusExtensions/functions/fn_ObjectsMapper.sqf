@@ -15,10 +15,9 @@
 	Modified for Ares by Anton Struyk
 */
 
-private ["_newAnchorObject", "_objs", "_preserveOrientations"];
+private ["_newAnchorObject", "_objs"];
 _newAnchorObject = [_this, 0, objNull, [objNull]] call BIS_fnc_Param;
 _objs = [_this, 1, [[0,0,0]], [[]]] call BIS_fnc_Param;
-_preserveOrientations = [_this, 2, false, [false]] call BIS_fnc_Param;
 
 // The copy script will have added the reference point as the last object in the array.
 // Get the position from it, and then remove it from the array so we no longer process it.
@@ -40,7 +39,7 @@ _newAnchorY = (getPosASL _newAnchorObject) select 1;
 _newAnchorZ = (getPosASL _newAnchorObject) select 2;
 
 {
-	private ["_type", "_originalPosition", "_azimuth", "_fuel", "_damage", "_orientation", "_newObj"];
+	private ["_type", "_originalPosition", "_azimuth", "_fuel", "_damage", "_newObj"];
 	_type = _x select 0;
 	_originalPosition = _x select 1;
 	_azimuth = _x select 2;
@@ -48,7 +47,6 @@ _newAnchorZ = (getPosASL _newAnchorObject) select 2;
 	//Optionally map certain features if they're included in the data. Order must match the grabber order.
 	if ((count _x) > 3) then {_fuel = _x select 3};
 	if ((count _x) > 4) then {_damage = _x select 4};
-	if ((count _x) > 5) then {_orientation = _x select 5};
 
 	if (_useAbsolutePositions) then
 	{
@@ -81,10 +79,6 @@ _newAnchorZ = (getPosASL _newAnchorObject) select 2;
 	//If fuel and damage were grabbed, map them
 	if (!isNil "_fuel") then {_newObj setFuel _fuel};
 	if (!isNil "_damage") then {_newObj setDamage _damage;};
-	if (!isNil "_orientation" && _preserveOrientations && ((count _orientation) > 0)) then 
-	{
-		([_newObj] + _orientation) call BIS_fnc_setPitchBank;
-	};
 	_newObjs pushback _newObj;
 } forEach _objs;
 
