@@ -1,7 +1,7 @@
 // Modules to include in the tree.
 units[] =
 {
-	//"Ares_Module_Test",
+	// "Ares_Module_Test",
 	"Ares_Module_Add_All_Objects_To_Curator",
 	"Ares_Module_Arsenal_Copy_To_Clipboard",
 	"Ares_Module_Arsenal_Create_Aaf",
@@ -31,7 +31,7 @@ units[] =
 	"Ares_Module_Remove_Objects_From_Curator",
 	"Ares_Module_Spawn_Custom_Mission_Objects",
 	"Ares_Module_Save_Objects_For_Paste",
-	"Ares_Module_Spawn_Smoke",
+	// "Ares_Module_Spawn_Smoke",
 	"Ares_Module_SurrenderSingleUnit",
 	"Ares_Module_Teleport_All",
 	"Ares_Module_Teleport_CreateTeleporter",
