@@ -93,7 +93,7 @@ _objectsToSave = [];
 	_objPos = getPosASL _x;
 	_xPos = _objPos select 0;
 	_yPos = _objPos select 1;
-	_zPos = _objPos select 2;
+	_zPos = (_objPos select 2) - (getTerrainHeightASL _objPos); // Store the actual height above ground. Using getPos() will not work for stacked things (I think it's storing height above object below it)
 	_azimuth = direction _x;
 	_fuel = fuel _x;
 	_damage = damage _x;
@@ -104,6 +104,6 @@ _objectsToSave = [];
 } forEach _objs;
 
 // Add an entry for holding the anchor position. This will be extracted if we want to do a relative paste later.
-_outputText = _outputText + format ["[%1, %2, %3]", (getPosASL _anchorObject) select 0,  (getPosASL _anchorObject) select 1, (getPosASL _anchorObject) select 2] + "]";
+_outputText = _outputText + format ["[%1, %2, %3]", (position _anchorObject) select 0,  (position _anchorObject) select 1, (position _anchorObject) select 2] + "]";
 copyToClipboard _outputText;
 _outputText
