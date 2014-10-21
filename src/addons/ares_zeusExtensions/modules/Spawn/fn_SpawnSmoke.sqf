@@ -190,7 +190,7 @@ if (_activated && local _logic) then
 					{
 						_sourceObject = _this select 0;
 						_ps1 = "#particlesource" createVehicle (getPos _sourceObject);
-					_ps2 = "#particlesource" createVehicle (getPos _sourceObject);
+						_ps2 = "#particlesource" createVehicle (getPos _sourceObject);
 						
 						_ps1 setParticleCircle [0, [0, 0, 0]];
 						_ps1 setParticleRandom [0, [0.25, 0.25, 0], [0.2, 0.2, 0], 0, 0.25, [0, 0, 0, 0.1], 0, 0];
