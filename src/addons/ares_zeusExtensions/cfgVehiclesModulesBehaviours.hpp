@@ -45,6 +45,8 @@ class Ares_Module_Behaviour_Create_Artillery_Target : Ares_Behaviours_Module_Bas
 	scopeCurator = 2;
 	displayName = "Create Artillery Target";
 	function = "Ares_fnc_BehaviourArtilleryCreateTarget";
+	icon = "\ares_zeusExtensions\data\icon_artillery_target.paa";
+	portrait = "\ares_zeusExtensions\data\icon_artillery_target.paa";
 };
 
 class Ares_Module_Behaviour_Fire_At_Artillery_Target : Ares_Behaviours_Module_Base
