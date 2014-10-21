@@ -27,13 +27,13 @@ Testers/Feedback:
 	Modified by Anton Struyk
 */
 
-// Must be run on the server.
-if !(isServer) exitWith {diag_log text "Not server, exiting building search.";};
-
 private ["_grpFM", "_FunctionsManager", "_group", "_leader", "_ldrPos", "_previousBehaviour", "_srchRad", "_whichOne", "_initialPos", "_includeLeaderInSearch", "_occupy", "_bldgArray", "_tempArray", "_bldgLoc", "_bldgSelect", "_searchersT", "_searchers", "_searcherCount", "_s", "_checkTime", "_wpArray", "_currWP", "_wpCnt", "_d", "_t", "_b", "_bldg", "_bldgPos", "_bldgCnt", "_nameMarker", "_marker", "_bldgBB", "_wpRad", "_wp", "_positionsInBuilding", "_totTime", "_activeBP", "_loop", "_cycle", "_unitSelect", "_units"];
+_group = [_this, 0] call BIS_fnc_param;
+
+// Must be run where group leader is local.
+if (not local _group) exitWith { diag_log text "Group is not local"; };
 
 // Extract necessary values from parameters
-_group = [_this, 0] call BIS_fnc_param;
 if ((typeName _group) == "OBJECT") then {_group = group (_this select 0)};
 _leader = leader _group;
 _ldrPos = getPos _leader;
