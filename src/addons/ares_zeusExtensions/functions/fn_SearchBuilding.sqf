@@ -31,7 +31,7 @@ private ["_grpFM", "_FunctionsManager", "_group", "_leader", "_ldrPos", "_previo
 _group = [_this, 0] call BIS_fnc_param;
 
 // Must be run where group leader is local.
-if (not local _group) exitWith { diag_log text "Group is not local"; };
+if (not local _group) exitWith {};
 
 // Extract necessary values from parameters
 if ((typeName _group) == "OBJECT") then {_group = group (_this select 0)};
@@ -104,7 +104,6 @@ for [{_b = 0},{_b <= _t},{_b = _b+1}] do
 _bldgCnt = count _bldgArray;
 if (_bldgCnt == 0) exitWith 
 {
-	diag_log text "No buildings to search!";
 	false
 };
 
@@ -166,19 +165,14 @@ _searchers = [];
 //_searchers = [_searchers] call _arrayShuffle;
 
 // loop to string out the units
-diag_log format["Starting search with %1 searchers and %2 positions.", count _searchers, count _positionsInBuilding];
-
 _isAnySearcherAlive = true;
 scopeName "bldgSearchMainScope";
 {
-	diag_log format["Searching position %1", _x];
-
 	// Get the first searcher that is available for tasking. If none
 	// is available for tasking wait until one becomes available.
 	_currentSearcherIndex = -1;
 	while {_isAnySearcherAlive && _currentSearcherIndex == -1} do
 	{
-		diag_log "Looking for a ready searcher...";
 		// Look for a ready searcher
 		_isAnySearcherAlive = false;
 		{
@@ -186,14 +180,12 @@ scopeName "bldgSearchMainScope";
 			{
 				_isAnySearcherAlive = true;
 				if (not (_x getVariable ["Ares_isSearching", false])) exitWith { _currentSearcherIndex = _foreachIndex; };
-				diag_log "Available searcher found!";
 			};
 		} foreach _searchers;
 
 		if (_currentSearcherIndex == -1 && _isAnySearcherAlive) then
 		{
 			// Wait a bit and try again.
-			diag_log "None found. Waiting.";
 			sleep 1;
 		};
 	};
@@ -201,7 +193,6 @@ scopeName "bldgSearchMainScope";
 	if (_currentSearcherIndex != -1) then
 	{
 		// Send the searcher to the current building position.
-		diag_log format["Sending searcher %1 to position %2", _currentSearcherIndex, _x];
 		_searcher = _searchers select _currentSearcherIndex;
 		doStop _searcher;
 		_searcher doMove _x;
@@ -217,31 +208,24 @@ scopeName "bldgSearchMainScope";
 		
 		_searcher spawn
 		{
-			diag_log format["Starting search logic."];
 			_debugMarker = _this getVariable ["Ares_searchingDebugMarker", objNull];
 			while {true} do
 			{
 				if ((getPosASL _this) vectorDistance (_this getVariable ["Ares_searchLocation", [0,0,0]]) < 1
 					/*&& !lineIntersects [eyepos _this, (_this getVariable ["Ares_searchLocation", [0,0,0]]), _this, _debugMarker]*/) exitWith
 				{
-					diag_log "Unit is close enough to search location. Finishing.";
 				};
 				if (moveToCompleted _this) exitWith
 				{
-					diag_log "Move to completed.";
 				};
 				if (moveToFailed _this) exitWith
 				{
-					diag_log "Move to failed.";
 				};
 				if (dayTime > (_this getVariable ["Ares_searchStartTime", dayTime + 10]) + (0.5/60) ) exitWith
 				{
-					diag_log "Search timed out.";
 				};
-				diag_log format ["Unit %1 is %2 from target.", _this, (getPosASL _this) vectorDistance (_this getVariable ["Ares_searchLocation", [0,0,0]])];
 				sleep 0.5;
 			};
-			diag_log format ["%1 finished search (or timed out).", _this];
 			if (!isNil "_debugMarker") then
 			{
 				_this setVariable ["Ares_searchingDebugMarker", objNull];
@@ -250,8 +234,6 @@ scopeName "bldgSearchMainScope";
 			_this setVariable ["Ares_isSearching", false];
 			doStop _this;
 		};
-		
-		diag_log "Searcher sent.";
 	};
 } foreach _positionsInBuilding;
 
@@ -264,17 +246,14 @@ while {!_isDoneSearching} do
 		if (_x getVariable ["Ares_isSearching", false]) exitWith
 		{
 			_isDoneSearching = false;
-			diag_log format ["%1 is not done searching.", _x];
 	};
 	} forEach _searchers;
 	if (_isDoneSearching) then
 	{
-		diag_log "Still waiting for all units to finish searching...";
 		sleep 1;
 	};
 };
 
-diag_log "All units done searching.";
 _group setbehaviour _previousBehaviour;
 
 // The units will end up in a position inside the building.
