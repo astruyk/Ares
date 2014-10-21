@@ -25,14 +25,6 @@ _grabOrientation = [_this, 2, false, [false]] call BIS_fnc_Param;
 private ["_objs"];
 _objs = nearestObjects [(position _anchorObject), ["All"], _anchorDim];
 
-//Formatting for output
-private ["_br", "_tab", "_outputText"];
-_br = toString [13, 10];
-_tab = toString [9];
-
-// Start the output
-_outputText = "[";
-
 //First filter illegal objects
 {
 	//Exclude non-dynamic objects (world objects)
@@ -86,7 +78,15 @@ _outputText = "[";
 
 _objs = _objs - [-1];
 
-//Process remaining objects
+//Formatting for output
+private ["_br", "_tab", "_outputText"];
+_br = toString [13, 10];
+_tab = toString [9];
+
+// Start the output
+_outputText = "[";
+
+//Process non-filtered objects
 _objectsToSave = [];
 {
 	private ["_type", "_ASL", "_objPos", "_dX", "_dY", "_z", "_azimuth", "_fuel", "_damage", "_orientation", "_outputArray"];
