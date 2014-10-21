@@ -35,12 +35,12 @@ private ["_useAbsolutePositions"];
 _useAbsolutePositions = isNull _newAnchorObject;
 
 private ["_newAnchorX", "_newAnchorY", "_newAnchorZ"];
-_newAnchorX = (position _newAnchorObject) select 0;
-_newAnchorY = (position _newAnchorObject) select 1;
-_newAnchorZ = (position _newAnchorObject) select 2;
+_newAnchorX = (getPosASL _newAnchorObject) select 0;
+_newAnchorY = (getPosASL _newAnchorObject) select 1;
+_newAnchorZ = (getPosASL _newAnchorObject) select 2;
 
 {
-	private ["_type", "_originalPosition", "_azimuth", "_fuel", "_damage", "_orientation", "_ASL", "_newObj"];
+	private ["_type", "_originalPosition", "_azimuth", "_fuel", "_damage", "_orientation", "_newObj"];
 	_type = _x select 0;
 	_originalPosition = _x select 1;
 	_azimuth = _x select 2;
@@ -49,25 +49,34 @@ _newAnchorZ = (position _newAnchorObject) select 2;
 	if ((count _x) > 3) then {_fuel = _x select 3};
 	if ((count _x) > 4) then {_damage = _x select 4};
 	if ((count _x) > 5) then {_orientation = _x select 5};
-	if ((count _x) > 6) then {_ASL = _x select 6};
-	if (isNil "_ASL") then {_ASL = false;};
 
-	_newPos = [_originalPosition select 0, _originalPosition select 1, _originalPosition select 2];
-	if (!_useAbsolutePositions) then
+	if (_useAbsolutePositions) then
 	{
+		_newObj = createVehicle [_type, (ASLToATL _originalPosition), [], 0, "CAN_COLLIDE"];
+		//_newObj setPosASL _originalPosition; // Just in case?
+	}
+	else
+	{
+		
 		// The new position = (new anchor position) + (old position relative to anchor)
 		//                  = (new anchor position) + (old absolute position - old anchor position)
 		_newPos = [
 			_newAnchorX + ((_originalPosition select 0) - (_originalAnchorPosition select 0)),
 			_newAnchorY + ((_originalPosition select 1) - (_originalAnchorPosition select 1)),
-			_newAnchorZ + ((_originalPosition select 2) - (_originalAnchorPosition select 2))
+			0
 			];
-	};
 
-	//Create the object and make sure it's in the correct location
-	_newObj = _type createVehicle _newPos;
+		_newObj = createVehicle [_type, _newPos, [], 0, "CAN_COLLIDE"];
+		_heightAboveTerrainAtOriginalPosition = (_originalPosition select 2) - (getTerrainHeightASL _originalPosition);
+		if (_heightAboveTerrainAtOriginalPosition > 0.1) then
+		{
+			_newHeightASL = (getTerrainHeightASL _newPos) + _heightAboveTerrainAtOriginalPosition;
+			_newObj setPosASL [_newPos select 0, _newPos select 1, _newHeightASL];
+		};
+	};
+	
+	// Orient the object correctly
 	_newObj setDir (_azimuth);
-	if (!_ASL) then {_newObj setPos _newPos;} else {_newObj setPosASL _newPos;};
 	
 	//If fuel and damage were grabbed, map them
 	if (!isNil "_fuel") then {_newObj setFuel _fuel};
@@ -76,7 +85,7 @@ _newAnchorZ = (position _newAnchorObject) select 2;
 	{
 		([_newObj] + _orientation) call BIS_fnc_setPitchBank;
 	};
-	_newObjs = _newObjs + [_newObj];
+	_newObjs pushback _newObj;
 } forEach _objs;
 
 _newObjs

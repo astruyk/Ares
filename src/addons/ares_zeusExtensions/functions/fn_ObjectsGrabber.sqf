@@ -89,10 +89,9 @@ _outputText = "[";
 //Process non-filtered objects
 _objectsToSave = [];
 {
-	private ["_type", "_ASL", "_objPos", "_dX", "_dY", "_z", "_azimuth", "_fuel", "_damage", "_orientation", "_outputArray"];
+	private ["_type", "_objPos", "_dX", "_dY", "_z", "_azimuth", "_fuel", "_damage", "_orientation", "_outputArray"];
 	_type = typeOf _x;
-	_ASL = _x getVariable ["ASL", false];
-	if (!_ASL) then {_objPos = position _x;} else {_objPos = getPosASL _x;}; //To cover some situations (inside objects with multiple roadways)
+	_objPos = getPosASL _x;
 	_xPos = _objPos select 0;
 	_yPos = _objPos select 1;
 	_zPos = _objPos select 2;
@@ -101,14 +100,12 @@ _objectsToSave = [];
 	_damage = damage _x;
 	if (_grabOrientation) then {_orientation = _x call BIS_fnc_getPitchBank;} else {_orientation = [];};
 	
-	_outputArray = [_type, [_xPos, _yPos, _zPos], _azimuth, _fuel, _damage, _orientation, _ASL];
+	_outputArray = [_type, [_xPos, _yPos, _zPos], _azimuth, _fuel, _damage, _orientation];
 	_outputText = _outputText + (str _outputArray);
 	_outputText = _outputText + ",";
-
-	//debugLog (format ["Log: objectGrabber: %1", _outputArray]);
 } forEach _objs;
 
 // Add an entry for holding the anchor position. This will be extracted if we want to do a relative paste later.
-_outputText = _outputText + format ["[%1, %2, %3]", (position _anchorObject) select 0,  (position _anchorObject) select 1, (position _anchorObject) select 2] + "]";
+_outputText = _outputText + format ["[%1, %2, %3]", (getPosASL _anchorObject) select 0,  (getPosASL _anchorObject) select 1, (getPosASL _anchorObject) select 2] + "]";
 copyToClipboard _outputText;
 _outputText
