@@ -104,6 +104,6 @@ _objectsToSave = [];
 } forEach _objs;
 
 // Add an entry for holding the anchor position. This will be extracted if we want to do a relative paste later.
-_outputText = _outputText + format ["[%1, %2, %3]", (position _anchorObject) select 0,  (position _anchorObject) select 1, (position _anchorObject) select 2] + "]";
+_outputText = _outputText + format ["[%1,%2,%3]", (position _anchorObject) select 0,  (position _anchorObject) select 1, (position _anchorObject) select 2] + "]";
 copyToClipboard _outputText;
 _outputText

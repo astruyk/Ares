@@ -5,7 +5,7 @@
 
 <p>
 <textarea id="sourceTextArea" rows="20" cols="150">
-[["Land_CncBarrierMedium4_F",[13150.7,15957.8,-3.14713e-005],84.1957,1,0],["Land_CncShelter_F",[13149.7,15962.7,-6.58035e-005],259.898,1,0],["Land_CncBarrier_stripes_F",[13149.7,15962.7,2.43754],84.7398,1,0],["Land_HBarrier_1_F",[13142,15959.6,2.2905],147.102,1,0],["Land_CncBarrierMedium4_F",[13145.9,15964.7,-3.14713e-005],173.157,1,0],["Land_HBarrier_Big_F",[13141.6,15960.9,-0.000167847],263.541,1,0],["Land_CncBarrierMedium4_F",[13147.5,15953.4,-9.91821e-005],170.071,1,0],["Land_CncBarrierMedium_F",[13149.7,15964.7,0.289334],258.604,1,0],["Land_HBarrier_1_F",[13143.5,15953.1,0],355.723,1,0],["Land_HBarrier_1_F",[13142.9,15953,1.4394],355.723,1,0],["Land_HBarrier_1_F",[13142.3,15952.9,0],355.723,1,0],[13146.9, 15959.3, 0]]
+[["Land_CncBarrierMedium4_F",[13150.7,15957.8,-3.14713e-005],84.1957,1,0],["Land_CncShelter_F",[13149.7,15962.7,-6.58035e-005],259.898,1,0],["Land_CncBarrier_stripes_F",[13149.7,15962.7,2.43754],84.7398,1,0],["Land_HBarrier_1_F",[13142,15959.6,2.2905],147.102,1,0],["Land_CncBarrierMedium4_F",[13145.9,15964.7,-3.14713e-005],173.157,1,0],["Land_HBarrier_Big_F",[13141.6,15960.9,-0.000167847],263.541,1,0],["Land_CncBarrierMedium4_F",[13147.5,15953.4,-9.91821e-005],170.071,1,0],["Land_CncBarrierMedium_F",[13149.7,15964.7,0.289334],258.604,1,0],["Land_HBarrier_1_F",[13143.5,15953.1,0],355.723,1,0],["Land_HBarrier_1_F",[13142.9,15953,1.4394],355.723,1,0],["Land_HBarrier_1_F",[13142.3,15952.9,0],355.723,1,0],[13146.9,15959.3,0]]
 </textarea>
 </p>
 
@@ -29,10 +29,10 @@ function myFunction()
 	var match;
 	
 	// Capture elements of the form:
-	//   ,[13146.9, 15959.3, 0]]
+	//   [13146.9,15959.3,0]
 	var anchorRegex = /\[([\d\.e\-]+,[\d\.e\-]+,[\d\.e\-]+)\]/g;
 	
-	// Get the coordinates of the anchor-position.
+	// Get the coordinates of the anchor-position (the last match)
 	anchorPositionText = "";
 	while (match = anchorRegex.exec(sourceText))
 	{
