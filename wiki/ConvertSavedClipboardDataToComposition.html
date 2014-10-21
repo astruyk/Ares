@@ -24,15 +24,43 @@ function myFunction()
 {
 	var sourceText = document.getElementById("sourceTextArea").value.trim();
 	// Capture elements of the form:
-	//   ["Land_Sack_F",[4006.72,4260.35,0],0,1,0,[0,0],"","",true,false]
-	var entryRegex = /\["(\w+)",\[([\d\.]+,[\d\.]+,[\d\.]+)\],([\d\.]+),[\d\.]+,[\d\.]+,\[[\d\.]+,[\d\.]+\],"\w*","\w*",[true|false]+,[true|false]+\]/g;
+	//   ["Land_CncBarrierMedium4_F",[13150.7,15957.8,-3.14713e-005],84.1957,1,0]
+	var entryRegex = /\["(\w+)",\[([\d\.e\-]+,[\d\.e\-]+,[\d\.e\-]+)\],([\d\.e\-]+),[\d\.e\-]+,[\d\.e\-]+]/g;
 	var match;
 	
+	// Capture elements of the form:
+	//   ,[13146.9, 15959.3, 0]]
+	var anchorRegex = /\[([\d\.e\-]+,[\d\.e\-]+,[\d\.e\-]+)\]/g;
+	
+	// Get the coordinates of the anchor-position.
+	anchorPositionText = "";
+	while (match = anchorRegex.exec(sourceText))
+	{
+		anchorPositionText = match[1];
+	}
+	if (anchorPositionText != "")
+	{
+		anchorPosition_x = parseFloat(anchorPositionText.split(',')[0]);
+		anchorPosition_y = parseFloat(anchorPositionText.split(',')[1]);
+	}
+
 	processedText = "class NEW_COMPOSITION_CLASS_NAME\n{\n\tname=\"Zeus Display Name\";";
 	var currentClassNumber = 0;
 	while (match = entryRegex.exec(sourceText))
 	{
-		processedText += "\n\tclass Object" + currentClassNumber + " {side=8;vehicle=\"" + match[1] + "\";rank=\"\";position[]={" + match[2] + "};dir=" + match [3] + ";};";
+		// For each element we captured we want to make its position relative to the anchor.
+		currentObjectPositionTextArray = match[2].split(',');
+		currentObjectPosition_x = anchorPosition_x - parseFloat(currentObjectPositionTextArray[0]);
+		currentObjectPosition_y = anchorPosition_y - parseFloat(currentObjectPositionTextArray[1]);
+		currentObjectPosition_z = parseFloat(currentObjectPositionTextArray[2]);	// The Z is already the correct height above the ground, but we want to trim it if it's small enough.
+		
+		// Hackily round digits. Converts back to a number after the .toFixed(...) rounds off the unimportant digits so we don't end up with "x.00000"
+		currentObjectPosition_x = parseFloat(currentObjectPosition_x.toFixed(5));
+		currentObjectPosition_y = parseFloat(currentObjectPosition_y.toFixed(5));
+		currentObjectPosition_z = parseFloat(currentObjectPosition_z.toFixed(3));
+
+		// Output the class definition for this object.
+		processedText += "\n\tclass Object" + currentClassNumber + " {side=8; vehicle=\"" + match[1] + "\";rank=\"\";position[]={" + currentObjectPosition_x + "," + currentObjectPosition_y + "," + currentObjectPosition_z + "};dir=" + match [3] + ";};";
 		currentClassNumber++;
 	}
 	processedText += "\n}";
