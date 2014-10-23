@@ -33,6 +33,7 @@ if (_activated && local _logic) then
 			}
 			else
 			{
+				doStop _vehicle;
 				_vehicle land "LAND";
 			};
 			_unitUnderCursor allowFleeing 0;
