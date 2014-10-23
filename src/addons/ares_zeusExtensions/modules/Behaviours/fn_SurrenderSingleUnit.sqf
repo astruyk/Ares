@@ -48,6 +48,8 @@ if (_activated && local _logic) then
 							_unit enableAI "ANIM";
 							_unit enableAI "TARGET";
 							_unit enableAI "AUTOTARGET";
+							
+							_unit disableAI "MOVE";
 						};
 						_unit switchMove "";
 						_unit playActionNow "SitDown";
@@ -63,7 +65,6 @@ if (_activated && local _logic) then
 	};
 
 	// Determine if we've already captured the unit in the past
-	// TODO Maybe if Zeus tries to recapture an already captured unit it should secure them?
 	if (alive _unitToCapture) then
 	{
 		_captureState = _unitToCapture getVariable ["AresCaptureState", -1];
