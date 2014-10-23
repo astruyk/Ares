@@ -5,18 +5,18 @@ class Ares_Module_Arsenal_Copy_To_Clipboard : Ares_Arsenal_Module_Base
 	function = "Ares_fnc_ArsenalCopyToClipboard";
 };
 
-class Ares_Module_Arsenal_Paste_From_Clipboard : Ares_Arsenal_Module_Base
+class Ares_Module_Arsenal_Paste_Replace: Ares_Arsenal_Module_Base
 {
 	scopeCurator = 2;
 	displayName = "Paste & Replace";
-	function = "Ares_fnc_ArsenalPasteFromClipboard";
+	function = "Ares_fnc_ArsenalPasteReplace";
 };
 
-class Ares_Module_Arsenal_Paste_Additive : Ares_Arsenal_Module_base
+class Ares_Module_Arsenal_Paste_Combine : Ares_Arsenal_Module_base
 {
 	scopeCurator = 2;
 	displayName = "Paste & Combine";
-	function = "Ares_fnc_ArsenalPasteAdditive";
+	function = "Ares_fnc_ArsenalPasteCombine";
 };
 
 class Ares_Module_Arsenal_Create_Nato : Ares_Arsenal_Module_Base

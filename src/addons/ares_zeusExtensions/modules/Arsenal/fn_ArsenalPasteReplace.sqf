@@ -10,7 +10,7 @@ if (_activated && local _logic) then
 		_parsedValue = [4] call Ares_fnc_GetArrayDataFromUser;
 		if (typeName _parsedValue == typeName []) then
 		{
-			[_ammoBox, _parsedValue] call Ares_fnc_ArsenalSetup;
+			[_ammoBox, _parsedValue, true] call Ares_fnc_ArsenalSetup;
 			[objNull, "Arsenal objects added."] call bis_fnc_showCuratorFeedbackMessage;
 		}
 		else

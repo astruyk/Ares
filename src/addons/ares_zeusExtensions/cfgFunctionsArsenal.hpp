@@ -6,6 +6,6 @@ class ArsenalModules
 	class ArsenalCreateCsat {};
 	class ArsenalCreateGuerilla {};
 	class ArsenalCreateNato {};
-	class ArsenalPasteAdditive {};
-	class ArsenalPasteFromClipboard {};
+	class ArsenalPasteCombine {};
+	class ArsenalPasteReplace {};
 };
