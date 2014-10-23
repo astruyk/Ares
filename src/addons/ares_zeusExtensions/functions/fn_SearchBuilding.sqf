@@ -269,8 +269,13 @@ else
 	// Make the units return to the group and go back to following the leader.
 	{
 		_x doMove _ldrPos;
-		waitUntil { moveToCompleted _x || moveToFailed _x };
-		_x doFollow _leader;
+		[_x, _leader] spawn
+			{
+				_unit = _this select 0;
+				_leader = _this select 1;
+				waitUntil { moveToCompleted _unit || moveToFailed _unit };
+				_unit doFollow _leader;
+			};
 	} foreach _searchers;
 };
 
