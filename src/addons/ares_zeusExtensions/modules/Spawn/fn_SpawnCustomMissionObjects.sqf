@@ -28,16 +28,13 @@ if (_activated && local _logic) then
 			_objectsToAddToCurator = [position _logic] call _codeBlock;
 			
 			// Add the returned object(s) to the Curator.
-			if (!isNull _objectsToAddToCurator) then
+			if (typeName _objectsToAddToCurator == typeName []) then
 			{
-				if (typeName _objectsToAddToCurator == typeName []) then
-				{
-					[_objectsToAddToCurator] call Ares_fnc_AddUnitsToCurator;
-				}
-				else
-				{
-					[[_objectsToAddToCurator]] call Ares_fnc_AddUnitsToCurator;
-				};
+				[_objectsToAddToCurator] call Ares_fnc_AddUnitsToCurator;
+			}
+			else
+			{
+				[[_objectsToAddToCurator]] call Ares_fnc_AddUnitsToCurator;
 			};
 			
 			[objNull, "Spawned object."] call bis_fnc_showCuratorFeedbackMessage;
