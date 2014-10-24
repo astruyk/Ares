@@ -53,14 +53,19 @@ function myFunction()
 		currentObjectPosition_x = anchorPosition_x - parseFloat(currentObjectPositionTextArray[0]);
 		currentObjectPosition_y = anchorPosition_y - parseFloat(currentObjectPositionTextArray[1]);
 		currentObjectPosition_z = parseFloat(currentObjectPositionTextArray[2]);	// The Z is already the correct height above the ground, but we want to trim it if it's small enough.
-		
+
 		// Hackily round digits. Converts back to a number after the .toFixed(...) rounds off the unimportant digits so we don't end up with "x.00000"
-		currentObjectPosition_x = parseFloat(currentObjectPosition_x.toFixed(5));
-		currentObjectPosition_y = parseFloat(currentObjectPosition_y.toFixed(5));
-		currentObjectPosition_z = parseFloat(currentObjectPosition_z.toFixed(3));
+		currentObjectPosition_x = parseFloat(currentObjectPosition_x.toFixed(10));
+		currentObjectPosition_y = parseFloat(currentObjectPosition_y.toFixed(10));
+		currentObjectPosition_z = parseFloat(currentObjectPosition_z.toFixed(10));
+
+		// Flip things 180 degrees because of some weirdness
+		currentOrientation = (parseFloat(match[3]) + 180);
+		if (currentOrientation > 360) { currentOrientation -= 360; }
+		currentOrientation = parseFloat(currentOrientation.toFixed(10));
 
 		// Output the class definition for this object.
-		processedText += "\n\tclass Object" + currentClassNumber + " {side=8; vehicle=\"" + match[1] + "\";rank=\"\";position[]={" + currentObjectPosition_x + "," + currentObjectPosition_y + "," + currentObjectPosition_z + "};dir=" + match [3] + ";};";
+		processedText += "\n\tclass Object" + currentClassNumber + " {side=8; vehicle=\"" + match[1] + "\";rank=\"\";position[]={" + currentObjectPosition_x + "," + currentObjectPosition_y + "," + currentObjectPosition_z + "};dir=" + currentOrientation + ";};";
 		currentClassNumber++;
 	}
 	processedText += "\n}";
