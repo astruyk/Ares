@@ -85,7 +85,43 @@ class AresCompositions
 				class Object24 {side=8;vehicle="Land_HBarrier_Big_F";rank="";position[]={16.3242,-1.83203,-0.00143886};dir=128.67;};
 				class Object25 {side=8;vehicle="Land_HBarrier_Big_F";rank="";position[]={17.084,3.71484,-0.00143886};dir=40.6699;};
 			};
-
+			
+			// House converted into field HQ
+			class AresImprovisedFieldCommand
+			{
+				name="Improvised Field Command";
+				class Object0 {side=8; vehicle="Land_MetalBarrel_empty_F";rank="";position[]={-1.6,-0.39,0};dir=180;};
+				class Object1 {side=8; vehicle="Land_MetalBarrel_F";rank="";position[]={-1.61,-1.1,0.000041008};dir=179.021;};
+				class Object2 {side=8; vehicle="Land_BagFence_End_F";rank="";position[]={-1.95,0.45,0};dir=85.277;};
+				class Object3 {side=8; vehicle="Land_BagFence_Long_F";rank="";position[]={-1.94,2.31,0};dir=95.257;};
+				class Object4 {side=8; vehicle="Land_BagFence_Short_F";rank="";position[]={-2.13,2.39,0.907253};dir=87.351;};
+				class Object5 {side=8; vehicle="Land_ChairWood_F";rank="";position[]={-1.8,-2.69,0.0000095367};dir=303.024;};
+				class Object6 {side=8; vehicle="Land_WoodenTable_small_F";rank="";position[]={3.82,0.2,-0.0000033379};dir=179.994;};
+				class Object7 {side=8; vehicle="CamoNet_OPFOR_open_Curator_F";rank="";position[]={2.76,2.85,0};dir=90.078;};
+				class Object8 {side=8; vehicle="Land_Pallet_MilBoxes_F";rank="";position[]={3.79,-1.31,0};dir=180;};
+				class Object9 {side=8; vehicle="Land_i_Stone_Shed_V1_F";rank="";position[]={-3.36,2.45,0};dir=271.4365;};
+				class Object10 {side=8; vehicle="Land_WaterBarrel_F";rank="";position[]={-3.18,-2.75,0.0000066757};dir=181.61607;};
+				class Object11 {side=8; vehicle="Land_HBarrier_1_F";rank="";position[]={3.82,1.9,0};dir=180;};
+				class Object12 {side=8; vehicle="Land_BagFence_Long_F";rank="";position[]={4.78,-0.24,0};dir=89.829;};
+				class Object13 {side=8; vehicle="Land_HBarrier_1_F";rank="";position[]={3.8,3.38,0};dir=180;};
+				class Object14 {side=8; vehicle="Land_BagFence_Round_F";rank="";position[]={4.3,-2.78,0};dir=300.088;};
+				class Object15 {side=8; vehicle="Land_PaperBox_closed_F";rank="";position[]={1.19,5.22,0};dir=180;};
+				class Object16 {side=8; vehicle="MapBoard_altis_F";rank="";position[]={-3.8,-3.83,-0.00219202};dir=315.219;};
+				class Object17 {side=8; vehicle="Land_BagFence_Long_F";rank="";position[]={4.73,2.71,0};dir=89.829;};
+				class Object18 {side=8; vehicle="Land_WoodenTable_large_F";rank="";position[]={-1.02,-5.39,0.000002861};dir=90.428;};
+				class Object19 {side=8; vehicle="Land_BagFence_Long_F";rank="";position[]={0.09,6.25,0};dir=180;};
+				class Object20 {side=8; vehicle="Land_BagFence_Corner_F";rank="";position[]={-2.03,6.07,0};dir=2.143;};
+				class Object21 {side=8; vehicle="CamoNet_OPFOR_Curator_F";rank="";position[]={-2.31,-6.08,0};dir=181.07304;};
+				class Object22 {side=8; vehicle="Land_BagFence_Short_F";rank="";position[]={2.4,6.2,0};dir=180;};
+				class Object23 {side=8; vehicle="Land_BagFence_Round_F";rank="";position[]={4.3,5.38,0};dir=235.5015;};
+				class Object24 {side=8; vehicle="Land_BagFence_Long_F";rank="";position[]={-6.11,-3.4,0};dir=89.154;};
+				class Object25 {side=8; vehicle="Land_BagFence_Corner_F";rank="";position[]={2.25,-7.33,0};dir=89.953;};
+				class Object26 {side=8; vehicle="Land_Mound01_8m_F";rank="";position[]={-2.14,-7.93,0};dir=180;};
+				class Object27 {side=8; vehicle="Land_BagFence_Long_F";rank="";position[]={-6.07,-6.31,0};dir=89.154;};
+				class Object28 {side=8; vehicle="Land_Razorwire_F";rank="";position[]={-5.47,7.12,0};dir=358.04;};
+				class Object29 {side=8; vehicle="Land_Razorwire_F";rank="";position[]={-8.89,2.26,0};dir=270.0637;};
+			}
+			
 			class AresSmallFieldCommand
 			{
 				name = "Sm. Field Command";
