@@ -45,10 +45,10 @@ if (_activated && local _logic) then
 							"B_APC_Tracked_01_rcws_F", "B_APC_Wheeled_01_cannon_F"
 						],
 						[	// 4 - Unarmed Aircraft
-							"B_Heli_Light_01_F"
+							"B_Heli_Light_01_F", "B_Heli_Transport_03_unarmed_F"
 						],
 						[	// 5 - Armed Transport Aircraft
-							"B_Heli_Transport_01_F", "B_Heli_Transport_01_camo_F"
+							"B_Heli_Transport_01_F", "B_Heli_Transport_01_camo_F", "B_Heli_Transport_03_F"
 						],
 						[	// 6 - Unarmed Boats
 							"B_Boat_Transport_01_F", "B_G_Boat_Transport_01_F"
@@ -78,10 +78,10 @@ if (_activated && local _logic) then
 							"O_APC_Tracked_02_cannon_F", "O_APC_Wheeled_02_rcws_F"
 						],
 						[	// 4 - Unarmed Aircraft
-							"O_Heli_Light_02_unarmed_F"
+							"O_Heli_Light_02_unarmed_F", "O_Heli_Transport_04_bench_F", "O_Heli_Transport_04_covered_F"
 						],
 						[	// 5 - Armed Transport Aircraft
-							"O_Heli_Light_02_F"
+							"O_Heli_Light_02_F", "O_Heli_Light_02_v2_F"
 						],
 						[	// 6 - Unarmed Boats
 							"O_Boat_Transport_01_F", "O_G_Boat_Transport_01_F"
@@ -236,7 +236,7 @@ if (_activated && local _logic) then
 					_squadType resize _freeSpace;
 				};
 				
-				_infantryGroup = [[0, 0, 0], _side, _squadType] call BIS_fnc_spawnGroup;
+				_infantryGroup = [position _logic, _side, _squadType] call BIS_fnc_spawnGroup;
 				{
 					_x moveInCargo (vehicle (leader _vehicleGroup));
 				} foreach(units _infantryGroup);
