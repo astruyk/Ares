@@ -12,7 +12,7 @@ units[] =
 	"Ares_Module_Arsenal_Paste_Replace",
 	"Ares_Module_Behaviour_Create_Artillery_Target",
 	"Ares_Module_Behaviour_Fire_At_Artillery_Target",
-	"Ares_Module_Behaviour_Land_Helicopter",
+	//"Ares_Module_Behaviour_Land_Helicopter",
 	"Ares_Module_Behaviour_Patrol",
 	"Ares_Module_Behaviour_Search_Nearby_And_Garrison",
 	"Ares_Module_Behaviour_Search_Nearby_Building",
@@ -43,6 +43,4 @@ units[] =
 	"Ares_Module_Teleport_Single",
 	"Ares_Module_Teleport_Zeus",
 	"Ares_Module_UnGarrison",
-	"Ares_Module_Util_Start_Group_Cleanup",
-	"Ares_Module_Util_Stop_Group_Cleanup",
 };
