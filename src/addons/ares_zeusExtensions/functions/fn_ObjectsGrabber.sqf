@@ -25,10 +25,27 @@ private ["_objs"];
 _objs = nearestObjects [(position _anchorObject), ["All"], _anchorDim];
 
 //First filter illegal objects
+ _typeBlacklist = [
+		"Ares_Module_Save_Objects_For_Paste",
+		"GroundWeaponHolder",
+		"Salema_F",
+		"Ornate_random_F",
+		"Mackerel_F",
+		"Tuna_F",
+		"Mullet_F", 
+		"CatShark_F",
+		"Rabbit_F",
+		"Snake_random_F",
+		"Turtle_F",
+		"Hen_random_F",
+		"Cock_random_F",
+		"Cock_white_F",
+		"Sheep_random_F"];
+private ["_allDynamic"];
+_allDynamic = allMissionObjects "All";
 {
 	//Exclude non-dynamic objects (world objects)
-	private ["_allDynamic", "_excludeFlag", "_objectType"];
-	_allDynamic = allMissionObjects "All";
+	private ["_excludeFlag"];
 
 	_excludeFlag = false;
 	if (_x in _allDynamic) then
@@ -46,25 +63,8 @@ _objs = nearestObjects [(position _anchorObject), ["All"], _anchorDim];
 	{
 		_excludeFlag = true;
 	};
-	
-	 _objectType = typeOf _x;
-	 _typeBlacklist = [
-		"Ares_Module_Save_Objects_For_Paste",
-		"GroundWeaponHolder",
-		"Salema_F",
-		"Ornate_random_F",
-		"Mackerel_F",
-		"Tuna_F",
-		"Mullet_F", 
-		"CatShark_F",
-		"Rabbit_F",
-		"Snake_random_F",
-		"Turtle_F",
-		"Hen_random_F",
-		"Cock_random_F",
-		"Cock_white_F",
-		"Sheep_random_F"];
-	if (_objectType in _typeBlacklist || _x == player) then
+
+	if ((typeOf _x) in _typeBlacklist || _x == player) then
 	{
 		_excludeFlag = true;
 	};
@@ -90,10 +90,10 @@ _objectsToSave = [];
 {
 	private ["_type", "_objPos", "_dX", "_dY", "_z", "_azimuth", "_fuel", "_damage", "_outputArray"];
 	_type = typeOf _x;
-	_objPos = getPosASL _x;
+	_objPos = getPosWorld _x;
 	_xPos = _objPos select 0;
 	_yPos = _objPos select 1;
-	_zPos = (_objPos select 2) - (getTerrainHeightASL _objPos); // Store the actual height above ground. Using getPos() will not work for stacked things (I think it's storing height above object below it)
+	_zPos = _objPos select 2;
 	_azimuth = direction _x;
 	_fuel = fuel _x;
 	_damage = damage _x;
@@ -103,7 +103,7 @@ _objectsToSave = [];
 	_outputText = _outputText + ",";
 } forEach _objs;
 
-// Add an entry for holding the anchor position. This will be extracted if we want to do a relative paste later.
-_outputText = _outputText + format ["[%1,%2,%3]", (position _anchorObject) select 0,  (position _anchorObject) select 1, (position _anchorObject) select 2] + "]";
+// Add an entry for holding the anchor position and version number. This will be extracted if we want to do a relative paste later.
+_outputText = _outputText + format ["[%1,%2,%3],[1]", (getPosWorld _anchorObject) select 0,  (getPosWorld _anchorObject) select 1, (getPosWorld _anchorObject) select 2] + "]";
 copyToClipboard _outputText;
 _outputText

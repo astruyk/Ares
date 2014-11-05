@@ -21,8 +21,9 @@ _objs = [_this, 1, [[0,0,0]], [[]]] call BIS_fnc_Param;
 
 // The copy script will have added the reference point as the last object in the array.
 // Get the position from it, and then remove it from the array so we no longer process it.
-_originalAnchorPosition = _objs select ((count _objs) - 1);
-_objs resize ((count _objs) - 1);
+_originalAnchorPosition = _objs select ((count _objs) - 2);
+_metadata = _objs select ((count _objs) - 1); // Right now this only contains the version number
+_objs resize ((count _objs) - 2);
 
 //Make sure there are definitions in the final object array
 if ((count _objs) == 0) exitWith {debugLog "Log: [BIS_fnc_objectMapper] No elements in the object array!"; []};
@@ -33,9 +34,10 @@ _newObjs = [];
 private ["_useAbsolutePositions"];
 _useAbsolutePositions = isNull _newAnchorObject;
 
-private ["_newAnchorX", "_newAnchorY", "_newAnchorZ", "_newAnchorPosition"];
-_newAnchorX = (position _newAnchorObject) select 0;
-_newAnchorY = (position _newAnchorObject) select 1;
+private ["_newAnchorX", "_newAnchorY"];
+_newAnchorX = (getPosWorld _newAnchorObject) select 0;
+_newAnchorY = (getPosWorld _newAnchorObject) select 1;
+_newAnchorZ = (getPosWorld _newAnchorObject) select 2;
 
 {
 	private ["_type", "_originalPosition", "_azimuth", "_fuel", "_damage", "_newObj"];
@@ -50,6 +52,7 @@ _newAnchorY = (position _newAnchorObject) select 1;
 	if (_useAbsolutePositions) then
 	{
 		_newObj = createVehicle [_type, _originalPosition, [], 0, "CAN_COLLIDE"];
+		_newObj setPosWorld _originalPosition;
 	}
 	else
 	{
@@ -58,18 +61,19 @@ _newAnchorY = (position _newAnchorObject) select 1;
 		_newPos = [
 			_newAnchorX + ((_originalPosition select 0) - (_originalAnchorPosition select 0)),
 			_newAnchorY + ((_originalPosition select 1) - (_originalAnchorPosition select 1)),
-			0 // Default to placing the unit on the ground.
+			_newAnchorZ + ((_originalPosition select 2) - (_originalAnchorPosition select 2))
 			];
 
 		_newObj = createVehicle [_type, _newPos, [], 0, "CAN_COLLIDE"];
+		_newObj setPosWorld _newPos;
 		
-		if (abs(_originalPosition select 2) > 0.01) then
+		/*if (abs(_originalPosition select 2) > 0.01) then
 		{
 			// If the unit was sufficiently above the ground level at their original position, then we want to translate
 			// that into the same offset above ground level in the new location.
 			_newHeightASL = (getTerrainHeightASL _newPos) + (_originalPosition select 2);
 			_newObj setPosASL [_newPos select 0, _newPos select 1, _newHeightASL];
-		};
+		};*/
 	};
 	
 	// Orient the object correctly
