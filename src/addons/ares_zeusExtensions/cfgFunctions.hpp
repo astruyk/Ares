@@ -28,7 +28,9 @@ class Ares // This bit will be prefixed when actually calling the function (e.g.
 		class ArsenalSetup {};
 		class BroadcastCode {};
 		class GetArrayDataFromUser {};
+		class GetFarthest {};
 		class GetGroupUnderCursor {};
+		class GetNearest {};
 		class GetSafePos {};
 		class GetUnitUnderCursor {};
 		class GlobalExecute {};
@@ -39,12 +41,10 @@ class Ares // This bit will be prefixed when actually calling the function (e.g.
 		class ObjectsGrabber {};
 		class ObjectsMapper {};
 		class SearchBuilding {};
+		class ShowChooseDialog {};
 		class TeleportPlayers {};
 		class WaitForZeus {};
 		class ZenOccupyHouse {};
-		class GetNearest {};
-		class GetFarthest {};
-		class ShowChooseDialog {};
 	};
 
 	// Functions to perform module actions
