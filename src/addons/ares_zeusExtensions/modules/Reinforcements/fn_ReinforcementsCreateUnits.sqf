@@ -138,6 +138,12 @@ if (_activated && local _logic) then
 			_dialogRpAlgorithm =      _dialogResult select 4;
 			_lzSize = 20;	// TODO make this a dialog parameter?
 			_rpSize = 20;	// TODO make this a dialog parameters?
+			
+			// Lz's for helicopters get more randomness because they tend to crash into eachother.
+			if (_dialogVehicleClass == 4 || _dialogVehicleClass == 5) then
+			{
+				_lzSize = 150;
+			};
 
 			[format ["Dialog results: Side=%1, VehicleType=%2, Behaviour=%3, LzAlgorithm=%4, RpAlgorithm=%5", _dialogSide, _dialogVehicleClass, _dialogVehicleBehaviour, _dialogLzAlgorithm, _dialogRpAlgorithm]] call Ares_fnc_LogMessage;
 
@@ -222,10 +228,14 @@ if (_activated && local _logic) then
 			_allRps = allMissionObjects "Ares_Module_Reinforcements_Create_Rp";
 
 			// Spawn the units and load them into the vehicle
-			while	{
-					((vehicle (leader _vehicleGroup)) emptyPositions "Cargo") >= 3 // Don't try to fill in slots with a squad if there are less than 3 spaces
-					|| (_dialogVehicleClass == 0 && ((vehicle (leader _vehicleGroup)) emptyPositions "Cargo") > 0) // ... unless this is a light vehicle (and so will have fewer positions total)
-					}
+			_vehicle = vehicle (leader _vehicleGroup);
+			_cargoSpacesToLeaveEmpty = 3;
+			if (_dialogVehicleClass == 0) then
+			{
+				// Light vehicles shouldn't leave empty seats, otherwise they often won't have any units at all.
+				_cargoSpacesToLeaveEmpty = 0;
+			};
+			while { (_vehicle emptyPositions "Cargo") > _cargoSpacesToLeaveEmpty }
 			do
 			{
 				_squadType = ((_data select _dialogSide) select 1) call BIS_fnc_selectRandom;
@@ -236,10 +246,8 @@ if (_activated && local _logic) then
 					_squadType resize _freeSpace;
 				};
 				
+				// Spawn the squad members.
 				_infantryGroup = [position _logic, _side, _squadType] call BIS_fnc_spawnGroup;
-				{
-					_x moveInCargo (vehicle (leader _vehicleGroup));
-				} foreach(units _infantryGroup);
 
 				// Choose a RP for the squad to head to once unloaded and set their waypoint.
 				if (count _allRps > 0) then
@@ -275,6 +283,11 @@ if (_activated && local _logic) then
 				{
 					_infantryMoveOnWp = _infantryGroup addWaypoint [position _lz, _rpSize];
 				};
+				
+				// Load the units into the vehicle.
+				{
+					_x moveInCargo (vehicle (leader _vehicleGroup));
+				} foreach(units _infantryGroup);
 				
 				// Add infantry to curator
 				[(units _infantryGroup)] call Ares_fnc_AddUnitsToCurator;
