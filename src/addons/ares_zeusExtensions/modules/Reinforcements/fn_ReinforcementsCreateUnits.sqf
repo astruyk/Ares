@@ -18,7 +18,6 @@ scopeName "main";
 if (_activated && local _logic) then
 {
 	if (isNil "Ares_Reinforcement_Unit_Pools"
-		|| isNull Ares_Reinforcement_Unit_Pools
 		|| typeName Ares_Reinforcement_Unit_Pools != typeName []
 		|| count Ares_Reinforcement_Unit_Pools == 0) then
 	{
@@ -76,7 +75,7 @@ if (_activated && local _logic) then
 		_lzSize = 150;
 	};
 
-	[format ["Dialog results: Side=%1, VehicleType=%2, Behaviour=%3, LzAlgorithm=%4, RpAlgorithm=%5", _dialogSide, _dialogVehicleClass, _dialogVehicleBehaviour, _dialogLzAlgorithm, _dialogRpAlgorithm]] call Ares_fnc_LogMessage;
+	[format ["Dialog results: Pool=%1, VehicleType=%2, Behaviour=%3, LzAlgorithm=%4, RpAlgorithm=%5", _dialogPool, _dialogVehicleClass, _dialogVehicleBehaviour, _dialogLzAlgorithm, _dialogRpAlgorithm]] call Ares_fnc_LogMessage;
 
 	// Choose an LZ to unload at.
 	_lz = _allLzs call BIS_fnc_selectRandom;
