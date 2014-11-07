@@ -7,9 +7,14 @@
 	Returns:
 		The group of the unit under the cursor (if any). Otherwise the logic unit parameter is deleted.
 */
+
+private ["_logic", "_unitUnderCursor", "_group"];
 _logic = _this select 0;
-
 _unitUnderCursor = [_logic] call Ares_fnc_GetUnitUnderCursor;
-_group = group _unitUnderCursor;
+_group = grpNull;
+if (not isNull _unitUnderCursor) then
+{
+	_group = group _unitUnderCursor;
+};
 
-_group
+_group;

@@ -138,6 +138,11 @@ if (_activated && local _logic) then
 			_dialogRpAlgorithm =      _dialogResult select 4;
 			_lzSize = 20;	// TODO make this a dialog parameter?
 			_rpSize = 20;	// TODO make this a dialog parameters?
+			_spawnPosition = position _logic;
+			if (not isNil "Ares_CuratorObjectPlaces_LastPlacedObjectPosition") then
+			{
+				_spawnPosition = Ares_CuratorObjectPlaces_LastPlacedObjectPosition;
+			};
 			
 			// Lz's for helicopters get more randomness because they tend to crash into eachother.
 			if (_dialogVehicleClass == 4 || _dialogVehicleClass == 5) then
@@ -159,12 +164,12 @@ if (_activated && local _logic) then
 			if (_dialogLzAlgorithm == 1) then
 			{
 				// Nearest
-				_lz = [position _logic, _allLzs] call Ares_fnc_GetNearest;
+				_lz = [_spawnPosition, _allLzs] call Ares_fnc_GetNearest;
 			};
 			if (_dialogLzAlgorithm == 2) then
 			{
 				// Farthest
-				_lz = [position _logic, _allLzs] call Ares_fnc_GetFarthest;
+				_lz = [_spawnPosition, _allLzs] call Ares_fnc_GetFarthest;
 			};
 			if (_dialogLzAlgorithm == 3) then
 			{
@@ -183,7 +188,7 @@ if (_activated && local _logic) then
 			// Spawn a vehicle, send it to the LZ and have it unload the troops before returning home and
 			// deleting itself.
 			_vehicleType = (((_data select _dialogSide) select 0) select _dialogVehicleClass) call BIS_fnc_selectRandom;
-			_vehicleGroup = ([position _logic, 0, _vehicleType, _side] call BIS_fnc_spawnVehicle) select 2;
+			_vehicleGroup = ([_spawnPosition, 0, _vehicleType, _side] call BIS_fnc_spawnVehicle) select 2;
 
 			_vehicleDummyWp = _vehicleGroup addWaypoint [position _vehicle, 0];
 			_vehicleUnloadWp = _vehicleGroup addWaypoint [position _lz, _lzSize];
@@ -211,7 +216,7 @@ if (_activated && local _logic) then
 			if (_dialogVehicleBehaviour == 0) then
 			{
 				// RTB and despawn.
-				_vehicleReturnWp = _vehicleGroup addWaypoint [position _logic, 0];
+				_vehicleReturnWp = _vehicleGroup addWaypoint [_spawnPosition, 0];
 				_vehicleReturnWp setWaypointTimeout [2,2,2]; // Let the unit stop before being despawned.
 				_vehicleReturnWp setWaypointStatements ["true", "deleteVehicle (vehicle this); {deleteVehicle _x} foreach thisList;"];
 			};
@@ -247,7 +252,7 @@ if (_activated && local _logic) then
 				};
 				
 				// Spawn the squad members.
-				_infantryGroup = [position _logic, _side, _squadType] call BIS_fnc_spawnGroup;
+				_infantryGroup = [_spawnPosition, _side, _squadType] call BIS_fnc_spawnGroup;
 
 				// Choose a RP for the squad to head to once unloaded and set their waypoint.
 				if (count _allRps > 0) then

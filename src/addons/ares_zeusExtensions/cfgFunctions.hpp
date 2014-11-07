@@ -17,6 +17,7 @@ class Ares // This bit will be prefixed when actually calling the function (e.g.
 		file = "\ares_zeusExtensions\functions\events";
 
 		class OnModuleTreeLoad {};
+		class HandleCuratorObjectPlaced {};
 	}
 
 	// Helper functions

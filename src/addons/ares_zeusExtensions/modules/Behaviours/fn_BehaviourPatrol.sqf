@@ -1,13 +1,29 @@
+private ["_logic", "_units", "_activated"];
 _logic = _this select 0;
 _units = _this select 1;
 _activated = _this select 2;
 
 if (_activated && local _logic) then
 {
+	private ["_groupUnderCursor"];
 	_groupUnderCursor = [_logic] call Ares_fnc_GetGroupUnderCursor;
 
-	if (not isnull _groupUnderCursor) then
+	if (isNull _logic) then
 	{
+		["Null logic passed to patrol behaviour!"] call Ares_fnc_LogMessage;
+	};
+	if ((position _logic) select 0 == 0 && (position _logic) select 1 == 0 && (position _logic) select 2 == 0) then
+	{
+		["Logic is at [0,0,0]!"] call Ares_fnc_LogMessage;
+	};
+	if (isNull _groupUnderCursor) then
+	{
+		["No unit under cursor!!"] call Ares_fnc_LogMessage;
+	};
+	
+	if (not isNull _groupUnderCursor) then
+	{
+		private ["_dialogResult"];
 		_dialogResult =
 			["Begin Patrol",
 					[
@@ -52,7 +68,7 @@ if (_activated && local _logic) then
 					_groupUnderCursor setSpeedMode "NORMAL";
 				};
 			};
-			
+			private ["_moveClockwise", "_delay", "_numberOfWaypoints", "_degreesPerWaypoint", "_centerPoint", "_waypoint"];
 			_moveClockwise = (_dialogResult select 2) == 0;
 
 			_delay = [0, 0, 0];
@@ -92,6 +108,7 @@ if (_activated && local _logic) then
 			_centerPoint = position _logic;
 			for "_waypointNumber" from 0 to (_numberOfWaypoints - 1) do
 			{
+				private ["_currentDegrees"];
 				_currentDegrees = _degreesPerWaypoint * _waypointNumber;
 				_waypoint = _groupUnderCursor addWaypoint [[_centerPoint, _radius, _currentDegrees] call BIS_fnc_relPos, 5];
 				_waypoint setWaypointTimeout _delay;

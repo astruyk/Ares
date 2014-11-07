@@ -7,17 +7,37 @@
 	Returns:
 		The unit under the cursor (if any). Otherwise the logic unit parameter is deleted.
 */
+private ["_logic", "_unitUnderCursor", "_mouseOverVariableValue"];
 _logic = _this select 0;
-
 _unitUnderCursor = objNull;
-_mouseOverVariableValue = missionnamespace getvariable ["bis_fnc_curatorObjectPlaced_mouseOver",[""]];
-if ((_mouseOverVariableValue select 0) == typename objNull) then
+if (not isNil "Ares_CuratorObjectPlaced_UnitUnderCursor") then
 {
-	_unitUnderCursor = _mouseOverVariableValue select 1;
-};
-if(isnull _unitUnderCursor) then {
-	[objNull, "Error - Module needs to be placed on a unit."] call bis_fnc_showCuratorFeedbackMessage;
-	deletevehicle _logic;
+	_mouseOverVariableValue = Ares_CuratorObjectPlaced_UnitUnderCursor;
+	if (count _mouseOverVariableValue == 0) then
+	{
+		// Not in curator mode.
+	}
+	else
+	{
+		if (_mouseOverVariableValue select 0 == "") then
+		{
+			// Mouse not over anything editable (value should be [""])
+		}
+		else
+		{
+			if (count _mouseOverVariableValue == 2) then
+			{
+				// value should be [typeName, object]
+				_unitUnderCursor = _mouseOverVariableValue select 1;
+			};
+		};
+	};
 };
 
-_unitUnderCursor
+if (isNull _unitUnderCursor) then
+{
+	[objNull, "Error - Module needs to be placed on a unit."] call bis_fnc_showCuratorFeedbackMessage;
+	deleteVehicle _logic;
+};
+
+_unitUnderCursor;
