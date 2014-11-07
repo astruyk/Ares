@@ -43,7 +43,6 @@ Ares_Reinforcement_Unit_Pools =
 			// Amphibious squad setups to load into boats. Note - these may get truncated to fit into empty spaces or small vehicles.
 			["O_diver_TL_F", "O_diver_F", "O_diver_F", "O_diver_F", "O_diver_F"]
 		]
-
 	],
 	[
 		"AAF", // Name of the faction
@@ -66,6 +65,27 @@ Ares_Reinforcement_Unit_Pools =
 			// Amphibious squad setups to load into boats. Note - these may get truncated to fit into empty spaces or small vehicles.
 			["O_diver_TL_F", "O_diver_F", "O_diver_F", "O_diver_F", "O_diver_F"]
 		]
-
+	],
+	[
+		"Canadian Forces", // Name of the faction
+		west, // The side of the faction
+		"CFB_Skins", // The name of the root class for the addon that defines these units (must exist or the side will not show up). Use "" to always show.
+		["I_G_Offroad_01_F","I_Quadbike_01_F", "I_MRAP_03_F"], // Scouts and unarmed light vehicles
+		["I_G_Offroad_01_armed_F", "I_MRAP_03_hmg_F", "I_MRAP_03_gmg_F"], // Armed light vehicles
+		["I_Truck_02_covered_F", "I_Truck_02_transport_F"], // Dedicated troop trucks
+		["I_APC_tracked_03_cannon_F", "I_APC_Wheeled_03_cannon_F"], // Armed + Armored Troop Transports
+		["CFB_Helo_Griffon_Unarmed", "CFB_Helo_Cyclone"], // Unarmed helicopters
+		["CFB_Helo_Griffon"], // Armed helicopters
+		["I_Boat_Transport_01_F", "I_G_Boat_Transport_01_F"], // Unarmed boats
+		["I_Boat_Armed_01_minigun_F"], // Armed boats
+		[
+			// Squad setups to load into vehicles. Note - these may get truncated to fit into empty spaces or small vehicles.
+			["CFB_TW_Soldier_TL", "CFB_TW_Soldier_AR", "CFB_TW_Soldier", "CFB_TW_Soldier_AmmoBearer", "CFB_TW_Soldier_Marksman"],
+			["CFB_TW_Soldier_TL", "CFB_TW_Soldier_GL", "CFB_TW_Soldier_MMG", "CFB_TW_Soldier", "CFB_TW_Soldier"]
+		],
+		[
+			// Amphibious squad setups to load into boats. Note - these may get truncated to fit into empty spaces or small vehicles.
+			["O_diver_TL_F", "O_diver_F", "O_diver_F", "O_diver_F", "O_diver_F"]
+		]
 	]
 ];
