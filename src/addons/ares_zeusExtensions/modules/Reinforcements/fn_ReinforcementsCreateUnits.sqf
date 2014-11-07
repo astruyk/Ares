@@ -1,13 +1,14 @@
-#define DISPLAY_NAME_INDEX = 0;
-#define SIDE_INDEX = 1;
-#define VEHICLE_POOL_START_INDEX = 2;
-#define SCOUT_UNIT_POOL_INDEX = 2;
-#define UNARMED_HELO_UNIT_POOL_INDEX = 6;
-#define ARMED_HELO_UNIT_POOL_INDEX = 7;
-#define UNARMED_BOAT_UNIT_POOL_INDEX = 8;
-#define ARMED_BOAT_UNIT_POOL_INDEX = 9;
-#define INFANTRY_UNIT_POOL_INDEX = 10;
-#define DIVER_UNIT_POOL_INDEX = 11;
+#define DISPLAY_NAME_INDEX 0
+#define SIDE_INDEX 1
+#define ADDON_CLASS_INDEX 2
+#define VEHICLE_POOL_START_INDEX 3
+#define SCOUT_UNIT_POOL_INDEX 3
+#define UNARMED_HELO_UNIT_POOL_INDEX 7
+#define ARMED_HELO_UNIT_POOL_INDEX 8
+#define UNARMED_BOAT_UNIT_POOL_INDEX 9
+#define ARMED_BOAT_UNIT_POOL_INDEX 10
+#define INFANTRY_UNIT_POOL_INDEX 11
+#define DIVER_UNIT_POOL_INDEX 12
 
 _logic = _this select 0;
 _units = _this select 1;
@@ -16,9 +17,6 @@ _activated = _this select 2;
 scopeName "main";
 if (_activated && local _logic) then
 {
-	// TODO do this once on addon start, not every time!
-	call compile preprocessFileLineNumbers "\@Ares\Ares_Reinforcement_Unit_Pools.sqf"; 
-
 	if (isNil "Ares_Reinforcement_Unit_Pools"
 		|| isNull Ares_Reinforcement_Unit_Pools
 		|| typeName Ares_Reinforcement_Unit_Pools != typeName []
@@ -26,7 +24,7 @@ if (_activated && local _logic) then
 	{
 		[objNull, "Unable to load unit pools. Is your 'Ares_Reinforcement_Unit_Pools.sqf' file corrupt?"] call bis_fnc_showCuratorFeedbackMessage;
 		breakTo "main";
-	}
+	};
 	
 	_allLzs = allMissionObjects "Ares_Module_Reinforcements_Create_Lz";
 	if (count _allLzs == 0) then

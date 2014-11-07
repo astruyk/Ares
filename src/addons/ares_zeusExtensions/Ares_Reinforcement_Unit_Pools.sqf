@@ -3,6 +3,7 @@ Ares_Reinforcement_Unit_Pools =
 	[
 		"CSAT", // Name of the faction
 		east, // The side of the faction
+		"", // The name of the root class for the addon that defines these units (must exist or the side will not show up). Use "" to always show.
 		["O_MRAP_02_F", "O_G_Offroad_01_F", "O_Quadbike_01_F"], // Scouts and unarmed light vehicles
 		["O_MRAP_02_hmg_F", "O_MRAP_02_gmg_F", "O_G_Offroad_01_armed_F"], // Armed light vehicles
 		["O_Truck_02_covered_F", "O_Truck_02_transport_F", "O_Truck_03_transport_F", "O_Truck_03_covered_F"], // Dedicated troop trucks
@@ -24,6 +25,7 @@ Ares_Reinforcement_Unit_Pools =
 	[
 		"NATO", // Name of the faction
 		west, // The side of the faction
+		"", // The name of the root class for the addon that defines these units (must exist or the side will not show up). Use "" to always show.
 		["B_MRAP_01_F", "B_G_Offroad_01_F", "B_Quadbike_01_F"], // Scouts and unarmed light vehicles
 		["B_MRAP_01_gmg_F", "B_MRAP_01_hmg_F","B_G_Offroad_01_armed_F"], // Armed light vehicles
 		["B_Truck_01_transport_F", "B_Truck_01_covered_F"], // Dedicated troop trucks
@@ -46,6 +48,7 @@ Ares_Reinforcement_Unit_Pools =
 	[
 		"AAF", // Name of the faction
 		resistance, // The side of the faction
+		"", // The name of the root class for the addon that defines these units (must exist or the side will not show up). Use "" to always show.
 		["I_G_Offroad_01_F","I_Quadbike_01_F", "I_MRAP_03_F"], // Scouts and unarmed light vehicles
 		["I_G_Offroad_01_armed_F", "I_MRAP_03_hmg_F", "I_MRAP_03_gmg_F"], // Armed light vehicles
 		["I_Truck_02_covered_F", "I_Truck_02_transport_F"], // Dedicated troop trucks

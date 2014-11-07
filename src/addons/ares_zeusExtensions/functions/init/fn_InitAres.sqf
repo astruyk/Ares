@@ -1,9 +1,8 @@
-// Create a flag we can check for debug things later.
-missionnamespace setVariable ["Ares_debugging", true];
+// Init unit pools
+call compile preprocessFileLineNumbers '\ares_zeusExtensions\Ares_Reinforcement_Unit_Pools.sqf';
 
 // Force a module of ours to load so that we will get the Ares scripts in the menu list. This only works if outside the spawn call.
 //["Ares_Module_Test"] call BIS_fnc_activateAddons; // Temporarily removed to try other UI init functions.
-
 [] spawn { activateAddons ["Ares"]; }; // This also works. Not sure which is best.
 
 [] spawn {
