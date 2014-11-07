@@ -34,8 +34,13 @@ if (_activated && local _logic) then
 	
 	// Generate list of pool names to let user choose from
 	_poolNames = [];
+	_validPools = [];
 	{
-		_poolNames pushBack (_x select DISPLAY_NAME_INDEX);
+		if ((_x select ADDON_CLASS_INDEX) == "" || isClass(configFile >> "CfgPatches" >> (_x select ADDON_CLASS_INDEX))) then
+		{
+			_poolNames pushBack (_x select DISPLAY_NAME_INDEX);
+			_validPools pushBack _x;
+		};
 	} forEach Ares_Reinforcement_Unit_Pools;
 	
 	// Show the user the dialog
@@ -106,7 +111,7 @@ if (_activated && local _logic) then
 	_lz setVariable ["Ares_Lz_Count", (_lz getVariable ["Ares_Lz_Count", 0]) + 1];
 
 	// Get the unit pool and the side it's associated with
-	_pool = Ares_Reinforcement_Unit_Pools select _dialogPool;
+	_pool = _validPools select _dialogPool;
 	_side = _pool select SIDE_INDEX;
 
 	// Spawn a vehicle, send it to the LZ and have it unload the troops before returning home and
@@ -169,11 +174,11 @@ if (_activated && local _logic) then
 		private ["_squadMembers"];
 		if (_dialogVehicleClass == UNARMED_BOAT_UNIT_POOL_INDEX || _dialogVehicleClass == ARMED_BOAT_UNIT_POOL_INDEX) then
 		{
-			_squadMembers = (_pool select INFANTRY_UNIT_POOL_INDEX) call BIS_fnc_selectRandom;
+			_squadMembers = (_pool select DIVER_UNIT_POOL_INDEX) call BIS_fnc_selectRandom;
 		}
 		else
 		{
-			_squadMembers = (_pool select DIVER_UNIT_POOL_INDEX) call BIS_fnc_selectRandom;
+			_squadMembers = (_pool select INFANTRY_UNIT_POOL_INDEX) call BIS_fnc_selectRandom;
 		};
 		_freeSpace = (vehicle (leader _vehicleGroup)) emptyPositions "Cargo";
 		if (_freeSpace < count _squadMembers) then
