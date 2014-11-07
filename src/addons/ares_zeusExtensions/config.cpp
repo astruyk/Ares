@@ -1,9 +1,9 @@
 class CfgPatches
 {
-    class Ares
-    {
-        weapons[] = {};
-        requiredVersion = 0.1;
+	class Ares
+	{
+		weapons[] = {};
+		requiredVersion = 0.1;
 		author[] = { "Anton Struyk" };
 		authorUrl = "https://github.com/astruyk/";
 		version = 1.0.0;
@@ -21,7 +21,7 @@ class CfgPatches
 			"A3_Modules_F",
 			"A3_Modules_F_Curator"
 		};
-    };
+	};
 };
 
 class CfgFactionClasses
