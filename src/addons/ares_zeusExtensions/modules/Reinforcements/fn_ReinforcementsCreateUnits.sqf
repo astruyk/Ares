@@ -116,7 +116,8 @@ if (_activated && local _logic) then
 
 	// Spawn a vehicle, send it to the LZ and have it unload the troops before returning home and
 	// deleting itself.
-	_vehicleType = (_pool select (_dialogVehicleClass + VEHICLE_POOL_START_INDEX)) call BIS_fnc_selectRandom;
+	_vehiclePoolIndex = (_dialogVehicleClass + VEHICLE_POOL_START_INDEX);
+	_vehicleType = (_pool select _vehiclePoolIndex) call BIS_fnc_selectRandom;
 	_vehicleGroup = ([_spawnPosition, 0, _vehicleType, _side] call BIS_fnc_spawnVehicle) select 2;
 
 	_vehicleDummyWp = _vehicleGroup addWaypoint [position _vehicle, 0];
@@ -127,7 +128,7 @@ if (_activated && local _logic) then
 	// when they take contact.
 	(driver (vehicle (leader _vehicleGroup))) setSkill 1;
 	
-	if (_dialogVehicleClass == UNARMED_HELO_UNIT_POOL_INDEX || _dialogVehicleClass == ARMED_HELO_UNIT_POOL_INDEX) then 
+	if (_vehiclePoolIndex == UNARMED_HELO_UNIT_POOL_INDEX || _vehiclePoolIndex == ARMED_HELO_UNIT_POOL_INDEX) then 
 	{
 		// Special settings for helicopters. Otherwise they tend to run away instead of land
 		// if the LZ is hot.
@@ -163,7 +164,7 @@ if (_activated && local _logic) then
 	// Spawn the units and load them into the vehicle
 	_vehicle = vehicle (leader _vehicleGroup);
 	_maxCargoSpacesToLeaveEmpty = 3;
-	if (_dialogVehicleClass == SCOUT_UNIT_POOL_INDEX) then
+	if (_vehiclePoolIndex == SCOUT_UNIT_POOL_INDEX) then
 	{
 		// Light vehicles shouldn't leave empty seats, otherwise they often won't have any units at all.
 		_maxCargoSpacesToLeaveEmpty = 0;
@@ -172,14 +173,14 @@ if (_activated && local _logic) then
 	do
 	{
 		private ["_squadMembers"];
-		if (_dialogVehicleClass == UNARMED_BOAT_UNIT_POOL_INDEX || _dialogVehicleClass == ARMED_BOAT_UNIT_POOL_INDEX) then
-		{
-			_squadMembers = (_pool select DIVER_UNIT_POOL_INDEX) call BIS_fnc_selectRandom;
-		}
-		else
-		{
+		//if (_vehiclePoolIndex == UNARMED_BOAT_UNIT_POOL_INDEX || _vehiclePoolIndex == ARMED_BOAT_UNIT_POOL_INDEX) then
+		//{
+		//	_squadMembers = (_pool select DIVER_UNIT_POOL_INDEX) call BIS_fnc_selectRandom;
+		//}
+		//else
+		//{
 			_squadMembers = (_pool select INFANTRY_UNIT_POOL_INDEX) call BIS_fnc_selectRandom;
-		};
+		//};
 		_freeSpace = (vehicle (leader _vehicleGroup)) emptyPositions "Cargo";
 		if (_freeSpace < count _squadMembers) then
 		{
