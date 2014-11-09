@@ -9,6 +9,18 @@ Or check out the source code at: https://github.com/astruyk/Ares
 
 Changelists
 
+V.1.0.1 - Bugfixes
+  * Behaviours - Fix issue where 'Aire Artillery' module wouldn't work with units that were spawned by dedicated server
+  * Behaviours - Garrisoned units should turn to fire at enemy units now
+  * Behaviours - Possible fix for issue where sometimes patrols would set wapoints around [0,0,0] instead of around selected unit
+  * Behaviours - Prevent 'Patrol' module from generating waypoints for players
+  * Experimental (Reinforcements) - Added some CFB_Skins units to reinforcement pools. Will be tweaked going forward.
+  * Experimental (Reinforcements) - Added some RHS units to reinforcement pools. Will be tweaked going forward.
+  * General - Fix conficts with some other mods (MCC, AGM)
+  * Reinforcements - Possible fix for issue where sometimes reinforcements would spawn at [0,0,0] instead of where module was placed
+  * Teleport - Fix issue where creating too many teleporters would cause script errors due to running out of phonetic names
+  * Util - Fixed some issues where adding objects to curator would grab ambient objects (rabbits, snakes, etc..)
+
 V.1.0.0 - Public Release!
   * Actions - Fix issue where invisible Zeus sometimes wasn't
   * Arsenal - 'Paste & Replace' works again
