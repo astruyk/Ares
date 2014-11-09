@@ -194,6 +194,7 @@ scopeName "bldgSearchMainScope";
 	{
 		// Send the searcher to the current building position.
 		_searcher = _searchers select _currentSearcherIndex;
+		_searcher forceSpeed -1;
 		doStop _searcher;
 		_searcher doMove _x;
 		_searcher setVariable ["Ares_isSearching", true];
@@ -247,7 +248,7 @@ while {!_isDoneSearching} do
 		if (_x getVariable ["Ares_isSearching", false]) exitWith
 		{
 			_isDoneSearching = false;
-	};
+		};
 	} forEach _searchers;
 	if (_isDoneSearching) then
 	{
@@ -262,13 +263,14 @@ if (_occupy) then
 {
 	// Don't need to do anything to move the units around. They're already in position.
 	{
-		doStop _x;
+		_x forceSpeed 0;
 	} forEach _searchers;
 }
 else
 {
 	// Make the units return to the group and go back to following the leader.
 	{
+		_x forceSpeed -1;
 		_x doMove _ldrPos;
 		[_x, _leader] spawn
 			{

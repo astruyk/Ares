@@ -12,8 +12,8 @@ if (_activated && local _logic) then
 	{
 		//_x enableAI "MOVE";
 		//_x doMove _outsidePos;
-		(_units select _unitIndex) forceSpeed -1;
-		} forEach(units _groupUnderCursor);
+		_x forceSpeed -1;
+	} forEach(units _groupUnderCursor);
 
 	[objnull, "Units released from garrison."] call bis_fnc_showCuratorFeedbackMessage;
 };
