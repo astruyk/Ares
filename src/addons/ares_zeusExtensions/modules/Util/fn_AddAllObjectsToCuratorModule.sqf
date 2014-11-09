@@ -8,11 +8,14 @@ if (_activated && local _logic) then
 
 	if (count _dialogResult > 0) then
 	{
-		_objectsToAdd = vehicles + (allMissionObjects "Man") + (allMissionObjects "Air") + (allMissionObjects "Ammo");
-		
-		if (_dialogResult select 0 != 0) then
+		// Grab the objects in the chosen radius
+		_objectsToAdd = [];
+		if (_dialogResult select 0 == 0) then
 		{
-			_filteredList = [];
+			_objectsToAdd = allMissionObjects "All";
+		}
+		else
+		{
 			_radius = 50;
 			switch (_dialogResult select 0) do
 			{
@@ -21,11 +24,17 @@ if (_activated && local _logic) then
 				case 3: { _radius = 500; };
 				default { _radius = 50; };
 			};
-			
+			_objectsToAdd = nearestObjects [(position _logic), ["All"], _radius];
+		};
+
+		// Filter the list to remove items in the blacklist
+		if (_dialogResult select 0 != 0) then
+		{
+			_filteredList = [];
 			{
-				if (_logic distance _x <= _radius) then
+				if (not ((typeOf _x) in Ares_EditableObjectBlacklist)) then
 				{
-					_filteredList set [count _filteredList, _x];
+					_filteredList pushBack _x;
 				};
 			} forEach _objectsToAdd;
 			_objectsToAdd = _filteredList;

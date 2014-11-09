@@ -25,23 +25,7 @@ private ["_objs"];
 _objs = nearestObjects [(position _anchorObject), ["All"], _anchorDim];
 
 //First filter illegal objects
- _typeBlacklist = [
-		"Ares_Module_Save_Objects_For_Paste",
-		"GroundWeaponHolder",
-		"Salema_F",
-		"Ornate_random_F",
-		"Mackerel_F",
-		"Tuna_F",
-		"Mullet_F", 
-		"CatShark_F",
-		"Rabbit_F",
-		"Snake_random_F",
-		"Turtle_F",
-		"Hen_random_F",
-		"Cock_random_F",
-		"Cock_white_F",
-		"Sheep_random_F"];
-private ["_allDynamic"];
+ private ["_allDynamic"];
 _allDynamic = allMissionObjects "All";
 {
 	//Exclude non-dynamic objects (world objects)
@@ -64,7 +48,7 @@ _allDynamic = allMissionObjects "All";
 		_excludeFlag = true;
 	};
 
-	if ((typeOf _x) in _typeBlacklist || _x == player) then
+	if ((typeOf _x) in Ares_EditableObjectBlacklist || _x == player) then
 	{
 		_excludeFlag = true;
 	};

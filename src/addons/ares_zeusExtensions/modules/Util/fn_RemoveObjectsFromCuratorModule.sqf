@@ -8,11 +8,14 @@ if (_activated && local _logic) then
 
 	if (count _dialogResult > 0) then
 	{
-		_objectsToRemove = vehicles + (allMissionObjects "Man") + (allMissionObjects "Air") + (allMissionObjects "Ammo");
-		
-		if (_dialogResult select 0 != 0) then
+		// Grab objects in the selected radius
+		_objectsToRemove = [];
+		if (_dialogResult select 0 == 0) then
 		{
-			_filteredList = [];
+			_objectsToRemove = allMissionObjects "All";
+		}
+		else
+		{
 			_radius = 50;
 			switch (_dialogResult select 0) do
 			{
@@ -21,14 +24,7 @@ if (_activated && local _logic) then
 				case 3: { _radius = 500; };
 				default { _radius = 50; };
 			};
-			
-			{
-				if (_logic distance _x <= _radius) then
-				{
-					_filteredList set [count _filteredList, _x];
-				};
-			} forEach _objectsToRemove;
-			_objectsToRemove = _filteredList;
+			_objectsToRemove = nearestObjects [(position _logic), ["All"], _radius];
 		};
 		
 		[_objectsToRemove, false] call Ares_fnc_AddUnitsToCurator;
