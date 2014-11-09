@@ -32,6 +32,7 @@ class Ares // This bit will be prefixed when actually calling the function (e.g.
 		class GetFarthest {};
 		class GetGroupUnderCursor {};
 		class GetNearest {};
+		class GetPhoneticName {};
 		class GetSafePos {};
 		class GetUnitUnderCursor {};
 		class GlobalExecute {};

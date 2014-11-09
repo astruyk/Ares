@@ -62,12 +62,11 @@ if (_activated && local _logic) then
 		_isFirstCallToCreateTeleporter = true;
 		publicVariable "Ares_addNewTeleportMarkerActions";
 	};
-	Ares_TeleportMarkers set [count Ares_TeleportMarkers, _teleportMarker];
+	Ares_TeleportMarkers pushBack _teleportMarker;
 	publicVariable "Ares_TeleportMarkers";
 
 	// Set the name of the marker (used in the action)
-	_teleportMarkerNames = ["Alpha", "Bravo", "Charlie", "Delta", "Echo", "Foxtrot", "Golf", "Hotel", "India", "Juliet", "Kilo", "Lima", "Mike", "November", "Oscar", "Papa", "Quebec", "Romeo", "Sierra", "Tango", "Uniform", "Victor", "Whiskey", "X-Ray", "Yankee", "Zulu"];
-	_teleportMarkerName = _teleportMarkerNames select ((count Ares_TeleportMarkers) - 1);
+	_teleportMarkerName = [(count Ares_TeleportMarkers) - 1] call Ares_fnc_GetPhoneticName;
 	_teleportMarker setVariable ["teleportMarkerName", _teleportMarkerName, true];
 
 	// Make the teleport marker editable in zeus (needs to run on server)
