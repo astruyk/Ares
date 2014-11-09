@@ -23,104 +23,124 @@ if (_activated && local _logic) then
 	
 	if (not isNull _groupUnderCursor) then
 	{
-		private ["_dialogResult"];
-		_dialogResult =
-			["Begin Patrol",
-					[
-						["Size of patrol grid:", ["50m", "100m", "150m", "200m", "500m"]],
-						["Behaviour:", ["Relaxed", "Cautious", "Searching"]],
-						["Direction:", ["Clockwise", "Counter-Clockwise"]],
-						["Delay at waypoints:", ["None", "15s", "30s", "1m"]]
-					]
-			] call Ares_fnc_ShowChooseDialog;
-		if (count _dialogResult > 0) then
+		_doesGroupContainAnyPlayer = false;
 		{
-			_radius = 50;
-			switch (_dialogResult select 0) do
+			if (isPlayer _x) exitWith { _doesGroupContainAnyPlayer = true; };
+		} forEach (units _groupUnderCursor);
+		
+		if (not _doesGroupContainAnyPlayer) then
+		{
+			private ["_dialogResult"];
+			_dialogResult =
+				["Begin Patrol",
+						[
+							["Size of patrol grid:", ["50m", "100m", "150m", "200m", "500m"]],
+							["Behaviour:", ["Relaxed", "Cautious", "Searching"]],
+							["Direction:", ["Clockwise", "Counter-Clockwise"]],
+							["Delay at waypoints:", ["None", "15s", "30s", "1m"]]
+						]
+				] call Ares_fnc_ShowChooseDialog;
+			if (count _dialogResult > 0) then
 			{
-				case 0: { _radius = 50; };
-				case 1: { _radius = 100; };
-				case 2: { _radius = 150; };
-				case 3: { _radius = 200; };
-				case 4: { _radius = 500; };
-				default { _radius = 50; };
-			};
-			
-			switch (_dialogResult select 1) do
-			{
-				// Case0 and default
-				default
+				_radius = 50;
+				switch (_dialogResult select 0) do
 				{
-					// Relaxed
-					_groupUnderCursor setBehaviour "SAFE";
-					_groupUnderCursor setSpeedMode "LIMITED";
+					case 0: { _radius = 50; };
+					case 1: { _radius = 100; };
+					case 2: { _radius = 150; };
+					case 3: { _radius = 200; };
+					case 4: { _radius = 500; };
+					default { _radius = 50; };
 				};
-				case 1:
+				
+				switch (_dialogResult select 1) do
 				{
-					// Cautious
-					_groupUnderCursor setBehaviour "AWARE";
-					_groupUnderCursor setSpeedMode "LIMITED";
+					// Case0 and default
+					default
+					{
+						// Relaxed
+						_groupUnderCursor setBehaviour "SAFE";
+						_groupUnderCursor setSpeedMode "LIMITED";
+					};
+					case 1:
+					{
+						// Cautious
+						_groupUnderCursor setBehaviour "AWARE";
+						_groupUnderCursor setSpeedMode "LIMITED";
+					};
+					case 2:
+					{
+						// Searching
+						_groupUnderCursor setBehaviour "COMBAT";
+						_groupUnderCursor setSpeedMode "NORMAL";
+					};
 				};
-				case 2:
-				{
-					// Searching
-					_groupUnderCursor setBehaviour "COMBAT";
-					_groupUnderCursor setSpeedMode "NORMAL";
-				};
-			};
-			private ["_moveClockwise", "_delay", "_numberOfWaypoints", "_degreesPerWaypoint", "_centerPoint", "_waypoint"];
-			_moveClockwise = (_dialogResult select 2) == 0;
+				private ["_moveClockwise", "_delay", "_numberOfWaypoints", "_degreesPerWaypoint", "_centerPoint", "_waypoint"];
+				_moveClockwise = (_dialogResult select 2) == 0;
 
-			_delay = [0, 0, 0];
-			switch (_dialogResult select 3) do
-			{
-				default {}; // Already set default (0) values
-				case 1:
+				_delay = [0, 0, 0];
+				switch (_dialogResult select 3) do
 				{
-					// 15s
-					_delay = [12, 15, 17];
+					default {}; // Already set default (0) values
+					case 1:
+					{
+						// 15s
+						_delay = [12, 15, 17];
+					};
+					case 2:
+					{
+						// 30s
+						_delay = [20, 30, 40];
+					};
+					case 3:
+					{
+						// 1m
+						_delay = [45, 60, 75];
+					};
 				};
-				case 2:
+				
+				// Remove other waypoints.
+				while {(count (waypoints _groupUnderCursor)) > 0} do
 				{
-					// 30s
-					_delay = [20, 30, 40];
+					deleteWaypoint ((waypoints _groupUnderCursor) select 0);
 				};
-				case 3:
-				{
-					// 1m
-					_delay = [45, 60, 75];
-				};
-			};
-			
-			// Remove other waypoints.
-			while {(count (waypoints _groupUnderCursor)) > 0} do
-			{
-				deleteWaypoint ((waypoints _groupUnderCursor) select 0);
-			};
 
-			// Make a circle with the unit's current location at the center.
-			_numberOfWaypoints = 6;
-			_degreesPerWaypoint =  360 / _numberOfWaypoints;
-			if (!_moveClockwise) then
+				// Make a circle with the unit's current location at the center.
+				_numberOfWaypoints = 6;
+				_degreesPerWaypoint =  360 / _numberOfWaypoints;
+				if (!_moveClockwise) then
+				{
+					_degreesPerWaypoint = _degreesPerWaypoint * -1;
+				};
+				_centerPoint = position _logic;
+				for "_waypointNumber" from 0 to (_numberOfWaypoints - 1) do
+				{
+					private ["_currentDegrees"];
+					_currentDegrees = _degreesPerWaypoint * _waypointNumber;
+					_waypoint = _groupUnderCursor addWaypoint [[_centerPoint, _radius, _currentDegrees] call BIS_fnc_relPos, 5];
+					_waypoint setWaypointTimeout _delay;
+				};
+				
+				// Add a waypoint at the location of the first WP. We started at 0 degrees.
+				// We don't delay the cycle WP since then we'd have double-time before moving.
+				_waypoint = _groupUnderCursor addWaypoint [[_centerPoint, _radius, 0] call BIS_fnc_relPos, 5];
+				_waypoint setWaypointType "CYCLE";
+				
+				[objnull, "Circular patrol path setup for units."] call bis_fnc_showCuratorFeedbackMessage;
+			}
+			else
 			{
-				_degreesPerWaypoint = _degreesPerWaypoint * -1;
+				// Cancelled
 			};
-			_centerPoint = position _logic;
-			for "_waypointNumber" from 0 to (_numberOfWaypoints - 1) do
-			{
-				private ["_currentDegrees"];
-				_currentDegrees = _degreesPerWaypoint * _waypointNumber;
-				_waypoint = _groupUnderCursor addWaypoint [[_centerPoint, _radius, _currentDegrees] call BIS_fnc_relPos, 5];
-				_waypoint setWaypointTimeout _delay;
-			};
-			
-			// Add a waypoint at the location of the first WP. We started at 0 degrees.
-			// We don't delay the cycle WP since then we'd have double-time before moving.
-			_waypoint = _groupUnderCursor addWaypoint [[_centerPoint, _radius, 0] call BIS_fnc_relPos, 5];
-			_waypoint setWaypointType "CYCLE";
-			
-			[objnull, "Circular patrol path setup for units."] call bis_fnc_showCuratorFeedbackMessage;
+		}
+		else
+		{
+			[objnull, "Cannot add patrol for player units."] call bis_fnc_showCuratorFeedbackMessage;
 		};
+	}
+	else
+	{
+		[objnull, "No group under cursor."] call bis_fnc_showCuratorFeedbackMessage;
 	};
 };
 
