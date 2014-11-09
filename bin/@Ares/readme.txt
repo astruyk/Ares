@@ -10,7 +10,7 @@ Or check out the source code at: https://github.com/astruyk/Ares
 Changelists
 
 V.1.0.1 - Bugfixes
-  * Behaviours - Fix issue where 'Aire Artillery' module wouldn't work with units that were spawned by dedicated server
+  * Behaviours - Fix issue where 'Fire Artillery' module wouldn't work with units that were spawned by dedicated server
   * Behaviours - Garrisoned units should turn to fire at enemy units now
   * Behaviours - Possible fix for issue where sometimes patrols would set wapoints around [0,0,0] instead of around selected unit
   * Behaviours - Prevent 'Patrol' module from generating waypoints for players
