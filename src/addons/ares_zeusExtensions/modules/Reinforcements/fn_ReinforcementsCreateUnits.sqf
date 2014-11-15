@@ -10,10 +10,7 @@
 #define INFANTRY_UNIT_POOL_INDEX 11
 #define DIVER_UNIT_POOL_INDEX 12
 
-_logic = _this select 0;
-_units = _this select 1;
-_activated = _this select 2;
-
+#include "\ares_zeusExtensions\module_header.hpp"
 scopeName "main";
 if (_activated && local _logic) then
 {
