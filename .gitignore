@@ -37,3 +37,4 @@ Icon
 .Trashes
 scripts/build_PBO_out.txt
 src/addons/ares_zeusExtensions/texHeaders.bin
+bin/@Ares/addons/
