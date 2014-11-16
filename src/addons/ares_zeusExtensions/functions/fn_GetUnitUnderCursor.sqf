@@ -9,6 +9,8 @@
 */
 private ["_logic", "_unitUnderCursor", "_mouseOverVariableValue"];
 _logic = _this select 0;
+_shouldRemoveUnitIfNoneFound = [_this, 1, true] call BIS_fnc_Param;
+
 _unitUnderCursor = objNull;
 if (not isNil "Ares_CuratorObjectPlaced_UnitUnderCursor") then
 {
@@ -34,7 +36,7 @@ if (not isNil "Ares_CuratorObjectPlaced_UnitUnderCursor") then
 	};
 };
 
-if (isNull _unitUnderCursor) then
+if (_shouldRemoveUnitIfNoneFound && isNull _unitUnderCursor) then
 {
 	[objNull, "Error - Module needs to be placed on a unit."] call bis_fnc_showCuratorFeedbackMessage;
 	deleteVehicle _logic;

@@ -17,7 +17,6 @@ units[] =
 	"Ares_Module_Behaviour_Search_Nearby_And_Garrison",
 	"Ares_Module_Behaviour_Search_Nearby_Building",
 	"Ares_Module_Disable_Thermals",
-	"Ares_Module_Enable_Thermals",
 	"Ares_Module_ForceLightsAuto",
 	"Ares_Module_ForceLightsOff",
 	"Ares_Module_ForceLightsOn",

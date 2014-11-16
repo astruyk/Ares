@@ -32,10 +32,3 @@ class Ares_Module_Disable_Thermals : Ares_Equipment_Module_Base
 	displayName = "Disable Thermals";
 	function = "Ares_fnc_DisableThermals";
 };
-
-class Ares_Module_Enable_Thermals : Ares_Equipment_Module_Base
-{
-	scopeCurator = 2;
-	displayName = "Enable Thermals";
-	function = "Ares_fnc_EnableThermals";
-};
