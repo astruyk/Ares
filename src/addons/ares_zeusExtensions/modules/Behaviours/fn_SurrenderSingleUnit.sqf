@@ -63,35 +63,42 @@ if (isNil "Ares_AddSurrenderActionsFunction") then
 // Determine if we've already captured the unit in the past
 if (alive _unitToCapture) then
 {
-	_captureState = _unitToCapture getVariable ["AresCaptureState", -1];
-	switch (_captureState) do
+	if (!isPLayer _unitToCapture) then
 	{
-		case -1: //Not yet captured
+		_captureState = _unitToCapture getVariable ["AresCaptureState", -1];
+		switch (_captureState) do
 		{
-			//Set this for all players so can add correct actions.
-			_unitToCapture setVariable ["AresCaptureState", 0, true];
+			case -1: //Not yet captured
+			{
+				//Set this for all players so can add correct actions.
+				_unitToCapture setVariable ["AresCaptureState", 0, true];
 
-			// Broadcast to all players that this unit is surrendered. Will update their anim states in the mission.
-			// We use a persistant call because we want it to be called later for JIP.
-			[[_unitToCapture], "Ares_AddSurrenderActionsFunction", true, true] spawn BIS_fnc_MP;
+				// Broadcast to all players that this unit is surrendered. Will update their anim states in the mission.
+				// We use a persistant call because we want it to be called later for JIP.
+				[[_unitToCapture], "Ares_AddSurrenderActionsFunction", true, true] spawn BIS_fnc_MP;
 
-			[objnull, "Unit surrendered."] call bis_fnc_showCuratorFeedbackMessage;
+				[objnull, "Unit surrendered."] call bis_fnc_showCuratorFeedbackMessage;
+			};
+			case 0: // Captured but not secured
+			{
+				//Set this for all players so can add correct actions.
+				_unitToCapture setVariable ["AresCaptureState", 1, true];
+
+				// Broadcast to all players that this unit is surrendered. Will update their anim states in the mission.
+				// We use a persistant call because we want it to be called later for JIP.
+				[[_unitToCapture], "Ares_AddSurrenderActionsFunction", true, true] spawn BIS_fnc_MP;
+
+				[objnull, "Unit secured."] call bis_fnc_showCuratorFeedbackMessage;
+			};
+			default // Something else (secured maybe?)
+			{
+				[objnull, "Unit has already been secured."] call bis_fnc_showCuratorFeedbackMessage;
+			};
 		};
-		case 0: // Captured but not secured
-		{
-			//Set this for all players so can add correct actions.
-			_unitToCapture setVariable ["AresCaptureState", 1, true];
-
-			// Broadcast to all players that this unit is surrendered. Will update their anim states in the mission.
-			// We use a persistant call because we want it to be called later for JIP.
-			[[_unitToCapture], "Ares_AddSurrenderActionsFunction", true, true] spawn BIS_fnc_MP;
-
-			[objnull, "Unit secured."] call bis_fnc_showCuratorFeedbackMessage;
-		};
-		default // Something else (secured maybe?)
-		{
-			[objnull, "Unit has already been secured."] call bis_fnc_showCuratorFeedbackMessage;
-		};
+	}
+	else
+	{
+		[objnull, "Cannot force players to surrender."] call bis_fnc_showCuratorFeedbackMessage;
 	};
 }
 else
