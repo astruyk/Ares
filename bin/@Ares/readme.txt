@@ -9,6 +9,9 @@ Or check out the source code at: https://github.com/astruyk/Ares
 
 Changelists
 
+V.1.0.2
+  * Fix an issue where running Ares on a dedicated server or on more than one client would cause a race-condition that would break lots of modules.
+
 V.1.0.1 - Bugfixes
   * Behaviours - Fix issue where 'Fire Artillery' module wouldn't work with units that were spawned by dedicated server
   * Behaviours - Garrisoned units should turn to fire at enemy units now
