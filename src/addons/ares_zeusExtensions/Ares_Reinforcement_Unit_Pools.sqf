@@ -14,8 +14,8 @@ Ares_Reinforcement_Unit_Pools =
 		["O_Boat_Armed_01_hmg_F"], // Armed boats
 		[
 			// Squad setups to load into vehicles. Note - these may get truncated to fit into empty spaces or small vehicles.
-			["O_Soldier_TL_F", "O_Soldier_lite_F", "O_Soldier_lite_F", "O_Soldier_GL_F", "O_soldier_M_F"],
-			["O_Soldier_TL_F", "O_Soldier_AR_F", "O_Soldier_A_F", "O_Soldier_GL_F", "O_Soldier_lite_F"]
+			["O_Soldier_TL_F", "O_Soldier_GL_F", "O_Soldier_F", "O_Soldier_lite_F", "O_soldier_M_F"],
+			["O_Soldier_TL_F", "O_Soldier_AR_F", "O_Soldier_A_F", "O_Soldier_GL_F", "O_Soldier_F"]
 		],
 		[
 			// Amphibious squad setups to load into boats. Note - these may get truncated to fit into empty spaces or small vehicles.
@@ -36,8 +36,8 @@ Ares_Reinforcement_Unit_Pools =
 		["B_Boat_Armed_01_minigun_F"], // Armed boats
 		[
 			// Squad setups to load into vehicles. Note - these may get truncated to fit into empty spaces or small vehicles.
-			["B_Soldier_TL_F", "B_soldier_AR_F", "B_Soldier_lite_F", "B_Soldier_lite_F", "B_Soldier_lite_F"],
-			["B_Soldier_TL_F", "B_Soldier_GL_F", "B_Soldier_F", "B_Soldier_lite_F", "B_Soldier_lite_F"]
+			["B_Soldier_TL_F", "B_soldier_AR_F", "B_Soldier_A_F", "B_Soldier_F", "B_Soldier_lite_F"],
+			["B_Soldier_TL_F", "B_Soldier_GL_F", "B_soldier_M_F", "B_Soldier_F", "B_Soldier_lite_F"]
 		],
 		[
 			// Amphibious squad setups to load into boats. Note - these may get truncated to fit into empty spaces or small vehicles.
