@@ -33,7 +33,7 @@ if (count _dialogResult > 0) then
 			case 3: { _radius = 500; };
 			case 4: { _radius = 1000; };
 			case 5: { _radius = 2000; };
-			case 5: { _radius = 5000; };
+			case 6: { _radius = 5000; };
 			default { _radius = 50; };
 		};
 		_objectsToAdd = nearestObjects [(position _logic), ["All"], _radius];

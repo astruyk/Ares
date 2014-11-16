@@ -1,5 +1,18 @@
 #include "\ares_zeusExtensions\module_header.hpp"
-_dialogResult = ["Remove Objects From Curator", ["Remove...", ["All units in mission", "All units within 50m", "All units within 100m", "All units within 500m"], 1]] call Ares_fnc_ShowChooseDialog;
+_dialogResult = [
+	"Remove Objects From Curator",
+	[
+		"Remove...",
+		[
+			"All units in mission",
+			"All units within 50m",
+			"All units within 100m",
+			"All units within 500m",
+			"All units within 1km",
+			"All units within 2km",
+			"All units within 5km"
+		], 1
+	]] call Ares_fnc_ShowChooseDialog;
 
 if (count _dialogResult > 0) then
 {
@@ -17,6 +30,9 @@ if (count _dialogResult > 0) then
 			case 1: { _radius = 50; };
 			case 2: { _radius = 100; };
 			case 3: { _radius = 500; };
+			case 4: { _radius = 1000; };
+			case 5: { _radius = 2000; };
+			case 6: { _radius = 5000; };
 			default { _radius = 50; };
 		};
 		_objectsToRemove = nearestObjects [(position _logic), ["All"], _radius];
