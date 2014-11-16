@@ -1,6 +1,10 @@
 #include "\ares_zeusExtensions\module_header.hpp"
 
-_unitToCapture = [_logic] call Ares_fnc_GetUnitUnderCursor;
+#define CAPTURE_STATE_UNKNOWN -1
+#define CAPTURE_STATE_SURRENDERED 0
+#define CAPTURE_STATE_SECURED 1
+
+_unitToSurrender = [_logic] call Ares_fnc_GetUnitUnderCursor;
 
 // Check to see if we've ever called this before. If not, then broadcast the necessary code to the other clients.
 if (isNil "Ares_AddSurrenderActionsFunction") then
@@ -15,14 +19,30 @@ if (isNil "Ares_AddSurrenderActionsFunction") then
 		{
 			if (_unit getVariable["AresHasCaputreActionsAdded", -1] == -1) then
 			{
-				_unit addAction ["Secure", { (_this select 0) setVariable["AresCaptureState", 1, true]; [[_this select 0], "Ares_AddSurrenderActionsFunction", true] spawn BIS_fnc_MP; }, [], 0, false, true, "", "(alive _target) && (player distance _target < 3) && (_target getVariable ['AresCaptureState', -1] == 0)"];
+				_unit addAction ["Secure", { (_this select 0) setVariable["AresCaptureState", CAPTURE_STATE_SECURED, true]; [[_this select 0], "Ares_AddSurrenderActionsFunction", true] spawn BIS_fnc_MP; }, [], 0, false, true, "", "(alive _target) && (player distance _target < 3) && (_target getVariable ['AresCaptureState', -1] == 0)"];
+				_unit addAction ["Release", { (_this select 0) setVariable["AresCaptureState", CAPTURE_STATE_UNKNOWN, true]; [[_this select 0], "Ares_AddSurrenderActionsFunction", true] spawn BIS_fnc_MP; }, [], 0, false, true, "", "(alive _target) && (player distance _target < 3) && (_target getVariable ['AresCaptureState', -1] == 0)"];
 				_unit setVariable ["AresHasCaputreActionsAdded", 1];
 			};
 			
 			// Set the animation states for the units based on their current capture state.
 			switch (_unit getVariable["AresCaptureState", -1]) do
 			{
-				case 0:
+				case CAPTURE_STATE_UNKNOWN:
+				{
+					// Release the unit again (he might have been captured)
+					if (local _unit) then
+					{
+						// No longer a captive
+						_unit setCaptive false;
+						
+						// Re-enable the AI
+						_unit enableAI "ANIM";
+						_unit enableAI "TARGET";
+						_unit enableAI "AUTOTARGET";
+					};
+					_unit switchMove "";
+				};
+				case CAPTURE_STATE_SURRENDERED:
 				{
 					if (local _unit) then
 					{
@@ -36,7 +56,7 @@ if (isNil "Ares_AddSurrenderActionsFunction") then
 					_unit switchMove "";
 					_unit playActionNow "Surrender";
 				};
-				case 1:
+				case CAPTURE_STATE_SECURED:
 				{
 					if (local _unit) then
 					{
@@ -61,34 +81,51 @@ if (isNil "Ares_AddSurrenderActionsFunction") then
 };
 
 // Determine if we've already captured the unit in the past
-if (alive _unitToCapture) then
+if (alive _unitToSurrender) then
 {
-	if (!isPLayer _unitToCapture) then
+	if (!isPLayer _unitToSurrender) then
 	{
-		_captureState = _unitToCapture getVariable ["AresCaptureState", -1];
-		switch (_captureState) do
+		_surrenderState = _unitToSurrender getVariable ["AresCaptureState", -1];
+		switch (_surrenderState) do
 		{
-			case -1: //Not yet captured
+			case CAPTURE_STATE_UNKNOWN: //Not yet surrendered
 			{
 				//Set this for all players so can add correct actions.
-				_unitToCapture setVariable ["AresCaptureState", 0, true];
+				_unitToSurrender setVariable ["AresCaptureState", 0, true];
 
 				// Broadcast to all players that this unit is surrendered. Will update their anim states in the mission.
 				// We use a persistant call because we want it to be called later for JIP.
-				[[_unitToCapture], "Ares_AddSurrenderActionsFunction", true, true] spawn BIS_fnc_MP;
+				[[_unitToSurrender], "Ares_AddSurrenderActionsFunction", true, true] spawn BIS_fnc_MP;
 
 				[objnull, "Unit surrendered."] call bis_fnc_showCuratorFeedbackMessage;
 			};
-			case 0: // Captured but not secured
+			case CAPTURE_STATE_SURRENDERED: // Surrendered but not secured
 			{
-				//Set this for all players so can add correct actions.
-				_unitToCapture setVariable ["AresCaptureState", 1, true];
+				_dialogResult =
+					[
+						"Surrendered Unit",
+						[
+							["Action to take:", ["Secure Unit", "Release Unit"]]
+						]
+					] call Ares_fnc_ShowChooseDialog;
+				if (count _dialogResult > 0) then
+				{
+					private ["_nextCaptureStateDialogResult"];
+					switch (_dialogResult select 0) do
+					{
+						case 0: { _nextCaptureStateDialogResult = CAPTURE_STATE_SECURED; };
+						case 1: { _nextCaptureStateDialogResult = CAPTURE_STATE_UNKNOWN; };
+					};
+					
+					//Set this for all players so can add correct actions.
+					_unitToSurrender setVariable ["AresCaptureState", _nextCaptureStateDialogResult, true];
 
-				// Broadcast to all players that this unit is surrendered. Will update their anim states in the mission.
-				// We use a persistant call because we want it to be called later for JIP.
-				[[_unitToCapture], "Ares_AddSurrenderActionsFunction", true, true] spawn BIS_fnc_MP;
+					// Broadcast to all players that this unit is surrendered. Will update their anim states in the mission.
+					// We use a persistant call because we want it to be called later for JIP.
+					[[_unitToSurrender], "Ares_AddSurrenderActionsFunction", true, true] spawn BIS_fnc_MP;
 
-				[objnull, "Unit secured."] call bis_fnc_showCuratorFeedbackMessage;
+					[objnull, "Unit secured."] call bis_fnc_showCuratorFeedbackMessage;
+				};
 			};
 			default // Something else (secured maybe?)
 			{
@@ -103,7 +140,7 @@ if (alive _unitToCapture) then
 }
 else
 {
-	[objnull, format["Unit must be alive. (State: %1)", (_unitToCapture getVariable ["AresCaptureState", -1])]] call bis_fnc_showCuratorFeedbackMessage;
+	[objnull, format["Unit must be alive. (State: %1)", (_unitToSurrender getVariable ["AresCaptureState", -1])]] call bis_fnc_showCuratorFeedbackMessage;
 };
 
 deleteVehicle _logic;
