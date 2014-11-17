@@ -47,7 +47,8 @@ if (_activated && local _logic) then
 			["Vehicle Type", ["Unarmed Light Vehicles + Scouts", "Armed Light Vehicles", "Dedicated Troop Trucks", "APC's & Heavy Troop Transports", "Unarmed Aircraft", "Light Armed Aircraft", "Unarmed Boats", "Armed Boats"]],
 			["Vehicle Behaviour After Dropoff", ["RTB and Despawn", "Stay at LZ"]],
 			["Vehicle Landing Zone", ["Random", "Nearest", "Farthest", "Least Used"]],
-			["Unit Rally Point", ["Random", "Nearest", "Farthest", "Least Used"]]
+			["Unit Rally Point", ["Random", "Nearest", "Farthest", "Least Used"]],
+			["Unit Behaviour", ["Default", "Relaxed", "Cautious", "Combat"]]
 		]
 	] call Ares_fnc_ShowChooseDialog;
 
@@ -63,6 +64,7 @@ if (_activated && local _logic) then
 	_dialogVehicleBehaviour = _dialogResult select 2;
 	_dialogLzAlgorithm =      _dialogResult select 3;
 	_dialogRpAlgorithm =      _dialogResult select 4;
+	_dialogUnitBehaviour =    _dialogResult select 5;
 	_lzSize = 20;	// TODO make this a dialog parameter?
 	_rpSize = 20;	// TODO make this a dialog parameters?
 	_spawnPosition = position _logic;
@@ -187,6 +189,26 @@ if (_activated && local _logic) then
 		
 		// Spawn the squad members.
 		_infantryGroup = [_spawnPosition, _side, _squadMembers] call BIS_fnc_spawnGroup;
+		
+		// Set the default behaviour of the squad
+		switch (_dialogUnitBehaviour) do
+		{
+			case 1: // Relaxed
+			{
+				_infantryGroup setBehaviour "SAFE";
+				_infantryGroup setSpeedMode "LIMITED";
+			};
+			case 2: // Cautious
+			{
+				_infantryGroup setBehaviour "AWARE";
+				_infantryGroup setSpeedMode "LIMITED";
+			};
+			case 3: // Combat
+			{
+				_infantryGroup setBehaviour "COMBAT";
+				_infantryGroup setSpeedMode "NORMAL";
+			};
+		};
 
 		// Choose a RP for the squad to head to once unloaded and set their waypoint.
 		if (count _allRps > 0) then
