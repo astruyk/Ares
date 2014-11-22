@@ -5,7 +5,7 @@
 
 <p>
 <textarea id="sourceTextArea" rows="20" cols="150">
-[["Land_CncBarrierMedium4_F",[13150.7,15957.8,-3.14713e-005],84.1957,1,0],["Land_CncShelter_F",[13149.7,15962.7,-6.58035e-005],259.898,1,0],["Land_CncBarrier_stripes_F",[13149.7,15962.7,2.43754],84.7398,1,0],["Land_HBarrier_1_F",[13142,15959.6,2.2905],147.102,1,0],["Land_CncBarrierMedium4_F",[13145.9,15964.7,-3.14713e-005],173.157,1,0],["Land_HBarrier_Big_F",[13141.6,15960.9,-0.000167847],263.541,1,0],["Land_CncBarrierMedium4_F",[13147.5,15953.4,-9.91821e-005],170.071,1,0],["Land_CncBarrierMedium_F",[13149.7,15964.7,0.289334],258.604,1,0],["Land_HBarrier_1_F",[13143.5,15953.1,0],355.723,1,0],["Land_HBarrier_1_F",[13142.9,15953,1.4394],355.723,1,0],["Land_HBarrier_1_F",[13142.3,15952.9,0],355.723,1,0],[13146.9,15959.3,0]]
+[["Land_Cargo20_yellow_F",[4008.92,4156.45,6.32431],270.957,1,0],["Land_MetalBarrel_F",[4008.75,4152.43,5.42271],359.993,1,0.0592568],["Land_CncBarrierMedium4_F",[4014.22,4156.83,5.8462],268.492,1,0],["Land_MetalBarrel_F",[4008.7,4151.67,5.42272],359.993,1,0.0492834],["Land_MetalBarrel_F",[4008.72,4150.58,5.42272],359.992,1,0.0494006],["Land_HBarrier_1_F",[4015.94,4153.91,5.70211],0,1,0],["Land_MetalBarrel_F",[4008.69,4149.7,5.42272],359.993,1,0.0494093],["Land_HBarrier_1_F",[4016.78,4153.96,7.12944],0,1,0],["Land_MetalBarrel_F",[4008.66,4148.97,5.42272],359.944,1,0.0493666],["Land_HBarrier_1_F",[4017.62,4153.91,5.70211],0,1,0],["Land_CncBarrierMedium4_F",[4004.05,4156.84,5.8462],268.492,1,0],["Land_HBarrier_1_F",[4018.53,4153.81,7.29145],0,1,0],["Land_CncWall1_F",[4011.27,4147.25,6.76441],0,1,0],["Land_WaterTank_F",[4008.77,4147.28,5.68491],0.000523827,1,0],["Land_Cargo10_white_F",[4009.04,4162.25,6.35289],0.0110448,1,0],["Land_Cargo10_white_F",[4013.22,4162.47,6.35289],358.354,1,0],["Land_HBarrier_1_F",[4019.33,4153.76,5.70211],0,1,0],["Land_CncWall1_F",[4006.42,4147.21,6.76441],0,1,0],["Land_Cargo10_white_F",[4004.72,4162.46,6.35289],0.00852176,1,0],["Land_Cargo10_white_F",[4009.08,4167.02,6.35289],358.329,1,0],["Land_Mil_WallBig_4m_F",[4008.88,4171.26,6.69987],92.574,1,0],["Land_Mil_WallBig_4m_F",[4008.63,4176.37,6.69987],92.574,1,0],[4011.11,4154.73,5],[1]]
 </textarea>
 </p>
 
@@ -42,6 +42,7 @@ function myFunction()
 	{
 		anchorPosition_x = parseFloat(anchorPositionText.split(',')[0]);
 		anchorPosition_y = parseFloat(anchorPositionText.split(',')[1]);
+		anchorPosition_z = parseFloat(anchorPositionText.split(',')[2]);
 	}
 
 	processedText = "class NEW_COMPOSITION_CLASS_NAME\n{\n\tname=\"Zeus Display Name\";";
@@ -52,7 +53,7 @@ function myFunction()
 		currentObjectPositionTextArray = match[2].split(',');
 		currentObjectPosition_x = anchorPosition_x - parseFloat(currentObjectPositionTextArray[0]);
 		currentObjectPosition_y = anchorPosition_y - parseFloat(currentObjectPositionTextArray[1]);
-		currentObjectPosition_z = parseFloat(currentObjectPositionTextArray[2]);	// The Z is already the correct height above the ground, but we want to trim it if it's small enough.
+		currentObjectPosition_z = anchorPosition_z - parseFloat(currentObjectPositionTextArray[2]);
 
 		// Hackily round digits. Converts back to a number after the .toFixed(...) rounds off the unimportant digits so we don't end up with "x.00000"
 		currentObjectPosition_x = parseFloat(currentObjectPosition_x.toFixed(10));
