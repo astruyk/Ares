@@ -3,6 +3,10 @@
 _ammoBox = [_logic] call Ares_fnc_GetUnitUnderCursor;
 if (not isnull _ammoBox) then
 {
+	// Clear out any previous text from the dialog. We do this so it behaves consistently
+	// in dedicated and local servers.
+	Ares_CopyPaste_Dialog_Text = '';
+
 	_parsedValue = [4] call Ares_fnc_GetArrayDataFromUser;
 	if (typeName _parsedValue == typeName []) then
 	{

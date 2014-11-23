@@ -2,7 +2,9 @@ private ["_logic", "_units", "_activated"];
 #include "\ares_zeusExtensions\module_header.hpp"
 
 private ["_groupUnderCursor"];
+["BehaviourPatrol: Getting group under cursor"] call Ares_fnc_LogMessage;
 _groupUnderCursor = [_logic] call Ares_fnc_GetGroupUnderCursor;
+["BehaviourPatrol: Got group under cursor"] call Ares_fnc_LogMessage;
 
 if (isNull _logic) then
 {
@@ -19,6 +21,7 @@ if (isNull _groupUnderCursor) then
 
 if (not isNull _groupUnderCursor) then
 {
+	
 	_doesGroupContainAnyPlayer = false;
 	{
 		if (isPlayer _x) exitWith { _doesGroupContainAnyPlayer = true; };
@@ -27,6 +30,7 @@ if (not isNull _groupUnderCursor) then
 	if (not _doesGroupContainAnyPlayer) then
 	{
 		private ["_dialogResult"];
+		["BehaviourPatrol: Group under cursor was not null - showing prompt"] call Ares_fnc_LogMessage;
 		_dialogResult =
 			["Begin Patrol",
 					[
@@ -36,6 +40,8 @@ if (not isNull _groupUnderCursor) then
 						["Delay at waypoints:", ["None", "15s", "30s", "1m"]]
 					]
 			] call Ares_fnc_ShowChooseDialog;
+			
+		["BehaviourPatrol: Prompt complete!"] call Ares_fnc_LogMessage;
 		if (count _dialogResult > 0) then
 		{
 			_radius = 50;

@@ -13,8 +13,10 @@ if (not isnull _ammoBox) then
 %2,
 %3,
 %4]",
-		str(_backpacks), str(_items), str(_magazines), str(_weapons)];
-	copyToClipboard _stringData;
+	str(_backpacks), str(_items), str(_magazines), str(_weapons)];
+	
+	// Don't do this anytime since it doesn't work on dedicated servers.
+	//copyToClipboard _stringData;
 	
 	missionNamespace setVariable ['Ares_CopyPaste_Dialog_Text', _stringData];
 	_dialog = createDialog "Ares_CopyPaste_Dialog";

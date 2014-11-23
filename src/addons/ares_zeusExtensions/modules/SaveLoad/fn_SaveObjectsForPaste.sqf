@@ -16,7 +16,10 @@ if (count _dialogResult > 0) then
 	
 	_text = [_logic, _radius] call Ares_fnc_ObjectsGrabber;
 
-	copyToClipBoard _text;
+	// Disabled because this doesn't work consistently on dedicated servers. This way
+	// local and dedicated servers behave the same. You must manually copy the text to
+	// the clipboard in both cases.
+	//copyToClipBoard _text;
 	
 	missionNamespace setVariable ['Ares_CopyPaste_Dialog_Text', _text];
 	_dialog = createDialog "Ares_CopyPaste_Dialog";
