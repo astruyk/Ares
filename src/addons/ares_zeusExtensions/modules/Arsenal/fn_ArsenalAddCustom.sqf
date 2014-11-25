@@ -5,15 +5,15 @@ if (not isnull _ammoBox) then
 {
 	_dialogResult =
 		[
-			"Automatically Add Arsenal Objects",
+			"Add All Objects",
 			[
 				["Combine or Replace?", ["Combine with existing items", "Replace existing items"], 1],
 				["Add GPS?", ["Yes", "No"]],
 				["Add thermals?", ["Yes", "No"], 1],
 				["Add NVG's?", ["Yes", "No"]],
-				["Add static weapon backpacks?", ["All", "Blufor Only", "Opfor Only", "Greenfor Only", "None"], 4],
-				["Add UAV items & backpacks?", ["All", "Blufor Only", "Opfor Only", "Greenfor Only", "None"], 4],
-				["Add automated weapon backpacks?", ["All", "Blufor Only", "Opfor Only", "Greenfor Only", "None"], 4]
+				["Static weapon backpacks", ["All", "Blufor Only", "Opfor Only", "Greenfor Only", "None"], 4],
+				["UAV items & backpacks", ["All", "Blufor Only", "Opfor Only", "Greenfor Only", "None"], 4],
+				["Automated weapon backpacks", ["All", "Blufor Only", "Opfor Only", "Greenfor Only", "None"], 4]
 				// Don't ask about tents. No one cares about tents.
 			]
 		] call Ares_fnc_ShowChooseDialog;
@@ -28,9 +28,9 @@ if (not isnull _ammoBox) then
 		_dialogAddUav = _dialogResult select 5;
 		_dialogAddAutomated = _dialogResult select 6;
 		
-		_filterChoices = ["All", "Bluefor", "Opfor", "Greenfor", "None"];
+		_filterChoices = ["All", "Blufor", "Opfor", "Greenfor", "None"];
 		
-		_blackList =
+		_blacklist =
 			[
 				(_dialogAddGps == 0), 
 				(_dialogAddThermals == 0),
@@ -40,6 +40,7 @@ if (not isnull _ammoBox) then
 				(_filterChoices select _dialogAddAutomated),
 				False
 			] call Ares_fnc_GenerateArsenalBlacklist;
+
 		_arsenalData = [_blacklist] call Ares_fnc_GenerateArsenalDataList;
 		
 		[_ammoBox, _arsenalData, (_dialogCombineOrReplace == 1)] call Ares_fnc_ArsenalSetup;
