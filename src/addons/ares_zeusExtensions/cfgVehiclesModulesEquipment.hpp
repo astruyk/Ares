@@ -1,8 +1,15 @@
-class Ares_Module_RemoveNvgGroup : Ares_Equipment_Module_Base
+class Ares_Module_Equipment_Nvgs : Ares_Equipment_Module_Base
 {
 	scopeCurator = 2;
-	displayName = "Remove NVG's";
-	function = "Ares_fnc_RemoveNvgGroup";
+	displayName = "Add/Remove NVG's";
+	function = "Ares_fnc_EquipmentNvgs";
+};
+
+class Ares_Module_Equipment_Thermals : Ares_Equipment_Module_Base
+{
+	scopeCurator = 2;
+	displayName = "Add/Remove Thermals";
+	function = "Ares_fnc_EquipmentThermals";
 };
 
 class Ares_Module_ForceLightsOn : Ares_Equipment_Module_Base
@@ -24,11 +31,4 @@ class Ares_Module_ForceLightsAuto : Ares_Equipment_Module_Base
 	scopeCurator = 2;
 	displayName = "Force Lights Auto";
 	function  = "Ares_fnc_ForceLightsAuto";
-};
-
-class Ares_Module_Disable_Thermals : Ares_Equipment_Module_Base
-{
-	scopeCurator = 2;
-	displayName = "Disable Thermals";
-	function = "Ares_fnc_DisableThermals";
 };

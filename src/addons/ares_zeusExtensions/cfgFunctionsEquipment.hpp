@@ -1,9 +1,11 @@
 class EquipmentModules
 {
 	file = "\ares_zeusExtensions\modules\Equipment";
-	class DisableThermals {};
+	class EquipmentNvgs {};
+	class EquipmentThermals {};
+	
 	class ForceLightsAuto {};
 	class ForceLightsOff {};
 	class ForceLightsOn {};
-	class RemoveNvgGroup {};
+	
 };
