@@ -41,7 +41,7 @@ class Ares_CopyPaste_Dialog
 		{
 			x = 34 * GUI_GRID_W + GUI_GRID_X;
 			y = 22 * GUI_GRID_H + GUI_GRID_Y;
-			w = 4 * GUI_GRID_W;
+			w = 4.5 * GUI_GRID_W;
 			h = 1.5 * GUI_GRID_H;
 			onButtonClick = "missionNamespace setVariable ['Ares_CopyPaste_Dialog_Result', 0];";
 			default = 0;
