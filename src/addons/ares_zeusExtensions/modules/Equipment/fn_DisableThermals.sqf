@@ -4,14 +4,13 @@ _unit = [_logic, false] call Ares_fnc_GetUnitUnderCursor;
 
 _vehicles = [];
 _shouldThermalsBeEnabled = false;
-_wasCancelled = false;
 if (isNull _unit) then
 {
 	_dialogResult = [
 		"Disable/Enable Thermals",
 		[
-			["Set thermals to:", ["Enabled", "Disabled"]],
-			["Disable thermals for:", ["All Units On Map (including empty)", "All West (NATO) units", "All Independent/Resistance (AAF) units", "All East (CSAT) units", "All Empty + Civilian vehicles"]]
+			["Set thermals to:", ["Enabled", "Disabled"], 1],
+			["Change thermals for:", ["All Units On Map (including empty)", "All West (NATO) units", "All Independent/Resistance (AAF) units", "All East (CSAT) units", "All Empty + Civilian vehicles"]]
 		]
 	] call Ares_fnc_ShowChooseDialog;
 	
@@ -50,15 +49,18 @@ else
 {
 	_dialogResult =
 		[
-			"Disable/Enable Thermals",
+			"Disable/Enable thermals for group",
 			[
-				["Set thermals to:", ["Enabled", "Disabled"]]
+				["Set thermals to:", ["Enabled", "Disabled"], 1]
 			]
 		] call Ares_fnc_ShowChooseDialog;
 	if (count _dialogResult > 0) then
 	{
 		_shouldThermalsBeEnabled = ((_dialogResult select 0) == 0);
-		_vehicles = [ vehicle _unit ];
+		_vehicles = [];
+		{
+			_vehicles pushBack (vehicle _unit);
+		} forEach (units (group _unit));
 	};
 };
 
