@@ -3,6 +3,7 @@ units[] =
 {
 	// "Ares_Module_Test",
 	"Ares_Module_Add_All_Objects_To_Curator",
+	"Ares_Module_Arsenal_AddCustom",
 	"Ares_Module_Arsenal_Copy_To_Clipboard",
 	"Ares_Module_Arsenal_Create_Aaf",
 	"Ares_Module_Arsenal_Create_Csat",

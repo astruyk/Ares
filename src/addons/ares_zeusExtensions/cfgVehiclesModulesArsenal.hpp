@@ -1,3 +1,10 @@
+class Ares_Module_Arsenal_AddCustom : Ares_Arsenal_Module_Base
+{
+	scopeCurator = 2;
+	displayName = "Automatic Arsenal List";
+	function = "Ares_fnc_ArsenalAddCustom";
+};
+
 class Ares_Module_Arsenal_Copy_To_Clipboard : Ares_Arsenal_Module_Base
 {
 	scopeCurator = 2;
