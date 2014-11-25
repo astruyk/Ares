@@ -44,7 +44,7 @@ if ((count _this) == 2 && typeName (_choicesArray select 0) == typeName "") then
 #define OK_BUTTON_WIDTH			(4 * GUI_GRID_W)
 #define OK_BUTTON_HEIGHT		(1.5 * GUI_GRID_H)
 #define CANCEL_BUTTON_X			(34 * GUI_GRID_W + GUI_GRID_X)
-#define CANCEL_BUTTON_WIDTH		(4 * GUI_GRID_W)
+#define CANCEL_BUTTON_WIDTH		(4.5 * GUI_GRID_W)
 #define CANCEL_BUTTON_HEIGHT	(1.5 * GUI_GRID_H)
 #define TOTAL_ROW_HEIGHT		(2 * GUI_GRID_H)
 #define BASE_IDC				(9000)
