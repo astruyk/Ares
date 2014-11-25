@@ -116,151 +116,158 @@ if (_activated && local _logic) then
 	// Spawn a vehicle, send it to the LZ and have it unload the troops before returning home and
 	// deleting itself.
 	_vehiclePoolIndex = (_dialogVehicleClass + VEHICLE_POOL_START_INDEX);
-	_vehicleType = (_pool select _vehiclePoolIndex) call BIS_fnc_selectRandom;
-	_vehicleGroup = ([_spawnPosition, 0, _vehicleType, _side] call BIS_fnc_spawnVehicle) select 2;
+	if (count (_pool select _vehiclePoolIndex) > 0) then
+	{
+		_vehicleType = (_pool select _vehiclePoolIndex) call BIS_fnc_selectRandom;
+		_vehicleGroup = ([_spawnPosition, 0, _vehicleType, _side] call BIS_fnc_spawnVehicle) select 2;
 
-	_vehicleDummyWp = _vehicleGroup addWaypoint [position _vehicle, 0];
-	_vehicleUnloadWp = _vehicleGroup addWaypoint [position _lz, _lzSize];
-	_vehicleUnloadWp setWaypointType "TR UNLOAD";
-	
-	// Make the driver full skill. This makes him less likely to do dumb things
-	// when they take contact.
-	(driver (vehicle (leader _vehicleGroup))) setSkill 1;
-	
-	if (_vehiclePoolIndex == UNARMED_HELO_UNIT_POOL_INDEX || _vehiclePoolIndex == ARMED_HELO_UNIT_POOL_INDEX) then 
-	{
-		// Special settings for helicopters. Otherwise they tend to run away instead of land
-		// if the LZ is hot.
-		{
-			_x allowFleeing 0; // Especially for helos... They're very cowardly.
-		} forEach (crew (vehicle (leader _vehicleGroup)));
-		_vehicleUnloadWp setWaypointTimeout [0,0,0];
-	}
-	else
-	{
-		_vehicleUnloadWp setWaypointTimeout [5,10,20]; // Give the units some time to get away from truck
-	};
-	
-	// Generate the waypoints for after the transport drops off the troops.
-	if (_dialogVehicleBehaviour == 0) then
-	{
-		// RTB and despawn.
-		_vehicleReturnWp = _vehicleGroup addWaypoint [_spawnPosition, 0];
-		_vehicleReturnWp setWaypointTimeout [2,2,2]; // Let the unit stop before being despawned.
-		_vehicleReturnWp setWaypointStatements ["true", "deleteVehicle (vehicle this); {deleteVehicle _x} foreach thisList;"];
-	};
-	if (_dialogVehicleBehaviour == 1) then
-	{
-		// Nothing to do. Vehicle will sit tight.
-	};
-	
-	// Add vehicle to curator
-	 [(units _vehicleGroup) + [(vehicle (leader _vehicleGroup))]] call Ares_fnc_AddUnitsToCurator;
-
-	// Define this once.. Before spawning troops.
-	_allRps = allMissionObjects "Ares_Module_Reinforcements_Create_Rp";
-
-	// Spawn the units and load them into the vehicle
-	_vehicle = vehicle (leader _vehicleGroup);
-	_maxCargoSpacesToLeaveEmpty = 3;
-	if (_vehiclePoolIndex == SCOUT_UNIT_POOL_INDEX) then
-	{
-		// Light vehicles shouldn't leave empty seats, otherwise they often won't have any units at all.
-		_maxCargoSpacesToLeaveEmpty = 0;
-	};
-	while { (_vehicle emptyPositions "Cargo") > _maxCargoSpacesToLeaveEmpty }
-	do
-	{
-		private ["_squadMembers"];
-		//if (_vehiclePoolIndex == UNARMED_BOAT_UNIT_POOL_INDEX || _vehiclePoolIndex == ARMED_BOAT_UNIT_POOL_INDEX) then
-		//{
-		//	_squadMembers = (_pool select DIVER_UNIT_POOL_INDEX) call BIS_fnc_selectRandom;
-		//}
-		//else
-		//{
-			_squadMembers = (_pool select INFANTRY_UNIT_POOL_INDEX) call BIS_fnc_selectRandom;
-		//};
-		_freeSpace = (vehicle (leader _vehicleGroup)) emptyPositions "Cargo";
-		if (_freeSpace < count _squadMembers) then
-		{
-			// Trim the squad size so they will fit.
-			_squadMembers resize _freeSpace;
-		};
+		_vehicleDummyWp = _vehicleGroup addWaypoint [position _vehicle, 0];
+		_vehicleUnloadWp = _vehicleGroup addWaypoint [position _lz, _lzSize];
+		_vehicleUnloadWp setWaypointType "TR UNLOAD";
 		
-		// Spawn the squad members.
-		_infantryGroup = [_spawnPosition, _side, _squadMembers] call BIS_fnc_spawnGroup;
+		// Make the driver full skill. This makes him less likely to do dumb things
+		// when they take contact.
+		(driver (vehicle (leader _vehicleGroup))) setSkill 1;
 		
-		// Set the default behaviour of the squad
-		switch (_dialogUnitBehaviour) do
+		if (_vehiclePoolIndex == UNARMED_HELO_UNIT_POOL_INDEX || _vehiclePoolIndex == ARMED_HELO_UNIT_POOL_INDEX) then 
 		{
-			case 1: // Relaxed
+			// Special settings for helicopters. Otherwise they tend to run away instead of land
+			// if the LZ is hot.
 			{
-				_infantryGroup setBehaviour "SAFE";
-				_infantryGroup setSpeedMode "LIMITED";
-			};
-			case 2: // Cautious
-			{
-				_infantryGroup setBehaviour "AWARE";
-				_infantryGroup setSpeedMode "LIMITED";
-			};
-			case 3: // Combat
-			{
-				_infantryGroup setBehaviour "COMBAT";
-				_infantryGroup setSpeedMode "NORMAL";
-			};
-		};
-
-		// Choose a RP for the squad to head to once unloaded and set their waypoint.
-		if (count _allRps > 0) then
-		{
-			_rp = _allRps call BIS_fnc_selectRandom;
-
-			// Choose the RP based on the algorithm chosen
-			if (_dialogRpAlgorithm == 1) then
-			{
-				_rp = [position _lz, _allRps] call Ares_fnc_GetNearest;
-			};
-			if (_dialogRpAlgorithm == 2) then
-			{
-				_rp = [position _lz, _allRps] call Ares_fnc_GetFarthest;
-			};
-			if (_dialogRpAlgorithm == 3) then
-			{
-				// Least used
-				{
-					if (_x getVariable ["Ares_Rp_Count", 0] < _rp getVariable ["Ares_Rp_Count", 0]) then
-					{
-						_rp = _x;
-					};
-				} forEach _allRps;
-			};
-
-			// Now that we've chosen an RP, increment the count for it.
-			_rp setVariable ["Ares_Rp_Count", (_rp getVariable ["Ares_Rp_Count", 0]) + 1];
-			
-			_infantryRpWp = _infantryGroup addWaypoint [position _rp, _rpSize];
+				_x allowFleeing 0; // Especially for helos... They're very cowardly.
+			} forEach (crew (vehicle (leader _vehicleGroup)));
+			_vehicleUnloadWp setWaypointTimeout [0,0,0];
 		}
 		else
 		{
-			_infantryMoveOnWp = _infantryGroup addWaypoint [position _lz, _rpSize];
+			_vehicleUnloadWp setWaypointTimeout [5,10,20]; // Give the units some time to get away from truck
 		};
 		
-		// Load the units into the vehicle.
+		// Generate the waypoints for after the transport drops off the troops.
+		if (_dialogVehicleBehaviour == 0) then
 		{
-			_x moveInCargo (vehicle (leader _vehicleGroup));
-		} foreach(units _infantryGroup);
+			// RTB and despawn.
+			_vehicleReturnWp = _vehicleGroup addWaypoint [_spawnPosition, 0];
+			_vehicleReturnWp setWaypointTimeout [2,2,2]; // Let the unit stop before being despawned.
+			_vehicleReturnWp setWaypointStatements ["true", "deleteVehicle (vehicle this); {deleteVehicle _x} foreach thisList;"];
+		};
+		if (_dialogVehicleBehaviour == 1) then
+		{
+			// Nothing to do. Vehicle will sit tight.
+		};
 		
-		// Add infantry to curator
-		[(units _infantryGroup)] call Ares_fnc_AddUnitsToCurator;
-	};
-	
-	if (count _allRps > 0) then
-	{
-		[objNull, "Transport dispatched to LZ. Squad will head to RP."] call bis_fnc_showCuratorFeedbackMessage;
+		// Add vehicle to curator
+		 [(units _vehicleGroup) + [(vehicle (leader _vehicleGroup))]] call Ares_fnc_AddUnitsToCurator;
+
+		// Define this once.. Before spawning troops.
+		_allRps = allMissionObjects "Ares_Module_Reinforcements_Create_Rp";
+
+		// Spawn the units and load them into the vehicle
+		_vehicle = vehicle (leader _vehicleGroup);
+		_maxCargoSpacesToLeaveEmpty = 3;
+		if (_vehiclePoolIndex == SCOUT_UNIT_POOL_INDEX) then
+		{
+			// Light vehicles shouldn't leave empty seats, otherwise they often won't have any units at all.
+			_maxCargoSpacesToLeaveEmpty = 0;
+		};
+		while { (_vehicle emptyPositions "Cargo") > _maxCargoSpacesToLeaveEmpty }
+		do
+		{
+			private ["_squadMembers"];
+			//if (_vehiclePoolIndex == UNARMED_BOAT_UNIT_POOL_INDEX || _vehiclePoolIndex == ARMED_BOAT_UNIT_POOL_INDEX) then
+			//{
+			//	_squadMembers = (_pool select DIVER_UNIT_POOL_INDEX) call BIS_fnc_selectRandom;
+			//}
+			//else
+			//{
+				_squadMembers = (_pool select INFANTRY_UNIT_POOL_INDEX) call BIS_fnc_selectRandom;
+			//};
+			_freeSpace = (vehicle (leader _vehicleGroup)) emptyPositions "Cargo";
+			if (_freeSpace < count _squadMembers) then
+			{
+				// Trim the squad size so they will fit.
+				_squadMembers resize _freeSpace;
+			};
+			
+			// Spawn the squad members.
+			_infantryGroup = [_spawnPosition, _side, _squadMembers] call BIS_fnc_spawnGroup;
+			
+			// Set the default behaviour of the squad
+			switch (_dialogUnitBehaviour) do
+			{
+				case 1: // Relaxed
+				{
+					_infantryGroup setBehaviour "SAFE";
+					_infantryGroup setSpeedMode "LIMITED";
+				};
+				case 2: // Cautious
+				{
+					_infantryGroup setBehaviour "AWARE";
+					_infantryGroup setSpeedMode "LIMITED";
+				};
+				case 3: // Combat
+				{
+					_infantryGroup setBehaviour "COMBAT";
+					_infantryGroup setSpeedMode "NORMAL";
+				};
+			};
+
+			// Choose a RP for the squad to head to once unloaded and set their waypoint.
+			if (count _allRps > 0) then
+			{
+				_rp = _allRps call BIS_fnc_selectRandom;
+
+				// Choose the RP based on the algorithm chosen
+				if (_dialogRpAlgorithm == 1) then
+				{
+					_rp = [position _lz, _allRps] call Ares_fnc_GetNearest;
+				};
+				if (_dialogRpAlgorithm == 2) then
+				{
+					_rp = [position _lz, _allRps] call Ares_fnc_GetFarthest;
+				};
+				if (_dialogRpAlgorithm == 3) then
+				{
+					// Least used
+					{
+						if (_x getVariable ["Ares_Rp_Count", 0] < _rp getVariable ["Ares_Rp_Count", 0]) then
+						{
+							_rp = _x;
+						};
+					} forEach _allRps;
+				};
+
+				// Now that we've chosen an RP, increment the count for it.
+				_rp setVariable ["Ares_Rp_Count", (_rp getVariable ["Ares_Rp_Count", 0]) + 1];
+				
+				_infantryRpWp = _infantryGroup addWaypoint [position _rp, _rpSize];
+			}
+			else
+			{
+				_infantryMoveOnWp = _infantryGroup addWaypoint [position _lz, _rpSize];
+			};
+			
+			// Load the units into the vehicle.
+			{
+				_x moveInCargo (vehicle (leader _vehicleGroup));
+			} foreach(units _infantryGroup);
+			
+			// Add infantry to curator
+			[(units _infantryGroup)] call Ares_fnc_AddUnitsToCurator;
+		};
+		
+		if (count _allRps > 0) then
+		{
+			[objNull, "Transport dispatched to LZ. Squad will head to RP."] call bis_fnc_showCuratorFeedbackMessage;
+		}
+		else
+		{
+			[objNull, "Transport dispatched to LZ. Squad will stay at LZ."] call bis_fnc_showCuratorFeedbackMessage;
+		};
 	}
 	else
 	{
-		[objNull, "Transport dispatched to LZ. Squad will stay at LZ."] call bis_fnc_showCuratorFeedbackMessage;
+		[objNull, "Vehicle pool had no vehicles defined for this faction."] call bis_fnc_showCuratorFeedbackMessage;
 	};
 };
 deleteVehicle _logic;
