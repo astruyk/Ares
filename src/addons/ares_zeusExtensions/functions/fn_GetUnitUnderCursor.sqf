@@ -12,7 +12,16 @@ _logic = _this select 0;
 _shouldRemoveUnitIfNoneFound = [_this, 1, true] call BIS_fnc_Param;
 
 _unitUnderCursor = objNull;
-_mouseOverUnit = curatorMouseOver;
+
+// We use the value we set when the last object was created. This is because when we call this
+// (inside the module's logic) the object under the mouse is always going to be the newly created
+// logic module, and not the actual object that is underneath it. We want to know what the object
+// was under the mouse when the module itself was created - under the assumption that the last object
+// created was the module, and that the mouse was actually on the object we want when the event
+// got fired.
+// TODO we could eliminate this issue if we always deleted the logic BEFORE we tried to get
+// the item under the cursor.
+_mouseOverUnit = Ares_CuratorObjectPlaced_UnitUnderCursor;
 if (count _mouseOverUnit == 0) then
 {
 	["GetUnitUnderCursor: Not in curator mode"] call Ares_fnc_LogMessage;
