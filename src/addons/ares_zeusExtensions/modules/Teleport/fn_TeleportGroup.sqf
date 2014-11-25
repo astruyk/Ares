@@ -1,45 +1,38 @@
 #include "\ares_zeusExtensions\module_header.hpp"
 
-// Get the unit this was applied to.
-_playerToTeleport = [_logic] call Ares_fnc_GetUnitUnderCursor;
+// Get the position to teleport to
+_teleportLocation = getPos _logic;
 
-if (!isPlayer _playerToTeleport) then
+// Generate a list of the player objects and their names
+_groupList = [];
+_groupNameList = [];
 {
-	[objNull, "You must drop this on a playable unit."] call bis_fnc_showCuratorFeedbackMessage;
-}
-else
-{
-	_closestMarker = objNull;
-	_closestMarkerDistance = 9999999999;
-	if (!isNil "Ares_TeleportMarkers") then
+	_group = _x;
+	_groupName = groupID _group;
 	{
+		if (isPlayer _x) exitWith
 		{
-			if (alive _x) then
-			{
-				_distanceToPlayer = _playerToTeleport distance _x;
-				if (isNull _closestMarker || _distanceToPlayer < _closestMarkerDistance) then
-				{
-					_closestMarker = _x;
-					_closestMarkerDistance = _distanceToPlayer;
-				};
-			};
-		} forEach Ares_TeleportMarkers;
-	};
+			_groupList pushBack _group;
+			_groupNameList pushBack _groupName;
+		};
+	} forEach (units _group);
+} forEach allGroups;
 
-	if (isNull _closestMarker) then
-	{
-		[objNull, "You must place a teleporter first."] call bis_fnc_showCuratorFeedbackMessage;
-	}
-	else
-	{
-		// Get the location to teleport them to.
-		_location = getPos _closestMarker;
+// Ask the user who to teleport
+_dialogResult =
+	[
+		"Teleport Group",
+		[
+			["Group Name", _groupNameList]
+		]
+	] call Ares_fnc_ShowChooseDialog;
 
-		// Call the teleport function.
-		[units (group _playerToTeleport), _location] call Ares_fnc_TeleportPlayers;
-
-		[objNull, format["Teleported player to %1", _location]] call bis_fnc_showCuratorFeedbackMessage;
-	};
+if ((count _dialogResult) > 0) then
+{
+	// Teleport the selected player.
+	_groupToTeleport = _groupList select (_dialogResult select 0);
+	[units _groupToTeleport, _teleportLocation] call Ares_fnc_TeleportPlayers;
+	[objNull, format["'%1' teleported to %2", _groupNameList select (_dialogResult select 0), _teleportLocation]] call bis_fnc_showCuratorFeedbackMessage;
 };
 
 deleteVehicle _logic;
