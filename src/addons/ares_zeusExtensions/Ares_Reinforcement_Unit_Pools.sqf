@@ -16,10 +16,6 @@ Ares_Reinforcement_Unit_Pools =
 			// Squad setups to load into vehicles. Note - these may get truncated to fit into empty spaces or small vehicles.
 			["O_Soldier_TL_F", "O_Soldier_GL_F", "O_Soldier_F", "O_Soldier_lite_F", "O_soldier_M_F"],
 			["O_Soldier_TL_F", "O_Soldier_AR_F", "O_Soldier_A_F", "O_Soldier_GL_F", "O_Soldier_F"]
-		],
-		[
-			// Amphibious squad setups to load into boats. Note - these may get truncated to fit into empty spaces or small vehicles.
-			["O_diver_TL_F", "O_diver_F", "O_diver_F", "O_diver_F", "O_diver_F"]
 		]
 	],
 	[
@@ -38,10 +34,6 @@ Ares_Reinforcement_Unit_Pools =
 			// Squad setups to load into vehicles. Note - these may get truncated to fit into empty spaces or small vehicles.
 			["B_Soldier_TL_F", "B_soldier_AR_F", "B_Soldier_A_F", "B_Soldier_F", "B_Soldier_lite_F"],
 			["B_Soldier_TL_F", "B_Soldier_GL_F", "B_soldier_M_F", "B_Soldier_F", "B_Soldier_lite_F"]
-		],
-		[
-			// Amphibious squad setups to load into boats. Note - these may get truncated to fit into empty spaces or small vehicles.
-			["O_diver_TL_F", "O_diver_F", "O_diver_F", "O_diver_F", "O_diver_F"]
 		]
 	],
 	[
@@ -60,10 +52,6 @@ Ares_Reinforcement_Unit_Pools =
 			// Squad setups to load into vehicles. Note - these may get truncated to fit into empty spaces or small vehicles.
 			["I_Soldier_SL_F", "I_Soldier_AR_F", "I_Soldier_A_F", "I_Soldier_lite_F", "I_Soldier_lite_F"],
 			["I_Soldier_TL_F", "I_Soldier_GL_F", "I_soldier_F", "I_soldier_F", "I_Soldier_lite_F"]
-		],
-		[
-			// Amphibious squad setups to load into boats. Note - these may get truncated to fit into empty spaces or small vehicles.
-			["O_diver_TL_F", "O_diver_F", "O_diver_F", "O_diver_F", "O_diver_F"]
 		]
 	],
 	[
@@ -82,10 +70,6 @@ Ares_Reinforcement_Unit_Pools =
 			// Squad setups to load into vehicles. Note - these may get truncated to fit into empty spaces or small vehicles.
 			["CFB_TW_Soldier_TL", "CFB_TW_Soldier_AR", "CFB_TW_Soldier", "CFB_TW_Soldier_AmmoBearer", "CFB_TW_Soldier_Marksman"],
 			["CFB_TW_Soldier_TL", "CFB_TW_Soldier_GL", "CFB_TW_Soldier_MMG", "CFB_TW_Soldier", "CFB_TW_Soldier"]
-		],
-		[
-			// Amphibious squad setups to load into boats. Note - these may get truncated to fit into empty spaces or small vehicles.
-			["O_diver_TL_F", "O_diver_F", "O_diver_F", "O_diver_F", "O_diver_F"]
 		]
 	],
 	[
@@ -104,10 +88,6 @@ Ares_Reinforcement_Unit_Pools =
 			// Squad setups to load into vehicles. Note - these may get truncated to fit into empty spaces or small vehicles.
 			["rhs_msv_junior_sergeant", "rhs_msv_machinegunner", "rhs_msv_machinegunner_assistant", "rhs_msv_efreitor", "rhs_msv_rifleman"],
 			["rhs_msv_sergeant", "rhs_msv_grenadier", "rhs_msv_efreitor", "rhs_msv_rifleman", "rhs_msv_marksman"]
-		],
-		[
-			// Amphibious squad setups to load into boats. Note - these may get truncated to fit into empty spaces or small vehicles.
-			["O_diver_TL_F", "O_diver_F", "O_diver_F", "O_diver_F", "O_diver_F"]
 		]
 	],
 	[
@@ -126,10 +106,6 @@ Ares_Reinforcement_Unit_Pools =
 			// Squad setups to load into vehicles. Note - these may get truncated to fit into empty spaces or small vehicles.
 			["rhsusf_army_ocp_squadleader", "rhsusf_army_ocp_machinegunner", "rhsusf_army_ocp_machinegunnera", "rhsusf_army_ocp_riflemanl", "rhsusf_army_ocp_riflemanl"],
 			["rhsusf_army_ocp_teamleader", "rhsusf_army_ocp_grenadier", "rhsusf_army_ocp_rifleman", "rhsusf_army_ocp_medic", "rhsusf_army_ocp_marksman"]
-		],
-		[
-			// Amphibious squad setups to load into boats. Note - these may get truncated to fit into empty spaces or small vehicles.
-			["O_diver_TL_F", "O_diver_F", "O_diver_F", "O_diver_F", "O_diver_F"]
 		]
 	]
 ];
