@@ -165,9 +165,9 @@ if (_activated && local _logic) then
 		// Spawn the units and load them into the vehicle
 		_vehicle = vehicle (leader _vehicleGroup);
 		_maxCargoSpacesToLeaveEmpty = 3;
-		if (_vehiclePoolIndex == SCOUT_UNIT_POOL_INDEX) then
+		if ((_vehicle emptyPositions "Cargo") < 3) then
 		{
-			// Light vehicles shouldn't leave empty seats, otherwise they often won't have any units at all.
+			// Vehicles with low cargo space shouldn't leave empty seats, otherwise they often won't have any units at all.
 			_maxCargoSpacesToLeaveEmpty = 0;
 		};
 		while { (_vehicle emptyPositions "Cargo") > _maxCargoSpacesToLeaveEmpty }
