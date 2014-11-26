@@ -27,6 +27,8 @@ units[] =
 	"Ares_Module_Remove_Objects_From_Curator",
 	"Ares_Module_Save_Objects_For_Paste",
 	"Ares_Module_Spawn_Custom_Mission_Objects",
+	"Ares_Module_Spawn_Submarine",
+	"Ares_Module_Spawn_Trawler",
 	"Ares_Module_SurrenderSingleUnit",
 	"Ares_Module_Teleport_All",
 	"Ares_Module_Teleport_CreateTeleporter",

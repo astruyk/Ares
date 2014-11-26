@@ -4,4 +4,6 @@ class SpawnModules
 	
 	// class SpawnSmoke {};
 	class SpawnCustomMissionObjects {};
+	class SpawnSubmarine;
+	class SpawnTrawler;
 };

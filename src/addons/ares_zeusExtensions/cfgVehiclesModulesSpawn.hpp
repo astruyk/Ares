@@ -13,3 +13,17 @@ class Ares_Module_Spawn_Custom_Mission_Objects : Ares_Spawn_Module_Base
 	displayName = "Custom Mission Objects";
 	function = "Ares_fnc_SpawnCustomMissionObjects";
 };
+
+class Ares_Module_Spawn_Submarine : Ares_Spawn_Module_Base
+{
+	scopeCurator = 2;
+	displayName = "Submarine";
+	function = "Ares_fnc_SpawnSubmarine";
+};
+
+class Ares_Module_Spawn_Trawler : Ares_Spawn_Module_Base
+{
+	scopeCurator = 2;
+	displayName = "Trawler";
+	function = "Ares_fnc_SpawnTrawler";
+};
