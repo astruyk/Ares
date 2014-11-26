@@ -24,5 +24,4 @@ if (not isnull _ammoBox) then
 	[objNull, "Copied items from arsenal to clipboard."] call bis_fnc_showCuratorFeedbackMessage;
 };
 
-deleteVehicle _logic;
-true
+#include "\ares_zeusExtensions\module_footer.hpp"

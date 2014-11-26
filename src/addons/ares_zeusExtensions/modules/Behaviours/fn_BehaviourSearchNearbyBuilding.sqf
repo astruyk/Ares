@@ -6,5 +6,4 @@ _codeBlock = compile preprocessFileLineNumbers '\ares_zeusExtensions\functions\f
 [_codeBlock, [_groupUnderCursor, 50, "NEAREST", getPos _logic, true, false, false]] call Ares_fnc_BroadcastCode;
 [objnull, "Searching nearby building."] call bis_fnc_showCuratorFeedbackMessage;
 
-deleteVehicle _logic;
-true
+#include "\ares_zeusExtensions\module_footer.hpp"

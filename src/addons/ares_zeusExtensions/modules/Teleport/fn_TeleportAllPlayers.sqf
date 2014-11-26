@@ -17,5 +17,4 @@ _location = getPos _logic;
 
 [objNull, format["Teleported %1 players to %2", (count _playersToTeleport), _location]] call bis_fnc_showCuratorFeedbackMessage;
 
-deleteVehicle _logic;
-true
+#include "\ares_zeusExtensions\module_footer.hpp"

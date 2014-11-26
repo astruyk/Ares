@@ -10,4 +10,4 @@ _location = getPos _logic;
 
 [objNull, format["Teleported zeus to %1", _location]] call bis_fnc_showCuratorFeedbackMessage;
 
-deleteVehicle _logic;
+#include "\ares_zeusExtensions\module_footer.hpp"

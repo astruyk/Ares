@@ -48,5 +48,4 @@ else
 };
 */
 
-deleteVehicle _logic;
-true
+#include "\ares_zeusExtensions\module_footer.hpp"

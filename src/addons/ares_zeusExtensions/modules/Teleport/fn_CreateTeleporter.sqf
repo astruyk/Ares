@@ -73,5 +73,4 @@ _teleportMarker setVariable ["teleportMarkerName", _teleportMarkerName, true];
 
 [objNull, format["Created teleporter '%1'", _teleportMarkerName]] call bis_fnc_showCuratorFeedbackMessage;
 
-deleteVehicle _logic;
-true
+#include "\ares_zeusExtensions\module_footer.hpp"

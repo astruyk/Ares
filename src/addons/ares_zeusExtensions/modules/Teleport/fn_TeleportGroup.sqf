@@ -35,5 +35,4 @@ if ((count _dialogResult) > 0) then
 	[objNull, format["'%1' teleported to %2", _groupNameList select (_dialogResult select 0), _teleportLocation]] call bis_fnc_showCuratorFeedbackMessage;
 };
 
-deleteVehicle _logic;
-true
+#include "\ares_zeusExtensions\module_footer.hpp"

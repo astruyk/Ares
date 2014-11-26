@@ -231,5 +231,4 @@ if (count _dialogResult > 0) then
 	};
 };
 
-deleteVehicle _logic;
-true
+#include "\ares_zeusExtensions\module_footer.hpp"

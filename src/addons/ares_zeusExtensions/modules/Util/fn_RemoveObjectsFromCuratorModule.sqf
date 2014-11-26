@@ -43,4 +43,4 @@ if (count _dialogResult > 0) then
 	[objNull, format["Removed %1 objects to curator.", count _objectsToRemove]] call bis_fnc_showCuratorFeedbackMessage;
 };
 
-deleteVehicle _logic;
+#include "\ares_zeusExtensions\module_footer.hpp"

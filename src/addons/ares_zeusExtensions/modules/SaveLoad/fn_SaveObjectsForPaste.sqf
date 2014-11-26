@@ -27,6 +27,4 @@ if (count _dialogResult > 0) then
 	[objNull, format["Copied all objects in %1 metre radius.", _radius]] call bis_fnc_showCuratorFeedbackMessage;
 };
 
-deleteVehicle _logic;
-
-true
+#include "\ares_zeusExtensions\module_footer.hpp"

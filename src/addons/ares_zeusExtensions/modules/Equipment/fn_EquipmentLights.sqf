@@ -101,6 +101,4 @@ if (count _units > 0) then
 	[objnull, format ["Changed light settings on %1 objects.", (count _units)]] call bis_fnc_showCuratorFeedbackMessage;
 };
 
-
-deleteVehicle _logic;
-true
+#include "\ares_zeusExtensions\module_footer.hpp"

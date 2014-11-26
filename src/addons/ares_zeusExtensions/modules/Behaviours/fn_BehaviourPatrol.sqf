@@ -145,5 +145,4 @@ else
 	[objnull, "No group under cursor."] call bis_fnc_showCuratorFeedbackMessage;
 };
 
-deleteVehicle _logic;
-true
+#include "\ares_zeusExtensions\module_footer.hpp"

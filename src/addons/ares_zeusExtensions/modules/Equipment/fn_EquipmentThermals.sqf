@@ -72,5 +72,4 @@ if (count _vehicles > 0) then
 	[objnull, format ["Changed thermal settings on %1 objects.", count _vehicles]] call bis_fnc_showCuratorFeedbackMessage;
 };
 
-deleteVehicle _logic;
-true
+#include "\ares_zeusExtensions\module_footer.hpp"

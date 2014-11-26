@@ -26,5 +26,4 @@ if (not isnull _ammoBox) then
 	};
 };
 
-deleteVehicle _logic;
-true
+#include "\ares_zeusExtensions\module_footer.hpp"

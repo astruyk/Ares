@@ -57,4 +57,4 @@ if (count _dialogResult > 0) then
 	[objNull, format["Added %1 objects to curator.", count _objectsToAdd]] call bis_fnc_showCuratorFeedbackMessage;
 };
 
-deleteVehicle _logic;
+#include "\ares_zeusExtensions\module_footer.hpp"

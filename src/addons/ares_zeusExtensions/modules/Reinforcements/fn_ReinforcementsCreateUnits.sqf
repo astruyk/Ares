@@ -279,5 +279,5 @@ if (_activated && local _logic) then
 		[objNull, "Transport dispatched to LZ. Squad will stay at LZ."] call bis_fnc_showCuratorFeedbackMessage;
 	};
 };
-deleteVehicle _logic;
-true
+
+#include "\ares_zeusExtensions\module_footer.hpp"

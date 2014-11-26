@@ -23,5 +23,4 @@ _groupUnderCursor = [_logic] call Ares_fnc_GetGroupUnderCursor;
 
 [objnull, "Units released from garrison."] call bis_fnc_showCuratorFeedbackMessage;
 
-deleteVehicle _logic;
-true
+#include "\ares_zeusExtensions\module_footer.hpp"
