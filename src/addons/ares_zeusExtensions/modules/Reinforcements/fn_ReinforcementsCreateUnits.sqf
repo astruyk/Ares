@@ -21,6 +21,17 @@ if (_activated && local _logic) then
 		breakTo "main";
 	};
 	
+	
+	private ["_allUnitPools"];
+	if (isNil "Ares_Reinforcement_Mission_Unit_Pools") then
+	{
+		_allUnitPools = Ares_Reinforcement_Unit_Pools;
+	}
+	else
+	{
+		_allUnitPools = Ares_Reinforcement_Unit_Pools + Ares_Reinforcement_Mission_Unit_Pools;
+	};
+	
 	_allLzs = allMissionObjects "Ares_Module_Reinforcements_Create_Lz";
 	if (count _allLzs == 0) then
 	{
@@ -37,7 +48,7 @@ if (_activated && local _logic) then
 			_poolNames pushBack (_x select DISPLAY_NAME_INDEX);
 			_validPools pushBack _x;
 		};
-	} forEach Ares_Reinforcement_Unit_Pools;
+	} forEach _allUnitPools;
 	
 	// Show the user the dialog
 	_dialogResult = ["Create Reinforcements",
@@ -112,12 +123,6 @@ if (_activated && local _logic) then
 	_pool = _validPools select _dialogPool;
 	_side = _pool select SIDE_INDEX;
 	
-	if (count (_pool select _vehiclePoolIndex) == 0) then
-	{
-		[objNull, "Vehicle pool had no vehicles defined for this faction."] call bis_fnc_showCuratorFeedbackMessage;
-		breakTo "main";
-	};
-	
 	if (count (_pool select INFANTRY_UNIT_POOL_INDEX) == 0) then
 	{
 		[objNull, "No infantry squads defined for side."] call bis_fnc_showCuratorFeedbackMessage;
@@ -127,6 +132,13 @@ if (_activated && local _logic) then
 	// Spawn a vehicle, send it to the LZ and have it unload the troops before returning home and
 	// deleting itself.
 	_vehiclePoolIndex = (_dialogVehicleClass + VEHICLE_POOL_START_INDEX);
+	
+	if (count (_pool select _vehiclePoolIndex) == 0) then
+	{
+		[objNull, "Vehicle pool had no vehicles defined for this faction."] call bis_fnc_showCuratorFeedbackMessage;
+		breakTo "main";
+	};
+	
 	_vehicleType = (_pool select _vehiclePoolIndex) call BIS_fnc_selectRandom;
 	_vehicleGroup = ([_spawnPosition, 0, _vehicleType, _side] call BIS_fnc_spawnVehicle) select 2;
 
