@@ -12,3 +12,10 @@ class Ares_Module_Remove_Objects_From_Curator : Ares_Util_Module_Base
 	displayName = "Remove Objects From Zeus";
 	function = "Ares_fnc_RemoveObjectsFromCuratorModule";
 };
+
+class Ares_Module_Util_Remove_Nearest_Persistent : Ares_Util_Module_Base
+{
+	scopeCurator = 2;
+	displayName = "Delete LZ/RP/Artillery Tgt.";
+	function = "Ares_fnc_UtilRemoveClosestPersistentModule";
+};

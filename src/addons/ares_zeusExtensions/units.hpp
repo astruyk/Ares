@@ -40,6 +40,7 @@ units[] =
 	"Ares_Module_Teleport_Single",
 	"Ares_Module_Teleport_Zeus",
 	"Ares_Module_UnGarrison",
+	"Ares_Module_Util_Remove_Nearest_Persistent",
 	// "Ares_Module_Behaviour_Land_Helicopter",
 	// "Ares_Module_Spawn_Smoke",
 	// "Ares_Module_Test",
