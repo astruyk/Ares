@@ -7,6 +7,13 @@ Or check out the source code at: https://github.com/astruyk/Ares
 
 Changelists
 
+V.1.2.0
+* General - Fix an issue with some modules running twice when dedicated server had Ares mod loaded (See #144)
+* Spawn - Add ability to spawn submarine
+* Spawn - Add ability to spawn trawler
+* Save/Load - Include some larger options when choosing the radius for saving to clipboard (1k, 2k, 5k)
+* Util - Add module to delete closest LZ, RP or Artillery Target (hack fix in case they are not editable, see #145)
+
 V.1.1.0
 * Arsenal - Added an 'Add All ...' option to Arsenal that adds all items from loaded mods automatically.
 * Behaviours - Add ability for players to 'Release' surrendered units (as alternative to 'Secure'). Can also be applied by Zeus when dropping the module on a surrendered unit.

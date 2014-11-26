@@ -6,9 +6,9 @@ class CfgPatches
 		requiredVersion = 0.1;
 		author[] = { "Anton Struyk" };
 		authorUrl = "https://github.com/astruyk/";
-		version = 1.1.0;
-		versionStr = "1.1.0";
-		versionAr[] = {1,1,0};
+		version = 1.2.0;
+		versionStr = "1.2.0";
+		versionAr[] = {1,2,0};
 		
 		#include "units.hpp"
 
