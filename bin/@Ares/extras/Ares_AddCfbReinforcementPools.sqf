@@ -27,7 +27,7 @@ Ares_Reinforcement_Mission_Unit_Pools pushBack
 		"CFB Rebels", // Name of the faction
 		east, // The side of the faction
 		"CFB_Skins", // The name of the root class for the addon that defines these units (must exist or the side will not show up). Use "" to always show.
-		["O_Quadbike_01_F", "O_G_Offroad_01_armed_F", "CFB_Rebel_Technical", "O_G_Quadbike_01_F"], // Scouts and unarmed light vehicles
+		["CFB_Rebel_Technical", "O_G_Quadbike_01_F", "O_G_Offroad_01_F"], // Scouts and unarmed light vehicles
 		["O_G_Offroad_01_armed_F", "CFB_Rebel_Technical_Armed"], // Armed light vehicles
 		["O_Truck_02_transport_F", "O_Truck_02_covered_F"], // Dedicated troop trucks
 		[], // Armed + Armored Troop Transports
