@@ -186,7 +186,7 @@ if (_activated && local _logic) then
 	// Spawn the units and load them into the vehicle
 	_vehicle = vehicle (leader _vehicleGroup);
 	_maxCargoSpacesToLeaveEmpty = 3;
-	if ((_vehicle emptyPositions "Cargo") < 3) then
+	if ((_vehicle emptyPositions "Cargo") <= 3) then
 	{
 		// Vehicles with low cargo space shouldn't leave empty seats, otherwise they often won't have any units at all.
 		_maxCargoSpacesToLeaveEmpty = 0;
