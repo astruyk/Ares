@@ -210,9 +210,9 @@ class AresCompositions
 		{
 			name = "Road Checkpoints";
 
-			class CheckpointAlpha
+			class Large_Checkpoint
 			{
-				name = "Checkpoint Alpha";
+				name = "Large Checkpoint";
 				class Object1 {side=8;vehicle="Land_BarGate_F";rank="";position[]={3.89453,3.8125,-0.00143886};dir=0.501482;};
 				class Object2 {side=8;vehicle="RoadCone_F";rank="";position[]={4.69141,1.87695,-0.00143027};dir=20.4454;};
 				class Object3 {side=8;vehicle="RoadCone_F";rank="";position[]={-4.58789,2.29102,-0.00143051};dir=223.983;};
@@ -302,6 +302,89 @@ class AresCompositions
 				class Object90 {side=8;vehicle="Land_BarrelSand_grey_F";rank="";position[]={21.5156,-29.5898,-0.00137782};dir=88.4237;};
 				class Object91 {side=8;vehicle="Land_HBarrier_Big_F";rank="";position[]={17.0625,-33.5234,-0.00143886};dir=184.934;};
 				class Object92 {side=8;vehicle="Land_BarrelSand_grey_F";rank="";position[]={21.1445,-32.4707,-0.00137353};dir=88.4804;};
+			};
+			
+			
+			
+			class Medium_Checkpoint
+			{
+				name="Medium Checkpoint";
+				class Object0 {side=8;rank="";vehicle="Land_BarGate_F";position[]={3.52271,0.675293,0};dir=0;};
+				class Object1 {side=8;rank="";vehicle="Land_CncBarrier_F";position[]={3.89722,-4.88232,0};dir=90.0129;};
+				class Object2 {side=8;rank="";vehicle="Land_HBarrier_5_F";position[]={-5.58398,-0.865723,0};dir=90.1219;};
+				class Object3 {side=8;rank="";vehicle="Land_PaperBox_closed_F";position[]={5.14258,-4.37158,0};dir=0;};
+				class Object4 {side=8;rank="";vehicle="Land_HBarrier_5_F";position[]={8.8335,-2.75,0};dir=179.481;};
+				class Object5 {side=8;rank="";vehicle="Land_CncBarrier_F";position[]={-7.0127,2.51758,0};dir=90.8388;};
+				class Object6 {side=8;rank="";vehicle="Land_HBarrier_5_F";position[]={-5.33618,0.558105,0};dir=180.551;};
+				class Object7 {side=8;rank="";vehicle="Land_Razorwire_F";position[]={-5.49438,7.53369,0};dir=90.4343;};
+				class Object8 {side=8;rank="";vehicle="Land_PaperBox_open_empty_F";position[]={6.875,-4.27393,0};dir=0;};
+				class Object9 {side=8;rank="";vehicle="Land_HBarrier_5_F";position[]={4.72632,5.0415,0};dir=0;};
+				class Object10 {side=8;rank="";vehicle="Land_CncBarrier_F";position[]={-6.96289,5.22754,0};dir=89.7324;};
+				class Object11 {side=8;rank="";vehicle="Land_HBarrier_5_F";position[]={8.84937,-1.0625,0};dir=271.516;};
+				class Object12 {side=8;rank="";vehicle="Land_Pallet_MilBoxes_F";position[]={-9.29248,-1.18408,0};dir=179.833;};
+				class Object13 {side=8;rank="";vehicle="Land_CncBarrier_F";position[]={6.21729,7.11768,0};dir=90.8388;};
+				class Object14 {side=8;rank="";vehicle="Land_CncBarrier_F";position[]={-6.95288,7.86768,0};dir=88.887;};
+				class Object15 {side=8;rank="";vehicle="Land_Razorwire_F";position[]={5.07568,11.9536,0};dir=90.4343;};
+				class Object16 {side=8;rank="";vehicle="CamoNet_BLUFOR_open_Curator_F";position[]={-9.60034,-5.39893,0};dir=271.247;};
+				class Object17 {side=8;rank="";vehicle="Land_CncBarrier_F";position[]={6.2771,9.82764,0};dir=89.7324;};
+				class Object18 {side=8;rank="";vehicle="Land_BagBunker_Small_F";position[]={-11.7505,3.18115,0};dir=180.448;};
+				class Object19 {side=8;rank="";vehicle="Land_CncBarrier_F";position[]={-7.9834,9.35352,0};dir=179.171;};
+				class Object20 {side=8;rank="";vehicle="Land_CncBarrier_F";position[]={6.22729,12.5273,0};dir=88.887;};
+				class Object21 {side=8;rank="";vehicle="Land_HBarrier_5_F";position[]={-13.9141,0.523926,0};dir=90.125;};
+				class Object22 {side=8;rank="";vehicle="Land_CncBarrier_F";position[]={-10.6531,9.37354,0};dir=180.606;};
+				class Object23 {side=8;rank="";vehicle="Land_Razorwire_F";position[]={-7.78564,10.5923,0};dir=179.536;};
+				class Object24 {side=8;rank="";vehicle="Land_CncBarrier_F";position[]={-13.3672,-5.82666,0};dir=269.005;};
+				class Object25 {side=8;rank="";vehicle="Land_CncBarrier_F";position[]={-13.2529,9.41309,0};dir=180.606;};
+			};
+			
+			class Small_Checkpoint
+			{
+				name="Small Checkpoint";
+				class Object0 {side=8;rank="";vehicle="Land_BarGate_F";position[]={3.4895,0.182129,0};dir=0;};
+				class Object1 {side=8;rank="";vehicle="Land_CncBarrier_F";position[]={3.54639,-1.29199,0};dir=90;};
+				class Object2 {side=8;rank="";vehicle="Land_CncBarrier_F";position[]={3.57153,1.72949,0};dir=90;};
+				class Object3 {side=8;rank="";vehicle="Land_CncBarrier_F";position[]={-5.09131,0.412598,0};dir=269;};
+				class Object4 {side=8;rank="";vehicle="Land_CncBarrier_F";position[]={-5.08447,-2.22314,0};dir=90;};
+				class Object5 {side=8;rank="";vehicle="Land_CncBarrier_F";position[]={5.27002,2.70801,0};dir=179.447;};
+				class Object6 {side=8;rank="";vehicle="Land_BagBunker_Small_F";position[]={-7.12524,3.5415,0};dir=180;};
+				class Object7 {side=8;rank="";vehicle="Land_CncBarrier_F";position[]={7.98022,2.67432,0};dir=178.447;};
+				class Object8 {side=8;rank="";vehicle="Land_Razorwire_F";position[]={9.43408,3.98389,0};dir=180.061;};
+				class Object9 {side=8;rank="";vehicle="Land_CncBarrier_F";position[]={-10.6782,1.16504,0};dir=181.411;};
+				class Object10 {side=8;rank="";vehicle="Land_CncBarrier_F";position[]={10.6799,2.75,0};dir=177.447;};
+				class Object11 {side=8;rank="";vehicle="Land_CncBarrier_F";position[]={-13.2795,1.14746,0};dir=179.846;};
+				class Object12 {side=8;rank="";vehicle="Land_Razorwire_F";position[]={-11.9375,2.34424,0};dir=181.056;};
+				class Object13 {side=8;rank="";vehicle="Land_CncBarrier_F";position[]={-15.9133,1.10352,0};dir=179.846;};
+			};
+			
+			class Improvised_Checkpoint
+			{
+				name="Improvised Checkpoint";
+				class Object0 {side=8;rank="";vehicle="RoadCone_F";position[]={-2.26343,0.0947266,0};dir=1.2184;};
+				class Object1 {side=8;rank="";vehicle="RoadCone_F";position[]={-2.20337,2.03467,0};dir=1.21439;};
+				class Object2 {side=8;rank="";vehicle="Land_CncBarrier_F";position[]={-2.70557,-2.17725,0};dir=270.294;};
+				class Object3 {side=8;rank="";vehicle="RoadCone_F";position[]={4.1665,-0.0854492,0};dir=1.18479;};
+				class Object4 {side=8;rank="";vehicle="Land_CncBarrier_F";position[]={-4.21118,-0.9375,0};dir=181.556;};
+				class Object5 {side=8;rank="";vehicle="RoadCone_F";position[]={-2.14331,3.98486,0};dir=1.21067;};
+				class Object6 {side=8;rank="";vehicle="RoadCone_F";position[]={4.28662,1.93457,0};dir=1.1858;};
+				class Object7 {side=8;rank="";vehicle="Land_CncBarrier_F";position[]={4.53906,-1.94336,0};dir=91.2938;};
+				class Object8 {side=8;rank="";vehicle="RoadCone_F";position[]={-2.80347,-4.31543,0};dir=358.576;};
+				class Object9 {side=8;rank="";vehicle="RoadCone_F";position[]={4.20654,3.91455,0};dir=1.18881;};
+				class Object10 {side=8;rank="";vehicle="RoadCone_F";position[]={4.49658,-4.13525,0};dir=1.23268;};
+				class Object11 {side=8;rank="";vehicle="Land_CncBarrier_F";position[]={6.05859,-0.807617,0};dir=180.741;};
+				class Object12 {side=8;rank="";vehicle="RoadCone_F";position[]={-2.12329,6.01465,0};dir=1.2087;};
+				class Object13 {side=8;rank="";vehicle="RoadCone_F";position[]={-2.84351,-5.90527,0};dir=358.583;};
+				class Object14 {side=8;rank="";vehicle="Land_Razorwire_F";position[]={-8.36011,0.55127,0};dir=1.29378;};
+				class Object15 {side=8;rank="";vehicle="Land_Razorwire_F";position[]={-3.29517,4.10596,0};dir=270.148;};
+				class Object16 {side=8;rank="";vehicle="Land_CncBarrier_F";position[]={-6.90137,-0.867676,0};dir=180.136;};
+				class Object17 {side=8;rank="";vehicle="RoadCone_F";position[]={4.19653,5.85449,0};dir=1.18982;};
+				class Object18 {side=8;rank="";vehicle="RoadCone_F";position[]={4.48657,-5.99512,0};dir=1.23168;};
+				class Object19 {side=8;rank="";vehicle="Land_Razorwire_F";position[]={5.61011,7.37256,0};dir=90.5344;};
+				class Object20 {side=8;rank="";vehicle="RoadCone_F";position[]={-2.09351,7.97461,0};dir=1.20567;};
+				class Object21 {side=8;rank="";vehicle="Land_Razorwire_F";position[]={6.97974,0.391113,0};dir=1.29378;};
+				class Object22 {side=8;rank="";vehicle="Land_CncBarrier_F";position[]={8.71875,-0.827637,0};dir=181.044;};
+				class Object23 {side=8;rank="";vehicle="RoadCone_F";position[]={4.19653,7.84473,0};dir=1.19274;};
+				class Object24 {side=8;rank="";vehicle="RoadCone_F";position[]={-2.0835,9.94482,0};dir=1.31905;};
+				class Object25 {side=8;rank="";vehicle="RoadCone_F";position[]={4.25659,9.76465,0};dir=1.19577;};
 			};
 		};
 
