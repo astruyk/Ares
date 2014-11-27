@@ -15,7 +15,8 @@ _anchorObject = [_this, 0] call BIS_fnc_Param;
 _anchorDim = [_this, 1, 50, [-1]] call BIS_fnc_Param;
 
 private ["_objs"];
-_objs = nearestObjects [(position _anchorObject), ["All"], _anchorDim];
+_anchorPos = position _anchorObject;
+_objs = nearestObjects [_anchorPos, ["All"], _anchorDim];
 
 //First filter illegal objects
  private ["_allDynamic"];
@@ -69,7 +70,13 @@ _objectsToSave = [];
 _currentObjectNumber = 0;
 {
 	_type = typeOf _x;
-	_offset = (position _anchorObject) vectorDiff (position _x);
+	_offset = (position _x) vectorDiff _anchorPos;
+	/*_offset =
+		[
+			((position _x) select 0) - (_anchorPos select 0),
+			((position _x) select 1) - (_anchorPos select 1),
+			((position _x) select 2) - (_anchorPos select 2)
+		];*/
 	if (_offset select 2 < 0.01) then
 	{
 		// Round off things less than a cm different from the Z-pos of the anchor
