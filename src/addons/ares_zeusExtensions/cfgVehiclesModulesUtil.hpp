@@ -13,6 +13,13 @@ class Ares_Module_Remove_Objects_From_Curator : Ares_Util_Module_Base
 	function = "Ares_fnc_RemoveObjectsFromCuratorModule";
 };
 
+class Ares_Module_Util_Create_Composition : Ares_Util_Module_Base
+{
+	scopeCurator = 2;
+	displayName = "Create Composition";
+	function = "Ares_fnc_UtilCreateCompositionModule";
+};
+
 class Ares_Module_Util_Remove_Nearest_Persistent : Ares_Util_Module_Base
 {
 	scopeCurator = 2;

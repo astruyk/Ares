@@ -6,8 +6,11 @@ call compile preprocessFileLineNumbers '\ares_zeusExtensions\Ares_Reinforcement_
 //[] spawn { activateAddons ["Ares"]; }; // This also works. Not sure which is best.
 
 // Blacklist for modules that grab objects. These types should not be added to Zeus automatically.
-Ares_EditableObjectBlacklist = [
+Ares_EditableObjectBlacklist =
+	[
+		"Ares_Module_Util_Create_Composition",
 		"Ares_Module_Save_Objects_For_Paste",
+		"ModuleCurator_F",
 		"GroundWeaponHolder",
 		"Salema_F",
 		"Ornate_random_F",
@@ -21,7 +24,8 @@ Ares_EditableObjectBlacklist = [
 		"Hen_random_F",
 		"Cock_random_F",
 		"Cock_white_F",
-		"Sheep_random_F"];
+		"Sheep_random_F"
+	];
 
 [] spawn {
 	[] call Ares_fnc_waitForZeus;

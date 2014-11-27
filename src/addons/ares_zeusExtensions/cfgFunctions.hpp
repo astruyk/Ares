@@ -25,30 +25,31 @@ class Ares // This bit will be prefixed when actually calling the function (e.g.
 	{
 		file = "\ares_zeusExtensions\functions";
 
-		class AddUnitsToCurator {};
-		class ArsenalSetup {};
-		class BroadcastCode {};
-		class GenerateArsenalBlacklist {};
-		class GenerateArsenalDataList {};
-		class GetArrayDataFromUser {};
-		class GetFarthest {};
-		class GetGroupUnderCursor {};
-		class GetNearest {};
-		class GetPhoneticName {};
-		class GetSafePos {};
-		class GetUnitUnderCursor {};
-		class GlobalExecute {};
-		class IsZeus {};
-		class LogMessage {};
-		class MakePlayerInvisible {};
-		class MonitorCuratorDisplay {};
-		class ObjectsGrabber {};
-		class ObjectsMapper {};
-		class SearchBuilding {};
-		class ShowChooseDialog {};
-		class TeleportPlayers {};
-		class WaitForZeus {};
-		class ZenOccupyHouse {};
+		class AddUnitsToCurator;
+		class ArsenalSetup;
+		class BroadcastCode;
+		class CompositionGrabber;
+		class GenerateArsenalBlacklist;
+		class GenerateArsenalDataList;
+		class GetArrayDataFromUser;
+		class GetFarthest;
+		class GetGroupUnderCursor;
+		class GetNearest;
+		class GetPhoneticName;
+		class GetSafePos;
+		class GetUnitUnderCursor;
+		class GlobalExecute;
+		class IsZeus;
+		class LogMessage;
+		class MakePlayerInvisible;
+		class MonitorCuratorDisplay;
+		class ObjectsGrabber;
+		class ObjectsMapper;
+		class SearchBuilding;
+		class ShowChooseDialog;
+		class TeleportPlayers;
+		class WaitForZeus;
+		class ZenOccupyHouse;
 	};
 
 	// Functions to perform module actions
