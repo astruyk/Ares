@@ -57,49 +57,46 @@ _objs = _objs - [-1];
 
 //Formatting for output
 private ["_br", "_tab", "_outputText"];
-_br = toString [13, 10];
-_tab = toString [9];
+_br = "
+";
+_tab = " ";
 
 // Start the output
-_outputText = "class NEW_COMPOSITION_NAME" + _br;
-_outputText = _outputText + "{" + _br;
-_outputText = _outputText + _tab + 'name="Zeus Display Name";' + _br;
+
 
 //Process non-filtered objects
 _objectsToSave = [];
+_linesOfText = [];
 _currentObjectNumber = 0;
 {
 	_type = typeOf _x;
 	_offset = (position _x) vectorDiff _anchorPos;
-	/*_offset =
-		[
-			((position _x) select 0) - (_anchorPos select 0),
-			((position _x) select 1) - (_anchorPos select 1),
-			((position _x) select 2) - (_anchorPos select 2)
-		];*/
 	if (_offset select 2 < 0.01) then
 	{
 		// Round off things less than a cm different from the Z-pos of the anchor
 		_offset set [2, 0];
 	};
 	_azimuth = direction _x;
-
-	_outputText =
-		_outputText
-		+ _tab
-		+ format [
-			'class Object%1 {side=8;rank="";vehicle="%2";position[]={%3,%4,%5};dir=%6;};',
-			_currentObjectNumber,
-			_type,
-			_offset select 0,
-			_offset select 1,
-			_offset select 2,
-			_azimuth]
-		+ _br;
+	
+	_classText = format ["class Object%1 {side=8;rank="""";vehicle=""%2"";position[]={%3,%4,%5};dir=%6;};",
+		_currentObjectNumber, _type, _offset select 0,	_offset select 1, _offset select 2, _azimuth];
+	_linesOfText pushBack _classText;
+	
 	_currentObjectNumber = _currentObjectNumber + 1;
 } forEach _objs;
 
-// Add an entry for holding the anchor position and version number. This will be extracted if we want to do a relative paste later.
+_outputText = "
+class NEW_COMPOSITION_NAME
+{
+    name=""Zeus Display Name"";
+";
+{
+	_outputText = _outputText + "    ";
+	_outputText = _outputText + _x;
+	_outputText = _outputText + _br;
+	diag_log _x;
+} forEach _linesOfText;
+_outputText = _outputText + _br;
 _outputText = _outputText + "};";
-
-_outputText
+diag_log _outputText;
+_outputText;

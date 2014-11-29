@@ -19,10 +19,10 @@ if (count _dialogResult > 0) then
 	
 	_text = [_logic, _radius] call Ares_fnc_CompositionGrabber;
 
-	missionNamespace setVariable ['Ares_CopyPaste_Dialog_Text', _text];
-	_dialog = createDialog "Ares_CopyPaste_Dialog";
+	//missionNamespace setVariable ['Ares_CopyPaste_Dialog_Text', _text];
+	//_dialog = createDialog "Ares_CopyPaste_Dialog";
 
-	[objNull, format["Created from objects in %1 metre radius.", _radius]] call bis_fnc_showCuratorFeedbackMessage;
+	[objNull, format["Created from objects in %1 metre radius. Check RPT.", _radius]] call bis_fnc_showCuratorFeedbackMessage;
 };
 
 #include "\ares_zeusExtensions\module_footer.hpp"
