@@ -211,6 +211,11 @@ class CfgGroups
 	#include "compositions.hpp"
 };
 
+class CfgWeapons
+{
+	#include "cfgWeaponsSortingOverrides.hpp"
+};
+
 #include "ui\baseDialogs.hpp"
 #include "ui\copyPasteDialog.hpp"
 #include "ui\dynamicDialog.hpp"

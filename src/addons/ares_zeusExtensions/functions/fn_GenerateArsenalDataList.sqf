@@ -71,7 +71,7 @@ _namesOfAddedWeapons = [];
 						_includeItem = true;
 						if (_limitItemsToSide == 'All') then
 						{
-							// Include all uniforms - no reason to check any more config data.
+							// Include all side-specific items - no reason to check any more config data.
 						}
 						else
 						{
@@ -99,48 +99,15 @@ _namesOfAddedWeapons = [];
 									};
 								};
 							};
-							if ((_side == -1) &&
-									(
-										["[CSAT]", _weaponDisplayName] call Ares_fnc_StringContains
-										|| ["(Hex)", _weaponDisplayName] call Ares_fnc_StringContains
-										|| ["Assassin Helmet", _weaponDisplayName] call Ares_fnc_StringContains
-										|| ["Protector Helmet", _weaponDisplayName] call Ares_fnc_StringContains
-										|| ["Defender Helmet", _weaponDisplayName] call Ares_fnc_StringContains
-										|| ["[OPFOR]", _weaponDisplayName] call Ares_fnc_StringContains
-									)) then
-							{
-								_side = 0;
-							};
-							if ((_side == -1) &&
-								(
-									("ECH" == _weaponDisplayName)
-									|| ["ECH ", _weaponDisplayName] call Ares_fnc_StringContains
-									|| ["[NATO]", _weaponDisplayName] call Ares_fnc_StringContains
-									|| ["SF Helmet", _weaponDisplayName] call Ares_fnc_StringContains
-									|| ["Combat Helmet", _weaponDisplayName] call Ares_fnc_StringContains
-									|| ["(US ", _weaponDisplayName] call Ares_fnc_StringContains
-									|| ["(MTP)", _weaponDisplayName] call Ares_fnc_StringContains
-								)) then
+							
+							// Special case hack since the ECH helmet is the base of EVERYTHING we can't
+							// override the 'side' value for it in Ares without also making all other
+							// hats default to the same side.
+							if ((_side == -1) &&(_weaponDisplayName == "ECH")) then
 							{
 								_side = 1;
 							};
-							if ((_side == -1) && 
-								(
-									["[AAF]", _weaponDisplayName] call Ares_fnc_StringContains
-									|| ("MICH" == _weaponDisplayName)
-								)) then
-							{
-								_side = 2;
-							};
-							if ((_side == -1) &&
-								(
-									["Racing Helmet", _weaponDisplayName] call Ares_fnc_StringContains
-									|| ["VR Suit", _weaponDisplayName] call Ares_fnc_StringContains
-								)) then
-							{
-								_side = 3;
-							};
-
+							
 							if (_side != -1) then
 							{
 								switch (_limitItemsToSide) do
