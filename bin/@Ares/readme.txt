@@ -7,6 +7,12 @@ Or check out the source code at: https://github.com/astruyk/Ares
 
 Changelists
 
+V.1.2.1
+* Arsenal - Change the wording in 'All...' module to be more clear and require fewer selections for common use cases (See #155)
+* Arsenal - Fix an issue where magazines weren't being added when using the 'All...' module
+* Arsenal - Uniforms and helmets are now filtered based on side selection when using 'All...' modules to populate arsenal.
+* General - Supress the RPT log output by default. Use 'Ares_Debug_Output_Enabled = true;' to re-enable
+
 V.1.2.0
 * General - Fix an issue with some modules running twice when dedicated server had Ares mod loaded (See #144)
 * Spawn - Add ability to spawn submarine

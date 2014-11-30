@@ -6,9 +6,9 @@ class CfgPatches
 		requiredVersion = 0.1;
 		author[] = { "Anton Struyk" };
 		authorUrl = "https://github.com/astruyk/";
-		version = 1.2.0;
-		versionStr = "1.2.0";
-		versionAr[] = {1,2,0};
+		version = 1.2.1;
+		versionStr = "1.2.1";
+		versionAr[] = {1,2,1};
 		
 		#include "units.hpp"
 
@@ -209,6 +209,11 @@ class CfgFunctions
 class CfgGroups
 {
 	#include "compositions.hpp"
+};
+
+class CfgWeapons
+{
+	#include "cfgWeaponsSortingOverrides.hpp"
 };
 
 #include "ui\baseDialogs.hpp"

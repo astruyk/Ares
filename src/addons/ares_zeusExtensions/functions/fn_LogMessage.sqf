@@ -1,5 +1,11 @@
 private["_message"];
 _message = _this select 0;
 
-player vehicleChat format["[ARES] %1", _message];
-diag_log format["[ARES] %1", _message];
+if (not (isNil "Ares_Debug_Output_Enabled")) then
+{
+	if (Ares_Debug_Output_Enabled) then
+	{
+		player vehicleChat format["[ARES] %1", _message];
+		diag_log format["[ARES] %1", _message];
+	};
+};
