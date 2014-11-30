@@ -3,7 +3,7 @@
 	
 	Parameters:
 		0 - (Optional) Array of strings - List of class names to blacklist (not include) in all generated lists.
-		1 - (Optional) String - Option for limiting side of the uniforms added. One of { 'All', 'Blufor', 'Opfor', 'Greenfor', 'Civilian', 'None' }
+		1 - (Optional) String - Option for limiting side of the items added. One of { 'All', 'Blufor', 'Opfor', 'Greenfor', 'Civilian', 'None' }
 
 	Returns:
 		An array of arrays of all class names that can be added to arsenal in the following format:
@@ -23,7 +23,7 @@
 #define CFG_TYPE_SCOPED 0
 
 _blacklist = [_this, 0, []] call BIS_fnc_Param;
-_limitUniformsToSide = [_this, 1, 'All'] call Bis_fnc_Param;
+_limitItemsToSide = [_this, 1, 'All'] call Bis_fnc_Param;
 
 // Go through and gather all the items declared in 'CfgWeapons'. This includes most items, vests
 // and uniforms.
@@ -69,18 +69,23 @@ _namesOfAddedWeapons = [];
 					case CFG_TYPE_ITEM:
 					{
 						_includeItem = true;
-						if (_limitUniformsToSide == 'All') then
+						if (_limitItemsToSide == 'All') then
 						{
 							// Include all uniforms - no reason to check any more config data.
 						}
 						else
 						{
-							if (isClass (_weaponConfig >> "ItemInfo")) then
+							_side = -1;
+							if (isNumber (_weaponConfig >> "side")) then
+							{
+								_side = getNumber (_weaponConfig >> "side");
+							};
+							if ((_side == -1) && (isClass (_weaponConfig >> "ItemInfo"))) then
 							{
 								_uniformVehicle = getText (_weaponConfig >> "ItemInfo" >> "uniformClass");
 								if (_uniformVehicle != "") then
 								{
-									if (_limitUniformsToSide == 'None') then
+									if (_limitItemsToSide == 'None') then
 									{
 										// Don't inlcude any uniforms if the user specified 'None'
 										[format ["Not including %1 since it is a uniform.", _weaponClassName]] call Ares_fnc_LogMessage;
@@ -91,19 +96,64 @@ _namesOfAddedWeapons = [];
 										// Check the side of the uniform.
 										_uniformVehicleConfig = configFile >> "CfgVehicles" >> _uniformVehicle;
 										_side = getNumber (_uniformVehicleConfig >> "side");
-										
-										switch (_limitUniformsToSide) do
-										{
-											case 'Opfor': { _includeItem = (_side == 0); };
-											case 'Blufor': { _includeItem = (_side == 1); };
-											case 'Greenfor': { _includeItem = (_side == 2); };
-											case 'Civilian' : { _includeItem = (_side == 3); };
-										};
-										
-										[format ["Include %1 from side %2 = %3", _weaponClassName, _side, _uniformVehicleConfig]] call Ares_fnc_LogMessage;
 									};
 								};
 							};
+							if ((_side == -1) &&
+									(
+										["[CSAT]", _weaponDisplayName] call Ares_fnc_StringContains
+										|| ["(Hex)", _weaponDisplayName] call Ares_fnc_StringContains
+										|| ["Assassin Helmet", _weaponDisplayName] call Ares_fnc_StringContains
+										|| ["Protector Helmet", _weaponDisplayName] call Ares_fnc_StringContains
+										|| ["Defender Helmet", _weaponDisplayName] call Ares_fnc_StringContains
+										|| ["[OPFOR]", _weaponDisplayName] call Ares_fnc_StringContains
+									)) then
+							{
+								_side = 0;
+							};
+							if ((_side == -1) &&
+								(
+									("ECH" == _weaponDisplayName)
+									|| ["ECH ", _weaponDisplayName] call Ares_fnc_StringContains
+									|| ["[NATO]", _weaponDisplayName] call Ares_fnc_StringContains
+									|| ["SF Helmet", _weaponDisplayName] call Ares_fnc_StringContains
+									|| ["Combat Helmet", _weaponDisplayName] call Ares_fnc_StringContains
+									|| ["(US ", _weaponDisplayName] call Ares_fnc_StringContains
+									|| ["(MTP)", _weaponDisplayName] call Ares_fnc_StringContains
+								)) then
+							{
+								_side = 1;
+							};
+							if ((_side == -1) && 
+								(
+									["[AAF]", _weaponDisplayName] call Ares_fnc_StringContains
+									|| ("MICH" == _weaponDisplayName)
+								)) then
+							{
+								_side = 2;
+							};
+							if ((_side == -1) &&
+								(
+									["Racing Helmet", _weaponDisplayName] call Ares_fnc_StringContains
+									|| ["VR Suit", _weaponDisplayName] call Ares_fnc_StringContains
+								)) then
+							{
+								_side = 3;
+							};
+
+							if (_side != -1) then
+							{
+								switch (_limitItemsToSide) do
+								{
+									case 'None' : { _includeItem = false; };
+									case 'Opfor': { _includeItem = (_side == 0); };
+									case 'Blufor': { _includeItem = (_side == 1); };
+									case 'Greenfor': { _includeItem = (_side == 2); };
+									case 'Civilian' : { _includeItem = (_side == 3); };
+								};
+							};
+							
+							[format ["Include %1 from side %2 = %3", _weaponClassName, _side, _includeItem]] call Ares_fnc_LogMessage;
 						};
 					
 						if (_includeItem) then
