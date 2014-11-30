@@ -11,6 +11,7 @@ if (not isnull _ammoBox) then
 				["Add GPS?", ["Yes", "No"]],
 				["Add thermals?", ["Yes", "No"], 1],
 				["Add NVG's?", ["Yes", "No"]],
+				["Limit Uniform Sides To", ["All", "Blufor Only", "Opfor Only", "Greenfor Only", "None"], 1],
 				["Static weapon backpacks", ["All", "Blufor Only", "Opfor Only", "Greenfor Only", "None"], 4],
 				["UAV items & backpacks", ["All", "Blufor Only", "Opfor Only", "Greenfor Only", "None"], 4],
 				["Automated weapon backpacks", ["All", "Blufor Only", "Opfor Only", "Greenfor Only", "None"], 4]
@@ -24,9 +25,10 @@ if (not isnull _ammoBox) then
 		_dialogAddGps = _dialogResult select 1;
 		_dialogAddThermals = _dialogResult select 2;
 		_dialogAddNvg = _dialogResult select 3;
-		_dialogAddStaticWeapons = _dialogResult select 4;
-		_dialogAddUav = _dialogResult select 5;
-		_dialogAddAutomated = _dialogResult select 6;
+		_dialogLimitUniforms = _dialogResult select 4;
+		_dialogAddStaticWeapons = _dialogResult select 5;
+		_dialogAddUav = _dialogResult select 6;
+		_dialogAddAutomated = _dialogResult select 7;
 		
 		_filterChoices = ["All", "Blufor", "Opfor", "Greenfor", "None"];
 		
@@ -41,7 +43,7 @@ if (not isnull _ammoBox) then
 				False
 			] call Ares_fnc_GenerateArsenalBlacklist;
 
-		_arsenalData = [_blacklist] call Ares_fnc_GenerateArsenalDataList;
+		_arsenalData = [_blacklist, (_filterChoices select _dialogLimitUniforms)] call Ares_fnc_GenerateArsenalDataList;
 		
 		[_ammoBox, _arsenalData, (_dialogCombineOrReplace == 1)] call Ares_fnc_ArsenalSetup;
 		[objNull, "Arsenal objects added."] call bis_fnc_showCuratorFeedbackMessage;

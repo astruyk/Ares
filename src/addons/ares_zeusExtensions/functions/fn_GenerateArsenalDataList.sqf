@@ -2,8 +2,9 @@
 	Reads through the loaded mod configs and generates a list of all the objects that are valid to be added to an arsenal box.
 	
 	Parameters:
-		0 - Array of strings - List of class names to blacklist (not include) in all generated lists.
-	
+		0 - (Optional) Array of strings - List of class names to blacklist (not include) in all generated lists.
+		1 - (Optional) String - Option for limiting side of the uniforms added. One of { 'All', 'Blufor', 'Opfor', 'Greenfor', 'Civilian', 'None' }
+
 	Returns:
 		An array of arrays of all class names that can be added to arsenal in the following format:
 			[
@@ -22,6 +23,7 @@
 #define CFG_TYPE_SCOPED 0
 
 _blacklist = [_this, 0, []] call BIS_fnc_Param;
+_limitUniformsToSide = [_this, 1, 'All'] call Bis_fnc_Param;
 
 // Go through and gather all the items declared in 'CfgWeapons'. This includes most items, vests
 // and uniforms.
@@ -40,7 +42,7 @@ _namesOfAddedWeapons = [];
 	{
 		if (_weaponClassName in _blacklist) then
 		{
-			// diag_log format["Blacklisted: %1", _weaponClassName];
+			[format["Blacklisted: %1", _weaponClassName]] call Ares_fnc_LogMessage;
 		}
 		else
 		{
@@ -54,31 +56,72 @@ _namesOfAddedWeapons = [];
 					{
 						if (not isClass (_weaponConfig >> "LinkedItems")) then
 						{
-							// diag_log format ["Adding Weapon: %1", _x];
+							[format ["Adding Weapon: %1", _x]] call Ares_fnc_LogMessage;
 							_weapons pushBack _weaponClassName;
 							_namesOfAddedWeapons pushBack _weaponDisplayName;
 						}
 						else
 						{
-							// diag_log format ["Item '%1' had linked items. Skipped", _weaponClassName];
+							[format ["Item '%1' had linked items. Skipped", _weaponClassName]] call Ares_fnc_LogMessage;
 						};
 					};
 					case CFG_TYPE_BINOC;
 					case CFG_TYPE_ITEM:
 					{
-						// diag_log format ["Adding Item: %1", _x];
-						_items pushBack _weaponClassName;
-						_namesOfAddedWeapons pushBack _weaponDisplayName;
+						_includeItem = true;
+						if (_limitUniformsToSide == 'All') then
+						{
+							// Include all uniforms - no reason to check any more config data.
+						}
+						else
+						{
+							if (isClass (_weaponConfig >> "ItemInfo")) then
+							{
+								_uniformVehicle = getText (_weaponConfig >> "ItemInfo" >> "uniformClass");
+								if (_uniformVehicle != "") then
+								{
+									if (_limitUniformsToSide == 'None') then
+									{
+										// Don't inlcude any uniforms if the user specified 'None'
+										[format ["Not including %1 since it is a uniform.", _weaponClassName]] call Ares_fnc_LogMessage;
+										_includeItem = false;
+									}
+									else
+									{
+										// Check the side of the uniform.
+										_uniformVehicleConfig = configFile >> "CfgVehicles" >> _uniformVehicle;
+										_side = getNumber (_uniformVehicleConfig >> "side");
+										
+										switch (_limitUniformsToSide) do
+										{
+											case 'Opfor': { _includeItem = (_side == 0); };
+											case 'Blufor': { _includeItem = (_side == 1); };
+											case 'Greenfor': { _includeItem = (_side == 2); };
+											case 'Civilian' : { _includeItem = (_side == 3); };
+										};
+										
+										[format ["Include %1 from side %2 = %3", _weaponClassName, _side, _uniformVehicleConfig]] call Ares_fnc_LogMessage;
+									};
+								};
+							};
+						};
+					
+						if (_includeItem) then
+						{
+							[format ["Adding Item: %1", _x]] call Ares_fnc_LogMessage;
+							_items pushBack _weaponClassName;
+							_namesOfAddedWeapons pushBack _weaponDisplayName;
+						};
 					};
 					default
 					{
-						// diag_log format ["Unsupported weapon type %1 (%2)", _weaponClassName, _weaponType];
+						[format ["Unsupported weapon type %1 (%2)", _weaponClassName, _weaponType]] call Ares_fnc_LogMessage;
 					};
 				};
 			}
 			else
 			{
-				// diag_log format ["Duplicate display name for %1 (%2)", _weaponClassName, _weaponDisplayName];
+				[format ["Duplicate display name for %1 (%2)", _weaponClassName, _weaponDisplayName]] call Ares_fnc_LogMessage;
 			};
 		};
 	};
@@ -99,17 +142,17 @@ _magazines = [];
 		
 		if (_scope >= 2 && _displayName != "" && _picture != "") then
 		{
-			// diag_log format ["Adding magazine: %1", _className];
+			[format ["Adding magazine: %1", _className]] call Ares_fnc_LogMessage;
 			_magazines pushBack _className;
 		}
 		else
 		{
-			// diag_log format ["Skipped magazine: %1", _className];
+			[format ["Skipped magazine: %1", _className]] call Ares_fnc_LogMessage;
 		};
 	}
 	else
 	{
-		// diag_log format["Blacklisted: %1", _className];
+		[format["Blacklisted: %1", _className]] call Ares_fnc_LogMessage;
 	};
 } forEach _allMagazineClasses;
 
@@ -128,17 +171,17 @@ _backpacks = [];
 		
 		if (_scope >= 2 && _isBackpack == 1 && _displayName != "" && _picture != "") then
 		{
-			// diag_log format ["Adding backpack: %1", _className];
+			[format ["Adding backpack: %1", _className]] call Ares_fnc_LogMessage;
 			_backpacks pushBack _className;
 		}
 		else
 		{
-			// diag_log format ["Skipped backpack: %1", _className];
+			[format ["Skipped backpack: %1", _className]] call Ares_fnc_LogMessage;
 		};
 	}
 	else
 	{
-		// diag_log format["Blacklisted: %1", _className];
+		[format["Blacklisted: %1", _className]] call Ares_fnc_LogMessage;
 	};
 } forEach _allVehicleClasses;
 
@@ -156,17 +199,17 @@ _glasses = [];
 		
 		if (_scope >= 2 && _displayName != "" && _picture != "") then
 		{
-			// diag_log format ["Adding glasses: %1", _className];
+			[format ["Adding glasses: %1", _className]] call Ares_fnc_LogMessage;
 			_glasses pushBack _className;
 		}
 		else
 		{
-			// diag_log format ["Skipped glasses: %1", _className];
+			[format ["Skipped glasses: %1", _className]] call Ares_fnc_LogMessage;
 		};
 	}
 	else
 	{
-		// diag_log format["Blacklisted: %1", _className];
+		[format["Blacklisted: %1", _className]] call Ares_fnc_LogMessage;
 	};
 } forEach _allGlassesClasses;
 
@@ -184,17 +227,17 @@ _insignia = [];
 		
 		if (_scope >= 2 && _displayName != "" && _picture != "") then
 		{
-			// diag_log format ["Adding insignia: %1", _className];
+			[format ["Adding insignia: %1", _className]] call Ares_fnc_LogMessage;
 			_insignia pushBack _className;
 		}
 		else
 		{
-			// diag_log format ["Skipped insignia: %1", _className];
+			[format ["Skipped insignia: %1", _className]] call Ares_fnc_LogMessage;
 		};
 	}
 	else
 	{
-		// diag_log format["Blacklisted: %1", _className];
+		[format["Blacklisted: %1", _className]] call Ares_fnc_LogMessage;
 	};
 } forEach _allInsigniaClasses;
 
