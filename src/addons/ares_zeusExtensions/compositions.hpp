@@ -492,6 +492,141 @@ class AresCompositions
 				class Object21 {side=8;vehicle="Land_ScrapHeap_2_F";rank="";position[]={24.4016,4.91699,-0.00143862};dir=283.542;};
 			};
 		}
+		
+		class Minefields
+		{
+			name = "Minefields";
+			
+			class AresEmptyMinefield
+			{
+				name = "Empty Minefield (Marked)";
+				class Object0 {side=8;rank="";vehicle="Land_Sign_Mines_F";position[]={0.248596,12.8005,0};dir=179.461;};
+				class Object1 {side=8;rank="";vehicle="Land_Sign_Mines_F";position[]={-7.80341,12.5505,0};dir=179.461;};
+				class Object2 {side=8;rank="";vehicle="Land_Sign_Mines_F";position[]={8.19461,12.5305,0};dir=179.461;};
+				class Object3 {side=8;rank="";vehicle="Land_Sign_Mines_F";position[]={0.330872,-19.4211,0};dir=0;};
+				class Object4 {side=8;rank="";vehicle="Land_Sign_Mines_F";position[]={-15.6874,12.6106,0};dir=179.461;};
+				class Object5 {side=8;rank="";vehicle="Land_Sign_Mines_F";position[]={16.4226,12.5007,0};dir=179.461;};
+				class Object6 {side=8;rank="";vehicle="Land_Sign_Mines_F";position[]={-7.76013,-19.2412,0};dir=0;};
+				class Object7 {side=8;rank="";vehicle="Land_Sign_Mines_F";position[]={8.25287,-19.4512,0};dir=0;};
+				class Object8 {side=8;rank="";vehicle="Land_Sign_Mines_F";position[]={-15.7601,-19.561,0};dir=0;};
+				class Object9 {side=8;rank="";vehicle="Land_Sign_Mines_F";position[]={16.2109,-19.6311,0};dir=0;};
+				class Object10 {side=8;rank="";vehicle="Land_Sign_Mines_F";position[]={-23.9154,12.6406,0};dir=179.461;};
+				class Object11 {side=8;rank="";vehicle="Land_Sign_Mines_F";position[]={24.3065,12.4507,0};dir=179.461;};
+				class Object12 {side=8;rank="";vehicle="Land_Sign_Mines_F";position[]={-23.7271,-19.5112,0};dir=0;};
+				class Object13 {side=8;rank="";vehicle="Land_Sign_Mines_F";position[]={23.8619,-19.6411,0};dir=0;};
+				class Object14 {side=8;rank="";vehicle="Land_Sign_Mines_F";position[]={-31.9804,12.9607,0};dir=179.461;};
+				class Object15 {side=8;rank="";vehicle="Land_Sign_Mines_F";position[]={32.3586,12.6907,0};dir=179.461;};
+				class Object16 {side=8;rank="";vehicle="Land_Sign_Mines_F";position[]={-31.6851,-19.3411,0};dir=0;};
+				class Object17 {side=8;rank="";vehicle="Land_Sign_Mines_F";position[]={32.1779,-19.3611,0};dir=0;};
+			};
+			
+			class AresVehicleMinefield
+			{
+				name = "AT Minefield (Marked)";
+				class Object0 {side=8;rank="";vehicle="ModuleMine_ATMine_F";position[]={2.76547,-9.41162,0};dir=0;};
+				class Object1 {side=8;rank="";vehicle="ModuleMine_ATMine_F";position[]={-9.07309,-4.94385,0};dir=0;};
+				class Object2 {side=8;rank="";vehicle="ModuleMine_ATMine_F";position[]={9.97693,8.04932,0};dir=0;};
+				class Object3 {side=8;rank="";vehicle="ModuleMine_ATMine_F";position[]={-11.2313,7.14087,0};dir=0;};
+				class Object4 {side=8;rank="";vehicle="Land_Sign_Mines_F";position[]={0.194763,14.6118,0};dir=179.461;};
+				class Object5 {side=8;rank="";vehicle="ModuleMine_ATMine_F";position[]={15.5058,-4.34595,0};dir=0;};
+				class Object6 {side=8;rank="";vehicle="Land_Sign_Mines_F";position[]={-7.85724,14.3618,0};dir=179.461;};
+				class Object7 {side=8;rank="";vehicle="Land_Sign_Mines_F";position[]={8.14078,14.3418,0};dir=179.461;};
+				class Object8 {side=8;rank="";vehicle="Land_Sign_Mines_F";position[]={0.277039,-17.6099,0};dir=0;};
+				class Object9 {side=8;rank="";vehicle="Land_Sign_Mines_F";position[]={-7.81396,-17.4299,0};dir=0;};
+				class Object10 {side=8;rank="";vehicle="Land_Sign_Mines_F";position[]={8.19904,-17.6399,0};dir=0;};
+				class Object11 {side=8;rank="";vehicle="ModuleMine_ATMine_F";position[]={-19.8343,0.301514,0};dir=0;};
+				class Object12 {side=8;rank="";vehicle="Land_Sign_Mines_F";position[]={-15.7412,14.4219,0};dir=179.461;};
+				class Object13 {side=8;rank="";vehicle="Land_Sign_Mines_F";position[]={16.3687,14.312,0};dir=179.461;};
+				class Object14 {side=8;rank="";vehicle="Land_Sign_Mines_F";position[]={-15.814,-17.7498,0};dir=0;};
+				class Object15 {side=8;rank="";vehicle="Land_Sign_Mines_F";position[]={16.157,-17.8198,0};dir=0;};
+				class Object16 {side=8;rank="";vehicle="ModuleMine_ATMine_F";position[]={-25.5419,9.68628,0};dir=0;};
+				class Object17 {side=8;rank="";vehicle="Land_Sign_Mines_F";position[]={-23.9692,14.4519,0};dir=179.461;};
+				class Object18 {side=8;rank="";vehicle="Land_Sign_Mines_F";position[]={24.2527,14.262,0};dir=179.461;};
+				class Object19 {side=8;rank="";vehicle="ModuleMine_ATMine_F";position[]={26.8177,-9.84058,0};dir=0;};
+				class Object20 {side=8;rank="";vehicle="ModuleMine_ATMine_F";position[]={27.718,8.01318,0};dir=0;};
+				class Object21 {side=8;rank="";vehicle="Land_Sign_Mines_F";position[]={-23.7809,-17.7,0};dir=0;};
+				class Object22 {side=8;rank="";vehicle="Land_Sign_Mines_F";position[]={23.8081,-17.8298,0};dir=0;};
+				class Object23 {side=8;rank="";vehicle="ModuleMine_ATMine_F";position[]={-28.8665,-11.2297,0};dir=0;};
+				class Object24 {side=8;rank="";vehicle="Land_Sign_Mines_F";position[]={-32.0342,14.772,0};dir=179.461;};
+				class Object25 {side=8;rank="";vehicle="Land_Sign_Mines_F";position[]={32.3047,14.502,0};dir=179.461;};
+				class Object26 {side=8;rank="";vehicle="Land_Sign_Mines_F";position[]={-31.739,-17.5298,0};dir=0;};
+				class Object27 {side=8;rank="";vehicle="Land_Sign_Mines_F";position[]={32.1241,-17.5498,0};dir=0;};
+			};
+			
+			class AresPersonelMinefield
+			{
+				name = "AP Minefield (Marked)";
+				class Object0 {side=8;rank="";vehicle="ModuleMine_APERSMine_F";position[]={1.59109,3.38965,0};dir=0;};
+				class Object1 {side=8;rank="";vehicle="ModuleMine_APERSMine_F";position[]={-5.2525,-6.0127,0};dir=0;};
+				class Object2 {side=8;rank="";vehicle="ModuleMine_APERSBoundingMine_F";position[]={-9.98819,6.92114,0};dir=0;};
+				class Object3 {side=8;rank="";vehicle="ModuleMine_APERSMine_F";position[]={9.84344,8.74072,0};dir=0;};
+				class Object4 {side=8;rank="";vehicle="ModuleMine_APERSBoundingMine_F";position[]={10.1173,-8.79517,0};dir=0;};
+				class Object5 {side=8;rank="";vehicle="Land_Sign_Mines_F";position[]={0.475098,14.4041,0};dir=179.461;};
+				class Object6 {side=8;rank="";vehicle="Land_Sign_Mines_F";position[]={-7.5769,14.1541,0};dir=179.461;};
+				class Object7 {side=8;rank="";vehicle="Land_Sign_Mines_F";position[]={8.42111,14.134,0};dir=179.461;};
+				class Object8 {side=8;rank="";vehicle="Land_Sign_Mines_F";position[]={0.557373,-17.8176,0};dir=0;};
+				class Object9 {side=8;rank="";vehicle="ModuleMine_APERSBoundingMine_F";position[]={-18.4528,0.746094,0};dir=0;};
+				class Object10 {side=8;rank="";vehicle="ModuleMine_APERSMine_F";position[]={19.0385,0.960938,0};dir=0;};
+				class Object11 {side=8;rank="";vehicle="Land_Sign_Mines_F";position[]={-7.53363,-17.6377,0};dir=0;};
+				class Object12 {side=8;rank="";vehicle="Land_Sign_Mines_F";position[]={8.47937,-17.8477,0};dir=0;};
+				class Object13 {side=8;rank="";vehicle="Land_Sign_Mines_F";position[]={-15.4609,14.2141,0};dir=179.461;};
+				class Object14 {side=8;rank="";vehicle="Land_Sign_Mines_F";position[]={16.6491,14.1042,0};dir=179.461;};
+				class Object15 {side=8;rank="";vehicle="Land_Sign_Mines_F";position[]={-15.5336,-17.9575,0};dir=0;};
+				class Object16 {side=8;rank="";vehicle="ModuleMine_APERSMine_F";position[]={-22.5157,-8.63525,0};dir=0;};
+				class Object17 {side=8;rank="";vehicle="Land_Sign_Mines_F";position[]={16.4374,-18.0276,0};dir=0;};
+				class Object18 {side=8;rank="";vehicle="Land_Sign_Mines_F";position[]={-23.6889,14.2441,0};dir=179.461;};
+				class Object19 {side=8;rank="";vehicle="Land_Sign_Mines_F";position[]={24.5331,14.0542,0};dir=179.461;};
+				class Object20 {side=8;rank="";vehicle="ModuleMine_APERSMine_F";position[]={28.1869,8.7146,0};dir=0;};
+				class Object21 {side=8;rank="";vehicle="Land_Sign_Mines_F";position[]={-23.5006,-17.9077,0};dir=0;};
+				class Object22 {side=8;rank="";vehicle="Land_Sign_Mines_F";position[]={24.0884,-18.0376,0};dir=0;};
+				class Object23 {side=8;rank="";vehicle="ModuleMine_APERSBoundingMine_F";position[]={-30.8978,-1.12549,0};dir=0;};
+				class Object24 {side=8;rank="";vehicle="ModuleMine_APERSMine_F";position[]={-29.6405,9.59009,0};dir=0;};
+				class Object25 {side=8;rank="";vehicle="ModuleMine_APERSMine_F";position[]={30.6182,-9.63721,0};dir=0;};
+				class Object26 {side=8;rank="";vehicle="Land_Sign_Mines_F";position[]={-31.7539,14.5642,0};dir=179.461;};
+				class Object27 {side=8;rank="";vehicle="Land_Sign_Mines_F";position[]={32.5851,14.2942,0};dir=179.461;};
+				class Object28 {side=8;rank="";vehicle="Land_Sign_Mines_F";position[]={-31.4586,-17.7375,0};dir=0;};
+				class Object29 {side=8;rank="";vehicle="Land_Sign_Mines_F";position[]={32.4044,-17.7576,0};dir=0;};
+			};
+			
+			class AresMixedMinefield
+			{
+				name = "Mixed Minefield (Marked)";
+				class Object0 {side=8;rank="";vehicle="ModuleMine_APERSBoundingMine_F";position[]={-3.27209,-4.39819,0};dir=0;};
+				class Object1 {side=8;rank="";vehicle="ModuleMine_ATMine_F";position[]={-3.93057,7.24414,0};dir=0;};
+				class Object2 {side=8;rank="";vehicle="ModuleMine_ATMine_F";position[]={5.51419,7.26123,0};dir=0;};
+				class Object3 {side=8;rank="";vehicle="ModuleMine_APERSMine_F";position[]={5.44092,-9.45435,0};dir=0;};
+				class Object4 {side=8;rank="";vehicle="ModuleMine_APERSMine_F";position[]={-11.1991,2.81616,0};dir=0;};
+				class Object5 {side=8;rank="";vehicle="ModuleMine_APERSBoundingMine_F";position[]={-10.1147,-9.69214,0};dir=0;};
+				class Object6 {side=8;rank="";vehicle="Land_Sign_Mines_F";position[]={-0.171356,14.4336,0};dir=179.461;};
+				class Object7 {side=8;rank="";vehicle="ModuleMine_ATMine_F";position[]={13.3905,-5.6355,0};dir=0;};
+				class Object8 {side=8;rank="";vehicle="Land_Sign_Mines_F";position[]={7.77466,14.1636,0};dir=179.461;};
+				class Object9 {side=8;rank="";vehicle="ModuleMine_APERSMine_F";position[]={15.0542,5.86328,0};dir=0;};
+				class Object10 {side=8;rank="";vehicle="Land_Sign_Mines_F";position[]={-8.22336,14.1836,0};dir=179.461;};
+				class Object11 {side=8;rank="";vehicle="Land_Sign_Mines_F";position[]={-0.0890808,-17.7881,0};dir=0;};
+				class Object12 {side=8;rank="";vehicle="Land_Sign_Mines_F";position[]={-8.18008,-17.6082,0};dir=0;};
+				class Object13 {side=8;rank="";vehicle="Land_Sign_Mines_F";position[]={7.83292,-17.8181,0};dir=0;};
+				class Object14 {side=8;rank="";vehicle="ModuleMine_ATMine_F";position[]={-19.3529,-8.42725,0};dir=0;};
+				class Object15 {side=8;rank="";vehicle="Land_Sign_Mines_F";position[]={16.0026,14.1338,0};dir=179.461;};
+				class Object16 {side=8;rank="";vehicle="ModuleMine_APERSBoundingMine_F";position[]={-20.5924,5.83643,0};dir=0;};
+				class Object17 {side=8;rank="";vehicle="Land_Sign_Mines_F";position[]={-16.1074,14.2437,0};dir=179.461;};
+				class Object18 {side=8;rank="";vehicle="ModuleMine_APERSBoundingMine_F";position[]={23.3414,-0.52002,0};dir=0;};
+				class Object19 {side=8;rank="";vehicle="Land_Sign_Mines_F";position[]={15.7909,-17.998,0};dir=0;};
+				class Object20 {side=8;rank="";vehicle="Land_Sign_Mines_F";position[]={-16.1801,-17.928,0};dir=0;};
+				class Object21 {side=8;rank="";vehicle="ModuleMine_APERSMine_F";position[]={-25.6714,-1.12817,0};dir=0;};
+				class Object22 {side=8;rank="";vehicle="ModuleMine_ATMine_F";position[]={-25.9081,9.50806,0};dir=0;};
+				class Object23 {side=8;rank="";vehicle="Land_Sign_Mines_F";position[]={23.8866,14.0837,0};dir=179.461;};
+				class Object24 {side=8;rank="";vehicle="Land_Sign_Mines_F";position[]={-24.3354,14.2737,0};dir=179.461;};
+				class Object25 {side=8;rank="";vehicle="ModuleMine_ATMine_F";position[]={26.4516,-10.0188,0};dir=0;};
+				class Object26 {side=8;rank="";vehicle="ModuleMine_ATMine_F";position[]={27.3519,7.83496,0};dir=0;};
+				class Object27 {side=8;rank="";vehicle="Land_Sign_Mines_F";position[]={23.442,-18.0081,0};dir=0;};
+				class Object28 {side=8;rank="";vehicle="Land_Sign_Mines_F";position[]={-24.1471,-17.8782,0};dir=0;};
+				class Object29 {side=8;rank="";vehicle="ModuleMine_ATMine_F";position[]={-29.2326,-11.408,0};dir=0;};
+				class Object30 {side=8;rank="";vehicle="Land_Sign_Mines_F";position[]={31.9386,14.3237,0};dir=179.461;};
+				class Object31 {side=8;rank="";vehicle="Land_Sign_Mines_F";position[]={-32.4004,14.5938,0};dir=179.461;};
+				class Object32 {side=8;rank="";vehicle="Land_Sign_Mines_F";position[]={31.7579,-17.728,0};dir=0;};
+				class Object33 {side=8;rank="";vehicle="Land_Sign_Mines_F";position[]={-32.1051,-17.708,0};dir=0;};
+			};
+		};
 
 		class AresMisc
 		{
