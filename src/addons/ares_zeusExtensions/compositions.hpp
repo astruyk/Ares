@@ -5,14 +5,14 @@ class AresCompositions
 	class AresMilitaryStructures
 	{
 		name = "Military Structures";
-		class AresObservationPosts
+		
+		class Bunkers
 		{
-			name = "Observation Posts";
-
-			// Light OP with sandbags, small bunker, razor wire
+			name = "Bunkers";
+			
 			class AresLightOpAlpha
 			{
-				name = "Sm. OP Alpha";
+				name = "Small w/ wire";
 				class Object1 {side=8;vehicle="Land_BagBunker_Small_F";rank="";position[]={0.189453,1.06055,-0.00143886};dir=179.087;};
 				class Object2 {side=8;vehicle="Land_BagFence_Long_F";rank="";position[]={-1.26758,-3.54688,-0.00243902};dir=0;};
 				class Object3 {side=8;vehicle="Land_BagFence_Long_F";rank="";position[]={1.73242,-3.54102,-0.00243902};dir=0;};
@@ -26,145 +26,7 @@ class AresCompositions
 				class Object11 {side=8;vehicle="Land_Razorwire_F";rank="";position[]={-5.47852,11.2734,-0.00144124};dir=143.987;};
 				class Object12 {side=8;vehicle="Land_Razorwire_F";rank="";position[]={9.48438,9.10742,-0.00144124};dir=212.471;};
 			};
-
-			// Medium OP with H-barriers, observation tower, Cargo house & ammo crates
-			class AresMedOpAlpha
-			{
-				name = "Med. OP Alpha";
-				class Object1 {side=8;vehicle="Land_HBarrier_5_F";rank="";position[]={3.49805,-0.929688,-0.00143886};dir=269.333;};
-				class Object3 {side=8;vehicle="Land_Pallet_MilBoxes_F";rank="";position[]={-3.71484,-3.33789,-0.00143886};dir=0;};
-				class Object4 {side=8;vehicle="Land_Cargo_Patrol_V1_F";rank="";position[]={-2.90039,6.10742,-0.00143886};dir=177;};
-				class Object5 {side=8;vehicle="Land_BagFence_Long_F";rank="";position[]={5.69727,-1.32227,-0.00243902};dir=182.413;};
-				class Object6 {side=8;vehicle="Land_PaperBox_open_full_F";rank="";position[]={-5.94141,-1.58594,-0.00143886};dir=0;};
-				class Object7 {side=8;vehicle="Land_BagFence_Long_F";rank="";position[]={2.48242,-6.05078,-0.00243902};dir=181.819;};
-				class Object8 {side=8;vehicle="Land_HBarrier_Big_F";rank="";position[]={-3.17969,-5.92383,-0.00143886};dir=181;};
-				class Object9 {side=8;vehicle="CamoNet_BLUFOR_open_Curator_F";rank="";position[]={6.58008,-2.80078,-0.00143886};dir=0;};
-				class Object10 {side=8;vehicle="Land_PaperBox_open_empty_F";rank="";position[]={-5.87109,-3.57031,-0.00143886};dir=0;};
-				class Object11 {side=8;vehicle="Land_BagFence_End_F";rank="";position[]={4.87695,-6.125,-0.00243878};dir=0;};
-				class Object12 {side=8;vehicle="Land_HBarrier_5_F";rank="";position[]={3.43945,5.08594,-0.00143886};dir=269.333;};
-				class Object13 {side=8;vehicle="Land_BagFence_Long_F";rank="";position[]={8.63867,-1.46094,-0.00243902};dir=182.413;};
-				class Object14 {side=8;vehicle="Land_HBarrier_Big_F";rank="";position[]={-8.44336,-2.6582,-0.00143886};dir=87;};
-				class Object15 {side=8;vehicle="Land_Cargo_House_V1_F";rank="";position[]={8.57227,5.72461,-0.00143886};dir=0;};
-				class Object16 {side=8;vehicle="Land_HBarrier_Big_F";rank="";position[]={-8.71875,5.6875,-0.00143886};dir=89;};
-				class Object17 {side=8;vehicle="Land_BagFence_End_F";rank="";position[]={8.95117,-5.93555,-0.00243878};dir=179.891;};
-				class Object18 {side=8;vehicle="Land_HBarrierBig_F";rank="";position[]={2.93164,11.2031,-0.00143886};dir=179;};
-				class Object19 {side=8;vehicle="Land_HBarrier_Big_F";rank="";position[]={-5.53906,10.7793,-0.00143886};dir=0;};
-				class Object20 {side=8;vehicle="Land_BagFence_Long_F";rank="";position[]={11.3516,-5.90625,-0.00243902};dir=177.975;};
-				class Object21 {side=8;vehicle="Land_HBarrier_Big_F";rank="";position[]={13.8184,-2.02148,-0.00143886};dir=91.9795;};
-				class Object22 {side=8;vehicle="Land_HBarrier_Big_F";rank="";position[]={13.9297,6.42773,-0.00143886};dir=91.9795;};
-				class Object23 {side=8;vehicle="Land_HBarrier_Big_F";rank="";position[]={11.1426,11.2813,-0.00143886};dir=3.17937;};
-			};
-
-			// Medium OP with H-barriers, speaker tower, Cargo house & ammo crates
-			class AresMedOpBravo
-			{
-				name = "Med. OP Bravo";
-				class Object1 {side=8;vehicle="Land_HBarrier_5_F";rank="";position[]={5.32813,-2.0918,-0.00143886};dir=218.506;};
-				class Object2 {side=8;vehicle="Land_HBarrier_5_F";rank="";position[]={3.4707,4.98633,-0.00143886};dir=127.37;};
-				class Object3 {side=8;vehicle="Land_Pallet_MilBoxes_F";rank="";position[]={-3.60938,1.22266,-0.00143886};dir=37.6699;};
-				class Object4 {side=8;vehicle="Land_BagFence_Long_F";rank="";position[]={-0.361328,-4.71094,-0.00387788};dir=218.67;};
-				class Object5 {side=8;vehicle="Land_BagFence_End_F";rank="";position[]={-1.47656,4.08203,-0.00243878};dir=32.6901;};
-				class Object6 {side=8;vehicle="Land_HBarrier_Big_F";rank="";position[]={-4.76758,-1.15039,-0.00143886};dir=218.67;};
-				class Object7 {side=8;vehicle="Land_PaperBox_open_full_F";rank="";position[]={-4.30078,3.9707,-0.00143886};dir=37.6699;};
-				class Object8 {side=8;vehicle="Land_PaperBox_open_empty_F";rank="";position[]={-5.45898,2.35547,-0.00143886};dir=37.6699;};
-				class Object9 {side=8;vehicle="Land_BagFence_End_F";rank="";position[]={1.48633,-6.23438,-0.00243878};dir=37.6699;};
-				class Object10 {side=8;vehicle="Land_BagFence_Long_F";rank="";position[]={-3.58789,5.38477,-0.00243902};dir=213.69;};
-				class Object11 {side=8;vehicle="CamoNet_BLUFOR_open_Curator_F";rank="";position[]={4.86719,-4.64258,-0.00143886};dir=37.6699;};
-				class Object12 {side=8;vehicle="Land_HBarrier_Big_F";rank="";position[]={-6.93555,4.65039,-0.00143886};dir=124.67;};
-				class Object13 {side=8;vehicle="Land_BagFence_Long_F";rank="";position[]={1.24414,8.61328,-0.00243902};dir=32.0698;};
-				class Object14 {side=8;vehicle="Land_HBarrier_5_F";rank="";position[]={4.24414,5.86133,-0.00143886};dir=306.67;};
-				class Object15 {side=8;vehicle="Land_BagFence_End_F";rank="";position[]={4.83008,-8.57422,-0.00243878};dir=216.67;};
-				class Object16 {side=8;vehicle="Land_Cargo_House_V1_F";rank="";position[]={11.6543,0.888672,-0.00143886};dir=37.6699;};
-				class Object17 {side=8;vehicle="Land_HBarrier_Big_F";rank="";position[]={-2.05469,11.4258,-0.00143886};dir=126.67;};
-				class Object18 {side=8;vehicle="Land_Loudspeakers_F";rank="";position[]={8.58594,7.80859,-0.00143886};dir=307.287;};
-				class Object19 {side=8;vehicle="Land_BagFence_Long_F";rank="";position[]={6.74805,-10.0176,-0.00243902};dir=214.67;};
-				class Object20 {side=8;vehicle="Land_BagFence_Long_F";rank="";position[]={5.70117,10.9727,-0.00243902};dir=35.3246;};
-				class Object21 {side=8;vehicle="Land_HBarrierBig_F";rank="";position[]={10.5488,8.8125,-0.00143886};dir=216.67;};
-				class Object22 {side=8;vehicle="Land_BagFence_Long_F";rank="";position[]={1.49805,13.7988,-0.00243902};dir=32.2847;};
-				class Object23 {side=8;vehicle="Land_HBarrier_Big_F";rank="";position[]={11.0723,-8.45117,-0.00143886};dir=128.67;};
-				class Object24 {side=8;vehicle="Land_HBarrier_Big_F";rank="";position[]={16.3242,-1.83203,-0.00143886};dir=128.67;};
-				class Object25 {side=8;vehicle="Land_HBarrier_Big_F";rank="";position[]={17.084,3.71484,-0.00143886};dir=40.6699;};
-			};
 			
-			// House converted into field HQ
-			class AresImprovisedFieldCommand
-			{
-				name="Improvised Field Command";
-				class Object0 {side=8; vehicle="Land_MetalBarrel_empty_F";rank="";position[]={-1.6,-0.39,0};dir=180;};
-				class Object1 {side=8; vehicle="Land_MetalBarrel_F";rank="";position[]={-1.61,-1.1,0.000041008};dir=179.021;};
-				class Object2 {side=8; vehicle="Land_BagFence_End_F";rank="";position[]={-1.95,0.45,0};dir=85.277;};
-				class Object3 {side=8; vehicle="Land_BagFence_Long_F";rank="";position[]={-1.94,2.31,0};dir=95.257;};
-				class Object4 {side=8; vehicle="Land_BagFence_Short_F";rank="";position[]={-2.13,2.39,0.907253};dir=87.351;};
-				class Object5 {side=8; vehicle="Land_ChairWood_F";rank="";position[]={-1.8,-2.69,0.0000095367};dir=303.024;};
-				class Object6 {side=8; vehicle="Land_WoodenTable_small_F";rank="";position[]={3.82,0.2,-0.0000033379};dir=179.994;};
-				class Object7 {side=8; vehicle="CamoNet_OPFOR_open_Curator_F";rank="";position[]={2.76,2.85,0};dir=90.078;};
-				class Object8 {side=8; vehicle="Land_Pallet_MilBoxes_F";rank="";position[]={3.79,-1.31,0};dir=180;};
-				class Object9 {side=8; vehicle="Land_i_Stone_Shed_V1_F";rank="";position[]={-3.36,2.45,0};dir=271.4365;};
-				class Object10 {side=8; vehicle="Land_WaterBarrel_F";rank="";position[]={-3.18,-2.75,0.0000066757};dir=181.61607;};
-				class Object11 {side=8; vehicle="Land_HBarrier_1_F";rank="";position[]={3.82,1.9,0};dir=180;};
-				class Object12 {side=8; vehicle="Land_BagFence_Long_F";rank="";position[]={4.78,-0.24,0};dir=89.829;};
-				class Object13 {side=8; vehicle="Land_HBarrier_1_F";rank="";position[]={3.8,3.38,0};dir=180;};
-				class Object14 {side=8; vehicle="Land_BagFence_Round_F";rank="";position[]={4.3,-2.78,0};dir=300.088;};
-				class Object15 {side=8; vehicle="Land_PaperBox_closed_F";rank="";position[]={1.19,5.22,0};dir=180;};
-				class Object16 {side=8; vehicle="MapBoard_altis_F";rank="";position[]={-3.8,-3.83,-0.00219202};dir=315.219;};
-				class Object17 {side=8; vehicle="Land_BagFence_Long_F";rank="";position[]={4.73,2.71,0};dir=89.829;};
-				class Object18 {side=8; vehicle="Land_WoodenTable_large_F";rank="";position[]={-1.02,-5.39,0.000002861};dir=90.428;};
-				class Object19 {side=8; vehicle="Land_BagFence_Long_F";rank="";position[]={0.09,6.25,0};dir=180;};
-				class Object20 {side=8; vehicle="Land_BagFence_Corner_F";rank="";position[]={-2.03,6.07,0};dir=2.143;};
-				class Object21 {side=8; vehicle="CamoNet_OPFOR_Curator_F";rank="";position[]={-2.31,-6.08,0};dir=181.07304;};
-				class Object22 {side=8; vehicle="Land_BagFence_Short_F";rank="";position[]={2.4,6.2,0};dir=180;};
-				class Object23 {side=8; vehicle="Land_BagFence_Round_F";rank="";position[]={4.3,5.38,0};dir=235.5015;};
-				class Object24 {side=8; vehicle="Land_BagFence_Long_F";rank="";position[]={-6.11,-3.4,0};dir=89.154;};
-				class Object25 {side=8; vehicle="Land_BagFence_Corner_F";rank="";position[]={2.25,-7.33,0};dir=89.953;};
-				class Object26 {side=8; vehicle="Land_Mound01_8m_F";rank="";position[]={-2.14,-7.93,0};dir=180;};
-				class Object27 {side=8; vehicle="Land_BagFence_Long_F";rank="";position[]={-6.07,-6.31,0};dir=89.154;};
-				class Object28 {side=8; vehicle="Land_Razorwire_F";rank="";position[]={-5.47,7.12,0};dir=358.04;};
-				class Object29 {side=8; vehicle="Land_Razorwire_F";rank="";position[]={-8.89,2.26,0};dir=270.0637;};
-			}
-			
-			class AresSmallFieldCommand
-			{
-				name = "Sm. Field Command";
-				class Object1 {side=8;vehicle="Land_Cargo_HQ_V1_F";rank="";position[]={-4.21899,-6.00586,-0.00143862};dir=89.112;};
-				class Object2 {side=8;vehicle="Land_HBarrier_5_F";rank="";position[]={0.268311,7.86768,-0.00143862};dir=0;};
-				class Object3 {side=8;vehicle="Land_HBarrier_5_F";rank="";position[]={2.41235,-8.35107,-0.00143862};dir=0.48668;};
-				class Object4 {side=8;vehicle="Land_HBarrier_5_F";rank="";position[]={5.53516,7.84814,-0.00143862};dir=0;};
-				class Object5 {side=8;vehicle="CamoNet_INDP_open_Curator_F";rank="";position[]={-8.18286,8.55127,-0.00143862};dir=178.49;};
-				class Object6 {side=8;vehicle="CamoNet_INDP_open_Curator_F";rank="";position[]={12.3687,0.978027,-0.00143862};dir=271.571;};
-				class Object7 {side=8;vehicle="Land_HBarrierBig_F";rank="";position[]={-2.7019,13.2935,-0.00143862};dir=0.851427;};
-				class Object8 {side=8;vehicle="Land_HBarrierBig_F";rank="";position[]={-15.3643,3.65381,-0.00143862};dir=270.269;};
-				class Object9 {side=8;vehicle="Land_HBarrierBig_F";rank="";position[]={-15.3281,-4.97803,-0.00143862};dir=271.207;};
-				class Object10 {side=8;vehicle="Land_HBarrierBig_F";rank="";position[]={-11.1125,13.1929,-0.00143862};dir=0.851427;};
-				class Object11 {side=8;vehicle="Land_HBarrierBig_F";rank="";position[]={17.3374,-1.65283,-0.00143862};dir=271.209;};
-				class Object12 {side=8;vehicle="Land_HBarrierBig_F";rank="";position[]={-3.17773,-17.9146,-0.00143862};dir=180.796;};
-				class Object13 {side=8;vehicle="Land_HBarrierBig_F";rank="";position[]={17.2676,6.8457,-0.00143862};dir=271.209;};
-				class Object14 {side=8;vehicle="Land_BagBunker_Small_F";rank="";position[]={-16.2139,10.1162,-0.00143862};dir=88.7408;};
-				class Object15 {side=8;vehicle="Land_HBarrierBig_F";rank="";position[]={8.75293,17.1211,-0.00143862};dir=270.888;};
-				class Object16 {side=8;vehicle="Land_HBarrier_5_F";rank="";position[]={8.59668,-19.6699,-0.00143862};dir=270.531;};
-				class Object17 {side=8;vehicle="Land_HBarrierBig_F";rank="";position[]={17.3542,-10.0342,-0.00143862};dir=271.209;};
-				class Object18 {side=8;vehicle="Land_HBarrierBig_F";rank="";position[]={-15.21,-13.0947,-0.00143862};dir=270.269;};
-				class Object19 {side=8;vehicle="Land_Cargo_House_V1_F";rank="";position[]={12.6204,-16.9165,-0.00143862};dir=180.445;};
-				class Object20 {side=8;vehicle="Land_Cargo_Patrol_V1_F";rank="";position[]={12.7532,17.4746,-0.00143862};dir=180.641;};
-				class Object21 {side=8;vehicle="Land_HBarrierBig_F";rank="";position[]={2.2627,-21.2095,-0.00143862};dir=270.094;};
-				class Object22 {side=8;vehicle="Land_Tank_rust_F";rank="";position[]={-2.72827,-21.2856,-0.00143862};dir=0;};
-				class Object23 {side=8;vehicle="Land_HBarrierBig_F";rank="";position[]={-11.7,-18.1187,-0.00143862};dir=179.946;};
-				class Object24 {side=8;vehicle="Land_CratesShabby_F";rank="";position[]={-9.00488,-19.9883,-0.00143862};dir=0;};
-				class Object25 {side=8;vehicle="Land_HBarrierBig_F";rank="";position[]={17.282,15.2681,-0.00143862};dir=271.209;};
-				class Object26 {side=8;vehicle="Land_Sack_F";rank="";position[]={-11.1787,-20.355,-0.00143862};dir=0;};
-				class Object27 {side=8;vehicle="Land_CratesWooden_F";rank="";position[]={-12.8433,-20.3091,-0.00143862};dir=0;};
-				class Object28 {side=8;vehicle="Land_StallWater_F";rank="";position[]={-0.85083,-24.2417,-0.00143862};dir=0;};
-				class Object29 {side=8;vehicle="Land_cargo_addon02_V1_F";rank="";position[]={-11.3164,-21.4619,-0.00143862};dir=0;};
-				class Object30 {side=8;vehicle="Land_HBarrierBig_F";rank="";position[]={11.8506,-21.5117,-0.00143862};dir=181.513;};
-				class Object31 {side=8;vehicle="Land_HBarrierBig_F";rank="";position[]={13.8552,20.439,-0.00143862};dir=0.585755;};
-				class Object32 {side=8;vehicle="Land_HBarrierBig_F";rank="";position[]={17.3362,-18.3843,-0.00143862};dir=271.209;};
-				class Object33 {side=8;vehicle="Land_HBarrier_5_F";rank="";position[]={-3.86084,-26.2207,-0.00143862};dir=0;};
-				class Object34 {side=8;vehicle="Land_HBarrier_5_F";rank="";position[]={1.78516,-26.2207,-0.00143862};dir=0;};
-				class Object35 {side=8;vehicle="Land_HBarrier_5_F";rank="";position[]={-15.0525,-24.25,-0.00143862};dir=269.452;};
-				class Object36 {side=8;vehicle="Land_HBarrier_3_F";rank="";position[]={-7.0083,-26.2998,-0.00143862};dir=0;};
-				class Object37 {side=8;vehicle="Land_HBarrier_5_F";rank="";position[]={7.43237,-26.2251,-0.00143862};dir=0;};
-				class Object38 {side=8;vehicle="Land_HBarrier_1_F";rank="";position[]={-15.0168,-25.5342,-0.00143862};dir=0;};
-			};
-
 			class AresArtilleryPosition
 			{
 				name = "Artillery Position";
@@ -203,6 +65,112 @@ class AresCompositions
 				class Object33 {side=8;vehicle="Land_BagFence_Round_F";rank="";position[]={-8.7146,-13.9653,-0.00273943};dir=13.8526;};
 				class Object34 {side=8;vehicle="Land_BagBunker_Small_F";rank="";position[]={-15.7334,-2.61621,-0.00143862};dir=90.5012;};
 				class Object35 {side=8;vehicle="Land_BagFence_Round_F";rank="";position[]={9.95508,-13.8843,-0.00273943};dir=335.792;};
+			};
+		};
+		
+		class AresObservationPosts
+		{
+			name = "Bases";
+
+			class AresMedOpAlpha
+			{
+				name = "Small - OP Tower";
+				class Object1 {side=8;vehicle="Land_HBarrier_5_F";rank="";position[]={3.49805,-0.929688,-0.00143886};dir=269.333;};
+				class Object3 {side=8;vehicle="Land_Pallet_MilBoxes_F";rank="";position[]={-3.71484,-3.33789,-0.00143886};dir=0;};
+				class Object4 {side=8;vehicle="Land_Cargo_Patrol_V1_F";rank="";position[]={-2.90039,6.10742,-0.00143886};dir=177;};
+				class Object5 {side=8;vehicle="Land_BagFence_Long_F";rank="";position[]={5.69727,-1.32227,-0.00243902};dir=182.413;};
+				class Object6 {side=8;vehicle="Land_PaperBox_open_full_F";rank="";position[]={-5.94141,-1.58594,-0.00143886};dir=0;};
+				class Object7 {side=8;vehicle="Land_BagFence_Long_F";rank="";position[]={2.48242,-6.05078,-0.00243902};dir=181.819;};
+				class Object8 {side=8;vehicle="Land_HBarrier_Big_F";rank="";position[]={-3.17969,-5.92383,-0.00143886};dir=181;};
+				class Object9 {side=8;vehicle="CamoNet_BLUFOR_open_Curator_F";rank="";position[]={6.58008,-2.80078,-0.00143886};dir=0;};
+				class Object10 {side=8;vehicle="Land_PaperBox_open_empty_F";rank="";position[]={-5.87109,-3.57031,-0.00143886};dir=0;};
+				class Object11 {side=8;vehicle="Land_BagFence_End_F";rank="";position[]={4.87695,-6.125,-0.00243878};dir=0;};
+				class Object12 {side=8;vehicle="Land_HBarrier_5_F";rank="";position[]={3.43945,5.08594,-0.00143886};dir=269.333;};
+				class Object13 {side=8;vehicle="Land_BagFence_Long_F";rank="";position[]={8.63867,-1.46094,-0.00243902};dir=182.413;};
+				class Object14 {side=8;vehicle="Land_HBarrier_Big_F";rank="";position[]={-8.44336,-2.6582,-0.00143886};dir=87;};
+				class Object15 {side=8;vehicle="Land_Cargo_House_V1_F";rank="";position[]={8.57227,5.72461,-0.00143886};dir=0;};
+				class Object16 {side=8;vehicle="Land_HBarrier_Big_F";rank="";position[]={-8.71875,5.6875,-0.00143886};dir=89;};
+				class Object17 {side=8;vehicle="Land_BagFence_End_F";rank="";position[]={8.95117,-5.93555,-0.00243878};dir=179.891;};
+				class Object18 {side=8;vehicle="Land_HBarrierBig_F";rank="";position[]={2.93164,11.2031,-0.00143886};dir=179;};
+				class Object19 {side=8;vehicle="Land_HBarrier_Big_F";rank="";position[]={-5.53906,10.7793,-0.00143886};dir=0;};
+				class Object20 {side=8;vehicle="Land_BagFence_Long_F";rank="";position[]={11.3516,-5.90625,-0.00243902};dir=177.975;};
+				class Object21 {side=8;vehicle="Land_HBarrier_Big_F";rank="";position[]={13.8184,-2.02148,-0.00143886};dir=91.9795;};
+				class Object22 {side=8;vehicle="Land_HBarrier_Big_F";rank="";position[]={13.9297,6.42773,-0.00143886};dir=91.9795;};
+				class Object23 {side=8;vehicle="Land_HBarrier_Big_F";rank="";position[]={11.1426,11.2813,-0.00143886};dir=3.17937;};
+			};
+
+			// Medium OP with H-barriers, speaker tower, Cargo house & ammo crates
+			class AresMedOpBravo
+			{
+				name = "Small - Megaphone";
+				class Object1 {side=8;vehicle="Land_HBarrier_5_F";rank="";position[]={5.32813,-2.0918,-0.00143886};dir=218.506;};
+				class Object2 {side=8;vehicle="Land_HBarrier_5_F";rank="";position[]={3.4707,4.98633,-0.00143886};dir=127.37;};
+				class Object3 {side=8;vehicle="Land_Pallet_MilBoxes_F";rank="";position[]={-3.60938,1.22266,-0.00143886};dir=37.6699;};
+				class Object4 {side=8;vehicle="Land_BagFence_Long_F";rank="";position[]={-0.361328,-4.71094,-0.00387788};dir=218.67;};
+				class Object5 {side=8;vehicle="Land_BagFence_End_F";rank="";position[]={-1.47656,4.08203,-0.00243878};dir=32.6901;};
+				class Object6 {side=8;vehicle="Land_HBarrier_Big_F";rank="";position[]={-4.76758,-1.15039,-0.00143886};dir=218.67;};
+				class Object7 {side=8;vehicle="Land_PaperBox_open_full_F";rank="";position[]={-4.30078,3.9707,-0.00143886};dir=37.6699;};
+				class Object8 {side=8;vehicle="Land_PaperBox_open_empty_F";rank="";position[]={-5.45898,2.35547,-0.00143886};dir=37.6699;};
+				class Object9 {side=8;vehicle="Land_BagFence_End_F";rank="";position[]={1.48633,-6.23438,-0.00243878};dir=37.6699;};
+				class Object10 {side=8;vehicle="Land_BagFence_Long_F";rank="";position[]={-3.58789,5.38477,-0.00243902};dir=213.69;};
+				class Object11 {side=8;vehicle="CamoNet_BLUFOR_open_Curator_F";rank="";position[]={4.86719,-4.64258,-0.00143886};dir=37.6699;};
+				class Object12 {side=8;vehicle="Land_HBarrier_Big_F";rank="";position[]={-6.93555,4.65039,-0.00143886};dir=124.67;};
+				class Object13 {side=8;vehicle="Land_BagFence_Long_F";rank="";position[]={1.24414,8.61328,-0.00243902};dir=32.0698;};
+				class Object14 {side=8;vehicle="Land_HBarrier_5_F";rank="";position[]={4.24414,5.86133,-0.00143886};dir=306.67;};
+				class Object15 {side=8;vehicle="Land_BagFence_End_F";rank="";position[]={4.83008,-8.57422,-0.00243878};dir=216.67;};
+				class Object16 {side=8;vehicle="Land_Cargo_House_V1_F";rank="";position[]={11.6543,0.888672,-0.00143886};dir=37.6699;};
+				class Object17 {side=8;vehicle="Land_HBarrier_Big_F";rank="";position[]={-2.05469,11.4258,-0.00143886};dir=126.67;};
+				class Object18 {side=8;vehicle="Land_Loudspeakers_F";rank="";position[]={8.58594,7.80859,-0.00143886};dir=307.287;};
+				class Object19 {side=8;vehicle="Land_BagFence_Long_F";rank="";position[]={6.74805,-10.0176,-0.00243902};dir=214.67;};
+				class Object20 {side=8;vehicle="Land_BagFence_Long_F";rank="";position[]={5.70117,10.9727,-0.00243902};dir=35.3246;};
+				class Object21 {side=8;vehicle="Land_HBarrierBig_F";rank="";position[]={10.5488,8.8125,-0.00143886};dir=216.67;};
+				class Object22 {side=8;vehicle="Land_BagFence_Long_F";rank="";position[]={1.49805,13.7988,-0.00243902};dir=32.2847;};
+				class Object23 {side=8;vehicle="Land_HBarrier_Big_F";rank="";position[]={11.0723,-8.45117,-0.00143886};dir=128.67;};
+				class Object24 {side=8;vehicle="Land_HBarrier_Big_F";rank="";position[]={16.3242,-1.83203,-0.00143886};dir=128.67;};
+				class Object25 {side=8;vehicle="Land_HBarrier_Big_F";rank="";position[]={17.084,3.71484,-0.00143886};dir=40.6699;};
+			};
+			
+			class AresSmallFieldCommand
+			{
+				name = "Medium - OP Tower";
+				class Object1 {side=8;vehicle="Land_Cargo_HQ_V1_F";rank="";position[]={-4.21899,-6.00586,-0.00143862};dir=89.112;};
+				class Object2 {side=8;vehicle="Land_HBarrier_5_F";rank="";position[]={0.268311,7.86768,-0.00143862};dir=0;};
+				class Object3 {side=8;vehicle="Land_HBarrier_5_F";rank="";position[]={2.41235,-8.35107,-0.00143862};dir=0.48668;};
+				class Object4 {side=8;vehicle="Land_HBarrier_5_F";rank="";position[]={5.53516,7.84814,-0.00143862};dir=0;};
+				class Object5 {side=8;vehicle="CamoNet_INDP_open_Curator_F";rank="";position[]={-8.18286,8.55127,-0.00143862};dir=178.49;};
+				class Object6 {side=8;vehicle="CamoNet_INDP_open_Curator_F";rank="";position[]={12.3687,0.978027,-0.00143862};dir=271.571;};
+				class Object7 {side=8;vehicle="Land_HBarrierBig_F";rank="";position[]={-2.7019,13.2935,-0.00143862};dir=0.851427;};
+				class Object8 {side=8;vehicle="Land_HBarrierBig_F";rank="";position[]={-15.3643,3.65381,-0.00143862};dir=270.269;};
+				class Object9 {side=8;vehicle="Land_HBarrierBig_F";rank="";position[]={-15.3281,-4.97803,-0.00143862};dir=271.207;};
+				class Object10 {side=8;vehicle="Land_HBarrierBig_F";rank="";position[]={-11.1125,13.1929,-0.00143862};dir=0.851427;};
+				class Object11 {side=8;vehicle="Land_HBarrierBig_F";rank="";position[]={17.3374,-1.65283,-0.00143862};dir=271.209;};
+				class Object12 {side=8;vehicle="Land_HBarrierBig_F";rank="";position[]={-3.17773,-17.9146,-0.00143862};dir=180.796;};
+				class Object13 {side=8;vehicle="Land_HBarrierBig_F";rank="";position[]={17.2676,6.8457,-0.00143862};dir=271.209;};
+				class Object14 {side=8;vehicle="Land_BagBunker_Small_F";rank="";position[]={-16.2139,10.1162,-0.00143862};dir=88.7408;};
+				class Object15 {side=8;vehicle="Land_HBarrierBig_F";rank="";position[]={8.75293,17.1211,-0.00143862};dir=270.888;};
+				class Object16 {side=8;vehicle="Land_HBarrier_5_F";rank="";position[]={8.59668,-19.6699,-0.00143862};dir=270.531;};
+				class Object17 {side=8;vehicle="Land_HBarrierBig_F";rank="";position[]={17.3542,-10.0342,-0.00143862};dir=271.209;};
+				class Object18 {side=8;vehicle="Land_HBarrierBig_F";rank="";position[]={-15.21,-13.0947,-0.00143862};dir=270.269;};
+				class Object19 {side=8;vehicle="Land_Cargo_House_V1_F";rank="";position[]={12.6204,-16.9165,-0.00143862};dir=180.445;};
+				class Object20 {side=8;vehicle="Land_Cargo_Patrol_V1_F";rank="";position[]={12.7532,17.4746,-0.00143862};dir=180.641;};
+				class Object21 {side=8;vehicle="Land_HBarrierBig_F";rank="";position[]={2.2627,-21.2095,-0.00143862};dir=270.094;};
+				class Object22 {side=8;vehicle="Land_Tank_rust_F";rank="";position[]={-2.72827,-21.2856,-0.00143862};dir=0;};
+				class Object23 {side=8;vehicle="Land_HBarrierBig_F";rank="";position[]={-11.7,-18.1187,-0.00143862};dir=179.946;};
+				class Object24 {side=8;vehicle="Land_CratesShabby_F";rank="";position[]={-9.00488,-19.9883,-0.00143862};dir=0;};
+				class Object25 {side=8;vehicle="Land_HBarrierBig_F";rank="";position[]={17.282,15.2681,-0.00143862};dir=271.209;};
+				class Object26 {side=8;vehicle="Land_Sack_F";rank="";position[]={-11.1787,-20.355,-0.00143862};dir=0;};
+				class Object27 {side=8;vehicle="Land_CratesWooden_F";rank="";position[]={-12.8433,-20.3091,-0.00143862};dir=0;};
+				class Object28 {side=8;vehicle="Land_StallWater_F";rank="";position[]={-0.85083,-24.2417,-0.00143862};dir=0;};
+				class Object29 {side=8;vehicle="Land_cargo_addon02_V1_F";rank="";position[]={-11.3164,-21.4619,-0.00143862};dir=0;};
+				class Object30 {side=8;vehicle="Land_HBarrierBig_F";rank="";position[]={11.8506,-21.5117,-0.00143862};dir=181.513;};
+				class Object31 {side=8;vehicle="Land_HBarrierBig_F";rank="";position[]={13.8552,20.439,-0.00143862};dir=0.585755;};
+				class Object32 {side=8;vehicle="Land_HBarrierBig_F";rank="";position[]={17.3362,-18.3843,-0.00143862};dir=271.209;};
+				class Object33 {side=8;vehicle="Land_HBarrier_5_F";rank="";position[]={-3.86084,-26.2207,-0.00143862};dir=0;};
+				class Object34 {side=8;vehicle="Land_HBarrier_5_F";rank="";position[]={1.78516,-26.2207,-0.00143862};dir=0;};
+				class Object35 {side=8;vehicle="Land_HBarrier_5_F";rank="";position[]={-15.0525,-24.25,-0.00143862};dir=269.452;};
+				class Object36 {side=8;vehicle="Land_HBarrier_3_F";rank="";position[]={-7.0083,-26.2998,-0.00143862};dir=0;};
+				class Object37 {side=8;vehicle="Land_HBarrier_5_F";rank="";position[]={7.43237,-26.2251,-0.00143862};dir=0;};
+				class Object38 {side=8;vehicle="Land_HBarrier_1_F";rank="";position[]={-15.0168,-25.5342,-0.00143862};dir=0;};
 			};
 		};
 
@@ -304,8 +272,6 @@ class AresCompositions
 				class Object92 {side=8;vehicle="Land_BarrelSand_grey_F";rank="";position[]={21.1445,-32.4707,-0.00137353};dir=88.4804;};
 			};
 			
-			
-			
 			class Medium_Checkpoint
 			{
 				name="Medium Checkpoint";
@@ -388,111 +354,6 @@ class AresCompositions
 			};
 		};
 
-		class AresRoadblocks
-		{
-			name = "Urban Roadblocks";
-
-			class AresRoadblockJunkVerySmall
-			{
-				name = "Sm. Junk Pile";
-				class Object1 {side=8;vehicle="Land_IronPipes_F";rank="";position[]={0.361084,1.26563,-0.00143862};dir=0;};
-				class Object2 {side=8;vehicle="Land_Cages_F";rank="";position[]={-3.0564,1.57959,0.0143638};dir=267.511;};
-				class Object3 {side=8;vehicle="Land_Tyres_F";rank="";position[]={-3.33789,1.59619,0.0051589};dir=0;};
-				class Object4 {side=8;vehicle="Land_Sacks_heap_F";rank="";position[]={3.82861,1.61719,-0.00143862};dir=0;};
-				class Object5 {side=8;vehicle="Land_Pallets_stack_F";rank="";position[]={3.81396,1.73438,-0.00143862};dir=92.0786;};
-				class Object6 {side=8;vehicle="Land_CratesPlastic_F";rank="";position[]={5.03931,1.44678,-0.00143862};dir=0;};
-				class Object7 {side=8;vehicle="Land_Bricks_V4_F";rank="";position[]={5.15869,1.55225,-0.00143862};dir=0.00103247;};
-			};
-
-			class RoadblockMilSmall
-			{
-				name = "Sm. Re-enforced Fence";
-				class Object1 {side=8;vehicle="Land_BagFence_Long_F";rank="";position[]={0.243652,1.05127,-0.00243855};dir=179.528;};
-				class Object2 {side=8;vehicle="Land_Mil_WiredFence_F";rank="";position[]={0.253906,1.63867,-0.00144815};dir=179.97;};
-				class Object3 {side=8;vehicle="Land_BagFence_Long_F";rank="";position[]={-2.24487,0.74707,-0.00243855};dir=0;};
-				class Object4 {side=8;vehicle="Land_CncBarrier_F";rank="";position[]={-2.31445,0.737305,0.780849};dir=0;};
-				class Object5 {side=8;vehicle="Land_CncBarrier_F";rank="";position[]={2.65015,0.799805,0.782759};dir=0;};
-				class Object6 {side=8;vehicle="Land_BagFence_Long_F";rank="";position[]={2.76172,0.794434,-0.00243855};dir=0;};
-			};
-
-			class AresRoadblockCivilianWrecks
-			{
-				name = "Sm. Civ Vehicles";
-				class Object1 {side=8;vehicle="Land_Sacks_heap_F";rank="";position[]={0.873047,1.98242,-0.00143886};dir=0;};
-				class Object2 {side=8;vehicle="Land_Wreck_Car_F";rank="";position[]={-0.101563,1.93945,-0.00143886};dir=90.2452;};
-				class Object3 {side=8;vehicle="Land_Sacks_heap_F";rank="";position[]={0.923828,2.14453,1.44768};dir=0;};
-				class Object4 {side=8;vehicle="Land_BagFence_Long_F";rank="";position[]={3.40039,0.875,-0.00243902};dir=182.848;};
-				class Object5 {side=8;vehicle="Land_BagFence_Short_F";rank="";position[]={-2.53711,2.99414,-0.00243902};dir=195.925;};
-				class Object6 {side=8;vehicle="Land_Razorwire_F";rank="";position[]={1.31445,3.44922,1.00124};dir=195.217;};
-				class Object7 {side=8;vehicle="Land_Wreck_Truck_dropside_F";rank="";position[]={-1.7207,3.96484,-0.00143886};dir=286.44;};
-				class Object8 {side=8;vehicle="Land_BagFence_Short_F";rank="";position[]={-4.16992,3.45898,-0.00243902};dir=195.925;};
-				class Object9 {side=8;vehicle="Land_Wreck_Ural_F";rank="";position[]={5.48633,1.66406,7.12872e-005};dir=273.27;};
-				class Object10 {side=8;vehicle="Land_Razorwire_F";rank="";position[]={6.49609,2.85938,-0.00144124};dir=195.217;};
-				class Object11 {side=8;vehicle="Land_BagFence_Short_F";rank="";position[]={-5.3457,2.77539,-0.00243902};dir=138.052;};
-				class Object12 {side=8;vehicle="Land_BagFence_Long_F";rank="";position[]={6.18359,0.472656,-0.00243902};dir=182.848;};
-			};
-
-			class AresRoadblockCivilianWrecks2
-			{
-				name = "Sm. Civ Vehicles 2";
-				class Object1 {side=8;vehicle="Land_Wreck_Truck_dropside_F";rank="";position[]={-0.291016,3.2417,-0.00143862};dir=201.1;};
-				class Object2 {side=8;vehicle="Land_Wreck_Car2_F";rank="";position[]={2.88428,0.916016,0.601496};dir=107.267;};
-				class Object3 {side=8;vehicle="Land_JunkPile_F";rank="";position[]={-3.45459,2.1582,-0.24174};dir=0;};
-				class Object4 {side=8;vehicle="Land_Tyres_F";rank="";position[]={-3.74097,2.26416,0.0051589};dir=0;};
-				class Object5 {side=8;vehicle="Land_BagFence_Short_F";rank="";position[]={-3.69189,2.42041,0.0281777};dir=0;};
-				class Object6 {side=8;vehicle="Land_Wreck_HMMWV_F";rank="";position[]={-3.8313,2.53662,-0.761311};dir=270.966;};
-				class Object7 {side=8;vehicle="Land_Timbers_F";rank="";position[]={5.72705,0.469727,0.0217681};dir=89.2823;};
-				class Object8 {side=8;vehicle="Land_Razorwire_F";rank="";position[]={-6.46411,3.479,-0.681004};dir=352.751;};
-				class Object9 {side=8;vehicle="Land_Mound01_8m_F";rank="";position[]={5.48584,2.70898,-0.00144339};dir=0;};
-				class Object10 {side=8;vehicle="Land_Razorwire_F";rank="";position[]={3.72852,3.24658,0.146024};dir=0;};
-				class Object11 {side=8;vehicle="Land_Wreck_Truck_F";rank="";position[]={6.74683,0.542969,-0.0655932};dir=87.9434;};
-				class Object12 {side=8;vehicle="Land_Wreck_Skodovka_F";rank="";position[]={-7.62842,2.40186,0.00144911};dir=270.057;};
-				class Object13 {side=8;vehicle="Land_Bricks_V2_F";rank="";position[]={10.3438,1.6499,-0.00143862};dir=358.114;};
-			};
-
-			class AresRoadblockArmyWrecks
-			{
-				name = "Sm. Army Vehicles";
-				class Object1 {side=8;vehicle="Land_BagFence_Long_F";rank="";position[]={-1.69141,1.44922,-0.00243902};dir=200.036;};
-				class Object2 {side=8;vehicle="Land_BagFence_Long_F";rank="";position[]={2.95117,0.0664063,-0.00243902};dir=189.779;};
-				class Object3 {side=8;vehicle="Land_Wreck_Hunter_F";rank="";position[]={-0.744141,2.89453,-0.00143886};dir=117.829;};
-				class Object4 {side=8;vehicle="Land_Wreck_Slammer_turret_F";rank="";position[]={5.14844,1.96875,-0.00143886};dir=142.09;};
-				class Object5 {side=8;vehicle="Land_Slums02_4m";rank="";position[]={4.74609,1.36914,0.794677};dir=197.453;};
-				class Object6 {side=8;vehicle="Land_CncBarrier_F";rank="";position[]={2.26953,3.87695,-0.00143886};dir=19.03;};
-				class Object7 {side=8;vehicle="Land_CncBarrier_F";rank="";position[]={-0.191406,5.01367,-0.00143886};dir=27.5651;};
-				class Object8 {side=8;vehicle="Land_Razorwire_F";rank="";position[]={4.19336,4.23242,-0.00144124};dir=17.9729;};
-				class Object9 {side=8;vehicle="Land_Razorwire_F";rank="";position[]={-5.67578,6.37109,-0.00144124};dir=8.03473;};
-				class Object10 {side=8;vehicle="Land_Wreck_Slammer_hull_F";rank="";position[]={-7.42383,3.26367,-0.00143886};dir=257.511;};
-				class Object11 {side=8;vehicle="Land_Wreck_Truck_F";rank="";position[]={7.64453,0.353516,-0.00143886};dir=105.085;};
-			};
-
-			class AresRoadblockLargeWrecks
-			{
-				name = "Lg. Mixed Vehicles";
-				class Object1 {side=8;vehicle="Dirthump_2_F";rank="";position[]={-0.207031,4.63379,-0.00143862};dir=0;};
-				class Object2 {side=8;vehicle="Land_Wreck_Offroad_F";rank="";position[]={-6.64722,4.77832,-0.756494};dir=80.4907;};
-				class Object3 {side=8;vehicle="Land_Sacks_heap_F";rank="";position[]={-7.78662,4.3374,0.00906038};dir=0;};
-				class Object4 {side=8;vehicle="Land_Wreck_UAZ_F";rank="";position[]={7.3877,4.87988,0.517596};dir=261.738;};
-				class Object5 {side=8;vehicle="Land_Sacks_heap_F";rank="";position[]={8.04639,5.12354,-0.35144};dir=0;};
-				class Object6 {side=8;vehicle="Land_Razorwire_F";rank="";position[]={-8.5354,7.00977,-0.490126};dir=340.864;};
-				class Object7 {side=8;vehicle="Land_BagFence_Short_F";rank="";position[]={10.4751,4.28857,0.365863};dir=0;};
-				class Object8 {side=8;vehicle="Land_Razorwire_F";rank="";position[]={6.74731,8.05225,0.286464};dir=14.2485;};
-				class Object9 {side=8;vehicle="Land_Wreck_Car2_F";rank="";position[]={-10.7385,3.98877,-0.71892};dir=266.449;};
-				class Object10 {side=8;vehicle="Land_Wreck_CarDismantled_F";rank="";position[]={10.4683,4.96875,0.103909};dir=283.022;};
-				class Object11 {side=8;vehicle="Land_Wreck_Car3_F";rank="";position[]={-14.3706,3.57861,1.69269};dir=36.686;};
-				class Object12 {side=8;vehicle="Land_BagFence_Long_F";rank="";position[]={14.4746,4.38867,-0.00243855};dir=0;};
-				class Object13 {side=8;vehicle="Land_Wreck_Truck_dropside_F";rank="";position[]={13.9521,5.77148,-0.00143862};dir=104.871;};
-				class Object14 {side=8;vehicle="Land_BagFence_End_F";rank="";position[]={16.8474,4.36377,-0.00243855};dir=0;};
-				class Object15 {side=8;vehicle="Land_Mound01_8m_F";rank="";position[]={-17.5127,3.99658,-0.00144339};dir=0;};
-				class Object16 {side=8;vehicle="Land_Razorwire_F";rank="";position[]={-19.0044,5.79395,-0.001441};dir=354.017;};
-				class Object17 {side=8;vehicle="Land_Razorwire_F";rank="";position[]={15.905,6.85986,-0.001441};dir=0;};
-				class Object18 {side=8;vehicle="Land_Wreck_Ural_F";rank="";position[]={-19.0212,4.69775,1.13863};dir=80.8483;};
-				class Object19 {side=8;vehicle="Land_Wreck_Car_F";rank="";position[]={19.562,5.39258,-0.00143862};dir=265.952;};
-				class Object20 {side=8;vehicle="Land_BagFence_Round_F";rank="";position[]={22.4204,4.29053,-0.00273943};dir=203.478;};
-				class Object21 {side=8;vehicle="Land_ScrapHeap_2_F";rank="";position[]={24.4016,4.91699,-0.00143862};dir=283.542;};
-			};
-		}
-		
 		class Minefields
 		{
 			name = "Minefields";
@@ -628,42 +489,83 @@ class AresCompositions
 			};
 		};
 
-		class AresMisc
+		class SupportAreas
 		{
-			name = "Miscellaneous";
-
-			class AresAmmoCache
+			name = "Field Support";
+			
+			class AresFieldRepairPost
 			{
-				name = "Sm. Open Ammo Dump";
-				class Object1 {side=8;vehicle="Land_BagFence_Short_F";rank="";position[]={-0.976563,1.0957,-0.00143886};dir=0;};
-				class Object2 {side=8;vehicle="Land_BagFence_Short_F";rank="";position[]={1.99219,1.17773,-0.00243902};dir=0;};
-				class Object3 {side=8;vehicle="Land_Pallet_MilBoxes_F";rank="";position[]={-1.26758,2.33789,-0.00143886};dir=88.4461;};
-				class Object4 {side=8;vehicle="Land_MetalBarrel_F";rank="";position[]={1.95117,2.89453,-0.00139475};dir=359.618;};
-				class Object5 {side=8;vehicle="Land_HBarrier_5_F";rank="";position[]={0.601563,1.48633,-0.00143886};dir=269.358;};
-				class Object6 {side=8;vehicle="CamoNet_OPFOR_open_Curator_F";rank="";position[]={0.798828,3.53711,-0.0421278};dir=0;};
-				class Object7 {side=8;vehicle="Land_MetalBarrel_F";rank="";position[]={1.95313,3.81445,-0.00139451};dir=0.604036;};
-				class Object8 {side=8;vehicle="Land_MetalBarrel_F";rank="";position[]={2.65625,4.39453,-0.00139475};dir=357.823;};
-				class Object9 {side=8;vehicle="Land_MetalBarrel_F";rank="";position[]={1.97656,4.79297,-0.00139475};dir=359.994;};
-				class Object10 {side=8;vehicle="Land_Pallet_MilBoxes_F";rank="";position[]={-1.24219,5.42188,-0.00143886};dir=0;};
-				class Object11 {side=8;vehicle="Land_BagFence_Short_F";rank="";position[]={-5.53516,1.11914,-0.00243902};dir=0;};
-				class Object12 {side=8;vehicle="Land_PaperBox_open_empty_F";rank="";position[]={-5.41016,2.23242,-0.00143886};dir=0;};
-				class Object13 {side=8;vehicle="Land_MetalBarrel_F";rank="";position[]={2.58398,5.40039,-0.00139475};dir=359.222;};
-				class Object14 {side=8;vehicle="Land_MetalBarrel_F";rank="";position[]={1.95313,5.94141,-0.00139475};dir=359.501;};
-				class Object15 {side=8;vehicle="Land_BagFence_Short_F";rank="";position[]={6.37695,1.14453,-0.00243902};dir=0;};
-				class Object16 {side=8;vehicle="Land_PaperBox_closed_F";rank="";position[]={-5.45703,3.80273,-0.00143886};dir=0;};
-				class Object17 {side=8;vehicle="Land_WaterBarrel_F";rank="";position[]={6.625,2.15039,-0.00141311};dir=3.49215;};
-				class Object18 {side=8;vehicle="Land_HBarrier_5_F";rank="";position[]={-1.88281,7.30859,-0.00143886};dir=0;};
-				class Object19 {side=8;vehicle="Land_WaterTank_F";rank="";position[]={6.09375,4.63477,-0.0014441};dir=268.037;};
-				class Object20 {side=8;vehicle="Land_CargoBox_V1_F";rank="";position[]={-5.4707,5.40234,0.0291049};dir=359.274;};
-				class Object21 {side=8;vehicle="Land_HBarrier_5_F";rank="";position[]={-7.11914,1.46875,-0.00143886};dir=269.358;};
-				class Object22 {side=8;vehicle="Land_HBarrier_5_F";rank="";position[]={8.00391,1.55469,-0.00143886};dir=269.358;};
-				class Object23 {side=8;vehicle="Land_HBarrier_5_F";rank="";position[]={-7.40625,7.26953,-0.00143886};dir=0;};
-				class Object24 {side=8;vehicle="Land_HBarrier_5_F";rank="";position[]={3.56836,7.30859,-0.00143886};dir=0;};
+				name = "Vehicle Repair";
+				class Object0 {side=8;rank="";vehicle="Land_ClutterCutter_large_F";position[]={-0.948242,1.18994,0};dir=0;};
+				class Object1 {side=8;rank="";vehicle="CamoNet_INDP_big_Curator_F";position[]={-1.03931,0.9375,0};dir=10.1089;};
+				class Object2 {side=8;rank="";vehicle="Land_Scrap_MRAP_01_F";position[]={-1.52783,-1.59082,0};dir=354.33;};
+				class Object3 {side=8;rank="";vehicle="Land_WheelieBin_01_F";position[]={3.13721,0.199219,0};dir=92.9109;};
+				class Object4 {side=8;rank="";vehicle="Land_WeldingTrolley_01_F";position[]={0.830811,3.37354,0};dir=91.7986;};
+				class Object5 {side=8;rank="";vehicle="Land_Tyre_F";position[]={3.29004,1.12061,0};dir=0.963892;};
+				class Object6 {side=8;rank="";vehicle="Land_Hammer_F";position[]={-0.930664,3.47949,0.752882};dir=254.352;};
+				class Object7 {side=8;rank="";vehicle="Land_ExtensionCord_F";position[]={-0.154053,3.67676,0};dir=0.257904;};
+				class Object8 {side=8;rank="";vehicle="Land_GasTank_02_F";position[]={3.36719,1.76611,0};dir=359.227;};
+				class Object9 {side=8;rank="";vehicle="Land_Workbench_01_F";position[]={-1.97949,3.55566,0};dir=1.19755;};
+				class Object10 {side=8;rank="";vehicle="Land_PortableLight_double_F";position[]={2.73096,3.19189,0};dir=33.2272;};
+				class Object11 {side=8;rank="";vehicle="Land_GasTank_02_F";position[]={3.33032,2.35596,0};dir=359.316;};
+				class Object12 {side=8;rank="";vehicle="Land_Tyre_F";position[]={-3.50244,2.11377,0};dir=0.0471826;};
+				class Object13 {side=8;rank="";vehicle="Land_Gloves_F";position[]={-1.70728,3.75928,0.766838};dir=91.5025;};
+				class Object14 {side=8;rank="";vehicle="Land_Grinder_F";position[]={-2.38794,3.68994,0};dir=248.82;};
+				class Object15 {side=8;rank="";vehicle="Land_MetalBarrel_F";position[]={-4.58691,0.347656,0};dir=359.944;};
+				class Object16 {side=8;rank="";vehicle="Land_Tyre_F";position[]={-4.31738,1.62305,0};dir=0.0584276;};
+				class Object17 {side=8;rank="";vehicle="Land_MetalBarrel_F";position[]={-4.65039,-0.727539,0};dir=359.96;};
+				class Object18 {side=8;rank="";vehicle="Land_HBarrier_5_F";position[]={4.67163,3.60742,0};dir=90.9838;};
+				class Object19 {side=8;rank="";vehicle="Land_PortableLight_double_F";position[]={-4.08594,3.0166,0};dir=339.638;};
+				class Object20 {side=8;rank="";vehicle="Land_HBarrier_1_F";position[]={4.53979,-2.03955,0};dir=90.84;};
+				class Object21 {side=8;rank="";vehicle="Land_HBarrier_5_F";position[]={4.29297,4.89551,0};dir=180.927;};
+				class Object22 {side=8;rank="";vehicle="Land_HBarrier_1_F";position[]={4.54761,-3.44531,0};dir=90.84;};
+				class Object23 {side=8;rank="";vehicle="Land_HBarrier_5_F";position[]={-5.75098,3.67236,0};dir=90.9838;};
+				class Object24 {side=8;rank="";vehicle="Land_HBarrier_5_F";position[]={-1.36377,4.90967,0};dir=180.927;};
+				class Object25 {side=8;rank="";vehicle="Land_HBarrier_1_F";position[]={-5.93188,-2.05371,0};dir=90.84;};
+				class Object26 {side=8;rank="";vehicle="Land_ClutterCutter_large_F";position[]={-1.05518,-6.54297,0};dir=0;};
+				class Object27 {side=8;rank="";vehicle="Land_HBarrier_1_F";position[]={-5.96411,-3.25049,0};dir=90.84;};
+				class Object28 {side=8;rank="";vehicle="Land_CncBarrier_stripes_F";position[]={4.09033,-5.88818,0};dir=0;};
+				class Object29 {side=8;rank="";vehicle="Land_CncBarrier_stripes_F";position[]={-5.88354,-5.82715,0};dir=0;};
 			};
-
+			
+			// House converted into field HQ
+			class AresImprovisedFieldCommand
+			{
+				name="Improvised Command";
+				class Object0 {side=8;rank="";vehicle="Land_BagFence_Corner_F";position[]={-1.00293,0.330566,0};dir=90.9371;};
+				class Object1 {side=8;rank="";vehicle="Land_ChairWood_F";position[]={-1.89038,-0.417969,0};dir=303.015;};
+				class Object2 {side=8;rank="";vehicle="Land_MetalBarrel_F";position[]={-1.91699,1.39893,0.0139694};dir=198.323;};
+				class Object3 {side=8;rank="";vehicle="Land_BagFence_Short_F";position[]={-1.09814,2.21484,0};dir=87;};
+				class Object4 {side=8;rank="";vehicle="Land_MetalBarrel_empty_F";position[]={-1.69043,1.88184,0};dir=180;};
+				class Object5 {side=8;rank="";vehicle="Land_WaterBarrel_F";position[]={-3.27026,-0.478027,0};dir=180.996;};
+				class Object6 {side=8;rank="";vehicle="Land_WoodenTable_large_F";position[]={-1.11035,-3.11816,0};dir=90.0005;};
+				class Object7 {side=8;rank="";vehicle="Land_Pallet_MilBoxes_F";position[]={3.69971,0.961914,0};dir=180;};
+				class Object8 {side=8;rank="";vehicle="MapBoard_altis_F";position[]={-3.89404,-1.55469,0};dir=315.014;};
+				class Object9 {side=8;rank="";vehicle="Land_BagFence_Round_F";position[]={4.52148,-0.729492,0};dir=300;};
+				class Object10 {side=8;rank="";vehicle="CamoNet_OPFOR_Curator_F";position[]={-2.40039,-3.80811,0};dir=181;};
+				class Object11 {side=8;rank="";vehicle="Land_WoodenTable_small_F";position[]={3.65015,2.63184,0.013411};dir=172.88;};
+				class Object12 {side=8;rank="";vehicle="Land_BagFence_Long_F";position[]={-0.860596,4.65186,0};dir=95;};
+				class Object13 {side=8;rank="";vehicle="Land_BagFence_Corner_F";position[]={2.15967,-5.05811,0};dir=89;};
+				class Object14 {side=8;rank="";vehicle="Land_BagFence_Long_F";position[]={4.6897,2.03174,0};dir=89;};
+				class Object15 {side=8;rank="";vehicle="Land_HBarrier_1_F";position[]={3.72974,4.17188,0};dir=180;};
+				class Object16 {side=8;rank="";vehicle="Land_i_Stone_Shed_V1_F";position[]={-3.45044,4.72217,0};dir=271;};
+				class Object17 {side=8;rank="";vehicle="Land_Mound01_8m_F";position[]={-2.38745,-5.41016,0};dir=180;};
+				class Object18 {side=8;rank="";vehicle="CamoNet_OPFOR_open_Curator_F";position[]={2.66968,5.12207,0};dir=90;};
+				class Object19 {side=8;rank="";vehicle="Land_BagFence_Long_F";position[]={-6.1311,-0.714844,0};dir=89;};
+				class Object20 {side=8;rank="";vehicle="Land_HBarrier_1_F";position[]={3.70972,5.65186,0};dir=180;};
+				class Object21 {side=8;rank="";vehicle="Land_BagFence_Long_F";position[]={4.63965,4.98193,0};dir=89;};
+				class Object22 {side=8;rank="";vehicle="Land_BagFence_Long_F";position[]={-6.02637,-3.65869,0};dir=89;};
+				class Object23 {side=8;rank="";vehicle="Land_PaperBox_closed_F";position[]={1.09961,7.49219,0};dir=180;};
+				class Object24 {side=8;rank="";vehicle="Land_BagFence_Round_F";position[]={4.20972,7.65186,0};dir=235;};
+				class Object25 {side=8;rank="";vehicle="Land_BagFence_Long_F";position[]={-0.000244141,8.52197,0};dir=180;};
+				class Object26 {side=8;rank="";vehicle="Land_BagFence_Short_F";position[]={2.30957,8.47217,0};dir=180;};
+				class Object27 {side=8;rank="";vehicle="Land_Razorwire_F";position[]={-8.12451,3.354,0};dir=270;};
+				class Object28 {side=8;rank="";vehicle="Land_Razorwire_F";position[]={-5.08643,9.94873,0};dir=358;};
+			};
+			
 			class AresAmmoCache2
 			{
-				name = "Sm. Camo Ammo Dump";
+				name = "Camo Field Command";
 				class Object1 {side=8;vehicle="CamoNet_OPFOR_Curator_F";rank="";position[]={-0.665039,-1.42432,-0.00144148};dir=179.956;};
 				class Object2 {side=8;vehicle="Land_HBarrier_3_F";rank="";position[]={0.390381,-2.39258,-0.00144148};dir=176.049;};
 				class Object3 {side=8;vehicle="Land_BagFence_Long_F";rank="";position[]={2.33179,-3.00049,-0.00244141};dir=0;};
@@ -691,6 +593,39 @@ class AresCompositions
 				class Object25 {side=8;vehicle="Land_HBarrier_5_F";rank="";position[]={-4.20605,11.9351,-0.00144148};dir=0;};
 			};
 			
+			class AresAmmoCache
+			{
+				name = "Open Ammo Dump";
+				class Object1 {side=8;vehicle="Land_BagFence_Short_F";rank="";position[]={-0.976563,1.0957,-0.00143886};dir=0;};
+				class Object2 {side=8;vehicle="Land_BagFence_Short_F";rank="";position[]={1.99219,1.17773,-0.00243902};dir=0;};
+				class Object3 {side=8;vehicle="Land_Pallet_MilBoxes_F";rank="";position[]={-1.26758,2.33789,-0.00143886};dir=88.4461;};
+				class Object4 {side=8;vehicle="Land_MetalBarrel_F";rank="";position[]={1.95117,2.89453,-0.00139475};dir=359.618;};
+				class Object5 {side=8;vehicle="Land_HBarrier_5_F";rank="";position[]={0.601563,1.48633,-0.00143886};dir=269.358;};
+				class Object6 {side=8;vehicle="CamoNet_OPFOR_open_Curator_F";rank="";position[]={0.798828,3.53711,-0.0421278};dir=0;};
+				class Object7 {side=8;vehicle="Land_MetalBarrel_F";rank="";position[]={1.95313,3.81445,-0.00139451};dir=0.604036;};
+				class Object8 {side=8;vehicle="Land_MetalBarrel_F";rank="";position[]={2.65625,4.39453,-0.00139475};dir=357.823;};
+				class Object9 {side=8;vehicle="Land_MetalBarrel_F";rank="";position[]={1.97656,4.79297,-0.00139475};dir=359.994;};
+				class Object10 {side=8;vehicle="Land_Pallet_MilBoxes_F";rank="";position[]={-1.24219,5.42188,-0.00143886};dir=0;};
+				class Object11 {side=8;vehicle="Land_BagFence_Short_F";rank="";position[]={-5.53516,1.11914,-0.00243902};dir=0;};
+				class Object12 {side=8;vehicle="Land_PaperBox_open_empty_F";rank="";position[]={-5.41016,2.23242,-0.00143886};dir=0;};
+				class Object13 {side=8;vehicle="Land_MetalBarrel_F";rank="";position[]={2.58398,5.40039,-0.00139475};dir=359.222;};
+				class Object14 {side=8;vehicle="Land_MetalBarrel_F";rank="";position[]={1.95313,5.94141,-0.00139475};dir=359.501;};
+				class Object15 {side=8;vehicle="Land_BagFence_Short_F";rank="";position[]={6.37695,1.14453,-0.00243902};dir=0;};
+				class Object16 {side=8;vehicle="Land_PaperBox_closed_F";rank="";position[]={-5.45703,3.80273,-0.00143886};dir=0;};
+				class Object17 {side=8;vehicle="Land_WaterBarrel_F";rank="";position[]={6.625,2.15039,-0.00141311};dir=3.49215;};
+				class Object18 {side=8;vehicle="Land_HBarrier_5_F";rank="";position[]={-1.88281,7.30859,-0.00143886};dir=0;};
+				class Object19 {side=8;vehicle="Land_WaterTank_F";rank="";position[]={6.09375,4.63477,-0.0014441};dir=268.037;};
+				class Object20 {side=8;vehicle="Land_CargoBox_V1_F";rank="";position[]={-5.4707,5.40234,0.0291049};dir=359.274;};
+				class Object21 {side=8;vehicle="Land_HBarrier_5_F";rank="";position[]={-7.11914,1.46875,-0.00143886};dir=269.358;};
+				class Object22 {side=8;vehicle="Land_HBarrier_5_F";rank="";position[]={8.00391,1.55469,-0.00143886};dir=269.358;};
+				class Object23 {side=8;vehicle="Land_HBarrier_5_F";rank="";position[]={-7.40625,7.26953,-0.00143886};dir=0;};
+				class Object24 {side=8;vehicle="Land_HBarrier_5_F";rank="";position[]={3.56836,7.30859,-0.00143886};dir=0;};
+			};
+		};
+		class AresMisc
+		{
+			name = "Miscellaneous";
+
 			class FOBHelipad
 			{
 				name="FOB Helipad";
@@ -850,6 +785,120 @@ class AresCompositions
 				class Object27 {side=8;rank="";vehicle="Land_HBarrier_5_F";position[]={-54.7483,7.64404,0};dir=359;};
 				class Object28 {side=8;rank="";vehicle="Land_HBarrier_5_F";position[]={59.2783,7.56104,0};dir=180;};
 				class Object29 {side=8;rank="";vehicle="Land_HBarrier_5_F";position[]={-60.4187,7.7334,0};dir=0;};
+			};
+			
+			class WireAndSandbag
+			{
+				name = "Wire + Barrier";
+				class Object0 {side=8;rank="";vehicle="Land_BagFence_Long_F";position[]={0.129395,0.990234,0};dir=0;};
+				class Object1 {side=8;rank="";vehicle="Land_BagFence_Long_F";position[]={-2.17773,0.981445,0};dir=0;};
+				class Object2 {side=8;rank="";vehicle="Land_HBarrier_3_F";position[]={2.17334,0.302734,0};dir=0;};
+				class Object3 {side=8;rank="";vehicle="Land_Mil_WiredFence_F";position[]={-3.82813,2.04297,0};dir=179.744;};
+				class Object4 {side=8;rank="";vehicle="Land_Mil_WiredFence_F";position[]={3.91064,1.94531,0};dir=181.979;};
+				class Object5 {side=8;rank="";vehicle="Land_HBarrier_3_F";position[]={-6.49512,0.586914,0};dir=0;};
+				class Object6 {side=8;rank="";vehicle="Land_BagFence_Long_F";position[]={6.44824,0.762207,0};dir=0;};
+				class Object7 {side=8;rank="";vehicle="Land_BagFence_Long_F";position[]={-8.54492,1.125,0};dir=0;};
+				class Object8 {side=8;rank="";vehicle="Land_BagFence_Long_F";position[]={9.43311,0.724121,0};dir=0;};
+				class Object9 {side=8;rank="";vehicle="Land_BagFence_Long_F";position[]={-10.8521,1.11621,0};dir=0;};
+				class Object10 {side=8;rank="";vehicle="Land_Mil_WiredFence_F";position[]={-11.5938,2.05225,0};dir=179.744;};
+				class Object11 {side=8;rank="";vehicle="Land_Mil_WiredFence_F";position[]={11.6636,2.03906,0};dir=179.744;};
+				class Object12 {side=8;rank="";vehicle="Land_HBarrier_3_F";position[]={11.4824,0.104004,0};dir=0;};
+				class Object13 {side=8;rank="";vehicle="Land_HBarrier_3_F";position[]={-15.1514,0.647949,0};dir=0;};
+				class Object14 {side=8;rank="";vehicle="Land_HBarrier_1_F";position[]={14.8188,0.0961914,0};dir=359.82;};
+			};
+		};
+		
+		class ImprovisedBarriers
+		{
+			name = "Improvised Barriers";
+			
+			class AresRoadblockJunkVerySmall
+			{
+				name = "Junk";
+				class Object1 {side=8;vehicle="Land_IronPipes_F";rank="";position[]={0.361084,1.26563,-0.00143862};dir=0;};
+				class Object2 {side=8;vehicle="Land_Cages_F";rank="";position[]={-3.0564,1.57959,0.0143638};dir=267.511;};
+				class Object3 {side=8;vehicle="Land_Tyres_F";rank="";position[]={-3.33789,1.59619,0.0051589};dir=0;};
+				class Object4 {side=8;vehicle="Land_Sacks_heap_F";rank="";position[]={3.82861,1.61719,-0.00143862};dir=0;};
+				class Object5 {side=8;vehicle="Land_Pallets_stack_F";rank="";position[]={3.81396,1.73438,-0.00143862};dir=92.0786;};
+				class Object6 {side=8;vehicle="Land_CratesPlastic_F";rank="";position[]={5.03931,1.44678,-0.00143862};dir=0;};
+				class Object7 {side=8;vehicle="Land_Bricks_V4_F";rank="";position[]={5.15869,1.55225,-0.00143862};dir=0.00103247;};
+			};
+
+			class AresRoadblockCivilianWrecks
+			{
+				name = "Civ Vehicles";
+				class Object1 {side=8;vehicle="Land_Sacks_heap_F";rank="";position[]={0.873047,1.98242,-0.00143886};dir=0;};
+				class Object2 {side=8;vehicle="Land_Wreck_Car_F";rank="";position[]={-0.101563,1.93945,-0.00143886};dir=90.2452;};
+				class Object3 {side=8;vehicle="Land_Sacks_heap_F";rank="";position[]={0.923828,2.14453,1.44768};dir=0;};
+				class Object4 {side=8;vehicle="Land_BagFence_Long_F";rank="";position[]={3.40039,0.875,-0.00243902};dir=182.848;};
+				class Object5 {side=8;vehicle="Land_BagFence_Short_F";rank="";position[]={-2.53711,2.99414,-0.00243902};dir=195.925;};
+				class Object6 {side=8;vehicle="Land_Razorwire_F";rank="";position[]={1.31445,3.44922,1.00124};dir=195.217;};
+				class Object7 {side=8;vehicle="Land_Wreck_Truck_dropside_F";rank="";position[]={-1.7207,3.96484,-0.00143886};dir=286.44;};
+				class Object8 {side=8;vehicle="Land_BagFence_Short_F";rank="";position[]={-4.16992,3.45898,-0.00243902};dir=195.925;};
+				class Object9 {side=8;vehicle="Land_Wreck_Ural_F";rank="";position[]={5.48633,1.66406,7.12872e-005};dir=273.27;};
+				class Object10 {side=8;vehicle="Land_Razorwire_F";rank="";position[]={6.49609,2.85938,-0.00144124};dir=195.217;};
+				class Object11 {side=8;vehicle="Land_BagFence_Short_F";rank="";position[]={-5.3457,2.77539,-0.00243902};dir=138.052;};
+				class Object12 {side=8;vehicle="Land_BagFence_Long_F";rank="";position[]={6.18359,0.472656,-0.00243902};dir=182.848;};
+			};
+
+			class AresRoadblockCivilianWrecks2
+			{
+				name = "Civ Vehicles 2";
+				class Object1 {side=8;vehicle="Land_Wreck_Truck_dropside_F";rank="";position[]={-0.291016,3.2417,-0.00143862};dir=201.1;};
+				class Object2 {side=8;vehicle="Land_Wreck_Car2_F";rank="";position[]={2.88428,0.916016,0.601496};dir=107.267;};
+				class Object3 {side=8;vehicle="Land_JunkPile_F";rank="";position[]={-3.45459,2.1582,-0.24174};dir=0;};
+				class Object4 {side=8;vehicle="Land_Tyres_F";rank="";position[]={-3.74097,2.26416,0.0051589};dir=0;};
+				class Object5 {side=8;vehicle="Land_BagFence_Short_F";rank="";position[]={-3.69189,2.42041,0.0281777};dir=0;};
+				class Object6 {side=8;vehicle="Land_Wreck_HMMWV_F";rank="";position[]={-3.8313,2.53662,-0.761311};dir=270.966;};
+				class Object7 {side=8;vehicle="Land_Timbers_F";rank="";position[]={5.72705,0.469727,0.0217681};dir=89.2823;};
+				class Object8 {side=8;vehicle="Land_Razorwire_F";rank="";position[]={-6.46411,3.479,-0.681004};dir=352.751;};
+				class Object9 {side=8;vehicle="Land_Mound01_8m_F";rank="";position[]={5.48584,2.70898,-0.00144339};dir=0;};
+				class Object10 {side=8;vehicle="Land_Razorwire_F";rank="";position[]={3.72852,3.24658,0.146024};dir=0;};
+				class Object11 {side=8;vehicle="Land_Wreck_Truck_F";rank="";position[]={6.74683,0.542969,-0.0655932};dir=87.9434;};
+				class Object12 {side=8;vehicle="Land_Wreck_Skodovka_F";rank="";position[]={-7.62842,2.40186,0.00144911};dir=270.057;};
+				class Object13 {side=8;vehicle="Land_Bricks_V2_F";rank="";position[]={10.3438,1.6499,-0.00143862};dir=358.114;};
+			};
+
+			class AresRoadblockArmyWrecks
+			{
+				name = "Army Vehicles";
+				class Object1 {side=8;vehicle="Land_BagFence_Long_F";rank="";position[]={-1.69141,1.44922,-0.00243902};dir=200.036;};
+				class Object2 {side=8;vehicle="Land_BagFence_Long_F";rank="";position[]={2.95117,0.0664063,-0.00243902};dir=189.779;};
+				class Object3 {side=8;vehicle="Land_Wreck_Hunter_F";rank="";position[]={-0.744141,2.89453,-0.00143886};dir=117.829;};
+				class Object4 {side=8;vehicle="Land_Wreck_Slammer_turret_F";rank="";position[]={5.14844,1.96875,-0.00143886};dir=142.09;};
+				class Object5 {side=8;vehicle="Land_Slums02_4m";rank="";position[]={4.74609,1.36914,0.794677};dir=197.453;};
+				class Object6 {side=8;vehicle="Land_CncBarrier_F";rank="";position[]={2.26953,3.87695,-0.00143886};dir=19.03;};
+				class Object7 {side=8;vehicle="Land_CncBarrier_F";rank="";position[]={-0.191406,5.01367,-0.00143886};dir=27.5651;};
+				class Object8 {side=8;vehicle="Land_Razorwire_F";rank="";position[]={4.19336,4.23242,-0.00144124};dir=17.9729;};
+				class Object9 {side=8;vehicle="Land_Razorwire_F";rank="";position[]={-5.67578,6.37109,-0.00144124};dir=8.03473;};
+				class Object10 {side=8;vehicle="Land_Wreck_Slammer_hull_F";rank="";position[]={-7.42383,3.26367,-0.00143886};dir=257.511;};
+				class Object11 {side=8;vehicle="Land_Wreck_Truck_F";rank="";position[]={7.64453,0.353516,-0.00143886};dir=105.085;};
+			};
+
+			class AresRoadblockLargeWrecks
+			{
+				name = "Mixed Vehicles (Large)";
+				class Object1 {side=8;vehicle="Dirthump_2_F";rank="";position[]={-0.207031,4.63379,-0.00143862};dir=0;};
+				class Object2 {side=8;vehicle="Land_Wreck_Offroad_F";rank="";position[]={-6.64722,4.77832,-0.756494};dir=80.4907;};
+				class Object3 {side=8;vehicle="Land_Sacks_heap_F";rank="";position[]={-7.78662,4.3374,0.00906038};dir=0;};
+				class Object4 {side=8;vehicle="Land_Wreck_UAZ_F";rank="";position[]={7.3877,4.87988,0.517596};dir=261.738;};
+				class Object5 {side=8;vehicle="Land_Sacks_heap_F";rank="";position[]={8.04639,5.12354,-0.35144};dir=0;};
+				class Object6 {side=8;vehicle="Land_Razorwire_F";rank="";position[]={-8.5354,7.00977,-0.490126};dir=340.864;};
+				class Object7 {side=8;vehicle="Land_BagFence_Short_F";rank="";position[]={10.4751,4.28857,0.365863};dir=0;};
+				class Object8 {side=8;vehicle="Land_Razorwire_F";rank="";position[]={6.74731,8.05225,0.286464};dir=14.2485;};
+				class Object9 {side=8;vehicle="Land_Wreck_Car2_F";rank="";position[]={-10.7385,3.98877,-0.71892};dir=266.449;};
+				class Object10 {side=8;vehicle="Land_Wreck_CarDismantled_F";rank="";position[]={10.4683,4.96875,0.103909};dir=283.022;};
+				class Object11 {side=8;vehicle="Land_Wreck_Car3_F";rank="";position[]={-14.3706,3.57861,1.69269};dir=36.686;};
+				class Object12 {side=8;vehicle="Land_BagFence_Long_F";rank="";position[]={14.4746,4.38867,-0.00243855};dir=0;};
+				class Object13 {side=8;vehicle="Land_Wreck_Truck_dropside_F";rank="";position[]={13.9521,5.77148,-0.00143862};dir=104.871;};
+				class Object14 {side=8;vehicle="Land_BagFence_End_F";rank="";position[]={16.8474,4.36377,-0.00243855};dir=0;};
+				class Object15 {side=8;vehicle="Land_Mound01_8m_F";rank="";position[]={-17.5127,3.99658,-0.00144339};dir=0;};
+				class Object16 {side=8;vehicle="Land_Razorwire_F";rank="";position[]={-19.0044,5.79395,-0.001441};dir=354.017;};
+				class Object17 {side=8;vehicle="Land_Razorwire_F";rank="";position[]={15.905,6.85986,-0.001441};dir=0;};
+				class Object18 {side=8;vehicle="Land_Wreck_Ural_F";rank="";position[]={-19.0212,4.69775,1.13863};dir=80.8483;};
+				class Object19 {side=8;vehicle="Land_Wreck_Car_F";rank="";position[]={19.562,5.39258,-0.00143862};dir=265.952;};
+				class Object20 {side=8;vehicle="Land_BagFence_Round_F";rank="";position[]={22.4204,4.29053,-0.00273943};dir=203.478;};
+				class Object21 {side=8;vehicle="Land_ScrapHeap_2_F";rank="";position[]={24.4016,4.91699,-0.00143862};dir=283.542;};
 			};
 		};
 	};
