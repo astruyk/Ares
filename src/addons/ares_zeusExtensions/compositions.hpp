@@ -671,10 +671,10 @@ class AresCompositions
 	
 	class WallHelpers
 	{
-		name = "Wall Sections";
+		name = "Walls";
 		class AresMilitaryWallHelpers
 		{
-			name = "Military Walls";
+			name = "Wall Sections";
 			class SmallHBarrier
 			{
 				name="H-Barrier (small)";
@@ -751,6 +751,11 @@ class AresCompositions
 				class Object8 {side=8;rank="";vehicle="Land_Mil_WallBig_4m_F";position[]={-15.0344,1.8916,0};dir=90.5571;};
 				class Object9 {side=8;rank="";vehicle="Land_Mil_WallBig_4m_F";position[]={15.0498,-1.48242,0};dir=0;};
 			};
+		};
+		
+		class CompositeWalls
+		{
+			name = "Composite Walls";
 			
 			class BunkerLine
 			{
@@ -878,9 +883,9 @@ class AresCompositions
 			{
 				name = "Mixed Vehicles (Large)";
 				class Object1 {side=8;vehicle="Dirthump_2_F";rank="";position[]={-0.207031,4.63379,-0.00143862};dir=0;};
-				class Object2 {side=8;vehicle="Land_Wreck_Offroad_F";rank="";position[]={-6.64722,4.77832,-0.756494};dir=80.4907;};
+				class Object2 {side=8;vehicle="Land_Wreck_Offroad_F";rank="";position[]={-6.64722,4.77832,-0.156494};dir=80.4907;};
 				class Object3 {side=8;vehicle="Land_Sacks_heap_F";rank="";position[]={-7.78662,4.3374,0.00906038};dir=0;};
-				class Object4 {side=8;vehicle="Land_Wreck_UAZ_F";rank="";position[]={7.3877,4.87988,0.517596};dir=261.738;};
+				class Object4 {side=8;vehicle="Land_Wreck_UAZ_F";rank="";position[]={7.3877,4.87988,0.117596};dir=261.738;};
 				class Object5 {side=8;vehicle="Land_Sacks_heap_F";rank="";position[]={8.04639,5.12354,-0.35144};dir=0;};
 				class Object6 {side=8;vehicle="Land_Razorwire_F";rank="";position[]={-8.5354,7.00977,-0.490126};dir=340.864;};
 				class Object7 {side=8;vehicle="Land_BagFence_Short_F";rank="";position[]={10.4751,4.28857,0.365863};dir=0;};
