@@ -7,6 +7,18 @@ Or check out the source code at: https://github.com/astruyk/Ares
 
 Changelists
 
+V.1.3.0
+* Util - Added module to dump composition code to RPT file (aimed at making it easier for me to generate compositions)
+* Compositions - Re-organized the Ares composition menus to be a little more clear
+* Compositions - Fixed some placement issues with a few existing compositions
+* Compositions - Added a bunch more compsitions. Some of which are:
+  * Wall sections - to make generating corners and long areas of walls a lot faster
+  * Composite Walls - Added two kinds of walls, one for urban areas with chain fences and sandbags, and one for a defensive line of bunkers.
+  * Minefields - Lines of mine markers, including variants with AT, AP and Mixed composition
+  * Field Repair Base - Added field repair structure w/ decomissioned hunter
+  * Roadblocks - Added three more kinds of roadblocks of varying size
+  * FOB Helipad - Added a helipad for improvised bases with landing lights and some sandbags
+
 V.1.2.1
 * Arsenal - Change the wording in 'All...' module to be more clear and require fewer selections for common use cases (See #155)
 * Arsenal - Fix an issue where magazines weren't being added when using the 'All...' module
