@@ -1,5 +1,9 @@
 import os;
-	
+import string;
+
+def sanitizeClassname(classname):
+	validCharacters = "-_" + string.ascii_letters + "01234567890";
+	return ''.join(c for c in classname if c in validCharacters)
 
 inputFolder = "../src/compositions/";
 outputFile = "../src/addons/ares_zeusExtensions/compositions.hpp";
@@ -16,14 +20,14 @@ lastDepth = 0;
 for sectionName in os.listdir(inputFolder):
 	sectionPath = os.path.join(inputFolder, sectionName);
 	if (os.path.isdir(sectionPath)):
-		sectionClassName = sectionName.replace(' ', '');
+		sectionClassName = sanitizeClassname(sectionName);
 		outputLines.append("	class Ares_{0}".format(sectionClassName));
 		outputLines.append("	{");
 		outputLines.append("		name = \"{0}\";".format(sectionName));
 		for categoryName in os.listdir(sectionPath):
 			categoryPath = os.path.join(sectionPath, categoryName);
 			if (os.path.isdir(categoryPath)):
-				categoryClassName = categoryName.replace(' ', '');
+				categoryClassName = sanitizeClassname(categoryName);
 				outputLines.append("		class Ares_{0}_{1}".format(sectionClassName, categoryClassName));
 				outputLines.append("		{");
 				outputLines.append("			name = \"{0}\";".format(categoryName));
