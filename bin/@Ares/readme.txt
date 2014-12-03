@@ -7,6 +7,9 @@ Or check out the source code at: https://github.com/astruyk/Ares
 
 Changelists
 
+V.1.4.0
+* Added a bunch more premade base compositions from Vernei's prebuilt pastable bases ( http://www.armaholic.com/page.php?id=27531 ). Used with permission.
+
 V.1.3.0
 * Util - Added module to dump composition code to RPT file (aimed at making it easier for me to generate compositions)
 * Compositions - Re-organized the Ares composition menus to be a little more clear
