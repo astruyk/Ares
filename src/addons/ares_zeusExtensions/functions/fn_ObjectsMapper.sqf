@@ -6,8 +6,9 @@
 	Takes an array of data about a dynamic object template and creates the objects.
 
 	Parameter(s):
-	0: (Position) - The anchor point to position the objects relative to or [0,0,0] for absolute positioning.
+	0: (Position) - The anchor object to place the objects relative to, or objNull to use the original position.
 	1: (Array of data) - The data for the objects to paste in. See Ares_fnc_ObjectsGrabber.
+	2: (Boolean) - Snap to ground. True to snap the objects to the ground at their new position, false to leave them at their original position. Default false.
 
 	Returns:
 	Created objects (Array)
@@ -18,6 +19,7 @@
 private ["_newAnchorObject", "_objs"];
 _newAnchorObject = [_this, 0, objNull, [objNull]] call BIS_fnc_Param;
 _objs = [_this, 1, [[0,0,0]], [[]]] call BIS_fnc_Param;
+_snapToGround = [_this, 2, false] call BIS_fnc_Param;
 
 // The copy script will have added the reference point as the last object in the array.
 // Get the position from it, and then remove it from the array so we no longer process it.
@@ -76,9 +78,16 @@ _newAnchorZ = (getPosWorld _newAnchorObject) select 2;
 		};*/
 	};
 	
+	
 	// Orient the object correctly
 	_newObj setDir (_azimuth);
 	
+	// Snap to ground (if applicable)
+	if (_snapToGround) then
+	{
+		_newObj setPos [(getPos _newObj) select 0, (getPos _newObj) select 1, 0];
+	};
+
 	//If fuel and damage were grabbed, map them
 	if (!isNil "_fuel") then {_newObj setFuel _fuel};
 	if (!isNil "_damage") then {_newObj setDamage _damage;};
