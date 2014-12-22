@@ -40,9 +40,16 @@ else
 		["GetUnitUnderCursor: Elements in select array!"] call Ares_fnc_LogMessage;
 		if (count _mouseOverUnit == 2) then
 		{
-			// value should be [typeName, object]
-			_unitUnderCursor = _mouseOverUnit select 1;
-			[format ["GetUnitUnderCursor: Got unit under cursor: %1 (@%2)", _unitUnderCursor, position _unitUnderCursor]] call Ares_fnc_LogMessage;
+			if (_mouseOverUnit select 0 == "OBJECT") then
+			{
+				// value should be [typeName, object]
+				_unitUnderCursor = _mouseOverUnit select 1;
+				[format ["GetUnitUnderCursor: Got unit under cursor: %1 (@%2)", _unitUnderCursor, position _unitUnderCursor]] call Ares_fnc_LogMessage;
+			}
+			else
+			{
+				[format ["GetUnitUnderCursor: Unit under cursor was of type '%1' (non-Object). Ignored."]] call Ares_fnc_LogMessage;
+			}
 		}
 		else
 		{
