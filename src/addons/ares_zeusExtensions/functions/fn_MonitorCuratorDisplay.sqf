@@ -26,6 +26,8 @@ while {true} do {
 	_display = findDisplay IDD_RSCDISPLAYCURATOR;
 	_ctrl = _display displayCtrl IDC_RSCDISPLAYCURATOR_MODEMODULES;
 	_ctrl ctrlAddEventHandler ["buttonclick", format ["['%1'] spawn Ares_fnc_OnModuleTreeLoad;", _category]];
+	_display displayAddEventHandler ["KeyDown", { _this call Ares_fnc_HandleCuratorKeyPressed; }];
+	_display displayAddEventHandler ["KeyUp", { _this call Ares_fnc_HandleCuratorKeyReleased; }];
 
 	[_category] call Ares_fnc_OnModuleTreeLoad;
 

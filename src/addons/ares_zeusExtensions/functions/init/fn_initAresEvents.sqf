@@ -9,9 +9,8 @@ if(isServer && isDedicated) exitWith {};
 
 	["Initializing Events ..."] call Ares_fnc_LogMessage;
 	{
-		//_x addEventHandler ["CuratorGroupSelectionChanged", { _this call Ares_fnc_HandleGroupSelectionChanged; }];
-		//_x addEventHandler ["CuratorObjectSelectionChanged", { _this call Ares_fnc_HandleObjectSelectionChanged; }];
 		_x addEventHandler ["CuratorObjectPlaced", { _this call Ares_fnc_HandleCuratorObjectPlaced; }];
+		_x addEventHandler ["CuratorObjectDoubleClicked", { _this call Ares_fnc_HandleCuratorObjectDoubleClicked; }];
 	} foreach allCurators;
 
 	["... Done initializing events."] call Ares_fnc_LogMessage;

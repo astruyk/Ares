@@ -17,7 +17,6 @@ if(isServer && isDedicated) exitWith {};
 	["Initializing UI ..."] call Ares_fnc_LogMessage;
 	
 	["Ares"] spawn Ares_fnc_MonitorCuratorDisplay;
-	//[] spawn Ares_fnc_SetupDisplayHandlers;
 
 	["... Done initializing UI."] call Ares_fnc_LogMessage;
 };
