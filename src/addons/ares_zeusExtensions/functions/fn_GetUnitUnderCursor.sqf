@@ -3,7 +3,7 @@
 	
 	Params:
 		0 - [Object] The module's logic unit that is trying to get the unit under the cursor. Will automatically be deleted if no unit is under the cursor.
-		
+		1 - Boolean - True to remove the object passed in [0] if there is no unit under the cursor. False to leave it. (Default: True)
 	Returns:
 		The unit under the cursor (if any). Otherwise the logic unit parameter is deleted.
 */
