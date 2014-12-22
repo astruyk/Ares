@@ -58,7 +58,6 @@ switch(_smokeType) do
 	};
 	case 4: // Large Wood Smoke
 	{
-		_sourceObject = _this select 0;
 		_ps = "#particlesource" createVehicle (getPos _sourceObject);
 		
 		_ps setParticleCircle [0, [0, 0, 0]];
