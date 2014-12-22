@@ -5,6 +5,8 @@ if (isNil "Ares_Spawn_Smoke_Function") then
 	publicVariable "Ares_Spawn_Smoke_Function";
 };
 
+_unitUnderCursor = [_logic, false] call Ares_fnc_GetUnitUnderCursor;
+
 _options = [
 	"Vehicle Fire Look-Alike",
 	"Small Oil Smoke",
@@ -17,19 +19,18 @@ _options = [
 	"Large Mixed Smoke"
 	];
 _dialogResult = ["Create Smoke Effect", ["Smoke Type", _options]] call Ares_fnc_ShowChooseDialog;
+
 if (count _dialogResult > 0) then
 {
-	if (isNil "Ares_SmokeGroup") then
+	_sourceObject = _unitUnderCursor;
+	if (isNull _sourceObject) then
 	{
-		Ares_SmokeGroup = createGroup (side player);
-		publicVariable "Ares_SmokeGroup";
+		_sourceObject = "Land_ClutterCutter_small_F" createVehicle (position _logic);
+		_sourceObject setName format["Smoke (%1)", _options select (_dialogResult select 0)];
+		[[_sourceObject]] call Ares_fnc_AddUnitsToCurator;
 	};
-	_logicName = format["Smoke Source (%1)", _options select (_dialogResult select 0)];
-	_sourceObject = [(position _logic), _logicName, Ares_SmokeGroup] call Ares_fnc_CreateLogic;
-	[[_sourceObject]] call Ares_fnc_AddUnitsToCurator;
-	
-	_dialogSmokeType = _dialogResult select 0;
-	[[_dialogSmokeType, _sourceObject], "Ares_Spawn_Smoke_Function", true, true] call BIS_fnc_MP;
+
+	[[(_dialogResult select 0), _sourceObject], "Ares_Spawn_Smoke_Function", true, true] call BIS_fnc_MP;
 };
 
 #include "\ares_zeusExtensions\module_footer.hpp"
