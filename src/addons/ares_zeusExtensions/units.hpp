@@ -27,6 +27,7 @@ units[] =
 	"Ares_Module_Remove_Objects_From_Curator",
 	"Ares_Module_Save_Objects_For_Paste",
 	"Ares_Module_Spawn_Custom_Mission_Objects",
+	"Ares_Module_Spawn_Smoke",
 	"Ares_Module_Spawn_Submarine",
 	"Ares_Module_Spawn_Trawler",
 	"Ares_Module_SurrenderSingleUnit",
@@ -43,6 +44,4 @@ units[] =
 	"Ares_Module_Util_Create_Composition",
 	"Ares_Module_Util_Remove_Nearest_Persistent",
 	// "Ares_Module_Behaviour_Land_Helicopter",
-	// "Ares_Module_Spawn_Smoke",
-	// "Ares_Module_Test",
 };

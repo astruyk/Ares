@@ -32,6 +32,7 @@ class Ares // This bit will be prefixed when actually calling the function (e.g.
 		class ArsenalSetup;
 		class BroadcastCode;
 		class CompositionGrabber;
+		class CreateLogic;
 		class GenerateArsenalBlacklist;
 		class GenerateArsenalDataList;
 		class GetArrayDataFromUser;
