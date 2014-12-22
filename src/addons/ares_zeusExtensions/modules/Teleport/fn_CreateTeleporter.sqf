@@ -49,8 +49,29 @@ Ares_addNewTeleportMarkerActions =
 	} forEach (Ares_TeleportMarkers);
 };
 
-// Create a new teleport marker and add it to the list of markers that exist.
-_teleportMarker = "FlagPole_F" createVehicle (getPos _logic);
+// Check to see if there's an object under the cursor or not
+_unitUnderMouseCursor = [_logic, false] call Ares_fnc_GetUnitUnderCursor;
+
+_teleportMarker = objNull;
+if (isNull _unitUnderMouseCursor) then
+{
+	// Create a new object to make a telporter
+	_teleportMarker = "FlagPole_F" createVehicle (getPos _logic);
+}
+else
+{
+	if (_unitUnderMouseCursor getVariable ["teleportMarkerName", ""] == "") then
+	{
+		_teleportMarker = _unitUnderMouseCursor;
+	}
+	else
+	{
+		// Unit is already a teleporter! Log an error and exit.
+		[objNull, "Object is already a teleporter"] call bis_fnc_showCuratorFeedbackMessage;
+		breakTo MAIN_SCOPE_NAME;
+	}
+};
+
 _isFirstCallToCreateTeleporter = false;
 if (isNil "Ares_TeleportMarkers") then
 {
