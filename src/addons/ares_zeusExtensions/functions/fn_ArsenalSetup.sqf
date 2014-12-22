@@ -11,7 +11,7 @@
 */
 
 _ammoBox = [_this, 0] call BIS_fnc_Param;
-_itemData = [_this, 1, [], [[]], [4]] call BIS_fnc_Param;
+_itemData = [_this, 1, [], [[]]] call BIS_fnc_Param;
 _removeItems = [_this, 2, false, [false]] call BIS_fnc_Param;
 _addGlasses = [_this, 3, false, [false]] call BIS_fnc_Param;
 
@@ -36,6 +36,37 @@ if (_removeItems) then
 [_ammoBox, _itemData select 2, true] call BIS_fnc_addVirtualMagazineCargo;
 [_ammoBox, _itemData select 3, true] call BIS_fnc_addVirtualWeaponCargo;
 
+// Optionally add non-virtual items (if supplied)
+if (count _itemData > 4) then
+{
+	{
+		// The data for the non-virtual items should be in the format returned by 'getItemCargo' and its variants. That is:
+		// [["SomeClassName", "SomeOtherClassName"], [10, 5]] <-- indicates 10 of "SomeClassName" and 5 of "SomeOtherClassName"
+		_data = _itemData select _x;
+		if (count _data == 2) then
+		{
+			_names = _data select 0;
+			_counts = _data select 1;
+			if (count _names > 0 && count _counts > 0 && (count _names) == (count _counts)) then
+			{
+				for "_index" from 0 to ((count _names) - 1) do
+				{
+					_currentName = _names select _index;
+					_currentCount = _counts select _index;
+					[format["Adding '%1' x %2", _currentName, _currentCount]] call Ares_fnc_LogMessage;
+					switch (_x) do
+					{
+						case 4: { _ammoBox addBackpackCargoGlobal [_currentName, _currentCount]; };
+						case 5: { _ammoBox addItemCargoGlobal [_currentName, _currentCount]; };
+						case 6: { _ammoBox addMagazineCargoGlobal [_currentName, _currentCount]; };
+						case 7: { _ammoBox addWeaponCargoGlobal [_currentName, _currentCount]; };
+					};
+				};
+			};
+		};
+	} forEach [4,5,6,7];
+};
+
 if (_addGlasses) then
 {
 	// For some reason you can't add glasses in the ammo box config. Add them manually.
@@ -58,7 +89,7 @@ if (_addGlasses) then
 		"G_Sport_Greenblack",	//Sport Shades (Yetti)
 		"G_Sport_Checkered",	//Sport Shades (Style)
 		"G_Sport_Red",		//Sport Shades (Fire)
-		"G_Tactical_Black"	//Tactical Shades
+		"G_Tactical_Black"	//Tactical Shades 
 	];
 	[_ammoBox, _allGlasses, true] call BIS_fnc_addVirtualItemCargo;
 };

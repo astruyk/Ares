@@ -7,7 +7,7 @@ if (not isnull _ammoBox) then
 	// in dedicated and local servers.
 	Ares_CopyPaste_Dialog_Text = '';
 
-	_parsedValue = [4] call Ares_fnc_GetArrayDataFromUser;
+	_parsedValue = [] call Ares_fnc_GetArrayDataFromUser;
 	if (typeName _parsedValue == typeName []) then
 	{
 		[_ammoBox, _parsedValue, true] call Ares_fnc_ArsenalSetup;
