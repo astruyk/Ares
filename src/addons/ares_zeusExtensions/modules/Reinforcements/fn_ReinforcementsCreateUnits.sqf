@@ -9,6 +9,8 @@
 #define ARMED_BOAT_UNIT_POOL_INDEX 10
 #define INFANTRY_UNIT_POOL_INDEX 11
 
+#define FIRST_SPECIFIC_LZ_OR_RP_OPTION_INDEX 4
+
 #include "\ares_zeusExtensions\module_header.hpp"
 
 if (isNil "Ares_Reinforcement_Unit_Pools"
@@ -36,6 +38,7 @@ if (count _allLzs == 0) then
 	[objNull, "You must have at least one LZ for the transport to head to."] call bis_fnc_showCuratorFeedbackMessage;
 	breakTo MAIN_SCOPE_NAME;
 };
+_allRps = allMissionObjects "Ares_Module_Reinforcements_Create_Rp";
 
 // Generate list of pool names to let user choose from
 _poolNames = [];
@@ -48,14 +51,23 @@ _validPools = [];
 	};
 } forEach _allUnitPools;
 
+_lzOptions = ["Random", "Nearest", "Farthest", "Least Used"];
+{
+	_lzOptions pushBack (name _x);
+} forEach _allLzs;
+_rpOptions = ["Random", "Nearest", "Farthest", "Least Used"];
+{
+	_rpOptions pushBack (name _x);
+} forEach _allRps;
+
 // Show the user the dialog
 _dialogResult = ["Create Reinforcements",
 	[
 		["Side", _poolNames, 0],
 		["Vehicle Type", ["Unarmed Light Vehicles + Scouts", "Armed Light Vehicles", "Dedicated Troop Trucks", "APC's & Heavy Troop Transports", "Unarmed Aircraft", "Light Armed Aircraft", "Unarmed Boats", "Armed Boats"]],
 		["Vehicle Behaviour After Dropoff", ["RTB and Despawn", "Stay at LZ"]],
-		["Vehicle Landing Zone", ["Random", "Nearest", "Farthest", "Least Used"]],
-		["Unit Rally Point", ["Random", "Nearest", "Farthest", "Least Used"]],
+		["Vehicle Landing Zone", _lzOptions],
+		["Unit Rally Point", _rpOptions],
 		["Unit Behaviour", ["Default", "Relaxed", "Cautious", "Combat"]]
 	]
 ] call Ares_fnc_ShowChooseDialog;
@@ -89,29 +101,35 @@ if (_dialogVehicleClass == UNARMED_HELO_UNIT_POOL_INDEX || _dialogVehicleClass =
 
 [format ["Dialog results: Pool=%1, VehicleType=%2, Behaviour=%3, LzAlgorithm=%4, RpAlgorithm=%5", _dialogPool, _dialogVehicleClass, _dialogVehicleBehaviour, _dialogLzAlgorithm, _dialogRpAlgorithm]] call Ares_fnc_LogMessage;
 
-// Choose an LZ to unload at.
-_lz = _allLzs call BIS_fnc_selectRandom;
-
-// Choose the LZ based on the chosen behaviour
-if (_dialogLzAlgorithm == 1) then
+// Choose the LZ based on what the user indicated
+_lz = objNull;
+switch (_dialogLzAlgorithm) do
 {
-	// Nearest
-	_lz = [_spawnPosition, _allLzs] call Ares_fnc_GetNearest;
-};
-if (_dialogLzAlgorithm == 2) then
-{
-	// Farthest
-	_lz = [_spawnPosition, _allLzs] call Ares_fnc_GetFarthest;
-};
-if (_dialogLzAlgorithm == 3) then
-{
-	// Least used
+	case 0: // Random
 	{
-		if (_x getVariable ["Ares_Lz_Count", 0] < _lz getVariable ["Ares_Lz_Count", 0]) then
+		_lz = _allLzs call BIS_fnc_selectRandom;
+	};
+	case 1: // Nearest
+	{
+		_lz = [_spawnPosition, _allLzs] call Ares_fnc_GetNearest;
+	};
+	case 2: // Furthest
+	{
+		_lz = [_spawnPosition, _allLzs] call Ares_fnc_GetFarthest;
+	};
+	case 3: // Least used
+	{
 		{
-			_lz = _x;
-		};
-	} forEach _allLzs;
+			if (_x getVariable ["Ares_Lz_Count", 0] < _lz getVariable ["Ares_Lz_Count", 0]) then
+			{
+				_lz = _x;
+			};
+		} forEach _allLzs;
+	};
+	default // Specific LZ.
+	{
+		_lz = _allLzs select (_dialogLzAlgorithm - FIRST_SPECIFIC_LZ_OR_RP_OPTION_INDEX);
+	};
 };
 
 // Now that we've chosen an LZ, increment the count for it.
@@ -178,9 +196,6 @@ if (_dialogVehicleBehaviour == 1) then
 // Add vehicle to curator
  [(units _vehicleGroup) + [(vehicle (leader _vehicleGroup))]] call Ares_fnc_AddUnitsToCurator;
 
-// Define this once.. Before spawning troops.
-_allRps = allMissionObjects "Ares_Module_Reinforcements_Create_Rp";
-
 // Spawn the units and load them into the vehicle
 _vehicle = vehicle (leader _vehicleGroup);
 _maxCargoSpacesToLeaveEmpty = 3;
@@ -227,26 +242,35 @@ do
 	// Choose a RP for the squad to head to once unloaded and set their waypoint.
 	if (count _allRps > 0) then
 	{
-		_rp = _allRps call BIS_fnc_selectRandom;
-
-		// Choose the RP based on the algorithm chosen
-		if (_dialogRpAlgorithm == 1) then
+		// Choose the RP based on the algorithm the user selected
+		_rp = objNull;
+		switch (_dialogRpAlgorithm) do
 		{
-			_rp = [position _lz, _allRps] call Ares_fnc_GetNearest;
-		};
-		if (_dialogRpAlgorithm == 2) then
-		{
-			_rp = [position _lz, _allRps] call Ares_fnc_GetFarthest;
-		};
-		if (_dialogRpAlgorithm == 3) then
-		{
-			// Least used
+			case 0: // Random
 			{
-				if (_x getVariable ["Ares_Rp_Count", 0] < _rp getVariable ["Ares_Rp_Count", 0]) then
+				_rp = _allRps call BIS_fnc_selectRandom;
+			};
+			case 1: // Nearest
+			{
+				_rp = [position _lz, _allRps] call Ares_fnc_GetNearest;
+			};
+			case 2: // Furthest
+			{
+				_rp = [position _lz, _allRps] call Ares_fnc_GetFarthest;
+			};
+			case 3: // Least Used
+			{
 				{
-					_rp = _x;
-				};
-			} forEach _allRps;
+					if (_x getVariable ["Ares_Rp_Count", 0] < _rp getVariable ["Ares_Rp_Count", 0]) then
+					{
+						_rp = _x;
+					};
+				} forEach _allRps;
+			};
+			default
+			{
+				_rp = _allRps select (_dialogRpAlgorithm - FIRST_SPECIFIC_LZ_OR_RP_OPTION_INDEX);
+			};
 		};
 
 		// Now that we've chosen an RP, increment the count for it.
