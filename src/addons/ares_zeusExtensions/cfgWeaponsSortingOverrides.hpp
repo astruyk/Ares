@@ -17,11 +17,14 @@ class H_Cap_red;
 class H_Bandanna_surfer;
 class H_Booniehat_khk;
 class H_MilCap_oucamo;
+class Vest_Camo_Base;
+class Vest_NoCamo_Base;
 
 // CSAT - but has to be defined first because some other hats depend on it
 class H_MilCap_ocamo : H_HelmetB { side = SIDE_CSAT; }
 
 // NATO
+// Headgear
 class H_Bandanna_mcamo : H_Bandanna_surfer { side = SIDE_NATO; }
 class H_Beret_02 : H_Beret_blk { side = SIDE_NATO; }
 class H_Beret_grn_SF : H_Beret_blk { side = SIDE_NATO; }
@@ -44,8 +47,19 @@ class H_Helmet_Kerry : H_HelmetB { side = SIDE_NATO; }
 class H_MilCap_mcamo : H_MilCap_ocamo { side = SIDE_NATO; }
 class H_PilotHelmetFighter_B : H_HelmetB { side = SIDE_NATO; }
 class H_PilotHelmetHeli_B : H_HelmetB { side = SIDE_NATO; }
+// Vests
+class V_PlateCarrier1_blk : Vest_Camo_Base { side = SIDE_NATO; }
+class V_PlateCarrier1_rgr : Vest_NoCamo_Base { side = SIDE_NATO; }
+class V_PlateCarrier3_rgr : Vest_NoCamo_Base { side = SIDE_NATO; }
+class V_PlateCarrierGL_rgr : Vest_NoCamo_Base { side = SIDE_NATO; }
+class V_PlateCarrierSpec_rgr : Vest_NoCamo_Base { side = SIDE_NATO; }
+class V_RebreatherB : Vest_Camo_Base { side = SIDE_NATO; }
+class V_I_G_resistanceLeader_F : Vest_Camo_Base { side = SIDE_NATO; }
+// Weapons
+//...
 
 // OPFOR
+// Headgear
 class H_Beret_ocamo : H_Beret_blk { side = SIDE_CSAT; }
 class H_Cap_brn_SPECOPS : H_Cap_red { side = SIDE_CSAT; }
 class H_CrewHelmetHeli_O : H_CrewHelmetHeli_B { side = SIDE_CSAT; }
@@ -53,8 +67,13 @@ class H_HelmetCrew_O : H_HelmetCrew_B { side = SIDE_CSAT; }
 class H_HelmetO_ocamo : H_HelmetB { side = SIDE_CSAT; }
 class H_PilotHelmetFighter_O : H_PilotHelmetFighter_B { side = SIDE_CSAT; }
 class H_PilotHelmetHeli_O : H_PilotHelmetHeli_B { side = SIDE_CSAT; }
+// Vests
+class V_HarnessO_brn : Vest_Camo_Base { side = SIDE_CSAT; }
+class V_HarnessOGL_brn : Vest_Camo_Base { side = SIDE_CSAT; }
+class V_RebreatherIR : V_RebreatherB { side = SIDE_CSAT; }
 
 // AAF
+// Headgear
 class H_Booniehat_dgtl : H_Booniehat_khk { side = SIDE_AAF; }
 class H_Cap_blk_Raven : H_Cap_red { side = SIDE_AAF; }
 class H_CrewHelmetHeli_I : H_CrewHelmetHeli_B { side = SIDE_AAF; }
@@ -63,8 +82,13 @@ class H_HelmetIA : H_HelmetB { side = SIDE_AAF; }
 class H_MilCap_dgtl : H_MilCap_oucamo { side = SIDE_AAF; }
 class H_PilotHelmetFighter_I : H_PilotHelmetFighter_B { side = SIDE_AAF; }
 class H_PilotHelmetHeli_I : H_PilotHelmetHeli_B { side = SIDE_AAF; }
+// Vests
+class V_PlateCarrierIA1_dgtl : Vest_Camo_Base { side = SIDE_AAF; }
+class V_RebreatherIA : V_RebreatherB { side = SIDE_AAF; }
+
 
 // CIVILIAN
+// Headgear
 class H_Bandanna_surfer_blk : H_Bandanna_surfer { side = SIDE_CIV; }
 class H_Bandanna_surfer_grn : H_Bandanna_surfer { side = SIDE_CIV; }
 class H_Beret_blk_POLICE : H_Beret_blk { side = SIDE_CIV; }
@@ -73,3 +97,5 @@ class H_Cap_press : H_Cap_red { side = SIDE_CIV; }
 class H_Cap_surfer : H_Cap_red { side = SIDE_CIV; }
 class H_RacingHelmet_1_F : H_HelmetB_camo { side = SIDE_CIV; }
 class H_StrawHat : H_HelmetB { side = SIDE_CIV; }
+// Vests
+class V_Press_F : Vest_Camo_Base { side = SIDE_CIV; }
