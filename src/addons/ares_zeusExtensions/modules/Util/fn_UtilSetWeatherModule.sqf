@@ -1,5 +1,5 @@
 #include "\ares_zeusExtensions\module_header.hpp"
-#define SHARP_DECAY_VALUE = 0.2
+#define SHARP_DECAY_VALUE 0.2
 #define SMOOTH_DECAY_VALUE 0.002
 
 
@@ -31,7 +31,7 @@ if (isNil "Ares_Change_Weather_Function") then
 _altitudes = [0, 5, 10, 15, 20, 25, 30, 40, 50, 60, 70, 80, 100, 125, 150, 200, 300];
 _altitudeDisplayValues = [];
 {
-	_altitudeDisplayValues pushBack format ["%1 m", _x];
+	_altitudeDisplayValues pushBack (format ["%1 m", _x]);
 } forEach _altitudes;
 
 _dialogResult = [
@@ -40,7 +40,7 @@ _dialogResult = [
 			["Overcast", ["Off", "10%", "20%", "30%", "40%", "50%", "60%", "70%", "80%", "90%", "Full"]],
 			["Rain (Overcast > 70%)", ["Off", "10%", "20%", "30%", "40%", "50%", "60%", "70%", "80%", "90%", "Full"]],
 			["Fog Setting", ["None", "10%", "20%", "30%", "40%", "50%", "60%", "70%", "80%", "90%", "Full"]],
-			["Fog Decay", ["(0%) Smooth Transition", "10%", "20%", "30%", "40%", "50%", "60%", "70%", "80%", "90%", "(100%) Sharp Transition"]],
+			["Fog Decay", ["Smooth Transition / Low Falloff", "10%", "20%", "30%", "40%", "50%", "60%", "70%", "80%", "90%", "Sharp Transition / High Falloff"]],
 			["Fog Altitude (ASL)", _altitudeDisplayValues]
 		]
 	] call Ares_fnc_ShowChooseDialog;
