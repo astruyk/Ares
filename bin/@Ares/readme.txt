@@ -7,6 +7,19 @@ Or check out the source code at: https://github.com/astruyk/Ares
 
 Changelists
 
+V.1.5.0
+* Arsenal - Copying to clipboard (and pasting) now includes non-virtual items as well
+* Arsenal - Fixes a bunch of issues where side-filtering wasn't applying to Vests, Weapons and Backpacks when using 'Add All...'
+* Arsenal - Performance improvements when using 'Add All...'
+* Behaviours - When choosing where to fire artillery you can now select a specific target by name
+* General - Attempt to fix an issue when getting items under mouse when reconnecting to a server after running ares
+* General - When in Zeus UI holding left CTRL and double-clicking on a unit will immediately take control of that unit.
+* Reinforcements - When choosing LZ's and RP's you can now select specific ones by name
+* Save/Load - Snap placed objects to the ground when using 'Paste Into New Location'
+* Spawn - Add 'Spawn Smoke' module for spawning persistent smoke stacks. They can be attached to existing objects or placed in empty space.
+* Teleport - Dropping the 'Teleporter' module on an object will now make that object a teleporter instead of creating a new one.
+* Util - Added first-pass at a 'Change Weather' module.
+
 V.1.4.0
 * Added a bunch more premade base compositions from Vernei's prebuilt pastable bases ( http://www.armaholic.com/page.php?id=27531 ). Used with permission.
 
