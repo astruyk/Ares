@@ -41,7 +41,7 @@ _dialogResult = [
 			["Rain (Overcast > 70%)", ["Off", "10%", "20%", "30%", "40%", "50%", "60%", "70%", "80%", "90%", "Full"]],
 			["Fog Setting", ["None", "10%", "20%", "30%", "40%", "50%", "60%", "70%", "80%", "90%", "Full"]],
 			["Fog Decay", ["(0%) Smooth Transition", "10%", "20%", "30%", "40%", "50%", "60%", "70%", "80%", "90%", "(100%) Sharp Transition"]],
-			["Fog Altitude (ASL)", _altitudeDisplayValues]]
+			["Fog Altitude (ASL)", _altitudeDisplayValues]
 		]
 	] call Ares_fnc_ShowChooseDialog;
 
