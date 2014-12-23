@@ -5,5 +5,6 @@ class UtilModules
 	class RemoveObjectsFromCuratorModule;
 	class UtilCreateCompositionModule;
 	class UtilRemoveClosestPersistentModule;
+	class UtilSetWeatherModule;
 };
 

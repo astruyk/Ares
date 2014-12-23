@@ -43,5 +43,6 @@ units[] =
 	"Ares_Module_UnGarrison",
 	"Ares_Module_Util_Create_Composition",
 	"Ares_Module_Util_Remove_Nearest_Persistent",
+	"Ares_Module_Util_Change_Weather",
 	// "Ares_Module_Behaviour_Land_Helicopter",
 };
