@@ -7,6 +7,9 @@ Or check out the source code at: https://github.com/astruyk/Ares
 
 Changelists
 
+V.1.5.1
+* Fix a signing issue that prevented connection to servers running some other mods (see http://feedback.arma3.com/view.php?id=22133 )
+
 V.1.5.0
 * Arsenal - Copying to clipboard (and pasting) now includes non-virtual items as well
 * Arsenal - Fixes a bunch of issues where side-filtering wasn't applying to Vests, Weapons and Backpacks when using 'Add All...'
