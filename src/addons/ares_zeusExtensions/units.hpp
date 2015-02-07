@@ -45,9 +45,5 @@ units[] =
 	"Ares_Module_Util_Remove_Nearest_Persistent",
 	"Ares_Module_Util_Change_Weather",
 	// "Ares_Module_Behaviour_Land_Helicopter",
-	"Ares_Module_User_Defined_0",
-	"Ares_Module_User_Defined_1",
-	"Ares_Module_User_Defined_2",
-	"Ares_Module_User_Defined_3",
-	"Ares_Module_User_Defined_4",
+	#include "units_customModules.hpp"
 };
