@@ -1,17 +1,10 @@
 /*
 	Does magic to add custom items to a category in Zeus.
-	
-	Parameters:
-		0 - [String] The name of the module to add. Must match the name defined in CfgFactionClasses.
-		
-	This code taken (pretty much verbatim) from CuratorPresetsModule (CPM).
 */
 
 #include "\A3\ui_f_curator\ui\defineResinclDesign.inc"
 
-private ["_categoryClass","_display","_ctrl","_category","_categoryName","_categoryMod","_subCategories","_categoryBranches","_moduleClassList","_index"];
-
-_categoryClass = _this select 0;
+private ["_display","_ctrl","_category","_categoryName","_categoryMod","_subCategories","_categoryBranches","_moduleClassList","_index"];
 
 disableSerialization;
 
@@ -20,76 +13,111 @@ while {isNull (findDisplay IDD_RSCDISPLAYCURATOR)} do {
 	sleep 1;
 };
 
-//Get the UI control
+// Get the UI control
 _display = findDisplay IDD_RSCDISPLAYCURATOR;
 _ctrl = _display displayCtrl IDC_RSCDISPLAYCURATOR_CREATE_MODULES;
 
-//Get the category details
-_category = (configFile >> "CfgFactionClasses" >> _categoryClass);
-_categoryName = gettext (_category >> "displayName");
-_categoryMod = gettext (_category >> "addon");
-_subCategories = ((_category >> "subCategories") call BIS_fnc_returnChildren);
+// Generate a structure holding the data for all the entries we need to add to the display.
+_leafData = []; // An array of arrays with information on items in each category - [ ["CategoryName", "DisplayName", "ModuleClass", "icon"], ... ]
 
-//Check to see if our categories already exist, and if they do then delete them
+// Generate the leaf data for the modules defined as items in the mod.
 {
-	_subCategoryName = gettext (_x >> "displayName");
-	for [{_i=0},{_i<(_ctrl tvCount [])},{_i=_i+1}] do 
+	// Only add modules that define themselves in the "Ares" category
+	_moduleCategory = gettext (configFile >> "CfgVehicles" >> _x >> "category");
+	if(_moduleCategory == "Ares") then
+	{
+		_categoryName = gettext (configFile >> "CfgVehicles" >> _x >> "subCategory");
+		_displayName = gettext (configFile >> "CfgVehicles" >> _x >> "displayName");
+		_className = _x;
+		_icon = gettext (configFile >> "CfgVehicles" >> _x >> "icon");
+		_leafData pushBack [_categoryName, _displayName, _className, _icon];
+	};
+} forEach getArray (configFile >> "cfgPatches" >> "Ares" >> "units");
+
+// Process the user-defined modules and grab the display data for them.
+if (not isNil "Ares_Custom_Modules") then
+{
+	{
+		_categoryName = _x select 0;
+		_displayName = _x select 1;
+		_className = format ["Ares_Module_User_Defined_%1", _forEachIndex];
+		_icon = "\ares_zeusExtensions\data\icon_ares.paa";
+		_leafData pushBack [_categoryName, _displayName, _className, _icon];
+	} forEach Ares_Custom_Modules;
+};
+
+// Figure out the names of the categories we need to generate - and generate some data for them.
+_categoryData = [];
+{
+	_categoryName = _x select 0;
+	
+	_isAlreadyInData = false;
+	{
+		if (_x == _categoryName) exitWith { _isAlreadyInData = true; };
+	} forEach _categoryData;
+	
+	if (not _isAlreadyInData) then
+	{
+		_categoryData pushBack _categoryName;
+	};
+} forEach _leafData;
+
+// Check to see if our categories already exist, and if they do then delete them
+{
+	_categoryName = _x;
+	for [{ _i = 0 }, { _i < (_ctrl tvCount []) }, { _i = _i + 1 }] do 
 	{
 		_tvText = _ctrl tvText [_i];
-		if(_tvText == _subCategoryName) then {
+		if(_tvText == _categoryName) then
+		{
 			_ctrl tvDelete [_i];
 		};
 	};
-} forEach _subCategories;
+} forEach _categoryData;
 
-//Create the categories
+// Create new categories and add them to the tree.
 _categoryBranches = [];
 {
-	_tvText = gettext (_x >> "displayName");
-	_tvData = gettext (_x >> "moduleClass");
-	_tvIcon = gettext (_x >> "icon");
+	_tvText = _x;
+	_tvIcon = "\ares_zeusExtensions\data\icon_ares.paa";
+	_tvData = "Ares_Module_Empty"; // All of the categories use the 'Empty' module. There's no logic associated with them.
 	_tvBranch = _ctrl tvAdd [[], _tvText];
 	_ctrl tvSetData [[_tvBranch], _tvData];
 	_ctrl tvSetPicture [[_tvBranch], _tvIcon];
 
-	_categoryBranches set [count _categoryBranches, _tvBranch];
-} forEach _subCategories;
+	_categoryBranches pushBack _tvBranch;
+} forEach _categoryData;
 
-_moduleClassList = getArray (configFile >> "cfgPatches" >> _categoryMod >> "units");
-
-//Add all of the modules to each of their categories
-_index = 0;
+//Add all of the leaf nodes into their correct categories
 {
-	_moduleCategory = gettext (configFile >> "CfgVehicles" >> _x >> "category");
+	//Get values from leaf data [["CategoryName", "DisplayName", "ModuleClass", "icon"], ...]
+	_moduleSubCategory = _x select 0;
+	_moduleDisplayName = _x select 1;
+	_moduleClassName = _x select 2;
+	_moduleIcon = _x select 3;
 
-	//Check if the category is a match and the module is public
-	if(_moduleCategory == _categoryClass) then {
-		//Get values from config
-		_moduleDisplayName = gettext (configFile >> "CfgVehicles" >> _x >> "displayName");
-		_moduleIcon = gettext (configFile >> "CfgVehicles" >> _x >> "icon");
-		_moduleSubCategory = gettext (configFile >> "CfgVehicles" >> _x >> "subCategory");
-
-		_tvModuleBranch = nil;
-		_idx = 0;
+	// Serach for the branch we need to add this item to
+	_tvModuleBranch = nil;
+	{
+		if(_moduleSubCategory == _x) exitWith
 		{
-			if(_moduleSubCategory == configName _x) then {
-				_tvModuleBranch = _categoryBranches select _idx;
-			};
-			_idx = _idx + 1;
-		} forEach _subCategories;
-
-		//Create the new tree entry
+			// We assume the _categoryBrances are a parallel array with the _categoryBranches array.
+			_tvModuleBranch = _categoryBranches select _forEachIndex;
+		};
+	} forEach _categoryData;
+	
+	if (not isNil "_tvmodulebranch") then
+	{
+		//Create the new tree entry in the branch
 		_leaf = _ctrl tvAdd [[_tvModuleBranch], _moduleDisplayName];
 		_newPath = [_tvModuleBranch, _leaf];
 
 		//Copy all of the data into it
-		_ctrl tvSetData [_newPath, _x];
+		_ctrl tvSetData [_newPath, _moduleClassName];
 		_ctrl tvSetPicture [_newPath, _moduleIcon];
-		_ctrl tvSetValue [_newPath, _index];
-
-		_index = _index + 1;
+		_ctrl tvSetValue [_newPath, _forEachIndex];
 	};
-} forEach _moduleClassList;
+} forEach _leafData;
 
 //Sort the new categories
 {

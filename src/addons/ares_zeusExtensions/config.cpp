@@ -24,77 +24,6 @@ class CfgPatches
 	};
 };
 
-class CfgFactionClasses
-{
-	class Ares // The section the module will show up under in the editor?? Or is this just whatever you want?
-	{
-		displayname = "Ares";	// Name of the module section.
-		priority = 8;
-		side = 7;
-
-		addon = "Ares";
-
-		class subCategories
-		{
-			class Arsenal
-			{
-				displayName = "Arsenal";
-				moduleClass = "Ares_Module_Empty";
-				icon = "\ares_zeusExtensions\data\icon_ares.paa";
-			};
-
-			class Behaviours
-			{
-				displayname = "AI Behaviours";
-				moduleClass = "Ares_Module_Empty";
-				icon = "\ares_zeusExtensions\data\icon_ares.paa";
-			};
-
-			class Equipment
-			{
-				displayname = "Equipment";
-				moduleClass = "Ares_Module_Empty";
-				icon = "\ares_zeusExtensions\data\icon_ares.paa";
-			};
-			
-			class Reinforcements
-			{
-				displayName = "Reinforcements";
-				moduleClass = "Ares_Module_Empty";
-				icon = "\ares_zeusExtensions\data\icon_ares.paa";
-			};
-
-			class SaveLoad
-			{
-				displayname = "Save/Load";
-				moduleClass = "Ares_Module_Empty";
-				icon = "\ares_zeusExtensions\data\icon_ares.paa";
-			};
-			
-			class Spawn
-			{
-				displayName = "Spawn";
-				moduleClass = "Ares_Module_Empty";
-				icon = "\ares_zeusExtensions\data\icon_ares.paa";
-			};
-
-			class Teleport
-			{
-				displayName = "Teleport";
-				moduleClass = "Ares_Module_Empty";
-				icon = "\ares_zeusExtensions\data\icon_ares.paa";
-			};
-			
-			class Util
-			{
-				displayName = "Util";
-				moduleClass = "Ares_Module_Empty";
-				icon = "\ares_zeusExtensions\data\icon_ares.paa";
-			};
-		};
-	};
-};
-
 class CfgVehicles
 {
 	class Logic;
@@ -142,11 +71,12 @@ class CfgVehicles
 	class Ares_Arsenal_Module_Base : Ares_Module_base
 	{
 		subCategory = "Arsenal";
+		
 	};
 
 	class Ares_Behaviours_Module_Base : Ares_Module_Base
 	{
-		subCategory = "Behaviours";
+		subCategory = "AI Behaviours";
 	};
 	
 	class Ares_Equipment_Module_Base : Ares_Module_Base
@@ -161,7 +91,7 @@ class CfgVehicles
 	
 	class Ares_SaveLoad_Module_Base : Ares_Module_Base
 	{
-		subCategory = "SaveLoad";
+		subCategory = "Save/Load";
 	};
 
 	class Ares_Spawn_Module_Base : Ares_Module_Base
@@ -173,7 +103,13 @@ class CfgVehicles
 	{
 		subCategory = "Teleport";
 	};
-	
+
+	class Ares_User_Defined_Module_Base : Ares_Module_Base
+	{
+		category = "User Defined"; // Keeps these from being added to the UI automatically.
+		subCategory = "";
+	};
+
 	class Ares_Util_Module_Base : Ares_Module_Base
 	{
 		subCategory = "Util";
@@ -199,6 +135,7 @@ class CfgVehicles
 	#include "cfgVehiclesModulesArsenal.hpp"
 	#include "cfgVehiclesModulesReinforcements.hpp"
 	#include "cfgVehiclesModulesUtil.hpp"
+	#include "cfgVehiclesModulesUserDefined.hpp"
 	
 	#include "cfgVehiclesSortingOVerrides.hpp"
 };
