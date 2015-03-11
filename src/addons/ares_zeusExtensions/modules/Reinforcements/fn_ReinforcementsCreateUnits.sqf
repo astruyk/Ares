@@ -119,6 +119,7 @@ switch (_dialogLzAlgorithm) do
 	};
 	case 3: // Least used
 	{
+		_lz = _allLzs call BIS_fnc_selectRandom; // Choose randomly to start.
 		{
 			if (_x getVariable ["Ares_Lz_Count", 0] < _lz getVariable ["Ares_Lz_Count", 0]) then
 			{
@@ -260,11 +261,12 @@ do
 			};
 			case 3: // Least Used
 			{
+				_rp = _allRps call BIS_fnc_selectRandom; // Choose randomly to begin with.
 				{
 					if (_x getVariable ["Ares_Rp_Count", 0] < _rp getVariable ["Ares_Rp_Count", 0]) then
 					{
 						_rp = _x;
-					};
+					}
 				} forEach _allRps;
 			};
 			default
