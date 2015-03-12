@@ -9,7 +9,8 @@ _allAmmunition = getArtilleryAmmo [_artillery];
 
 if (count _allAmmunition > 0) then
 {
-	_allTargets = allMissionObjects "Ares_Module_Behaviour_Create_Artillery_Target";
+	_allTargetsUnsorted = allMissionObjects "Ares_Module_Behaviour_Create_Artillery_Target";
+	_allTargets = [_allTargetsUnsorted, [], { _x getVariable ["SortOrder", 0]; }, "ASCEND"] call BIS_fnc_sortBy;
 	_targetChoices = ["Random", "Nearest", "Farthest"];
 	{
 		_targetChoices pushBack (name _x);

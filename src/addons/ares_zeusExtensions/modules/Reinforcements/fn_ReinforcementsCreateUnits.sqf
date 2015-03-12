@@ -32,13 +32,16 @@ else
 	_allUnitPools = Ares_Reinforcement_Unit_Pools + Ares_Reinforcement_Mission_Unit_Pools;
 };
 
-_allLzs = allMissionObjects "Ares_Module_Reinforcements_Create_Lz";
-if (count _allLzs == 0) then
+_allLzsUnsorted = allMissionObjects "Ares_Module_Reinforcements_Create_Lz";
+if (count _allLzsUnsorted == 0) then
 {
 	[objNull, "You must have at least one LZ for the transport to head to."] call bis_fnc_showCuratorFeedbackMessage;
 	breakTo MAIN_SCOPE_NAME;
 };
-_allRps = allMissionObjects "Ares_Module_Reinforcements_Create_Rp";
+_allLzs = [_allLzsUnsorted, [], { _x getVariable ["SortOrder", 0]; }, "ASCEND"] call BIS_fnc_sortBy;
+
+_allRpsUnsorted = allMissionObjects "Ares_Module_Reinforcements_Create_Rp";
+_allRps = [_allRpsUnsorted, [], { _x getVariable ["SortOrder", 0]; }, "ASCEND"] call BIS_fnc_sortBy;
 
 // Generate list of pool names to let user choose from
 _poolNames = [];
