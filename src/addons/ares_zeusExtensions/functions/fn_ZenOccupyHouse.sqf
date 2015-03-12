@@ -128,7 +128,7 @@ for [{_j = 0}, {(_unitIndex < count _units) && {(count _buildingPosArray > 0)}},
                                     (_units select _unitIndex) setUnitPos "UP";
                                 };
 
-                                (_units select _unitIndex) lookAt ([_housePos, CHECK_DISTANCE, (90 - _i), (_housePos select 2) - (getTerrainHeightASL _housePos)] call _Zen_ExtendPosition);
+                                (_units select _unitIndex) doWatch ([_housePos, CHECK_DISTANCE, (90 - _i), (_housePos select 2) - (getTerrainHeightASL _housePos)] call _Zen_ExtendPosition);
                                 //doStop (_units select _unitIndex);
 								//(_units select _unitIndex) disableAI "MOVE";
 								(_units select _unitIndex) forceSpeed 0;
