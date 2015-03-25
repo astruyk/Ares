@@ -1,6 +1,9 @@
 // Init some special data that Ares will use. These will sometimes be modified by missions.
 call compile preprocessFileLineNumbers '\ares_zeusExtensions\data\Ares_Reinforcement_Unit_Pools.sqf';
 
+// Add any custom modules we want
+call compile preprocessFileLineNumbers '\ares_zeusExtensions\scripts\registerBuiltInCustomModules.sqf';
+
 // Blacklist for modules that grab objects. These types should not be added to Zeus automatically.
 Ares_EditableObjectBlacklist =
 	[
