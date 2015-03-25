@@ -4,11 +4,7 @@ class Ares // This bit will be prefixed when actually calling the function (e.g.
 	class init
 	{
 		file = "\ares_zeusExtensions\functions\init";
-
 		class InitAres { preInit = 1; }
-		class InitAresEvents { preInit = 1; }
-		class InitAresUi { preInit = 1; }
-		class InitAresPlayerActions {};
 	};
 
 	// Functions called in response to events
