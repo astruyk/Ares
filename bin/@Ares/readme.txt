@@ -7,6 +7,19 @@ Or check out the source code at: https://github.com/astruyk/Ares
 
 Changelists
 
+V.1.6.0
+* Arsenal - Added ability to put full (unfiltered) Arsenal on an object.
+* Arsenal - Renamed the 'Add All...' option to 'Add Filtered...'
+* Behaviours - Fixed issue where AI units that were garrisoned wouldn't turn to shoot (#179)
+* General - Fixed an issue where rejoining a dedicated server would sometimes prevent proper Ares registration.
+* General - Totally revamped adding custom modules. Better than ever. (See https://github.com/astruyk/Ares/wiki/Extras#defining-custom-modules for details).
+* Reinforcements - Armed technicals are no longer considered as transports (#172)
+* Reinforcements - Fixed 'Least Used' RP's and LZ's not working (#167, #168)
+* Util - Added 'Remove All Actions' module (can be used to remove Arsenal from objects).
+* Util - Added module to change player sides during missions.
+* Util - Added modules to enable/disable debug logs in RPT.
+* Util - Replaced 'Go Invisible'/'Become Visible' action menu items with modules in the 'Util' section
+
 V.1.5.1
 * Fix a signing issue that prevented connection to servers running some other mods (see http://feedback.arma3.com/view.php?id=22133 )
 
