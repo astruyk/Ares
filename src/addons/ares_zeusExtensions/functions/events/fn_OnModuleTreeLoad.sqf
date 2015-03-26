@@ -41,7 +41,7 @@ if (not isNil "Ares_Custom_Modules") then
 		_categoryName = _x select 0;
 		_displayName = _x select 1;
 		_className = format ["Ares_Module_User_Defined_%1", _forEachIndex];
-		_icon = "\ares_zeusExtensions\data\icon_ares.paa";
+		_icon = "\ares_zeusExtensions\data\icon_default.paa";
 		_leafData pushBack [_categoryName, _displayName, _className, _icon];
 	} forEach Ares_Custom_Modules;
 };
