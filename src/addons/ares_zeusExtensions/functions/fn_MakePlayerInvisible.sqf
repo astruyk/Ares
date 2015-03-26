@@ -35,14 +35,3 @@ _updateVisibilityBlock = {
 	};
 };
 [_updateVisibilityBlock, [_unit, _shouldBeInvisible], true] call Ares_fnc_BroadcastCode;
-
-if (_shouldBeInvisible) then
-{
-	hint "Player is now invisible.";
-}
-else
-{
-	hint "Player is no longer invisible.";
-};
-sleep 3;
-hint "";

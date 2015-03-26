@@ -6,6 +6,8 @@
 		'Arsenal_RemoveArsenal',
 		'Util_EnableDebugLog',
 		'Util_DisableDebugLog',
-		'Util_ChangePlayerSides'
+		'Util_ChangePlayerSides',
+		'Util_MakeZeusInvisible',
+		'Util_MakeZeusVisible'
 	];
 
