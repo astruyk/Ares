@@ -5,7 +5,7 @@ if (not isnull _ammoBox) then
 {
 	_dialogResult =
 		[
-			"Add All Objects",
+			"Filter Objects",
 			[
 				["Combine or Replace?", ["Combine with existing items", "Replace existing items"], 1],
 				["Limit side-specific equip. to", ["All", "Blufor Only", "Opfor Only", "Greenfor Only", "None"], 1],

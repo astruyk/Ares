@@ -1,7 +1,7 @@
 class Ares_Module_Arsenal_AddCustom : Ares_Arsenal_Module_Base
 {
 	scopeCurator = 2;
-	displayName = "Add All ...";
+	displayName = "Add Filtered ...";
 	function = "Ares_fnc_ArsenalAddCustom";
 };
 
