@@ -7,6 +7,10 @@ Or check out the source code at: https://github.com/astruyk/Ares
 
 Changelists
 
+V.1.6.1
+* Util - Fixed an issue where player groups would be lost when switching sides
+* Util - Added more options to the 'switch player sides' module (allowing single player, group, or side)
+
 V.1.6.0
 * Arsenal - Added ability to put full (unfiltered) Arsenal on an object.
 * Arsenal - Renamed the 'Add All...' option to 'Add Filtered...'
