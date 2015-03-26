@@ -3,11 +3,11 @@
 } forEach
 	[
 		'Arsenal_AddFullArsenal',
-		'Arsenal_RemoveArsenal',
 		'Util_EnableDebugLog',
 		'Util_DisableDebugLog',
 		'Util_ChangePlayerSides',
 		'Util_MakeZeusInvisible',
-		'Util_MakeZeusVisible'
+		'Util_MakeZeusVisible',
+		'Util_RemoveAllActions'
 	];
 
