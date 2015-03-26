@@ -5,7 +5,7 @@
 		_dialogResult = [
 			"Choose Side For Players",
 			[
-				["Side", ["East (Opfor)", "West (Blufor)", "Independent (Greenfor)"]]
+				["Side", ["East (Opfor)", "West (Blufor)", "Independent (Greenfor)", "Civilian"]]
 			]
 		] call Ares_fnc_ShowChooseDialog;
 		
@@ -16,6 +16,7 @@
 			{
 				case 1: { _side = west; };
 				case 2: { _side = independent; };
+				case 3: { _side = civilian; };
 			};
 			_newGroup = createGroup _side;
 			_allPlayers = [];
@@ -26,6 +27,8 @@
 				};
 			} forEach allUnits;
 			_allPlayers join _newgroup;
+			
+			["Players Side Changed."] call Ares_fnc_ShowZeusMessage;
 		};
 	}
 ] call Ares_fnc_RegisterCustomModule;
