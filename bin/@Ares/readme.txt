@@ -11,6 +11,7 @@ V.1.6.0
 * Arsenal - Added ability to put full (unfiltered) Arsenal on an object.
 * Arsenal - Renamed the 'Add All...' option to 'Add Filtered...'
 * Behaviours - Fixed issue where AI units that were garrisoned wouldn't turn to shoot (#179)
+* Equipment - Added ability to remove optics from enemy weapons.
 * General - Fixed an issue where rejoining a dedicated server would sometimes prevent proper Ares registration.
 * General - Totally revamped adding custom modules. Better than ever. (See https://github.com/astruyk/Ares/wiki/Extras#defining-custom-modules for details).
 * Reinforcements - Armed technicals are no longer considered as transports (#172)
