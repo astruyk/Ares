@@ -3,6 +3,7 @@
 } forEach
 	[
 		'Arsenal_AddFullArsenal',
+		'Equipment_RemoveWeaponOptics',
 		'Util_EnableDebugLog',
 		'Util_DisableDebugLog',
 		'Util_ChangePlayerSides',
