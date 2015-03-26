@@ -47,6 +47,7 @@ class Ares // This bit will be prefixed when actually calling the function (e.g.
 		class ObjectsMapper;
 		class SearchBuilding;
 		class ShowChooseDialog;
+		class ShowZeusMessage;
 		class StringContains;
 		class TeleportPlayers;
 		class WaitForZeus;
