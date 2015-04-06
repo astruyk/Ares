@@ -26,6 +26,7 @@ for i in range (0, numberOfModules):
 	outputLines = [];
 	outputLines.append("// This is a generated file! Do not edit by hand!");
 	outputLines.append('#include "\\ares_zeusExtensions\\module_header.hpp"');
+	outputLines.append('_deleteModuleOnExit = false; //This will be done by executeCustomModuleCode');
 	outputLines.append('[' + str(i) + ', _logic] call Ares_fnc_ExecuteCustomModuleCode;');
 	outputLines.append('#include "\\ares_zeusExtensions\\module_footer.hpp"');
 	outputLines.append('');

@@ -6,12 +6,12 @@
 // Cleanup the module if the script logic didn't tell us not to.
 if (_deleteModuleOnExit) then
 {
-	[format["Deleting %1", (_this select 0)]] call Ares_fnc_LogMessage;
+	["Deleting %1", (_this select 0)] call Ares_fnc_LogMessage;
 	deleteVehicle (_this select 0);
 }
 else
 {
-	[format["Didn't delete %1", (_this select 0)]] call Ares_fnc_LogMessage;
+	["Not deleting logic module."] call Ares_fnc_LogMessage;
 };
 
 [format["Finished module code '%1','%2','%3' (%4)", (_this select 0), (_this select 1), (_this select 2), typename _this]] call Ares_fnc_LogMessage;

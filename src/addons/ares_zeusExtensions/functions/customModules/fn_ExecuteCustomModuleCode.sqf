@@ -30,5 +30,6 @@ _codeBlock = _data select 2;
 [format ["ExecuteCustomModuleCode: Running code for '%1'->'%2'", _categoryName, _displayName]] call Ares_fnc_LogMessage;
 _position = position _logic;
 _unitUnderCursor = [_logic, false] call Ares_fnc_GetUnitUnderCursor;
+deleteVehicle _logic; // Delete the logic module before we actually execute the code in case the call fails.
 [_position, _unitUnderCursor] call _codeBlock;
 [format ["ExecuteCustomModuleCode: Done running code for '%1'->'%2'", _categoryName, _displayName]] call Ares_fnc_LogMessage;
