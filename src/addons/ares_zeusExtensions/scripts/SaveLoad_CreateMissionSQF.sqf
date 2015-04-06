@@ -12,7 +12,8 @@
 					["Radius", ["50m", "100m", "500m", "1km", "2km", "5km", "Entire Map"], 6],
 					["Include AI?", ["Yes", "No"]],
 					["Include Empty Vehicles?", ["Yes", "No"]],
-					["Include Objects?", ["Yes", "No"]]
+					["Include Objects?", ["Yes", "No"]],
+					["Include Markers?", ["Yes", "No"], 1]
 				]
 			] call Ares_fnc_ShowChooseDialog;
 		if (count _dialogResult == 0) exitWith { "User cancelled dialog."; };
@@ -33,6 +34,7 @@
 		_includeUnits = if (_dialogResult select 1 == 0) then { true; } else { false; };
 		_includeEmptyVehicles = if (_dialogResult select 2 == 0) then { true; } else { false; };
 		_includeEmptyObjects = if (_dialogResult select 3 == 0) then { true; } else { false; };
+		_includeMarkers = if (_dialogResult select 4 == 0) then { true; } else { false; };
 
 		_objectsToFilter = curatorEditableObjects (allCurators select 0);
 		_emptyObjects = [];
@@ -189,6 +191,25 @@
 				};
 			} forEach (waypoints _x)
 		} forEach _groups;
+		
+		if (_includeMarkers) then
+		{
+			{
+				_markerName = "Ares_Imported_Marker_" + str(_forEachIndex);
+				_output pushBack format [
+					"_newMarker = createMarker ['%1', %2]; _newMarker setMarkerShape '%3'; _newMarker setMarkerType '%4'; _newMarker setMarkerDir %5; _newMarker setMarkerColor '%6'; _newMarker setMarkerAlpha %7; %8 %9",
+					_markerName,
+					(getMarkerPos _x),
+					(markerShape _x),
+					(markerType _x),
+					(markerDir _x),
+					(getMarkerColor _x),
+					(markerAlpha _x),
+					if ((markerShape _x) == "RECTANGLE" ||(markerShape _x) == "ELLIPSE") then { "_newMarker setMarkerSize " + str(markerSize _x) + ";"; } else { ""; },
+					if ((markerShape _x) == "RECTANGLE" || (markerShape _x) == "ELLIPSE") then { "_newMarker setMarkerBrush " + str(markerBrush _x) + ";"; } else { ""; }
+					];
+			} forEach allMapMarkers;
+		};
 		
 		_text = "";
 		{
