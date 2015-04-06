@@ -7,6 +7,13 @@ Or check out the source code at: https://github.com/astruyk/Ares
 
 Changelists
 
+V.1.7.0
+* Save/Load - Add module to export current mission objects to SQF script (including AI, Groups and markers).
+* Util - Add module to execute custom code on the server, locally, or on all machines.
+* General - Fixed an issue where custom modules that caused an error would leave a logic object around.
+* Deprecated - 'Spawn Custom Mission Objects' was removed (use custom modules instead).
+* Deprecated - New SQF saving will replace existing copy-paste functionality in 1.8.0.
+
 V.1.6.1
 * Util - Fixed an issue where player groups would be lost when switching sides
 * Util - Added more options to the 'switch player sides' module (allowing single player, group, or side)
