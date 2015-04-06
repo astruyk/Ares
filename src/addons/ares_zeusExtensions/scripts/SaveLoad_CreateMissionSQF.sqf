@@ -93,12 +93,12 @@
 		
 		{
 			_output pushBack format [
-				"_newObject = createVehicle ['%1', [%2, %3, %4], [], 0, 'CAN_COLLIDE']; _newObject setDir %5; _newObjects pushBack _newObject;",
+				"_newObject = createVehicle ['%1', %2, [], 0, 'CAN_COLLIDE']; _newObject setPosASL %3; _newObject setVectorDirAndUp [%4, %5];",
 				(typeOf _x),
-				(position _x) select 0,
-				(position _x) select 1,
-				(position _x) select 2,
-				(getDir _x)];
+				(position _x),
+				(getPosASL _x),
+				(vectorDir _x),
+				(vectorUp _x)];
 		} forEach _emptyObjects;
 		
 		{
@@ -111,14 +111,13 @@
 				if (vehicle _x == _x) then
 				{
 					_output pushBack format [
-						"_newUnit = _newGroup createUnit ['%1', [%2, %3, %4], [], 0, 'CAN_COLLIDE']; _newUnit setSkill %5; _newUnit setRank '%6'; _newUnit setFormDir %7; _newUnit setDir %7;",
+						"_newUnit = _newGroup createUnit ['%1', %2, [], 0, 'CAN_COLLIDE']; _newUnit setSkill %3; _newUnit setRank '%4'; _newUnit setFormDir %5; _newUnit setDir %5; _newUnit setPosASL %6;",
 						(typeOf _x),
-						(position _x) select 0,
-						(position _x) select 1,
-						(position _x) select 2,
+						(position _x),
 						(skill _x),
 						(rank _x),
-						(getDir _x)];
+						(getDir _x),
+						(getPosASL _x)];
 				}
 				else
 				{
@@ -132,12 +131,11 @@
 			// Create the vehicles that are part of the group.
 			{
 				_output pushBack format [
-					"_newObject = createVehicle ['%1', [%2, %3, %4], [], 0, 'CAN_COLLIDE']; _newObjects pushBack _newObject; createVehicleCrew _newObject; (crew _newObject) join _newGroup; _newObject setDir %5; _newObject setFormDir %5;",
+					"_newUnit = createVehicle ['%1', %2, [], 0, 'CAN_COLLIDE']; createVehicleCrew _newUnit; (crew _newUnit) join _newGroup; _newUnit setDir %3; _newUnit setFormDir %3; _newUnit setPosASL %4;",
 					(typeOf _x),
-					(position _x) select 0,
-					(position _x) select 1,
-					(position _x) select 2,
-					(getDir _x)];
+					(position _x),
+					(getDir _x),
+					(getPosASL _x)];
 			} forEach _groupVehicles;
 			
 			// Set group behaviours
@@ -152,10 +150,8 @@
 				if (_forEachIndex > 0) then
 				{
 					_output pushBack format [
-						"_newWaypoint = _newGroup addWaypoint [[%1, %2, %3], %4]; _newWaypoint setWaypointType '%5';%6 %7 %8",
-						(waypointPosition _x) select 0,
-						(waypointPosition _x) select 1,
-						(waypointPosition _x) select 2,
+						"_newWaypoint = _newGroup addWaypoint [%1, %2]; _newWaypoint setWaypointType '%3';%4 %5 %6",
+						(waypointPosition _x),
 						0,
 						(waypointType _x),
 						if ((waypointSpeed _x) != 'UNCHANGED') then { "_newWaypoint setWaypointSpeed '" + (waypointSpeed _x) + "'; " } else { "" },
