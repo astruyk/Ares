@@ -6,7 +6,7 @@
 		{
 			["This module has been disabled by the mission creator."] call Ares_fnc_ShowZeusMessage;
 		};
-	
+
 		missionNamespace setVariable ['Ares_CopyPaste_Dialog_Text', ""];
 		missionNamespace setVariable ["Ares_CopyPaste_Dialog_Result", ""];
 		_dialog = createDialog "Ares_CopyPaste_Dialog";
