@@ -2,25 +2,52 @@
 	"Save/Load",
 	"Generate Mission SQF",
 	{
-		_output = [];
 		_radius = 100;
 		_position = _this select 0;
+
+		_dialogResult =
+			[
+				"Generate Mission SQF",
+				[
+					["Radius", ["50m", "100m", "500m", "1km", "2km", "5km", "Entire Map"], 6],
+					["Include AI?", ["Yes", "No"]],
+					["Include Empty Vehicles?", ["Yes", "No"]],
+					["Include Objects?", ["Yes", "No"]]
+				]
+			] call Ares_fnc_ShowChooseDialog;
+		if (count _dialogResult == 0) exitWith { "User cancelled dialog."; };
 		
-		_emptyObjects = [];
-		_vehicles = [];
-		_groups = [];
-		
+		["User chose radius with index '%1'", _dialogResult] call Ares_fnc_LogMessage;
+		_radius = 100;
+		switch (_dialogResult select 0) do
+		{
+			case 0: { _radius = 50; };
+			case 1: { _radius = 100; };
+			case 2: { _radius = 500; };
+			case 3: { _radius = 1000; };
+			case 4: { _radius = 2000; };
+			case 5: { _radius = 5000; };
+			case 6: { _radius = -1; };
+			default { _radius = 100; };
+		};
+		_includeUnits = if (_dialogResult select 1 == 0) then { true; } else { false; };
+		_includeEmptyVehicles = if (_dialogResult select 2 == 0) then { true; } else { false; };
+		_includeEmptyObjects = if (_dialogResult select 3 == 0) then { true; } else { false; };
+
 		_objectsToFilter = curatorEditableObjects (allCurators select 0);
+		_emptyObjects = [];
+		_emptyVehicles = [];
+		_groups = [];
 		{
 			_ignoreFlag = false;
-			if ((typeOf _x) in Ares_EditableObjectBlacklist || _x == player) then
+			if ((typeOf _x) in Ares_EditableObjectBlacklist || _x == player || isPlayer _x) then
 			{
 				_ignoreFlag = true;
 			};
-			
-			if (!_ignoreFlag && _x distance _position <= _radius) then
+
+			if (!_ignoreFlag && ((_x distance _position <= _radius) || _radius == -1)) then
 			{
-				_output pushBack (format ["Processing object: %1 - %2", _x, typeof(_x)]);
+				["Processing object: %1 - %2", _x, typeof(_x)] call Ares_fnc_LogMessage;
 				_ignoreFlag = true;
 				_isUnit = (_x isKindOf "CAManBase")
 					|| (_x isKindOf "car")
@@ -32,14 +59,14 @@
 				{
 					if (_x isKindOf "CAManBase") then
 					{
-						_output pushBack "Is a man.";
+						["Is a man."] call Ares_fnc_LogMessage;
 						if ((group _x) in _groups) then
 						{
-							_output pushBack "In an old group.";
+							["In an old group."] call Ares_fnc_LogMessage;
 						}
 						else
 						{
-							_output pushBack "In a new group.";
+							["In a new group."] call Ares_fnc_LogMessage;
 							_groups pushBack (group _x);
 						};
 						
@@ -48,49 +75,49 @@
 					{
 						if (count crew _x > 0) then
 						{
-							_output pushBack "Is a vehicle with units.";
+							["Is a vehicle with units."] call Ares_fnc_LogMessage;
 							if ((group _x) in _groups) then
 							{
-								_output pushBack "In an old group.";
+								["In an old group."] call Ares_fnc_LogMessage;
 							}
 							else
 							{
-								_output pushBack "In a new group.";
+								["In a new group."] call Ares_fnc_LogMessage;
 								_groups pushBack (group _x);
 							};
 						}
 						else
 						{
-							_output pushBack "Is an empty vehicle.";
+							["Is an empty vehicle."] call Ares_fnc_LogMessage;
+							_emptyVehicles pushBack _x;
 						};
-						_vehicles pushBack _x;
 					};
 				}
 				else
 				{
 					if (_x isKindOf "Logic") then
 					{
-						_output pushBack "Is a logic. Ignoring.";
+						["Is a logic. Ignoring."] call Ares_fnc_LogMessage;
 					}
 					else
 					{
-						_output pushBack "Is an empty vehicle.";
+						["Is an empty vehicle."] call Ares_fnc_LogMessage;
 						_emptyObjects pushBack _x;
 					};
 				};
 			}
 			else
 			{
-				_output pushBack (format ["Ignoring object: %1 - %2", _x, typeof(_x)]);
+				["Ignoring object: %1 - %2", _x, typeof(_x)] call Ares_fnc_LogMessage;
 			};
 		} forEach _objectsToFilter;
 		
-		// HACK - We'll dump everything we've written so far since it's just debug data anyways.
-		{
-			diag_log _x;
-		} forEach _output;
 		_output = [];
-		
+		if (!_includeUnits) then { _groups = []; };
+		if (!_includeEmptyVehicles) then { _emptyVehicles = []; };
+		if (!_includeEmptyObjects) then { _emptyObjects = []; };
+
+		_totalUnitsProcessed = 0;
 		{
 			_output pushBack format [
 				"_newObject = createVehicle ['%1', %2, [], 0, 'CAN_COLLIDE']; _newObject setPosASL %3; _newObject setVectorDirAndUp [%4, %5];",
@@ -99,7 +126,7 @@
 				(getPosASL _x),
 				(vectorDir _x),
 				(vectorUp _x)];
-		} forEach _emptyObjects;
+		} forEach _emptyObjects + _emptyVehicles;
 		
 		{
 			_output pushBack format [
@@ -126,6 +153,7 @@
 						_groupVehicles pushBack (vehicle _x);
 					};
 				};
+				_totalUnitsProcessed = _totalUnitsProcessed + 1;
 			} forEach (units _x);
 			
 			// Create the vehicles that are part of the group.
@@ -164,12 +192,11 @@
 		
 		_text = "";
 		{
-			diag_log _x;
 			_text = _text + _x;
+			[_x] call Ares_fnc_LogMessage;
 		} forEach _output;
-		
 		missionNamespace setVariable ['Ares_CopyPaste_Dialog_Text', _text];
 		_dialog = createDialog "Ares_CopyPaste_Dialog";
-		["Generated SQF from mission objects."] call Ares_fnc_ShowZeusMessage;
+		["Generated SQF from mission objects (%1 object, %2 groups, %3 units)", count _emptyObjects, count _groups, _totalUnitsProcessed] call Ares_fnc_ShowZeusMessage;
 	}
 ] call Ares_fnc_RegisterCustomModule;
