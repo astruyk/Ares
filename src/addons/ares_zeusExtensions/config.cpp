@@ -125,7 +125,7 @@ class CfgVehicles
 		displayName = "Ares Module Empty";
 		//icon = "";
 		function = "Ares_fnc_Empty";
-	}
+	};
 
 	#include "cfgVehiclesModulesBehaviours.hpp"
 	#include "cfgVehiclesModulesEquipment.hpp"

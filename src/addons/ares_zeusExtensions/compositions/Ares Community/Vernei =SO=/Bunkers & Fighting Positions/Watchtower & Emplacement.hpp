@@ -14,4 +14,4 @@ class Object12 {side=8;rank="";vehicle="Land_Razorwire_F";position[]={15.6672,-5
 class Object13 {side=8;rank="";vehicle="Land_Razorwire_F";position[]={-14.468,7.66455,0};dir=137.623;};
 class Object14 {side=8;rank="";vehicle="Land_Razorwire_F";position[]={-17.0012,-5.16211,0};dir=48.1779;};
 class Object15 {side=8;rank="";vehicle="Land_Razorwire_F";position[]={17.2661,-2.38184,0};dir=268.396;};
-class Object16 {side=8;rank="";vehicle="Land_Razorwire_F";position[]={-18.9451,-1.63965,0};dir=268.396;}
+class Object16 {side=8;rank="";vehicle="Land_Razorwire_F";position[]={-18.9451,-1.63965,0};dir=268.396;};

@@ -4,5 +4,5 @@ class Ares_Dynamic_Dialog
 	movingEnable = false;
 	class controls 
 	{
-	}
+	};
 };

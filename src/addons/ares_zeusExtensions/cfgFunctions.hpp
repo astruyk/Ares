@@ -4,7 +4,7 @@ class Ares // This bit will be prefixed when actually calling the function (e.g.
 	class init
 	{
 		file = "\ares_zeusExtensions\functions\init";
-		class InitAres { preInit = 1; }
+		class InitAres { preInit = 1; };
 	};
 
 	// Functions called in response to events
@@ -17,7 +17,7 @@ class Ares // This bit will be prefixed when actually calling the function (e.g.
 		class HandleCuratorObjectDoubleClicked;
 		class HandleCuratorKeyPressed;
 		class HandleCuratorKeyReleased;
-	}
+	};
 
 	// Helper functions
 	class util
