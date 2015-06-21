@@ -38,3 +38,7 @@ Icon
 scripts/build_PBO_out.txt
 src/addons/ares_zeusExtensions/texHeaders.bin
 bin/@Ares/addons/
+
+# Intellij Idea
+*.iml
+.idea

@@ -12,6 +12,7 @@ units[] =
 	"Ares_Module_Arsenal_Paste_Replace",
 	"Ares_Module_Behaviour_Create_Artillery_Target",
 	"Ares_Module_Behaviour_Fire_At_Artillery_Target",
+	"Ares_Module_Behaviour_Artillery_Fire_Mission",
 	"Ares_Module_Behaviour_Patrol",
 	"Ares_Module_Behaviour_Search_Nearby_And_Garrison",
 	"Ares_Module_Behaviour_Search_Nearby_Building",
