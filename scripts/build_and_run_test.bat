@@ -10,4 +10,4 @@ python2.7.exe generateCustomModules.py
 
 cp "%CONTENT_DIR%\bin\@Ares\addons\ares_zeusExtensions.pbo" "D:\Spiele\steamapps\common\Arma 3\@ares\addons\ares_zeusExtensions.pbo"
 
-"D:\Spiele\steamapps\common\Arma 3\arma3.exe" -name=Jason Miles -cpuCount=4 -nosplash -nolauncher -mod=@CBA_A3;@ares;@ace; "D:\Spiele\steamapps\common\Arma 3\Missions\zeus_test.Stratis.pbo"
+"D:\Spiele\steamapps\common\Arma 3\arma3.exe" -name=Jason Miles -cpuCount=4 -nosplash -nolauncher -mod=@CBA_A3;@ares;@ace;
