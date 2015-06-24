@@ -139,6 +139,7 @@ _titleVariableIdentifier = format ["Ares_ChooseDialog_DefaultValues_%1", [_title
 	if (_titleText != "") then
 	{
 		_defaultVariableId = format["%1_%2", _titleVariableIdentifier, _forEachIndex];
+		// TODO: if run a second time this crashes because of string <-> int comparison
 		if (missionNamespace getVariable [_defaultVariableId, -1] != -1) then
 		{
 			_defaultChoice = missionNamespace getVariable _defaultVariableId;
@@ -155,9 +156,15 @@ _titleVariableIdentifier = format ["Ares_ChooseDialog_DefaultValues_%1", [_title
 	_comboBoxIdc = BASE_IDC + _controlCount;
 	if (count _choices == 0) then 
 	{
-		_choiceEdit = BASE_IDC + _controlCount;
+		// no choice given. Create a textbox instead.
+		_defaultChoice = -1;
+		
 		_choiceEdit = _dialog ctrlCreate ["RscEdit", _comboBoxIdc];
 		_choiceEdit ctrlSetPosition [COMBO_COLUMN_X, _yCoord, COMBO_WIDTH, COMBO_HEIGHT];
+		_choiceEdit ctrlSetBackgroundColor [0, 0, 0, 1];
+		_choiceEdit ctrlCommit 0;
+		_choiceEdit ctrlSetEventHandler ["KeyUp", "missionNamespace setVariable [format['Ares_ChooseDialog_ReturnValue_%1'," + str (_forEachIndex) + "], ctrlText (_this select 0)];"];
+		_choiceEdit ctrlCommit 0;
 	}
 	else {
 		// Create the combo box for this entry and populate it.		
@@ -172,10 +179,10 @@ _titleVariableIdentifier = format ["Ares_ChooseDialog_DefaultValues_%1", [_title
 		_choiceCombo lbSetCurSel _defaultChoice;
 		_choiceCombo ctrlSetEventHandler ["LBSelChanged", "missionNamespace setVariable [format['Ares_ChooseDialog_ReturnValue_%1'," + str (_forEachIndex) + "], _this select 1];"];
 	};
-	
 	missionNamespace setVariable [format["Ares_ChooseDialog_ReturnValue_%1",_forEachIndex], _defaultChoice];
-	_controlCount = _controlCount + 1;
 	
+	_controlCount = _controlCount + 1;
+
 	// Move onto the next row
 	_yCoord = _yCoord + TOTAL_ROW_HEIGHT;
 } forEach _choicesArray;

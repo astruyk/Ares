@@ -46,8 +46,12 @@ _batteries = [];
 		{
 			_battery = _x;
 			_units = _battery select 1;
+			_unitType = typeOf _unit;
 			
-			_units pushBack _unit;
+			if (_unitType == (_battery select 0)) then
+			{
+			  _units pushBack _unit;
+			};			
 			
 		} forEach _batteries;
 	};
@@ -72,6 +76,7 @@ _pickBatteryResult = [
 // DEBUG
 _pickBatteryResult call BIS_fnc_log;		
 		
+// Pick a battery
 _battery = nil;
 if (count _pickBatteryResult > 0) then 
 {
@@ -81,7 +86,8 @@ if (count _pickBatteryResult > 0) then
 // DEBUG
 _battery call BIS_fnc_log;
 
-_pickFireMissionResult = nil;
+// Pick fire mission details
+_fireMission = nil;
 if (count _battery > 0) then
 {
 	_units = _battery select 1;
@@ -106,7 +112,76 @@ if (count _battery > 0) then
 			["X", []],
 			["Y", []]
 		]] call Ares_fnc_ShowChooseDialog;
+	
+	// DEBUG
+	_pickFireMissionResult call BIS_fnc_log;
+	
+	if (count _pickFireMissionResult > 0) then 
+	{
+		// TODO: Add validation that coordinates are actually numbers.
+		_guns = (_numberOfGuns select (_pickFireMissionResult select 0));
+		_rounds = _pickFireMissionResult select 1;
+		_ammo = (_artilleryAmmo select (_pickFireMissionResult select 2));
+		_targetX = _pickFireMissionResult select 3;
+		_targetY = _pickFireMissionResult select 4;
+		
+		_fireMission = [_units, parseNumber _guns, _rounds, _ammo, _targetX, _targetY];
+	};	
 };
 
+// DEBUG
+_fireMission call BIS_fnc_log;
+
+// confirm and execute fire mission
+if (count _fireMission > 0) then {
+  _units = _fireMission select 0;
+  _guns = _fireMission select 1;
+  _rounds = _fireMission select 2;
+  _ammo = _fireMission select 3;
+  _targetX = _fireMission select 4;
+  _targetY = _fireMission select 5; 
+  
+  // TODO: estimated flight time
+  // TODO: Dialog without leaving zeus
+  _message = format ["Confirm Fire Mission \n Battery %1 \n GRID %2 %3 \n %4 Guns %5 Rounds %6", (_battery select 0), _targetX, _targetY, _guns, _rounds, _ammo];
+  //_result = [_message, "Confirm Fire Mission", true, true] call BIS_fnc_guiMessage;  
+  
+  if (/*_result*/ true) then 
+  { 
+	// DEBUG
+	"Firemission confirmed." call BIS_fnc_log;
+	
+	enableEngineArtillery true;
+	if (isNil "Ares_FireArtilleryFunction") then
+	{
+		Ares_FireArtilleryFunction = {
+			_artilleryUnit = _this select 0;
+			_targetPos = _this select 1;
+			_ammoType = _this select 2;
+			_roundsToFire = _this select 3;
+			enableEngineArtillery true;
+			_artilleryUnit commandArtilleryFire [_targetPos, _ammoType, _roundsToFire];
+		};
+		publicVariable "Ares_FireArtilleryFunction";
+	};
+	
+	_targetPos = [_targetX,_targetY] call CBA_fnc_mapGridToPos;
+	
+	_targetPos call BIS_fnc_log;
+	_smoke = "SmokeShellGreen" createVehicle _targetPos;
+	_smoke setDamage 1;
+	
+	for "_i" from 1 to _guns do {
+	  _artillery = _units select _i - 1;
+	  _artillery call BIS_fnc_log;
+	  [[_artillery, _targetPos, _ammo, _rounds], "Ares_FireArtilleryFunction", _artillery] call BIS_fnc_MP;
+	};
+
+  } 
+  else 
+  {
+    hint "Fire mission aborted!";
+  }
+};
 
 #include "\ares_zeusExtensions\module_footer.hpp"
