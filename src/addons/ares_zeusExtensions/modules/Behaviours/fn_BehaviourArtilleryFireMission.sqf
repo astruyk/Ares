@@ -166,7 +166,9 @@ if (count _fireMission > 0) then {
 	
 	_targetPos = [_targetX,_targetY] call CBA_fnc_mapGridToPos;
 	
+	// DEBUG
 	_targetPos call BIS_fnc_log;
+
 	_smoke = "SmokeShellGreen" createVehicle _targetPos;
 	_smoke setDamage 1;
 	
