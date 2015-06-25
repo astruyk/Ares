@@ -25,7 +25,6 @@ _batteries = [];
 
 // initialize type names
 {
-//// THERE IS A BUG HERE. ALL UNITS GO IN ALL BATTERIES.
 	_type = typeOf _x;	
 	_alreadyContained = false;	
 	{
@@ -107,10 +106,10 @@ if (count _battery > 0) then
 		"Pick fire mission details.",
 		[
 			["Guns", _numberOfGuns],
-			["Rounds", []],
+			["Rounds", ""],
 			["Ammo", _artilleryAmmo],
-			["X", []],
-			["Y", []]
+			["X", ""],
+			["Y", ""]
 		]] call Ares_fnc_ShowChooseDialog;
 	
 	// DEBUG

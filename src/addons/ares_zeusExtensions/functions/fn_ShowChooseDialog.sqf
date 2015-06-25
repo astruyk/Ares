@@ -139,11 +139,24 @@ _titleVariableIdentifier = format ["Ares_ChooseDialog_DefaultValues_%1", [_title
 	if (_titleText != "") then
 	{
 		_defaultVariableId = format["%1_%2", _titleVariableIdentifier, _forEachIndex];
-		// TODO: if run a second time this crashes because of string <-> int comparison
-		if (missionNamespace getVariable [_defaultVariableId, -1] != -1) then
+		_tempDefault = missionNamespace getVariable [_defaultVariableId, -1];
+		_isSelect = typeName _tempDefault == typeName 0;
+		_isText = typeName _tempDefault == typeName "";
+		
+		// This really sucks but SQF does not seem to like complex ifs...
+		if (_isSelect) then
 		{
+			if (_tempDefault != -1) then {
 			_defaultChoice = missionNamespace getVariable _defaultVariableId;
+			}			
 		};
+		if (_isText) then {
+			if (_tempDefault != "") then {
+				_defaultChoice = missionNamespace getVariable _defaultVariableId;
+			};
+		};
+
+
 	};
 
 	// Create the label for this entry
