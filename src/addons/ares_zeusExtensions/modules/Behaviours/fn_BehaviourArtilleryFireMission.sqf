@@ -144,14 +144,19 @@ if (count _fireMission > 0) then {
 	};
 	
 	_targetPos = [_targetX,_targetY] call CBA_fnc_mapGridToPos;
-		
+
+	
+	_roundEta = 0;
 	for "_i" from 1 to _guns do {
 	  _artillery = _units select _i - 1;
 	  
-
+	  // TODO: add overlay for each shot
+	  _roundEta = _artillery getArtilleryETA [_targetPos, _ammo];
+	  	  
 	  [[_artillery, _targetPos, _ammo, _rounds], "Ares_FireArtilleryFunction", _artillery] call BIS_fnc_MP;
 	};
 
+	[objNull, format ["Firing %1 rounds of '%2' at target. ETA %3", _rounds, _ammo, _roundEta]] call bis_fnc_showCuratorFeedbackMessage;
   } 
   else 
   {
