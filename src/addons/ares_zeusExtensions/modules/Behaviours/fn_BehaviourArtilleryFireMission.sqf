@@ -124,7 +124,7 @@ if (count _battery > 0) then
 		_targetX = _pickFireMissionResult select 3;
 		_targetY = _pickFireMissionResult select 4;
 		
-		_fireMission = [_units, parseNumber _guns, _rounds, _ammo, _targetX, _targetY];
+		_fireMission = [_units, parseNumber _guns, parseNumber _rounds, _ammo, _targetX, _targetY];
 	};	
 };
 
