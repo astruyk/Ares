@@ -57,9 +57,6 @@ _batteries = [];
 	
 } forEach _filteredObjects;
 
-// DEBUG
-_batteries call BIS_fnc_log;
-
 // pick battery
 _batteryTypes = [];
 {
@@ -71,10 +68,7 @@ _pickBatteryResult = [
 		[
 			["Battery", _batteryTypes]
 		]] call Ares_fnc_ShowChooseDialog;
-
-// DEBUG
-_pickBatteryResult call BIS_fnc_log;		
-		
+	
 // Pick a battery
 _battery = nil;
 if (count _pickBatteryResult > 0) then 
@@ -82,19 +76,12 @@ if (count _pickBatteryResult > 0) then
 	_battery = _batteries select (_pickBatteryResult select 0);
 };
 
-// DEBUG
-_battery call BIS_fnc_log;
-
 // Pick fire mission details
 _fireMission = nil;
 if (count _battery > 0) then
 {
 	_units = _battery select 1;
 	_artilleryAmmo = _battery select 2;
-	
-	// DEBUG
-	_units call BIS_fnc_log;
-	_artilleryAmmo call BIS_fnc_log;
 	
 	_numberOfGuns = [];
 	{
@@ -112,9 +99,6 @@ if (count _battery > 0) then
 			["Y", ""]
 		]] call Ares_fnc_ShowChooseDialog;
 	
-	// DEBUG
-	_pickFireMissionResult call BIS_fnc_log;
-	
 	if (count _pickFireMissionResult > 0) then 
 	{
 		// TODO: Add validation that coordinates are actually numbers.
@@ -127,9 +111,6 @@ if (count _battery > 0) then
 		_fireMission = [_units, parseNumber _guns, parseNumber _rounds, _ammo, _targetX, _targetY];
 	};	
 };
-
-// DEBUG
-_fireMission call BIS_fnc_log;
 
 // confirm and execute fire mission
 if (count _fireMission > 0) then {
@@ -147,8 +128,6 @@ if (count _fireMission > 0) then {
   
   if (/*_result*/ true) then 
   { 
-	// DEBUG
-	"Firemission confirmed." call BIS_fnc_log;
 	
 	enableEngineArtillery true;
 	if (isNil "Ares_FireArtilleryFunction") then
@@ -165,16 +144,11 @@ if (count _fireMission > 0) then {
 	};
 	
 	_targetPos = [_targetX,_targetY] call CBA_fnc_mapGridToPos;
-	
-	// DEBUG
-	_targetPos call BIS_fnc_log;
-
-	_smoke = "SmokeShellGreen" createVehicle _targetPos;
-	_smoke setDamage 1;
-	
+		
 	for "_i" from 1 to _guns do {
 	  _artillery = _units select _i - 1;
-	  _artillery call BIS_fnc_log;
+	  
+
 	  [[_artillery, _targetPos, _ammo, _rounds], "Ares_FireArtilleryFunction", _artillery] call BIS_fnc_MP;
 	};
 

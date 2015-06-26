@@ -75,8 +75,6 @@ if (count _allAmmunition > 0) then
 					_ammoType = _this select 2;
 					_roundsToFire = _this select 3;
 					enableEngineArtillery true;
-					// DEBUG
-					[_targetPos, _ammoType, _roundsToFire] call BIS_fnc_log;
 					_artilleryUnit commandArtilleryFire [_targetPos, _ammoType, _roundsToFire];
 				};
 				publicVariable "Ares_FireArtilleryFunction";
