@@ -147,16 +147,14 @@ _titleVariableIdentifier = format ["Ares_ChooseDialog_DefaultValues_%1", [_title
 		if (_isSelect) then
 		{
 			if (_tempDefault != -1) then {
-			_defaultChoice = missionNamespace getVariable _defaultVariableId;
-			}			
+			_defaultChoice = _tempDefault;
+			}
 		};
 		if (_isText) then {
 			if (_tempDefault != "") then {
-				_defaultChoice = missionNamespace getVariable _defaultVariableId;
+				_defaultChoice = _tempDefault;
 			};
 		};
-
-
 	};
 
 	// Create the label for this entry
@@ -175,7 +173,7 @@ _titleVariableIdentifier = format ["Ares_ChooseDialog_DefaultValues_%1", [_title
 		_choiceEdit = _dialog ctrlCreate ["RscEdit", _comboBoxIdc];
 		_choiceEdit ctrlSetPosition [COMBO_COLUMN_X, _yCoord, COMBO_WIDTH, COMBO_HEIGHT];
 		_choiceEdit ctrlSetBackgroundColor [0, 0, 0, 1];
-		_choiceEdit setText _choices;
+		_choiceEdit ctrlSetText _choices;
 		_choiceEdit ctrlCommit 0;
 		_choiceEdit ctrlSetEventHandler ["KeyUp", "missionNamespace setVariable [format['Ares_ChooseDialog_ReturnValue_%1'," + str (_forEachIndex) + "], ctrlText (_this select 0)];"];
 		_choiceEdit ctrlCommit 0;
