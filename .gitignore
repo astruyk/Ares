@@ -42,3 +42,6 @@ bin/@Ares/addons/
 # Intellij Idea
 *.iml
 .idea
+
+# scripts
+scripts/build_and_run_test.bat
