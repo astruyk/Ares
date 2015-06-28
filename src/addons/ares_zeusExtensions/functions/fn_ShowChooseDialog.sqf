@@ -4,11 +4,11 @@
 	
 	Params:
 		0 - String - The title to display for the combo box. Do not use non-standard characters (e.g. %&$*()!@#*%^&) that cannot appear in variable names
-		1 - Array of Arrays - The set of choices to display to the user. Each element in the array should be an array in the following format: ["Choice Description", ["Choice1", "Choice2", etc...]] optionally the last element can be a number that indicates which element to select. For example: ["Choose A Pie", ["Apple", "Pumpkin"], 1] will have "Pumpkin" selected by default. If you omit the choices a textbox will be displayed instead.
+		1 - Array of Arrays - The set of choices to display to the user. Each element in the array should be an array in the following format: ["Choice Description", ["Choice1", "Choice2", etc...]] optionally the last element can be a number that indicates which element to select. For example: ["Choose A Pie", ["Apple", "Pumpkin"], 1] will have "Pumpkin" selected by default. If you replace the choices with a string then a textbox (with the string as default) will be displayed instead.
 
 	Alternate Params:
 		0 - String - The title to display for the combo box.
-		1 - Array of Arrays - A single entry in the format of the first version of the function. That is: ["Choice Description", ["Choice1", "Choice2", etc...]]. If you omit the choices a textbox will be displayed instead.
+		1 - Array of Arrays - A single entry in the format of the first version of the function. That is: ["Choice Description", ["Choice1", "Choice2", etc...]]. If you replace the choices with a string then a textbox (with the string as default) will be displayed instead.
 	Returns:
 		An array containing the indices of each of the values chosen, or a null object if nothing was selected.
 */
@@ -175,6 +175,7 @@ _titleVariableIdentifier = format ["Ares_ChooseDialog_DefaultValues_%1", [_title
 		_choiceEdit = _dialog ctrlCreate ["RscEdit", _comboBoxIdc];
 		_choiceEdit ctrlSetPosition [COMBO_COLUMN_X, _yCoord, COMBO_WIDTH, COMBO_HEIGHT];
 		_choiceEdit ctrlSetBackgroundColor [0, 0, 0, 1];
+		_choiceEdit setText _choices;
 		_choiceEdit ctrlCommit 0;
 		_choiceEdit ctrlSetEventHandler ["KeyUp", "missionNamespace setVariable [format['Ares_ChooseDialog_ReturnValue_%1'," + str (_forEachIndex) + "], ctrlText (_this select 0)];"];
 		_choiceEdit ctrlCommit 0;
