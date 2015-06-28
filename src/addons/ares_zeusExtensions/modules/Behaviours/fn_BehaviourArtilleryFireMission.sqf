@@ -1,7 +1,7 @@
 #include "\ares_zeusExtensions\module_header.hpp"
 
 // get all units within 50m
-_nearObjects = nearestObjects [(position _logic), ["All"], 50];
+_nearObjects = nearestObjects [(position _logic), ["All"], 150];
 
 // Filter for artillery
 _filteredObjects = [];
