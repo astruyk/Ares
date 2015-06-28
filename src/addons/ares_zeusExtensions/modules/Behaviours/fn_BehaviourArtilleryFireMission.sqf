@@ -95,8 +95,8 @@ if (count _battery > 0) then
 			["Guns", _numberOfGuns],
 			["Rounds", ""],
 			["Ammo", _artilleryAmmo],
-			["X", ""],
-			["Y", ""]
+			["Grid East-West", ""],
+			["Grid North-South", ""]
 		]] call Ares_fnc_ShowChooseDialog;
 	
 	if (count _pickFireMissionResult > 0) then 
@@ -156,11 +156,11 @@ if (count _fireMission > 0) then {
 	  [[_artillery, _targetPos, _ammo, _rounds], "Ares_FireArtilleryFunction", _artillery] call BIS_fnc_MP;
 	};
 
-	[objNull, format ["Firing %1 rounds of '%2' at target. ETA %3", _rounds, _ammo, _roundEta]] call bis_fnc_showCuratorFeedbackMessage;
+	["Firing %1 rounds of '%2' at target. ETA %3", _rounds, _ammo, _roundEta] call Ares_fnc_ShowZeusMessage;
   } 
   else 
   {
-    hint "Fire mission aborted!";
+    ["Fire mission aborted!"] call Ares_fnc_ShowZeusMessage;
   }
 };
 
