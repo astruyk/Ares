@@ -1,13 +1,14 @@
 /*
-	Displays a dialog that prompts the user to choose an option from a set of combo boxes. If the dialog has a title then the default values provided will be used the FIRST time a dialog is displayed, and the selected values remembered for the next time it is displayed.
+	Displays a dialog that prompts the user to choose an option from a set of combo boxes. 
+	If the dialog has a title then the default values provided will be used the FIRST time a dialog is displayed, and the selected values remembered for the next time it is displayed.
 	
 	Params:
 		0 - String - The title to display for the combo box. Do not use non-standard characters (e.g. %&$*()!@#*%^&) that cannot appear in variable names
-		1 - Array of Arrays - The set of choices to display to the user. Each element in the array should be an array in the following format: ["Choice Description", ["Choice1", "Choice2", etc...]] optionally the last element can be a number that indicates which element to select. For example: ["Choose A Pie", ["Apple", "Pumpkin"], 1] will have "Pumpkin" selected by default.
+		1 - Array of Arrays - The set of choices to display to the user. Each element in the array should be an array in the following format: ["Choice Description", ["Choice1", "Choice2", etc...]] optionally the last element can be a number that indicates which element to select. For example: ["Choose A Pie", ["Apple", "Pumpkin"], 1] will have "Pumpkin" selected by default. If you replace the choices with a string then a textbox (with the string as default) will be displayed instead.
 
 	Alternate Params:
 		0 - String - The title to display for the combo box.
-		1 - Array of Arrays - A single entry in the format of the first version of the function. That is: ["Choice Description", ["Choice1", "Choice2", etc...]]
+		1 - Array of Arrays - A single entry in the format of the first version of the function. That is: ["Choice Description", ["Choice1", "Choice2", etc...]]. If you replace the choices with a string then a textbox (with the string as default) will be displayed instead.
 	Returns:
 		An array containing the indices of each of the values chosen, or a null object if nothing was selected.
 */
@@ -138,9 +139,21 @@ _titleVariableIdentifier = format ["Ares_ChooseDialog_DefaultValues_%1", [_title
 	if (_titleText != "") then
 	{
 		_defaultVariableId = format["%1_%2", _titleVariableIdentifier, _forEachIndex];
-		if (missionNamespace getVariable [_defaultVariableId, -1] != -1) then
+		_tempDefault = missionNamespace getVariable [_defaultVariableId, -1];
+		_isSelect = typeName _tempDefault == typeName 0;
+		_isText = typeName _tempDefault == typeName "";
+		
+		// This really sucks but SQF does not seem to like complex ifs...
+		if (_isSelect) then
 		{
-			_defaultChoice = missionNamespace getVariable _defaultVariableId;
+			if (_tempDefault != -1) then {
+			_defaultChoice = _tempDefault;
+			}
+		};
+		if (_isText) then {
+			if (_tempDefault != "") then {
+				_defaultChoice = _tempDefault;
+			};
 		};
 	};
 
@@ -151,21 +164,37 @@ _titleVariableIdentifier = format ["Ares_ChooseDialog_DefaultValues_%1", [_title
 	_choiceLabel ctrlCommit 0;
 	_controlCount = _controlCount + 1;
 	
-	// Create the combo box for this entry and populate it.
 	_comboBoxIdc = BASE_IDC + _controlCount;
-	_choiceCombo = _dialog ctrlCreate ["RscCombo", _comboBoxIdc];
-	_choiceCombo ctrlSetPosition [COMBO_COLUMN_X, _yCoord, COMBO_WIDTH, COMBO_HEIGHT];
-	_choiceCombo ctrlCommit 0;
+	if (count _choices == 0) then 
 	{
-		_choiceCombo lbAdd _x;
-	} forEach _choices;
-	
-	// Set the current choice, record it in the global variable, and setup the event handler to update it.
-	_choiceCombo lbSetCurSel _defaultChoice;
+		// no choice given. Create a textbox instead.
+		_defaultChoice = -1;
+		
+		_choiceEdit = _dialog ctrlCreate ["RscEdit", _comboBoxIdc];
+		_choiceEdit ctrlSetPosition [COMBO_COLUMN_X, _yCoord, COMBO_WIDTH, COMBO_HEIGHT];
+		_choiceEdit ctrlSetBackgroundColor [0, 0, 0, 1];
+		_choiceEdit ctrlSetText _choices;
+		_choiceEdit ctrlCommit 0;
+		_choiceEdit ctrlSetEventHandler ["KeyUp", "missionNamespace setVariable [format['Ares_ChooseDialog_ReturnValue_%1'," + str (_forEachIndex) + "], ctrlText (_this select 0)];"];
+		_choiceEdit ctrlCommit 0;
+	}
+	else {
+		// Create the combo box for this entry and populate it.		
+		_choiceCombo = _dialog ctrlCreate ["RscCombo", _comboBoxIdc];
+		_choiceCombo ctrlSetPosition [COMBO_COLUMN_X, _yCoord, COMBO_WIDTH, COMBO_HEIGHT];
+		_choiceCombo ctrlCommit 0;
+		{
+			_choiceCombo lbAdd _x;
+		} forEach _choices;
+		
+		// Set the current choice, record it in the global variable, and setup the event handler to update it.
+		_choiceCombo lbSetCurSel _defaultChoice;
+		_choiceCombo ctrlSetEventHandler ["LBSelChanged", "missionNamespace setVariable [format['Ares_ChooseDialog_ReturnValue_%1'," + str (_forEachIndex) + "], _this select 1];"];
+	};
 	missionNamespace setVariable [format["Ares_ChooseDialog_ReturnValue_%1",_forEachIndex], _defaultChoice];
-	_choiceCombo ctrlSetEventHandler ["LBSelChanged", "missionNamespace setVariable [format['Ares_ChooseDialog_ReturnValue_%1'," + str (_forEachIndex) + "], _this select 1];"];
-	_controlCount = _controlCount + 1;
 	
+	_controlCount = _controlCount + 1;
+
 	// Move onto the next row
 	_yCoord = _yCoord + TOTAL_ROW_HEIGHT;
 } forEach _choicesArray;
