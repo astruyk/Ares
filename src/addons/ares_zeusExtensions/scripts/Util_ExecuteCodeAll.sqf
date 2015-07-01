@@ -18,7 +18,7 @@
 			_pastedText = missionNamespace getVariable ["Ares_CopyPaste_Dialog_Text", "[]"];
 			try
 			{
-				[(compile _pastedText), [], true] call Ares_fnc_BroadcastCode;
+				[(compile _pastedText), _this, true] call Ares_fnc_BroadcastCode;
 			}
 			catch
 			{

@@ -18,7 +18,7 @@
 			_pastedText = missionNamespace getVariable ["Ares_CopyPaste_Dialog_Text", "[]"];
 			try
 			{
-				call (compile _pastedText);
+				_this call (compile _pastedText);
 			}
 			catch
 			{
