@@ -7,6 +7,11 @@ Or check out the source code at: https://github.com/astruyk/Ares
 
 Changelists
 
+V.1.8.0
+* Artillery - Add 'Artillery Fire Mission' module to fire artillery using map coordinates and multiple artillery pieces. (Author JonasJurczok)
+* Util - Pass 'Unit under cursor' and location to 'Execute Script' modules.
+* Save/Load - Remove deprecated Save/Load modules (using old non-SQF format)
+
 V.1.7.0
 * Save/Load - Add module to export current mission objects to SQF script (including AI, Groups and markers).
 * Util - Add module to execute custom code on the server, locally, or on all machines.

@@ -13,7 +13,7 @@ Ares integrates code from the following mods or scripts:
     * http://www.soclan.co.uk/ (source: http://www.armaholic.com/page.php?id=27531 )
 
 Ares includes contributions by the following coders:
-* astruyk
+* Anton Struyk
 * TheOtherTaylor
 * JonasJurczok
 
