@@ -8,7 +8,6 @@ call compile preprocessFileLineNumbers '\ares_zeusExtensions\scripts\registerBui
 Ares_EditableObjectBlacklist =
 	[
 		"Ares_Module_Util_Create_Composition",
-		"Ares_Module_Save_Objects_For_Paste",
 		"ModuleCurator_F",
 		"GroundWeaponHolder",
 		"Salema_F",

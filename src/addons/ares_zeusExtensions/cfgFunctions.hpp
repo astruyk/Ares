@@ -43,8 +43,6 @@ class Ares // This bit will be prefixed when actually calling the function (e.g.
 		class LogMessage;
 		class MakePlayerInvisible;
 		class MonitorCuratorDisplay;
-		class ObjectsGrabber;
-		class ObjectsMapper;
 		class SearchBuilding;
 		class ShowChooseDialog;
 		class ShowZeusMessage;
@@ -65,7 +63,6 @@ class Ares // This bit will be prefixed when actually calling the function (e.g.
 	#include "cfgFunctionsBehaviour.hpp"
 	#include "cfgFunctionsEquipment.hpp"
 	#include "cfgFunctionsReinforcements.hpp"
-	#include "cfgFunctionsSaveLoad.hpp"
 	#include "cfgFunctionsSpawn.hpp"
 	#include "cfgFunctionsTeleport.hpp"
 	#include "cfgFunctionsUtil.hpp"
