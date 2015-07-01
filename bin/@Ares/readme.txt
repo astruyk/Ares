@@ -1,9 +1,13 @@
-Ares is a mod aimed expanding the tools available to Zeus so that it is possible to create more varied and compelling missions. The goal is to add simple useful functionality to Zeus without requiring any extra mods running on other clients or the server.
+Ares is a mod aimed expanding the tools available to Zeus so that it is possible to create more varied and compelling missions. The goal is to add simple useful functionality to Zeus without requiring extra mods running on other clients or the server.
 
 Ares is designed to work with dedicated servers which may be running missions that allow JIP and respawn. The new functionality it is aimed at running with trusted players in a structured mission and is not recommended for general 'public server' play.
 
 Check out the full feature list and documentation at: https://github.com/astruyk/Ares/wiki
 Or check out the source code at: https://github.com/astruyk/Ares
+
+Requirements:
+As of V.1.8.0 Ares requires @CBA_A3 for some functionality. Please ensure it is running alongside @Ares if you are using Zeus. Clients that aren't running @Ares (e.g. non-zeus players) do not need to run @CBA_A3.
+You can download the latest version of CBA from the developer website here: http://dev.withsix.com/projects/cca/wiki/CBA
 
 Changelists
 
@@ -11,6 +15,7 @@ V.1.8.0
 * Artillery - Add 'Artillery Fire Mission' module to fire artillery using map coordinates and multiple artillery pieces. (Author JonasJurczok)
 * Util - Pass 'Unit under cursor' and location to 'Execute Script' modules.
 * Save/Load - Remove deprecated Save/Load modules (using old non-SQF format)
+* NOTE - Ares now requires CBA_A3! Make sure it's running on any machine that had Ares loaded.
 
 V.1.7.0
 * Save/Load - Add module to export current mission objects to SQF script (including AI, Groups and markers).
