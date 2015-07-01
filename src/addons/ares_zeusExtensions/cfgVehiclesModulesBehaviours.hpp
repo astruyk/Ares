@@ -49,21 +49,6 @@ class Ares_Module_Behaviour_Create_Artillery_Target : Ares_Behaviours_Module_Bas
 	portrait = "\ares_zeusExtensions\data\icon_artillery_target.paa";
 };
 
-class Ares_Module_Behaviour_Fire_At_Artillery_Target : Ares_Behaviours_Module_Base
-{
-	scopeCurator = 2;
-	displayName = "Fire Artillery";
-	function = "Ares_fnc_BehaviourArtilleryFire";
-};
-
-class Ares_Module_Behaviour_Artillery_Fire_Mission : Ares_Behaviours_Module_Base
-{
-	scopeCurator = 2;
-	displayName = "Artillery Fire Mission";
-	function = "Ares_fnc_BehaviourArtilleryFireMission";
-};
-
-
 class Ares_Module_Behaviour_Land_Helicopter : Ares_Behaviours_Module_Base
 {
 	scopeCurator = 2;

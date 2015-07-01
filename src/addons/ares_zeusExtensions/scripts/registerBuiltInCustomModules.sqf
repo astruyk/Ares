@@ -1,5 +1,7 @@
 _scripts = [
 		"Arsenal_AddFullArsenal",
+		"Behaviour_ArtilleryFire",
+		"Behaviour_ArtilleryFireMission",
 		"Equipment_RemoveWeaponOptics",
 		"SaveLoad_CreateMissionSQF",
 		"Util_ChangePlayerSides",
