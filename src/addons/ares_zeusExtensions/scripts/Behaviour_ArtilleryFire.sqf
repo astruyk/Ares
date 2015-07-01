@@ -1,6 +1,6 @@
 #define FIRST_SPECIFIC_ARTILLERY_TARGET_INDEX 3
 [
-	"Behaviours",
+	"AI Behaviours",
 	"Fire Artillery",
 	{
 		_artillery = _this select 1;
