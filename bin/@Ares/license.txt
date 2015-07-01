@@ -12,4 +12,9 @@ Ares integrates code from the following mods or scripts:
 * Vernei's Base Templates
     * http://www.soclan.co.uk/ (source: http://www.armaholic.com/page.php?id=27531 )
 
+Ares includes contributions by the following coders:
+* astruyk
+* TheOtherTaylor
+* JonasJurczok
+
 Ares is provided without warranty. Use at your own risk.
