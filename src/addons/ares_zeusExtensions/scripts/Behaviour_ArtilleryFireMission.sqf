@@ -1,5 +1,5 @@
 [
-	"Behaviours",
+	"AI Behaviours",
 	"Artillery Fire Mission",
 	{
 		// get all units within range
@@ -25,8 +25,8 @@
 		 */
 		_batteries = [];
 		{
-			_type = typeOf _x;	
-			_alreadyContained = false;	
+			_type = getText(configfile >> "CfgVehicles" >> (typeOf _x) >> "displayName");
+			_alreadyContained = false;
 			{
 				if (_x find _type > -1) then
 				{
@@ -45,12 +45,12 @@
 				{
 					_battery = _x;
 					_units = _battery select 1;
-					_unitType = typeOf _unit;
+					_unitType = getText (configfile >> "CfgVehicles" >> (typeOf _unit) >> "displayName");
 					
 					if (_unitType == (_battery select 0)) then
 					{
 					  _units pushBack _unit;
-					};			
+					};
 					
 				} forEach _batteries;
 			};
@@ -62,103 +62,65 @@
 		{
 			_batterytypes pushBack (_x select 0);
 		} forEach _batteries;
+		if (count _batteries == 0) exitWith { ["No nearby artillery units."] call Ares_fnc_ShowZeusMessage; };
 
+		// Pick a battery
 		_pickBatteryResult = [
 				"Pick battery to fire.",
 				[
 					["Battery", _batteryTypes]
 				]] call Ares_fnc_ShowChooseDialog;
-			
-		// Pick a battery
-		_battery = nil;
-		if (count _pickBatteryResult > 0) then 
-		{
-			_battery = _batteries select (_pickBatteryResult select 0);
-		};
+		if (count _pickBatteryResult == 0) exitWith { ["Fire mission aborted."] call Ares_fnc_ShowZeusMessage; };
+		_battery = _batteries select (_pickBatteryResult select 0);
 
 		// Pick fire mission details
 		_fireMission = nil;
-		if (count _battery > 0) then
+		_units = _battery select 1;
+		_artilleryAmmo = _battery select 2;
+		
+		_numberOfGuns = [];
 		{
-			_units = _battery select 1;
-			_artilleryAmmo = _battery select 2;
-			
-			_numberOfGuns = [];
-			{
-				_numberOfGuns pushBack (str (_forEachIndex + 1));
-			} forEach _units;
+			_numberOfGuns pushBack (str (_forEachIndex + 1));
+		} forEach _units;
 
-			// pick guns, rounds, ammo and coordinates
-			_pickFireMissionResult = [
-				"Pick fire mission details.",
-				[
-					["Guns", _numberOfGuns],
-					["Rounds", ""],
-					["Ammo", _artilleryAmmo],
-					["Grid East-West", ""],
-					["Grid North-South", ""]
-				]] call Ares_fnc_ShowChooseDialog;
+		// pick guns, rounds, ammo and coordinates
+		_pickFireMissionResult = [
+			"Pick fire mission details.",
+			[
+				["Guns", _numberOfGuns],
+				["Rounds", ["1", "2", "3", "4", "5"]],
+				["Ammo", _artilleryAmmo],
+				["Grid East-West", ""],
+				["Grid North-South", ""]
+			]] call Ares_fnc_ShowChooseDialog;
 
-			if (count _pickFireMissionResult > 0) then 
-			{
-				// TODO: Add validation that coordinates are actually numbers.
-				_guns = (_numberOfGuns select (_pickFireMissionResult select 0));
-				_rounds = _pickFireMissionResult select 1;
-				_ammo = (_artilleryAmmo select (_pickFireMissionResult select 2));
-				_targetX = _pickFireMissionResult select 3;
-				_targetY = _pickFireMissionResult select 4;
-				
-				_fireMission = [_units, parseNumber _guns, parseNumber _rounds, _ammo, _targetX, _targetY];
-			};	
+		if (count _pickFireMissionResult == 0) exitWith { ["Fire mission aborted."] call Ares_fnc_ShowZeusMessage; };
+		// TODO: Add validation that coordinates are actually numbers.
+		_guns = parseNumber (_numberOfGuns select (_pickFireMissionResult select 0));
+		_rounds = (_pickFireMissionResult select 1) + 1; // +1 since the options are 0-based. (0 actually fires a whole clip)
+		_ammo = (_artilleryAmmo select (_pickFireMissionResult select 2));
+		_targetX = _pickFireMissionResult select 3;
+		_targetY = _pickFireMissionResult select 4;
+		_targetPos = [_targetX,_targetY] call CBA_fnc_mapGridToPos;
+
+		// Generate a list of the actual units to fire.
+		_gunsToFire = [];
+		for "_i" from 1 to _guns do
+		{
+			_gunsToFire pushBack (_units select (_i - 1));
 		};
+		
+		// Get the ETA and exit if any one of the guns can't reach the target.
+		_roundEta = 99999;
+		{
+			_roundEta = _roundEta min (_x getArtilleryETA [_targetPos, _ammo]);
+		} forEach _gunsToFire;
+		if (_roundEta == -1) exitWith { ["Target not in range."] call Ares_fnc_ShowZeusMessage; };
 
-		// confirm and execute fire mission
-		if (count _fireMission > 0) then {
-		  _units = _fireMission select 0;
-		  _guns = _fireMission select 1;
-		  _rounds = _fireMission select 2;
-		  _ammo = _fireMission select 3;
-		  _targetX = _fireMission select 4;
-		  _targetY = _fireMission select 5; 
-		  
-		  // TODO: estimated flight time
-		  // TODO: Dialog without leaving zeus
-		  _message = format ["Confirm Fire Mission \n Battery %1 \n GRID %2 %3 \n %4 Guns %5 Rounds %6", (_battery select 0), _targetX, _targetY, _guns, _rounds, _ammo];
-		  //_result = [_message, "Confirm Fire Mission", true, true] call BIS_fnc_guiMessage;
-		  
-		  if (/*_result*/ true) then 
-		  { 
-			enableEngineArtillery true;
-			if (isNil "Ares_FireArtilleryFunction") then
-			{
-				Ares_FireArtilleryFunction = {
-					_artilleryUnit = _this select 0;
-					_targetPos = _this select 1;
-					_ammoType = _this select 2;
-					_roundsToFire = _this select 3;
-					enableEngineArtillery true;
-					_artilleryUnit commandArtilleryFire [_targetPos, _ammoType, _roundsToFire];
-				};
-				publicVariable "Ares_FireArtilleryFunction";
-			};
-			_targetPos = [_targetX,_targetY] call CBA_fnc_mapGridToPos;
-
-			_roundEta = 0;
-			for "_i" from 1 to _guns do {
-			  _artillery = _units select _i - 1;
-			  
-			  // TODO: add overlay for each shot
-			  _roundEta = _artillery getArtilleryETA [_targetPos, _ammo];
-				  
-			  [[_artillery, _targetPos, _ammo, _rounds], "Ares_FireArtilleryFunction", _artillery] call BIS_fnc_MP;
-			};
-
-			["Firing %1 rounds of '%2' at target. ETA %3", _rounds, _ammo, _roundEta] call Ares_fnc_ShowZeusMessage;
-		  } 
-		  else 
-		  {
-			["Fire mission aborted!"] call Ares_fnc_ShowZeusMessage;
-		  }
-		};
+		// Fire the guns
+		{
+			[[_x, _targetPos, _ammo, _rounds], "Ares_FireArtilleryFunction", _x] call BIS_fnc_MP;
+		} forEach _gunsToFire;
+		["Firing %1 rounds of '%2' at target. ETA %3", _rounds, _ammo, _roundEta] call Ares_fnc_ShowZeusMessage;
 	}
 ] call Ares_fnc_RegisterCustomModule;

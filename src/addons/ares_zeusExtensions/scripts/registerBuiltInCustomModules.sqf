@@ -18,3 +18,18 @@ _scripts = [
 	call compile preprocessFileLineNumbers ("\ares_zeusExtensions\scripts\" + _x + ".sqf");
 } forEach _scripts;
 
+// We need this to be registered so that the artillery modules can use it to
+// fire artillery where it is local.
+if (isNil "Ares_FireArtilleryFunction") then
+{
+	Ares_FireArtilleryFunction = {
+		_artilleryUnit = _this select 0;
+		_targetPos = _this select 1;
+		_ammoType = _this select 2;
+		_roundsToFire = _this select 3;
+		enableEngineArtillery true;
+		_artilleryUnit commandArtilleryFire [_targetPos, _ammoType, _roundsToFire];
+	};
+	publicVariable "Ares_FireArtilleryFunction";
+};
+

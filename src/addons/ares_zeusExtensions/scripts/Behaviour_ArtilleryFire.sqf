@@ -67,19 +67,6 @@
 					// Fire at the target where the unit is local (See #129)
 					enableEngineArtillery true;
 					_roundEta = _artillery getArtilleryETA [position _selectedTarget, _selectedAmmoType];
-					
-					if (isNil "Ares_FireArtilleryFunction") then
-					{
-						Ares_FireArtilleryFunction = {
-							_artilleryUnit = _this select 0;
-							_targetPos = _this select 1;
-							_ammoType = _this select 2;
-							_roundsToFire = _this select 3;
-							enableEngineArtillery true;
-							_artilleryUnit commandArtilleryFire [_targetPos, _ammoType, _roundsToFire];
-						};
-						publicVariable "Ares_FireArtilleryFunction";
-					};
 					[[_artillery, (position _selectedTarget), _selectedAmmoType, _roundsToFire], "Ares_FireArtilleryFunction", _artillery] call BIS_fnc_MP;
 					
 					[objNull, format ["Firing %1 rounds of '%2' at target. ETA %3", _roundsToFire, _selectedAmmoType, _roundEta]] call bis_fnc_showCuratorFeedbackMessage;
