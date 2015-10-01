@@ -131,9 +131,18 @@
 		} forEach _emptyObjects + _emptyVehicles;
 		
 		{
+			_sideString = "";
+			switch (side _x) do
+			{
+				case east: { _sideString = "east"; };
+				case west: { _sideString = "west"; };
+				case resistance: { _sideString = "resistance"; };
+				case civilian: { _sideString = "civilian"; };
+				default { _sideString = "?"; };
+			};
 			_output pushBack format [
 				"_newGroup = createGroup %1; ",
-				(side _x)];
+				_sideString];
 			_groupVehicles = [];
 			// Process all the infantry in the group
 			{
