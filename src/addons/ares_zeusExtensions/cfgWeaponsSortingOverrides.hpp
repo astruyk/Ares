@@ -22,8 +22,11 @@ class Vest_NoCamo_Base;
 class Rifle_Base_F;
 class Launcher_Base_F;
 class Rifle_Long_Base_F;
+class HelmetBase;
+class V_TacVest_camo;
 
 // CSAT - but has to be defined first because some other hats depend on it
+// class H_MilCap_ocamo;
 class H_MilCap_ocamo : H_HelmetB { side = SIDE_CSAT; };
 
 // NATO
@@ -57,7 +60,7 @@ class V_PlateCarrier3_rgr : Vest_NoCamo_Base { side = SIDE_NATO; };
 class V_PlateCarrierGL_rgr : Vest_NoCamo_Base { side = SIDE_NATO; };
 class V_PlateCarrierSpec_rgr : Vest_NoCamo_Base { side = SIDE_NATO; };
 class V_RebreatherB : Vest_Camo_Base { side = SIDE_NATO; };
-class V_I_G_resistanceLeader_F : Vest_Camo_Base { side = SIDE_NATO; };
+class V_I_G_resistanceLeader_F : V_TacVest_camo { side = SIDE_NATO; };
 // Weapons
 class arifle_MX_Base_F : Rifle_Base_F { side = SIDE_NATO; };
 class EBR_base_F : Rifle_Long_Base_F { side = SIDE_NATO; };
@@ -72,8 +75,8 @@ class H_HelmetO_ocamo : H_HelmetB { side = SIDE_CSAT; };
 class H_PilotHelmetFighter_O : H_PilotHelmetFighter_B { side = SIDE_CSAT; };
 class H_PilotHelmetHeli_O : H_PilotHelmetHeli_B { side = SIDE_CSAT; };
 // Vests
-class V_HarnessO_brn : Vest_Camo_Base { side = SIDE_CSAT; };
-class V_HarnessOGL_brn : Vest_Camo_Base { side = SIDE_CSAT; };
+class V_HarnessO_brn : Vest_NoCamo_Base { side = SIDE_CSAT; };
+class V_HarnessOGL_brn : Vest_NoCamo_Base { side = SIDE_CSAT; };
 class V_RebreatherIR : V_RebreatherB { side = SIDE_CSAT; };
 // Weapons
 class arifle_Katiba_Base_F : Rifle_Base_F { side = SIDE_CSAT; };
@@ -93,7 +96,7 @@ class H_MilCap_dgtl : H_MilCap_oucamo { side = SIDE_AAF; };
 class H_PilotHelmetFighter_I : H_PilotHelmetFighter_B { side = SIDE_AAF; };
 class H_PilotHelmetHeli_I : H_PilotHelmetHeli_B { side = SIDE_AAF; };
 // Vests
-class V_PlateCarrierIA1_dgtl : Vest_Camo_Base { side = SIDE_AAF; };
+class V_PlateCarrierIA1_dgtl : Vest_NoCamo_Base { side = SIDE_AAF; };
 class V_RebreatherIA : V_RebreatherB { side = SIDE_AAF; };
 // Weapons
 class mk20_base_F : Rifle_Base_F { side = SIDE_AAF; };
