@@ -17,17 +17,23 @@ class Ares
 
 			class Ares_MilitaryStructures_Bases_0
 			{
+				name = "Medium - Large Op Tower";
+				#include "compositions\Ares\Military Structures\Bases\Medium - Large Op Tower.hpp"
+			};
+
+			class Ares_MilitaryStructures_Bases_1
+			{
 				name = "Medium - Op Tower";
 				#include "compositions\Ares\Military Structures\Bases\Medium - Op Tower.hpp"
 			};
 
-			class Ares_MilitaryStructures_Bases_1
+			class Ares_MilitaryStructures_Bases_2
 			{
 				name = "Small - Megaphone";
 				#include "compositions\Ares\Military Structures\Bases\Small - Megaphone.hpp"
 			};
 
-			class Ares_MilitaryStructures_Bases_2
+			class Ares_MilitaryStructures_Bases_3
 			{
 				name = "Small - OP Tower";
 				#include "compositions\Ares\Military Structures\Bases\Small - OP Tower.hpp"
@@ -209,14 +215,14 @@ class Ares
 
 			class Ares_Walls_WallSections_1
 			{
-				name = "H-Barrier (Small)";
-				#include "compositions\Ares\Walls\Wall Sections\H-Barrier (Small).hpp"
+				name = "H-Barrier (Large)";
+				#include "compositions\Ares\Walls\Wall Sections\H-Barrier (Large).hpp"
 			};
 
 			class Ares_Walls_WallSections_2
 			{
-				name = "HBarrier (Large)";
-				#include "compositions\Ares\Walls\Wall Sections\HBarrier (Large).hpp"
+				name = "H-Barrier (Small)";
+				#include "compositions\Ares\Walls\Wall Sections\H-Barrier (Small).hpp"
 			};
 
 			class Ares_Walls_WallSections_3
@@ -293,50 +299,26 @@ class AresCommunity
 
 			class Ares_VerneiSO_FOBsBases_0
 			{
-				name = "Retribution (Detailed)";
-				#include "compositions\Ares Community\Vernei =SO=\FOBs & Bases\Retribution (Detailed).hpp"
+				name = "Retribution";
+				#include "compositions\Ares Community\Vernei =SO=\FOBs & Bases\Retribution.hpp"
 			};
 
 			class Ares_VerneiSO_FOBsBases_1
 			{
-				name = "Retribution (Lite)";
-				#include "compositions\Ares Community\Vernei =SO=\FOBs & Bases\Retribution (Lite).hpp"
+				name = "Reveille";
+				#include "compositions\Ares Community\Vernei =SO=\FOBs & Bases\Reveille.hpp"
 			};
 
 			class Ares_VerneiSO_FOBsBases_2
 			{
-				name = "Reveille (Detailed)";
-				#include "compositions\Ares Community\Vernei =SO=\FOBs & Bases\Reveille (Detailed).hpp"
+				name = "Rudder";
+				#include "compositions\Ares Community\Vernei =SO=\FOBs & Bases\Rudder.hpp"
 			};
 
 			class Ares_VerneiSO_FOBsBases_3
 			{
-				name = "Reveille (Lite)";
-				#include "compositions\Ares Community\Vernei =SO=\FOBs & Bases\Reveille (Lite).hpp"
-			};
-
-			class Ares_VerneiSO_FOBsBases_4
-			{
-				name = "Rudder (Detailed)";
-				#include "compositions\Ares Community\Vernei =SO=\FOBs & Bases\Rudder (Detailed).hpp"
-			};
-
-			class Ares_VerneiSO_FOBsBases_5
-			{
-				name = "Rudder (Lite)";
-				#include "compositions\Ares Community\Vernei =SO=\FOBs & Bases\Rudder (Lite).hpp"
-			};
-
-			class Ares_VerneiSO_FOBsBases_6
-			{
-				name = "UDacha (Detailed)";
-				#include "compositions\Ares Community\Vernei =SO=\FOBs & Bases\UDacha (Detailed).hpp"
-			};
-
-			class Ares_VerneiSO_FOBsBases_7
-			{
-				name = "Udacha (Lite)";
-				#include "compositions\Ares Community\Vernei =SO=\FOBs & Bases\Udacha (Lite).hpp"
+				name = "Udacha";
+				#include "compositions\Ares Community\Vernei =SO=\FOBs & Bases\Udacha.hpp"
 			};
 		};
 		class Ares_VerneiSO_MortarPositions
