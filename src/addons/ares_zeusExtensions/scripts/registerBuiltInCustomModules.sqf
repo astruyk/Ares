@@ -1,5 +1,8 @@
 _scripts = [
+		"Arsenal_AddArsenal",
 		"Arsenal_AddFullArsenal",
+		"Arsenal_CopyToClipboard",
+		"Arsenal_PasteFromClipboard",
 		"Behaviour_ArtilleryFire",
 		"Behaviour_ArtilleryFireMission",
 		"Equipment_RemoveWeaponOptics",

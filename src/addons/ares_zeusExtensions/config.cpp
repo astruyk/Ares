@@ -67,12 +67,6 @@ class CfgVehicles
 			description = "Ares Module Base";
 		};
 	};
-	
-	class Ares_Arsenal_Module_Base : Ares_Module_base
-	{
-		subCategory = "Arsenal";
-		
-	};
 
 	class Ares_Behaviours_Module_Base : Ares_Module_Base
 	{
@@ -131,7 +125,6 @@ class CfgVehicles
 	#include "cfgVehiclesModulesEquipment.hpp"
 	#include "cfgVehiclesModulesSpawn.hpp"
 	#include "cfgVehiclesModulesTeleport.hpp"
-	#include "cfgVehiclesModulesArsenal.hpp"
 	#include "cfgVehiclesModulesReinforcements.hpp"
 	#include "cfgVehiclesModulesUtil.hpp"
 	#include "cfgVehiclesModulesUserDefined.hpp"
