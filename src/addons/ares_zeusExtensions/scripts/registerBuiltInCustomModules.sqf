@@ -1,5 +1,6 @@
 _scripts = [
 		"Arsenal_AddArsenal",
+		"Arsenal_AddArsenalAmmo",
 		"Arsenal_AddFullArsenal",
 		"Arsenal_CopyToClipboard",
 		"Arsenal_PasteFromClipboard",
