@@ -2,15 +2,17 @@
 	"Arsenal",
 	"Add Full Arsenal",
 	{
-		_unitUnderCursor = _this select 1;
-		if (not (isNull _unitUnderCursor)) then
+		_ammoBox = _this select 1;
+		if (isNull _ammoBox) then
 		{
-			["AmmoboxInit", [_unitUnderCursor, true]] spawn BIS_fnc_arsenal;
-			["Arsenal Added"] call Ares_fnc_ShowZeusMessage;
-		}
-		else
-		{
-			["Must be placed on an object."] call Ares_fnc_ShowZeusMessage;
+			_ammoBox = "B_supplyCrate_F" createVehicle (_this select 0);
+			clearWeaponCargoGlobal _ammoBox;
+			clearMagazineCargoGlobal _ammoBox;
+			clearItemCargoGlobal _ammoBox;
+			clearBackpackCargoGlobal _ammoBox;
+			[[_ammoBox]] call Ares_fnc_AddUnitsToCurator;
 		};
+		["AmmoboxInit", [_ammoBox, true]] spawn BIS_fnc_arsenal;
+		["Arsenal Added"] call Ares_fnc_ShowZeusMessage;
 	}
 ] call Ares_fnc_RegisterCustomModule;
