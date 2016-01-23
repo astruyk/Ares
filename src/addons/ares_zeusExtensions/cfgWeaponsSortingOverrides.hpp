@@ -27,7 +27,7 @@ class V_TacVest_camo;
 
 // CSAT - but has to be defined first because some other hats depend on it
 // class H_MilCap_ocamo;
-class H_MilCap_ocamo : H_HelmetB { side = SIDE_CSAT; };
+class H_MilCap_ocamo : HelmetBase { side = SIDE_CSAT; };
 
 // NATO
 // Headgear
@@ -113,6 +113,6 @@ class H_Cap_police : H_Cap_red { side = SIDE_CIV; };
 class H_Cap_press : H_Cap_red { side = SIDE_CIV; };
 class H_Cap_surfer : H_Cap_red { side = SIDE_CIV; };
 class H_RacingHelmet_1_F : H_HelmetB_camo { side = SIDE_CIV; };
-class H_StrawHat : H_HelmetB { side = SIDE_CIV; };
+class H_StrawHat : HelmetBase { side = SIDE_CIV; };
 // Vests
 class V_Press_F : Vest_Camo_Base { side = SIDE_CIV; };
