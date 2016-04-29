@@ -48,6 +48,7 @@ class Ares // This bit will be prefixed when actually calling the function (e.g.
 		class ShowZeusMessage;
 		class StringContains;
 		class TeleportPlayers;
+		class TransferGroupsToServer;
 		class WaitForZeus;
 		class ZenOccupyHouse;
 	};
@@ -58,7 +59,7 @@ class Ares // This bit will be prefixed when actually calling the function (e.g.
 		file = "\ares_zeusExtensions\modules";
 		class Empty;
 	};
-	
+
 	#include "cfgFunctionsBehaviour.hpp"
 	#include "cfgFunctionsEquipment.hpp"
 	#include "cfgFunctionsReinforcements.hpp"
