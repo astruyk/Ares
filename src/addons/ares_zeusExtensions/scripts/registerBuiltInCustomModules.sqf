@@ -18,7 +18,8 @@ _scripts = [
 		"Util_ExecuteCodeServer",
 		"Util_MakeZeusInvisible",
 		"Util_MakeZeusVisible",
-		"Util_RemoveAllActions"
+		"Util_RemoveAllActions",
+		"Util_TransferGroupToServer"
 	];
 {
 	call compile preprocessFileLineNumbers ("\ares_zeusExtensions\scripts\" + _x + ".sqf");
@@ -38,4 +39,3 @@ if (isNil "Ares_FireArtilleryFunction") then
 	};
 	publicVariable "Ares_FireArtilleryFunction";
 };
-
