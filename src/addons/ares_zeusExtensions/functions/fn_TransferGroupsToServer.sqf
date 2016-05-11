@@ -10,43 +10,54 @@ _group = [_this, 0, objNull] call BIS_fnc_param;
 _debugOn = [_this, 1, false] call BIS_fnc_param;
 
 // Require this function
-if(isNil "Ares_changeOwnerToServerFunction") then {
-	Ares_changeOwnerToServerFunction = {
+if (isNil "Ares_ChangeOwnerToServerFunction") then
+{
+	Ares_ChangeOwnerToServerFunction =
+	{
 		private ["_playerInGroup", "_debugOn", "_debugTxt", "_groups"];
 		_groups = [_this, 0, objNull] call BIS_fnc_param;
 		_debugOn = [_this, 1, false] call BIS_fnc_param;
 
-		if(isNull _groups) then {
+		if (isNull _groups) then
+		{
 			_groups = allGroups;
-		} else {
+		}
+		else
+		{
 			_groups = [_groups]; // Make an array of this one
 		};
 
 		// Loop all groups
 		{
 			// Check if group is owned by the server or not
-			if((groupOwner _x) != 2) then {
+			if ((groupOwner _x) != 2) then
+			{
 				_playerInGroup = false;
 				{
 					if (isPlayer _x) exitWith { _playerInGroup = true; };
 				} forEach (units _x);
 
 				// Transfer group if no players are part of the group
-				if(!_playerInGroup) then {
+				if (!_playerInGroup) then
+				{
 					_x setGroupOwner 2;
-					if(_debugOn) then {
+					if (_debugOn) then
+					{
 						_debugTxt = format ["[ARES] Changing owner to server for %1", _x];
-						if(isDedicated) then {
+						if (isDedicated) then
+						{
 							diag_log _debugTxt;
-						} else {
+						}
+						else
+						{
 							systemChat _debugTxt;
 						};
 					};
 				};
 			};
-		}foreach _groups;
+		} foreach _groups;
 	};
-	publicVariable "Ares_changeOwnerToServerFunction";
+	publicVariable "Ares_ChangeOwnerToServerFunction";
 };
 
-[[_group, _debugOn], "Ares_changeOwnerToServerFunction", false] call BIS_fnc_MP;
+[[_group, _debugOn], "Ares_ChangeOwnerToServerFunction", false] call BIS_fnc_MP;
