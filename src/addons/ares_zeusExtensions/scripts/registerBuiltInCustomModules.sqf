@@ -19,7 +19,6 @@ _scripts = [
 		"Util_MakeZeusInvisible",
 		"Util_MakeZeusVisible",
 		"Util_RemoveAllActions",
-		"Util_TransferAllToServer",
 		"Util_TransferGroupToServer"
 	];
 {
