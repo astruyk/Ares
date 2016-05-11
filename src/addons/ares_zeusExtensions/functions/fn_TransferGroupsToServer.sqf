@@ -5,18 +5,14 @@
 		0: Specific group or objNull for all groups (default objNull)
 		1: Bool - show debug output (optional, default false)
 */
-private ["_group", "_debugOn"];
-_group = [_this, 0, objNull] call BIS_fnc_param;
-_debugOn = [_this, 1, false] call BIS_fnc_param;
+params[["_group", grpNull, [grpNull]], ["_debugOn", false, [false]]];
 
 // Require this function
 if (isNil "Ares_ChangeOwnerToServerFunction") then
 {
 	Ares_ChangeOwnerToServerFunction =
 	{
-		private ["_playerInGroup", "_debugOn", "_debugTxt", "_groups"];
-		_groups = [_this, 0, objNull] call BIS_fnc_param;
-		_debugOn = [_this, 1, false] call BIS_fnc_param;
+		params[["_groups", grpNull, [grpNull]], ["_debugOn", false, [false]]];
 
 		if (isNull _groups) then
 		{
