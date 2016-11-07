@@ -20,14 +20,6 @@ if (_showTeleportMessage) then
 		{
 			sleep 1;
 		};
-
-		// If the player is in a vehicle, kick them out.
-		if (vehicle _unit != _unit) then
-		{
-			_unit action ["Eject", vehicle _unit];
-		};
-
-		_smallRandomOffset = [(random 6) - 3, (random 6) - 3, 0];
-		_unit setPos (_teleportLocation vectorAdd _smallRandomOffset);
+		[_unit, _teleportLocation] call BIS_fnc_moveToRespawnPosition;
 	};
 } forEach _playersToTeleport;
