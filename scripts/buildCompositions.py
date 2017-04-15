@@ -27,6 +27,7 @@ for groupName in os.listdir(inputFolder):
 				sectionClassName = sanitizeClassname(sectionName);
 				outputLines.append("	class Ares_{0}".format(sectionClassName));
 				outputLines.append("	{");
+				outputLines.append("		side = 8;");
 				outputLines.append("		name = \"{0}\";".format(sectionName));
 				for categoryName in os.listdir(sectionPath):
 					categoryPath = os.path.join(sectionPath, categoryName);
@@ -34,6 +35,7 @@ for groupName in os.listdir(inputFolder):
 						categoryClassName = sanitizeClassname(categoryName);
 						outputLines.append("		class Ares_{0}_{1}".format(sectionClassName, categoryClassName));
 						outputLines.append("		{");
+						outputLines.append("			side = 8;");
 						outputLines.append("			name = \"{0}\";".format(categoryName));
 						classCount = 0;
 						for itemFileName in os.listdir(categoryPath):
@@ -44,11 +46,9 @@ for groupName in os.listdir(inputFolder):
 								#outputLines.append("			// Generated from file @ '{0}'".format(itemPath[len(inputFolder):]));
 								outputLines.append("			class Ares_{0}_{1}_{2}".format(sectionClassName, categoryClassName, classCount));
 								outputLines.append("			{");
+								outputLines.append("			side = 8;");
 								outputLines.append("				name = \"{0}\";".format(itemName));
 								outputLines.append("				#include \"compositions\\{0}\"".format(itemPath[len(inputFolder):]));
-								#with open(itemPath) as itemFile:
-								#	for line in itemFile.readlines():
-								#		outputLines.append("				" + line.strip());
 								outputLines.append("			};");
 								classCount += 1;
 						outputLines.append("		};");
