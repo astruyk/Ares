@@ -10,6 +10,9 @@ As of V.1.8.0 Ares requires @CBA_A3 for some functionality. Please ensure it is 
 You can download the latest version of CBA from the developer website here: http://dev.withsix.com/projects/cca/wiki/CBA
 
 Changelists
+V.1.8.3
+* Re-Release for Steam because apparently I messed up the previous upload.
+
 V.1.8.2
 * Fix an issue that prevented compositions from being placed in latest ARMA version.
 
